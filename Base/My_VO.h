@@ -28,23 +28,25 @@ struct ProjectPaths {
 };
 
 struct PoseRecord {
-    cv::Mat rotation;
-    cv::Mat translation;
+    cv::Matx33d rotation = cv::Matx33d::eye();
+    cv::Vec3d translation = cv::Vec3d(0.0, 0.0, 0.0);
 };
 
 bool loadCameraIntrinsics(const std::string& camera_info_path, CameraIntrinsics& intrinsics);
 std::vector<cv::Vec3d> loadGroundTruthPositions(const std::string& pose_path);
 cv::Mat buildCameraMatrix(const CameraIntrinsics& intrinsics);
+void scaleCameraIntrinsics(CameraIntrinsics& intrinsics, double scale);
 cv::Mat readImageOrEmpty(const std::string& image_pattern, int frame_id);
 std::string formatImagePath(const std::string& image_pattern, int frame_id);
 
-void featureDetection(const cv::Mat& image, std::vector<cv::Point2f>& points);
-void featureTracking(
+void featureDetection(const cv::Mat& image, std::vector<cv::Point2f>& points, int max_corners);
+int featureTracking(
     const cv::Mat& prev_image,
     const cv::Mat& curr_image,
     std::vector<cv::Point2f>& prev_points,
     std::vector<cv::Point2f>& curr_points,
     std::vector<uchar>& status);
+void compactPointsByMask(std::vector<cv::Point2f>& prev_points, std::vector<cv::Point2f>& curr_points, const cv::Mat& mask);
 
 cv::Point2f pixel2cam(const cv::Point2d& pixel, const cv::Mat& camera_matrix);
 void triangulation(
@@ -57,6 +59,7 @@ void triangulation(
 
 double getAbsoluteScale(const std::vector<cv::Vec3d>& gt_positions, int frame_id);
 
-bool isForwardMotion(const cv::Mat& translation);
-void appendPose(std::ofstream& output, const cv::Mat& translation);
+void appendPose(std::ofstream& output, const cv::Vec3d& translation);
 bool isVisualizationEnabled();
+bool isVerboseLoggingEnabled();
+double getImageScale();
