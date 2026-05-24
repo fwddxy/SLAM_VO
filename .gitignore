@@ -1,0 +1,11 @@
+Base/build/
+build/
+*.o
+*.out
+*.log
+position.txt
+map2.png
+.~*.docx
+
+# Dataset images are large and reproducible from source data.
+Kitti/left/
