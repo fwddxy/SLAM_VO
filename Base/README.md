@@ -1,31 +1,96 @@
 # Base
 
-当前 `Base` 目录只保留一版单目前端视觉里程计实现。
+本目录只保留单目前端视觉里程计源码和构建文件：
+- `My_VO.cpp`
+- `My_VO.h`
+- `CMakeLists.txt`
+- `README.md`
 
-运行前提：
-- 项目根目录下存在 `Kitti/` 数据与标定文件
-- 系统已安装 `OpenCV 4`
+所有运行输出统一放在项目根目录的 `output/` 下。
 
-程序行为：
-- 自动定位项目根目录下的 `Kitti/camera-info.txt`
-- 自动定位项目根目录下的 `Kitti/gt-tum07.txt`
-- 自动定位项目根目录下的 `Kitti/left/%06d.png`
-- 将 VO 轨迹写入 `Base/position.txt`
-- 默认按原始分辨率运行，优先保证长序列稳定性
-- 轨迹图会按当前轨迹范围自动缩放并居中显示，同时标注帧数与坐标范围
-- 终端默认会周期性输出当前处理帧、跟踪点数和位姿状态
+## 运行程序
 
-示例：
+运行前确认项目根目录下存在：
+- `Kitti/camera-info.txt`
+- `Kitti/gt-tum07.txt`
+- `Kitti/left/%06d.png`
+
+编译：
+
 ```bash
 cmake -S Base -B build
 cmake --build build -j
-./build/VO
 ```
 
-可选环境变量：
-- `VO_ENABLE_GUI=0`：强制关闭 GUI；默认在检测到可用本地图形会话时自动显示窗口
-- `VO_VERBOSE_LOG=1`：输出重检测和坏帧跳过日志
-- `VO_IMAGE_SCALE=0.5`：按比例缩小输入图像以换取速度，默认 `1.0`
+运行完整序列：
 
-可选命令行参数：
-- `./build/VO 300`：仅处理前 `300` 帧；不传参数时默认处理整个数据集
+```bash
+VO_ENABLE_GUI=0 ./build/VO
+```
+
+只运行前 300 帧：
+
+```bash
+VO_ENABLE_GUI=0 ./build/VO 300
+```
+
+程序输出：
+- `output/position/position.txt`：TUM 格式估计轨迹，格式为 `timestamp tx ty tz qx qy qz qw`
+- `output/traj/map2.png`：程序自绘的真值/VO 轨迹对比图
+
+可选环境变量：
+- `VO_ENABLE_GUI=0`：强制关闭 OpenCV 窗口，适合无桌面环境
+- `VO_VERBOSE_LOG=1`：输出更详细的重检测和跳帧日志
+- `VO_IMAGE_SCALE=0.5`：缩小输入图像以提升速度，默认 `1.0`
+
+## 使用 evo
+
+如果未安装 evo，可安装到用户级全局目录：
+
+```bash
+python3 -m pip install --user --break-system-packages evo
+```
+
+确认 `~/.local/bin` 在 PATH 中。若刚安装完后命令不可用，重新打开 VSCode 终端，或执行：
+
+```bash
+source ~/.bashrc
+```
+
+首次使用前建议把绘图后端设为 `Agg`，这样无 GUI 环境也能保存 PDF/PNG：
+
+```bash
+evo_config set plot_backend Agg
+mkdir -p output/ape output/rpe output/traj
+```
+
+如果运行时提示 Matplotlib 无法写入缓存目录，可执行：
+
+```bash
+export MPLCONFIGDIR=/tmp/evo-mpl
+```
+
+APE 绝对轨迹误差：
+
+```bash
+evo_ape tum Kitti/gt-tum07.txt output/position/position.txt -va --plot_mode xz --save_plot output/ape/evo_ape_plot.pdf --no_warnings | tee output/ape/evo_ape_metrics.txt
+```
+
+RPE 相对位姿误差：
+
+```bash
+evo_rpe tum Kitti/gt-tum07.txt output/position/position.txt -va --plot_mode xz --save_plot output/rpe/evo_rpe_plot.pdf --no_warnings | tee output/rpe/evo_rpe_metrics.txt
+```
+
+轨迹叠加图和轨迹统计：
+
+```bash
+evo_traj tum output/position/position.txt --ref Kitti/gt-tum07.txt --sync -a --plot_mode xz --save_plot output/traj/evo_traj_xz.pdf --save_table output/traj/evo_traj_table.csv --no_warnings
+```
+
+## 输出目录
+
+- `output/position/`：VO 输出的 TUM 轨迹
+- `output/ape/`：APE 指标和图
+- `output/rpe/`：RPE 指标和图
+- `output/traj/`：evo 轨迹图、统计表和程序自绘轨迹图

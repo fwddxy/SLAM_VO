@@ -1,5 +1,8 @@
 Base/build/
 build/
+.venv/
+.evo-python/
+.vscode/
 *.o
 *.out
 *.log
@@ -9,3 +12,15 @@ map2.png
 
 # Dataset images are large and reproducible from source data.
 Kitti/left/
+
+# Generated VO/evo outputs. Keep only directory placeholders.
+output/**
+!output/
+!output/ape/
+!output/rpe/
+!output/traj/
+!output/position/
+!output/ape/.gitkeep
+!output/rpe/.gitkeep
+!output/traj/.gitkeep
+!output/position/.gitkeep

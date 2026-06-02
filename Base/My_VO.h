@@ -25,6 +25,7 @@ struct ProjectPaths {
     std::string left_image_pattern;
     std::string gt_pose_path;
     std::string output_pose_path;
+    std::string output_map_path;
 };
 
 struct PoseRecord {
@@ -34,6 +35,7 @@ struct PoseRecord {
 
 bool loadCameraIntrinsics(const std::string& camera_info_path, CameraIntrinsics& intrinsics);
 std::vector<cv::Vec3d> loadGroundTruthPositions(const std::string& pose_path);
+std::vector<double> loadGroundTruthTimestamps(const std::string& pose_path);
 cv::Mat buildCameraMatrix(const CameraIntrinsics& intrinsics);
 void scaleCameraIntrinsics(CameraIntrinsics& intrinsics, double scale);
 cv::Mat readImageOrEmpty(const std::string& image_pattern, int frame_id);
@@ -59,7 +61,7 @@ void triangulation(
 
 double getAbsoluteScale(const std::vector<cv::Vec3d>& gt_positions, int frame_id);
 
-void appendPose(std::ofstream& output, const cv::Vec3d& translation);
+void appendPose(std::ofstream& output, double timestamp, const PoseRecord& pose);
 bool isVisualizationEnabled();
 bool isVerboseLoggingEnabled();
 double getImageScale();
