@@ -1,0 +1,4 @@
+segment_id,warmup_start_frame,start_frame,end_frame,sequence,is_primary,notes
+rotation_01,10,15,34,07,1,high relative rotation with moderate translation early in the route
+rotation_02,13,18,37,07,0,shifted version of the same early turning segment
+rotation_03,720,745,764,07,0,sustained turning with growing yaw rate and nonzero translation

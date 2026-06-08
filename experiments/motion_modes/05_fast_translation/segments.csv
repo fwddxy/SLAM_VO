@@ -1,0 +1,4 @@
+segment_id,warmup_start_frame,start_frame,end_frame,sequence,is_primary,notes
+fast_01,775,785,804,07,1,highest-speed translation plateau in KITTI 07
+fast_02,770,780,799,07,0,fast segment shifted earlier to include acceleration into the plateau
+fast_03,780,790,809,07,0,fast segment shifted later to include the plateau exit

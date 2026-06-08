@@ -1,0 +1,4 @@
+segment_id,warmup_start_frame,start_frame,end_frame,sequence,is_primary,notes
+nominal_01,190,200,219,07,1,stable nominal driving segment with sufficient translation
+nominal_02,277,287,306,07,0,moderate translation and low rotation, useful as a clean baseline
+nominal_03,350,360,379,07,0,post-turn steady translation with very low rotation

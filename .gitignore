@@ -16,11 +16,14 @@ Kitti/left/
 # Generated VO/evo outputs. Keep only directory placeholders.
 output/**
 !output/
-!output/ape/
-!output/rpe/
-!output/traj/
-!output/position/
-!output/ape/.gitkeep
-!output/rpe/.gitkeep
-!output/traj/.gitkeep
-!output/position/.gitkeep
+!output/full_run/
+!output/full_run/ape/
+!output/full_run/rpe/
+!output/full_run/traj/
+!output/full_run/position/
+!output/motion_modes/
+!output/full_run/ape/.gitkeep
+!output/full_run/rpe/.gitkeep
+!output/full_run/traj/.gitkeep
+!output/full_run/position/.gitkeep
+!output/motion_modes/.gitkeep

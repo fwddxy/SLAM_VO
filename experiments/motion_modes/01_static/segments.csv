@@ -1,0 +1,4 @@
+segment_id,warmup_start_frame,start_frame,end_frame,sequence,is_primary,notes
+static_01,644,695,714,07,1,near standstill with only millimeter-level translation
+static_02,644,704,715,07,0,overlapping static window centered on the lowest-speed plateau
+static_03,1060,1091,1100,07,0,terminal near-stop at the end of the sequence

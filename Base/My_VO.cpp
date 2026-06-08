@@ -1,6 +1,7 @@
 #include "My_VO.h"
 
 #include <cmath>
+#include <climits>
 #include <cstdio>
 #include <cstdlib>
 #include <algorithm>
@@ -39,6 +40,13 @@ constexpr int kMinPoseInliers = 20;
 
 namespace fs = std::filesystem;
 
+struct RunOptions {
+    int start_frame = 0;
+    int end_frame = -1;
+    int frame_count = -1;
+    std::string output_root_override;
+};
+
 fs::path findProjectRoot() {
     // 从当前目录逐级向上查找，直到同时找到 Kitti 和 Base 目录。
     // 这样程序既可以从工程根目录运行，也可以从 build/ 目录运行。
@@ -56,19 +64,22 @@ fs::path findProjectRoot() {
     return fs::current_path();
 }
 
-ProjectPaths makeProjectPaths() {
+ProjectPaths makeProjectPaths(const fs::path& output_root_override = fs::path()) {
     // 根据工程根目录统一生成输入输出文件路径，避免依赖固定启动目录。
     // 输入：
     // - Kitti/camera-info.txt：相机内参配置。
     // - Kitti/left/%06d.png：左目灰度图序列，frame_id 会格式化为 000000.png。
     // - Kitti/gt-tum07.txt：TUM 格式真值轨迹。
     // 输出：
-    // - output/position/position.txt：本程序估计出的 TUM 格式轨迹。
-    // - output/traj/map2.png：本程序绘制的轨迹对比图。
+    // - output/full_run/position/position.txt：本程序估计出的 TUM 格式轨迹。
+    // - output/full_run/traj/map2.png：本程序绘制的轨迹对比图。
     const fs::path project_root = findProjectRoot();
     const fs::path kitti_dir = project_root / "Kitti";
-    const fs::path output_dir = project_root / "output";
+    const fs::path output_dir = output_root_override.empty()
+        ? project_root / "output" / "full_run"
+        : (output_root_override.is_absolute() ? output_root_override : project_root / output_root_override);
     return {
+        project_root.string(),
         (kitti_dir / "camera-info.txt").string(),
         (kitti_dir / "left" / "%06d.png").string(),
         (kitti_dir / "gt-tum07.txt").string(),
@@ -220,18 +231,19 @@ Point2f projectTracePoint(
         static_cast<float>(kTraceCanvasSize - offset_y - (z - min_z) * scale));
 }
 
-bool shouldReportProgress(int frame_id, int max_frames) {
+bool shouldReportProgress(int processed_frames, int total_frames) {
     // 前几帧、固定间隔以及最后一帧打印进度，避免长序列刷屏。
-    // frame_id 从 0 开始，主循环从第 2 帧开始，因此 frame_id + 1 表示已经处理到的帧数量。
-    return frame_id < 5 || frame_id % kProgressReportInterval == 0 || frame_id + 1 == max_frames;
+    return processed_frames <= 5 ||
+           processed_frames % kProgressReportInterval == 0 ||
+           processed_frames == total_frames;
 }
 
 Mat renderTraceCanvas(
     const vector<Vec3d>& gt_positions,
     const vector<PoseRecord>& estimated_poses,
     const vector<int>& frame_ids,
-    int current_frame,
-    int max_frames) {
+    int processed_frames,
+    int total_frames) {
     // 根据当前已经累计的真值和估计位姿动态缩放画布，保证完整轨迹可见。
     // gt_positions 使用原始 frame_id 索引；estimated_positions 只保存成功推进或记录的估计点，
     // 因此需要 frame_ids 记录每个估计点对应的真实帧号。
@@ -287,8 +299,8 @@ Mat renderTraceCanvas(
         info,
         sizeof(info),
         "Frames: %d/%d  X:[%.1f, %.1f]  Z:[%.1f, %.1f]",
-        current_frame + 1,
-        max_frames,
+        processed_frames,
+        total_frames,
         min_x,
         max_x,
         min_z,
@@ -296,6 +308,88 @@ Mat renderTraceCanvas(
     putText(trace, info, Point2f(10, static_cast<float>(kTraceCanvasSize - 15)), FONT_HERSHEY_SIMPLEX, 0.45, Scalar(80, 80, 80), 1, 8);
 
     return trace;
+}
+
+void printUsage(const char* program_name) {
+    cout << "Usage:\n"
+         << "  " << program_name << " [frame_count]\n"
+         << "  " << program_name << " --start-frame N --end-frame M [--output-root REL_OR_ABS_PATH]\n"
+         << "  " << program_name << " --start-frame N --frame-count K [--output-root REL_OR_ABS_PATH]\n\n"
+         << "Options:\n"
+         << "  --start-frame N   First frame index in the selected segment. Default: 0\n"
+         << "  --end-frame M     Last frame index in the selected segment (inclusive).\n"
+         << "  --frame-count K   Process K frames starting from --start-frame.\n"
+         << "  --output-root P   Output root directory. Default: output/full_run/\n"
+         << "  --help            Show this help message.\n";
+}
+
+bool parseNonNegativeInt(const string& text, const string& option_name, int& value, string& error_message) {
+    char* end_ptr = nullptr;
+    errno = 0;
+    const long parsed = std::strtol(text.c_str(), &end_ptr, 10);
+    if (errno != 0 || end_ptr == text.c_str() || *end_ptr != '\0') {
+        error_message = "Invalid integer for " + option_name + ": " + text;
+        return false;
+    }
+    if (parsed < 0 || parsed > INT_MAX) {
+        error_message = "Out-of-range integer for " + option_name + ": " + text;
+        return false;
+    }
+    value = static_cast<int>(parsed);
+    return true;
+}
+
+bool parseRunOptions(int argc, char** argv, RunOptions& options, bool& show_help, string& error_message) {
+    for (int i = 1; i < argc; ++i) {
+        const string argument(argv[i]);
+        if (argument == "--help" || argument == "-h") {
+            show_help = true;
+            return true;
+        }
+        if (argument == "--start-frame" || argument == "--end-frame" || argument == "--frame-count" || argument == "--output-root") {
+            if (i + 1 >= argc) {
+                error_message = "Missing value for option: " + argument;
+                return false;
+            }
+            const string value(argv[++i]);
+            if (argument == "--start-frame") {
+                if (!parseNonNegativeInt(value, argument, options.start_frame, error_message)) {
+                    return false;
+                }
+            } else if (argument == "--end-frame") {
+                if (!parseNonNegativeInt(value, argument, options.end_frame, error_message)) {
+                    return false;
+                }
+            } else if (argument == "--frame-count") {
+                if (!parseNonNegativeInt(value, argument, options.frame_count, error_message)) {
+                    return false;
+                }
+                if (options.frame_count == 0) {
+                    error_message = "--frame-count must be greater than 0.";
+                    return false;
+                }
+            } else {
+                options.output_root_override = value;
+            }
+            continue;
+        }
+        if (!argument.empty() && argument[0] == '-') {
+            error_message = "Unknown option: " + argument;
+            return false;
+        }
+        if (options.frame_count >= 0) {
+            error_message = "Only one positional frame_count argument is supported.";
+            return false;
+        }
+        if (!parseNonNegativeInt(argument, "frame_count", options.frame_count, error_message)) {
+            return false;
+        }
+        if (options.frame_count == 0) {
+            error_message = "frame_count must be greater than 0.";
+            return false;
+        }
+    }
+    return true;
 }
 
 Vec4d rotationToTumQuaternion(const Matx33d& rotation) {
@@ -722,7 +816,20 @@ int main(int argc, char** argv) {
     // 2. 用前两帧初始化特征、光流和相对位姿。
     // 3. 从第 2 帧开始逐帧跟踪特征、估计帧间运动、累计全局轨迹。
     // 4. 输出 position.txt 和轨迹对比图 map2.png。
-    const ProjectPaths paths = makeProjectPaths();
+    RunOptions run_options;
+    bool show_help = false;
+    string option_error_message;
+    if (!parseRunOptions(argc, argv, run_options, show_help, option_error_message)) {
+        cerr << option_error_message << endl;
+        printUsage(argv[0]);
+        return -1;
+    }
+    if (show_help) {
+        printUsage(argv[0]);
+        return 0;
+    }
+
+    const ProjectPaths paths = makeProjectPaths(run_options.output_root_override);
     CameraIntrinsics intrinsics;
     if (!loadCameraIntrinsics(paths.camera_info_path, intrinsics)) {
         return -1;
@@ -741,20 +848,35 @@ int main(int argc, char** argv) {
         return -1;
     }
 
-    // 命令行第一个参数可限制处理帧数，默认处理真值文件中的全部帧。
-    // 例如运行 ./VO 200 时只处理前 200 帧，适合快速测试。
-    const int requested_frames = argc > 1 ? atoi(argv[1]) : available_frames;
-    const int max_frames = clampFrameCount(requested_frames, available_frames);
-    if (max_frames < 2) {
-        cerr << "Need at least two frames." << endl;
+    const int segment_start_frame = run_options.start_frame;
+    if (segment_start_frame < 0 || segment_start_frame >= available_frames - 1) {
+        cerr << "start-frame must leave at least two available frames inside the sequence." << endl;
         return -1;
     }
+
+    int segment_end_frame = available_frames - 1;
+    if (run_options.end_frame >= 0) {
+        segment_end_frame = min(run_options.end_frame, available_frames - 1);
+    }
+    if (run_options.frame_count > 0) {
+        const long long capped_end = static_cast<long long>(segment_start_frame) + run_options.frame_count - 1;
+        const int frame_count_end = capped_end > available_frames - 1
+            ? available_frames - 1
+            : static_cast<int>(capped_end);
+        segment_end_frame = min(segment_end_frame, frame_count_end);
+    }
+    if (segment_end_frame <= segment_start_frame) {
+        cerr << "Selected range must contain at least two frames." << endl;
+        return -1;
+    }
+
+    const int segment_frame_count = segment_end_frame - segment_start_frame + 1;
 
     // 用前两帧完成初始特征跟踪和相对位姿估计。
     // 第 0 帧检测 FAST 特征，第 1 帧用 LK 光流找到对应点；
     // 有了两帧对应点后才能估计本质矩阵和初始相对位姿。
-    Mat img_1 = readAndResizeImage(paths.left_image_pattern, 0, image_scale);
-    Mat img_2 = readAndResizeImage(paths.left_image_pattern, 1, image_scale);
+    Mat img_1 = readAndResizeImage(paths.left_image_pattern, segment_start_frame, image_scale);
+    Mat img_2 = readAndResizeImage(paths.left_image_pattern, segment_start_frame + 1, image_scale);
     if (img_1.empty() || img_2.empty()) {
         cerr << "Error reading initial images." << endl;
         return -1;
@@ -810,12 +932,6 @@ int main(int argc, char** argv) {
         cout << "Visualization disabled. GUI opens by default when a usable local display socket is present. "
              << "Set VO_ENABLE_GUI=0 to force headless mode." << endl;
     }
-    if (requested_frames > 0 && requested_frames < available_frames) {
-        cout << "Frame cap enabled: " << max_frames << "/" << available_frames << endl;
-    } else {
-        cout << "Using all available frames: " << available_frames << endl;
-    }
-    cout << "Processing " << max_frames << " frames..." << endl;
     Mat prev_image = img_2;
     Mat curr_image;
     vector<Point2f> prev_features = points2;
@@ -828,33 +944,51 @@ int main(int argc, char** argv) {
     // recoverPose 得到的是“上一帧到当前帧”的相对运动，translation 表示当前坐标系下的方向。
     // 代码使用 -delta_translation 并乘以累计旋转，把相对平移方向转换到世界坐标后再累加。
     PoseRecord raw_pose;
-    const double initial_scale = getAbsoluteScale(gt_positions, 1);
+    const double initial_scale = getAbsoluteScale(gt_positions, segment_start_frame + 1);
     raw_pose.rotation = toMatx33d(rotation.t());
     raw_pose.translation = (initial_scale > 0.0) ? initial_scale * toVec3d(translation) : toVec3d(translation);
 
     // trajectory 和 trajectory_frame_ids 一一对应，用于输出 TUM 轨迹、绘制估计轨迹并索引真值位置。
     // 初始估计来自第 0 到第 1 帧，所以第一条轨迹记录对应 frame_id=1。
     vector<PoseRecord> trajectory;
-    trajectory.reserve(max_frames);
+    trajectory.reserve(segment_frame_count);
     vector<int> trajectory_frame_ids;
-    trajectory_frame_ids.reserve(max_frames);
+    trajectory_frame_ids.reserve(segment_frame_count);
     trajectory.push_back(raw_pose);
-    trajectory_frame_ids.push_back(1);
+    trajectory_frame_ids.push_back(segment_start_frame + 1);
 
     future<Mat> next_frame_future;
-    if (max_frames > 2) {
+    if (segment_start_frame + 2 <= segment_end_frame) {
         // 异步预读下一帧，减少图像读取对主循环的阻塞。
         // 主线程处理当前帧特征和位姿时，后台线程提前把下一张图像读入内存。
-        next_frame_future = async(std::launch::async, readAndResizeImage, paths.left_image_pattern, 2, image_scale);
+        next_frame_future = async(
+            std::launch::async,
+            readAndResizeImage,
+            paths.left_image_pattern,
+            segment_start_frame + 2,
+            image_scale);
     }
 
-    for (int frame_id = 2; frame_id < max_frames; ++frame_id) {
+    if (!run_options.output_root_override.empty()) {
+        cout << "Custom output root: " << run_options.output_root_override << endl;
+    } else {
+        cout << "Using default output root: output" << endl;
+    }
+    if (segment_start_frame == 0 && segment_end_frame == available_frames - 1) {
+        cout << "Using all available frames: " << available_frames << endl;
+    } else {
+        cout << "Selected frame range: [" << segment_start_frame << ", " << segment_end_frame << "]"
+             << " (" << segment_frame_count << " frames)" << endl;
+    }
+    cout << "Processing " << segment_frame_count << " frames..." << endl;
+
+    for (int frame_id = segment_start_frame + 2; frame_id <= segment_end_frame; ++frame_id) {
         // 当前帧优先使用上一轮已经预读完成的结果。
         // 第 2 帧开始进入循环，因为第 0、1 帧已用于初始化。
         curr_image = next_frame_future.valid()
             ? next_frame_future.get()
             : readAndResizeImage(paths.left_image_pattern, frame_id, image_scale);
-        if (frame_id + 1 < max_frames) {
+        if (frame_id + 1 <= segment_end_frame) {
             // 立刻发起下一帧预读，让磁盘 IO 与当前帧计算尽量重叠。
             next_frame_future = async(std::launch::async, readAndResizeImage, paths.left_image_pattern, frame_id + 1, image_scale);
         }
@@ -883,8 +1017,9 @@ int main(int argc, char** argv) {
                 // 此时把 prev_image 更新为当前帧，相当于从当前帧重新开始积累可跟踪特征。
                 prev_image = curr_image;
                 prev_features = curr_features;
-                if (shouldReportProgress(frame_id, max_frames)) {
-                    cout << "Frame " << frame_id << "/" << (max_frames - 1)
+                const int processed_frames = frame_id - segment_start_frame + 1;
+                if (shouldReportProgress(processed_frames, segment_frame_count)) {
+                    cout << "Frame " << frame_id << " (" << processed_frames << "/" << segment_frame_count << ")"
                          << " tracked=0 status=reinit-failed" << endl;
                 }
                 continue;
@@ -923,8 +1058,9 @@ int main(int argc, char** argv) {
             trajectory_frame_ids.push_back(frame_id);
             prev_image = curr_image;
             prev_features = curr_features;
-            if (shouldReportProgress(frame_id, max_frames)) {
-                cout << "Frame " << frame_id << "/" << (max_frames - 1)
+            const int processed_frames = frame_id - segment_start_frame + 1;
+            if (shouldReportProgress(processed_frames, segment_frame_count)) {
+                cout << "Frame " << frame_id << " (" << processed_frames << "/" << segment_frame_count << ")"
                      << " tracked=" << curr_features.size()
                      << " inliers=" << inlier_count
                      << " status=skip-pose" << endl;
@@ -963,9 +1099,10 @@ int main(int argc, char** argv) {
             featureDetection(curr_image, curr_features, kTargetFeatureCount);
         }
 
-        if (shouldReportProgress(frame_id, max_frames)) {
+        const int processed_frames = frame_id - segment_start_frame + 1;
+        if (shouldReportProgress(processed_frames, segment_frame_count)) {
             // 进度信息包含当前保留的特征数、recoverPose 内点数和累计平移，便于判断运行质量。
-            cout << "Frame " << frame_id << "/" << (max_frames - 1)
+            cout << "Frame " << frame_id << " (" << processed_frames << "/" << segment_frame_count << ")"
                  << " tracked=" << curr_features.size()
                  << " inliers=" << inlier_count
                  << " pose=(" << raw_pose.translation[0] << ", "
@@ -979,7 +1116,7 @@ int main(int argc, char** argv) {
 
         if (enable_visualization) {
             // 实时显示当前灰度图和 X-Z 平面轨迹。waitKey(1) 同时负责刷新 OpenCV 窗口事件。
-            Mat trace = renderTraceCanvas(gt_positions, trajectory, trajectory_frame_ids, frame_id, max_frames);
+            Mat trace = renderTraceCanvas(gt_positions, trajectory, trajectory_frame_ids, processed_frames, segment_frame_count);
             imshow("CAMERA IMAGE", curr_image);
             imshow("Trajectory Drawing", trace);
             waitKey(1);
@@ -1004,7 +1141,7 @@ int main(int argc, char** argv) {
     }
     output.close();
     // 最后一张轨迹图即使在无 GUI 模式下也会保存，方便离线查看。
-    Mat trace = renderTraceCanvas(gt_positions, trajectory, trajectory_frame_ids, max_frames - 1, max_frames);
+    Mat trace = renderTraceCanvas(gt_positions, trajectory, trajectory_frame_ids, segment_frame_count, segment_frame_count);
     imwrite(paths.output_map_path, trace);
     cout << "Finished. Saved TUM trajectory to " << paths.output_pose_path
          << " and map to " << paths.output_map_path << endl;

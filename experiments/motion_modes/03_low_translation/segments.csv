@@ -1,0 +1,4 @@
+segment_id,warmup_start_frame,start_frame,end_frame,sequence,is_primary,notes
+low_translation_01,620,644,663,07,1,low-speed translation after the deceleration phase
+low_translation_02,620,648,667,07,0,similar low-parallax window with slightly lower average speed
+low_translation_03,620,652,671,07,0,weak translation close to the near-stop section

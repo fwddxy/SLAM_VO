@@ -1,0 +1,4 @@
+segment_id,warmup_start_frame,start_frame,end_frame,sequence,is_primary,notes
+transition_01,618,628,647,07,1,deceleration from nominal speed into a weak-translation region
+transition_02,652,714,733,07,0,restart and acceleration after the near-static interval
+transition_03,1060,1080,1099,07,0,terminal deceleration into the final stop

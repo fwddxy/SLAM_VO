@@ -21,6 +21,7 @@ struct CameraIntrinsics {
 };
 
 struct ProjectPaths {
+    std::string project_root;
     std::string camera_info_path;
     std::string left_image_pattern;
     std::string gt_pose_path;
