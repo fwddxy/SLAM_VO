@@ -46,15 +46,16 @@ constexpr double kMinTriangulationBaseline = 0.1;
 constexpr double kMinLandmarkDepth = 0.1;
 constexpr double kMaxLandmarkDepth = 80.0;
 constexpr int kMinKeyframePnPInliers = 30;
-constexpr int kPreferredKeyframePnPInliers = 120;
+constexpr int kPreferredKeyframePnPInliers = 80;
 constexpr int kMaxKeyframeTrackAge = 20;
 constexpr double kMaxPnPRotationDeltaDegrees = 8.0;
 constexpr double kMaxPnPTranslationDeltaScale = 3.0;
-constexpr double kTrustedPnPRotationDeltaDegrees = 0.75;
-constexpr double kTrustedPnPTranslationDeltaScale = 0.35;
-constexpr double kMaxOutputPnPScale = 0.4;
-constexpr int kMinOutputPnPKeyframeAge = 4;
-constexpr double kMinOutputPnPRotationDegrees = 2.0;
+constexpr double kTrustedPnPRotationDeltaDegrees = 1.5;
+constexpr double kTrustedPnPTranslationDeltaScale = 0.75;
+constexpr double kMaxOutputPnPScale = 1.0;
+constexpr int kMinOutputPnPKeyframeAge = 1;
+constexpr double kMinOutputPnPRotationDegrees = 0.0;
+constexpr int kMaxOutputPnPTrackedFeatures = 2200;
 
 namespace fs = std::filesystem;
 
@@ -386,6 +387,11 @@ bool shouldApplyPnPToOutput(
     int keyframe_map_age,
     int two_view_track_count,
     double two_view_rotation_degrees) {
+    // 这里决定“PnP 结果是否真的写入最终输出轨迹”。
+    // 当前策略非常保守：PnP 只作为 2D-2D 的补偿项，而不是主干位姿来源。
+    // 只有在小尺度、PnP 内点很多、PnP 与 2D-2D 姿态差异很小、
+    // 短时地图已经累计到足够年龄、当前 2D-2D 跟踪数已经明显下降、
+    // 并且当前相机运动是旋转主导时，才允许 PnP 改写输出。
     if (frame_scale > kMaxOutputPnPScale) {
         return false;
     }
@@ -407,7 +413,7 @@ bool shouldApplyPnPToOutput(
     if (keyframe_map_age < kMinOutputPnPKeyframeAge) {
         return false;
     }
-    if (two_view_track_count >= kMinTrackedFeatures) {
+    if (two_view_track_count >= kMaxOutputPnPTrackedFeatures) {
         return false;
     }
     return two_view_rotation_degrees >= kMinOutputPnPRotationDegrees;
@@ -458,6 +464,8 @@ bool triangulateWorldLandmarks(
     vector<Point2f>* filtered_curr_points = nullptr,
     int* finite_point_count = nullptr,
     int* positive_depth_count = nullptr) {
+    // 这个函数把当前 2D-2D 主干中的匹配点三角化成短寿命 3D 地图点。
+    // 这些 3D 点不会形成长期全局地图，只是为了给后续若干帧提供 3D-2D PnP 输入。
     if (prev_points.size() != curr_points.size() || prev_points.empty()) {
         world_points.clear();
         if (filtered_prev_points != nullptr) {
@@ -597,6 +605,10 @@ bool solvePoseWithPnP(
     const PoseRecord& initial_guess,
     PoseRecord& pose,
     vector<int>& inlier_indices) {
+    // PnP 两步走：
+    // 1. 先用 solvePnPRansac 从 3D-2D 对应中剔除外点。
+    // 2. 再只用内点做一次 iterative refine，得到更稳定的相机位姿。
+    // initial_guess 来自当前 2D-2D 位姿，用于把 PnP 解限制在“接近主干解”的局部区域。
     inlier_indices.clear();
     if (world_points.size() < 4 || image_points.size() < 4 || world_points.size() != image_points.size()) {
         return false;
@@ -1116,6 +1128,9 @@ int featureTrackingWithLandmarks(
     vector<Point2f>& curr_points,
     vector<Point3f>& landmarks,
     vector<uchar>& status) {
+    // 和普通 LK 跟踪不同，这里要同时维护 2D 观测与对应的 3D 地图点。
+    // 一旦某个点前后向跟踪失败、越界或不稳定，就连同它绑定的 3D 点一起丢弃，
+    // 这样传给 PnP 的 3D-2D 对应始终保持同一索引一一匹配。
     if (prev_points.size() != landmarks.size()) {
         prev_points.clear();
         curr_points.clear();
@@ -1652,6 +1667,9 @@ int main(int argc, char** argv) {
         PoseRecord base_geometry_pose = poseFromRelativeMotion(geometry_pose, rotation, translation, scale);
         PoseRecord estimated_geometry_pose = base_geometry_pose;
         PoseRecord base_output_pose = accumulateOutputPose(output_pose, rotation, translation, scale);
+        // output_pose_for_publish 是“当前帧最终写到 trajectory 里的结果”；
+        // next_output_pose 是“下一帧继续积分时采用的输出状态”。
+        // 当前主干策略里，PnP 即使被允许生效，也只接管输出旋转，不接管平移累计。
         PoseRecord output_pose_for_publish = base_output_pose;
         PoseRecord next_output_pose = base_output_pose;
         string status_text = "2d2d";
@@ -1676,6 +1694,10 @@ int main(int argc, char** argv) {
                 pnp_curr_features,
                 pnp_landmarks,
                 pnp_tracking_status) >= kMinKeyframePnPInliers) {
+            // 这一段是 3D-2D PnP 主路径：
+            // 1. 从当前 keyframe 的短时地图出发，把地图点跟踪到当前帧。
+            // 2. 用这些 3D-2D 对应求 PnP 位姿。
+            // 3. 如果 PnP 通过一致性与门控检查，再决定是否作用到输出轨迹。
             vector<int> pnp_inlier_indices;
             PoseRecord pnp_pose;
             if (solvePoseWithPnP(pnp_landmarks, pnp_curr_features, camera_matrix, base_geometry_pose, pnp_pose, pnp_inlier_indices) &&
@@ -1703,6 +1725,9 @@ int main(int argc, char** argv) {
                             keyframe_map_age,
                             static_cast<int>(curr_features.size()),
                             two_view_rotation_degrees)) {
+                        // 当前真正“起作用”的位置在这里：
+                        // PnP 不改 geometry_pose，也不改平移累计；
+                        // 它只把当前输出姿态和后续输出状态的旋转，替换为 PnP 的旋转。
                         output_pose_for_publish = base_output_pose;
                         output_pose_for_publish.rotation = pnp_pose.rotation;
                         next_output_pose = output_pose_for_publish;
@@ -1758,6 +1783,8 @@ int main(int argc, char** argv) {
             keyframe_map_age >= kMaxKeyframeTrackAge);
         if (should_refresh_keyframe &&
             can_triangulate &&
+            // 只有 2D-2D 主干在当前帧提供了足够基线和视差，才重建一份新的短时 3D 地图。
+            // 这份地图随后成为 PnP 的 keyframe 地图来源。
             triangulateWorldLandmarks(
                 triangulation_prev_features,
                 triangulation_curr_features,
