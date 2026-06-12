@@ -26,6 +26,7 @@ struct ProjectPaths {
     std::string left_image_pattern;
     std::string gt_pose_path;
     std::string output_pose_path;
+    std::string output_geometry_pose_path;
     std::string output_map_path;
 };
 

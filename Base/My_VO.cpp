@@ -35,8 +35,26 @@ constexpr int kTraceCanvasSize = 1000;
 constexpr int kProgressReportInterval = 50;
 constexpr double kTracePadding = 40.0;
 constexpr float kMaxForwardBackwardError = 1.0f;
-constexpr int kMinInitialPoseInliers = 8;
+constexpr int kMinInitialPoseInliers = 5;
 constexpr int kMinPoseInliers = 20;
+constexpr int kMinPnPInliers = 12;
+constexpr int kMinTriangulatedLandmarks = 4;
+constexpr float kPnPReprojectionError = 4.0f;
+constexpr double kTriangulationReprojectionError = 5.0;
+constexpr double kMinTriangulationParallaxPixels = 5.0;
+constexpr double kMinTriangulationBaseline = 0.1;
+constexpr double kMinLandmarkDepth = 0.1;
+constexpr double kMaxLandmarkDepth = 80.0;
+constexpr int kMinKeyframePnPInliers = 30;
+constexpr int kPreferredKeyframePnPInliers = 120;
+constexpr int kMaxKeyframeTrackAge = 20;
+constexpr double kMaxPnPRotationDeltaDegrees = 8.0;
+constexpr double kMaxPnPTranslationDeltaScale = 3.0;
+constexpr double kTrustedPnPRotationDeltaDegrees = 0.75;
+constexpr double kTrustedPnPTranslationDeltaScale = 0.35;
+constexpr double kMaxOutputPnPScale = 0.4;
+constexpr int kMinOutputPnPKeyframeAge = 4;
+constexpr double kMinOutputPnPRotationDegrees = 2.0;
 
 namespace fs = std::filesystem;
 
@@ -84,6 +102,7 @@ ProjectPaths makeProjectPaths(const fs::path& output_root_override = fs::path())
         (kitti_dir / "left" / "%06d.png").string(),
         (kitti_dir / "gt-tum07.txt").string(),
         (output_dir / "position" / "position.txt").string(),
+        (output_dir / "position" / "geometry_position.txt").string(),
         (output_dir / "traj" / "map2.png").string(),
     };
 }
@@ -213,6 +232,428 @@ Vec3d toVec3d(const Mat& translation) {
         translation.at<double>(0, 0),
         translation.at<double>(1, 0),
         translation.at<double>(2, 0));
+}
+
+void poseToWorldToCamera(const PoseRecord& pose, Matx33d& rotation_wc, Vec3d& translation_wc) {
+    rotation_wc = pose.rotation.t();
+    translation_wc = -(rotation_wc * pose.translation);
+}
+
+PoseRecord poseFromRelativeMotion(
+    const PoseRecord& prev_pose,
+    const Mat& relative_rotation,
+    const Mat& relative_translation,
+    double scale) {
+    PoseRecord curr_pose;
+    curr_pose.rotation = prev_pose.rotation * toMatx33d(relative_rotation.t());
+    curr_pose.translation = prev_pose.translation + curr_pose.rotation * (-scale * toVec3d(relative_translation));
+    return curr_pose;
+}
+
+PoseRecord poseFromInitialRelativeMotion(
+    const Mat& relative_rotation,
+    const Mat& relative_translation,
+    double scale) {
+    return poseFromRelativeMotion(PoseRecord(), relative_rotation, relative_translation, scale);
+}
+
+PoseRecord accumulateOutputPose(
+    const PoseRecord& prev_pose,
+    const Mat& relative_rotation,
+    const Mat& relative_translation,
+    double scale) {
+    PoseRecord curr_pose;
+    curr_pose.translation = prev_pose.translation + scale * (prev_pose.rotation * (-toVec3d(relative_translation)));
+    curr_pose.rotation = toMatx33d(relative_rotation.t()) * prev_pose.rotation;
+    return curr_pose;
+}
+
+PoseRecord poseFromInitialOutputMotion(
+    const Mat& relative_rotation,
+    const Mat& relative_translation,
+    double scale) {
+    PoseRecord pose;
+    pose.rotation = toMatx33d(relative_rotation.t());
+    pose.translation = (scale > 0.0) ? scale * toVec3d(relative_translation) : toVec3d(relative_translation);
+    return pose;
+}
+
+bool relativeMotionFromPoses(
+    const PoseRecord& prev_pose,
+    const PoseRecord& curr_pose,
+    Mat& relative_rotation,
+    Mat& relative_translation,
+    double& relative_scale) {
+    const Matx33d relative_rotation_matx = curr_pose.rotation.t() * prev_pose.rotation;
+    relative_rotation = (Mat_<double>(3, 3) <<
+        relative_rotation_matx(0, 0), relative_rotation_matx(0, 1), relative_rotation_matx(0, 2),
+        relative_rotation_matx(1, 0), relative_rotation_matx(1, 1), relative_rotation_matx(1, 2),
+        relative_rotation_matx(2, 0), relative_rotation_matx(2, 1), relative_rotation_matx(2, 2));
+
+    const Vec3d delta_world = curr_pose.translation - prev_pose.translation;
+    const Vec3d scaled_relative_translation = -(curr_pose.rotation.t() * delta_world);
+    relative_scale = norm(scaled_relative_translation);
+    if (relative_scale <= 1e-9) {
+        relative_translation = (Mat_<double>(3, 1) << 0.0, 0.0, 0.0);
+        return false;
+    }
+
+    const Vec3d direction = scaled_relative_translation / relative_scale;
+    relative_translation = (Mat_<double>(3, 1) << direction[0], direction[1], direction[2]);
+    return true;
+}
+
+PoseRecord poseFromPnP(const Mat& rvec, const Mat& tvec) {
+    Mat rotation_wc_mat;
+    Rodrigues(rvec, rotation_wc_mat);
+
+    PoseRecord pose;
+    const Matx33d rotation_wc = toMatx33d(rotation_wc_mat);
+    const Vec3d translation_wc = toVec3d(tvec);
+    pose.rotation = rotation_wc.t();
+    pose.translation = pose.rotation * (-translation_wc);
+    return pose;
+}
+
+void poseToPnPGuess(const PoseRecord& pose, Mat& rvec, Mat& tvec) {
+    Matx33d rotation_wc;
+    Vec3d translation_wc;
+    poseToWorldToCamera(pose, rotation_wc, translation_wc);
+
+    Mat rotation_wc_mat(3, 3, CV_64F);
+    for (int row = 0; row < 3; ++row) {
+        for (int col = 0; col < 3; ++col) {
+            rotation_wc_mat.at<double>(row, col) = rotation_wc(row, col);
+        }
+    }
+    Rodrigues(rotation_wc_mat, rvec);
+    tvec = (Mat_<double>(3, 1) << translation_wc[0], translation_wc[1], translation_wc[2]);
+}
+
+Mat buildProjectionMatrix(const Mat& camera_matrix, const PoseRecord& pose) {
+    Matx33d rotation_wc;
+    Vec3d translation_wc;
+    poseToWorldToCamera(pose, rotation_wc, translation_wc);
+
+    Mat extrinsic = (Mat_<double>(3, 4) <<
+        rotation_wc(0, 0), rotation_wc(0, 1), rotation_wc(0, 2), translation_wc[0],
+        rotation_wc(1, 0), rotation_wc(1, 1), rotation_wc(1, 2), translation_wc[1],
+        rotation_wc(2, 0), rotation_wc(2, 1), rotation_wc(2, 2), translation_wc[2]);
+    return camera_matrix * extrinsic;
+}
+
+Point2d projectWorldPoint(const Point3d& point_world, const Mat& camera_matrix, const PoseRecord& pose) {
+    Matx33d rotation_wc;
+    Vec3d translation_wc;
+    poseToWorldToCamera(pose, rotation_wc, translation_wc);
+
+    const Vec3d point_camera = rotation_wc * Vec3d(point_world.x, point_world.y, point_world.z) + translation_wc;
+    if (point_camera[2] <= 1e-9) {
+        return Point2d(
+            numeric_limits<double>::quiet_NaN(),
+            numeric_limits<double>::quiet_NaN());
+    }
+
+    const double fx = camera_matrix.at<double>(0, 0);
+    const double fy = camera_matrix.at<double>(1, 1);
+    const double cx = camera_matrix.at<double>(0, 2);
+    const double cy = camera_matrix.at<double>(1, 2);
+    return Point2d(
+        fx * point_camera[0] / point_camera[2] + cx,
+        fy * point_camera[1] / point_camera[2] + cy);
+}
+
+double rotationAngleDegrees(const Matx33d& lhs, const Matx33d& rhs) {
+    const Matx33d delta = lhs * rhs.t();
+    const double cosine = std::clamp((delta(0, 0) + delta(1, 1) + delta(2, 2) - 1.0) * 0.5, -1.0, 1.0);
+    return std::acos(cosine) * 180.0 / CV_PI;
+}
+
+bool isPnPPoseConsistent(const PoseRecord& pnp_pose, const PoseRecord& reference_pose, double frame_scale) {
+    const double translation_limit = std::max(0.5, frame_scale * kMaxPnPTranslationDeltaScale);
+    const double translation_delta = norm(pnp_pose.translation - reference_pose.translation);
+    if (translation_delta > translation_limit) {
+        return false;
+    }
+    return rotationAngleDegrees(pnp_pose.rotation, reference_pose.rotation) <= kMaxPnPRotationDeltaDegrees;
+}
+
+bool shouldApplyPnPToOutput(
+    const PoseRecord& pnp_pose,
+    const PoseRecord& reference_pose,
+    double frame_scale,
+    int pnp_inlier_count,
+    int keyframe_map_age,
+    int two_view_track_count,
+    double two_view_rotation_degrees) {
+    if (frame_scale > kMaxOutputPnPScale) {
+        return false;
+    }
+    if (pnp_inlier_count < kPreferredKeyframePnPInliers) {
+        return false;
+    }
+
+    const double translation_limit = std::max(0.2, frame_scale * kTrustedPnPTranslationDeltaScale);
+    const double translation_delta = norm(pnp_pose.translation - reference_pose.translation);
+    if (translation_delta > translation_limit) {
+        return false;
+    }
+
+    const double rotation_delta = rotationAngleDegrees(pnp_pose.rotation, reference_pose.rotation);
+    if (rotation_delta > kTrustedPnPRotationDeltaDegrees) {
+        return false;
+    }
+
+    if (keyframe_map_age < kMinOutputPnPKeyframeAge) {
+        return false;
+    }
+    if (two_view_track_count >= kMinTrackedFeatures) {
+        return false;
+    }
+    return two_view_rotation_degrees >= kMinOutputPnPRotationDegrees;
+}
+
+double medianParallax(const vector<Point2f>& prev_points, const vector<Point2f>& curr_points) {
+    if (prev_points.size() != curr_points.size() || prev_points.empty()) {
+        return 0.0;
+    }
+
+    vector<double> parallaxes;
+    parallaxes.reserve(prev_points.size());
+    for (size_t i = 0; i < prev_points.size(); ++i) {
+        parallaxes.push_back(norm(curr_points[i] - prev_points[i]));
+    }
+
+    const size_t middle = parallaxes.size() / 2;
+    nth_element(parallaxes.begin(), parallaxes.begin() + middle, parallaxes.end());
+    double median = parallaxes[middle];
+    if (parallaxes.size() % 2 == 0 && middle > 0) {
+        nth_element(parallaxes.begin(), parallaxes.begin() + middle - 1, parallaxes.begin() + middle);
+        median = 0.5 * (median + parallaxes[middle - 1]);
+    }
+    return median;
+}
+
+bool shouldTriangulateTracks(const vector<Point2f>& prev_points, const vector<Point2f>& curr_points, double baseline) {
+    if (prev_points.size() < static_cast<size_t>(kMinTriangulatedLandmarks) || curr_points.size() != prev_points.size()) {
+        return false;
+    }
+    if (baseline <= kMinTriangulationBaseline) {
+        return false;
+    }
+    return medianParallax(prev_points, curr_points) >= kMinTriangulationParallaxPixels;
+}
+
+bool triangulateWorldLandmarks(
+    const vector<Point2f>& prev_points,
+    const vector<Point2f>& curr_points,
+    const Mat& camera_matrix,
+    const PoseRecord& prev_pose,
+    const Mat& relative_rotation,
+    const Mat& relative_translation,
+    double relative_scale,
+    const PoseRecord* curr_pose_override,
+    vector<Point3f>& world_points,
+    vector<Point2f>* filtered_prev_points = nullptr,
+    vector<Point2f>* filtered_curr_points = nullptr,
+    int* finite_point_count = nullptr,
+    int* positive_depth_count = nullptr) {
+    if (prev_points.size() != curr_points.size() || prev_points.empty()) {
+        world_points.clear();
+        if (filtered_prev_points != nullptr) {
+            filtered_prev_points->clear();
+        }
+        if (filtered_curr_points != nullptr) {
+            filtered_curr_points->clear();
+        }
+        return false;
+    }
+
+    const vector<Point2f> input_prev_points = prev_points;
+    const vector<Point2f> input_curr_points = curr_points;
+
+    world_points.clear();
+    if (finite_point_count != nullptr) {
+        *finite_point_count = 0;
+    }
+    if (positive_depth_count != nullptr) {
+        *positive_depth_count = 0;
+    }
+    if (filtered_prev_points != nullptr) {
+        filtered_prev_points->clear();
+        filtered_prev_points->reserve(input_prev_points.size());
+    }
+    if (filtered_curr_points != nullptr) {
+        filtered_curr_points->clear();
+        filtered_curr_points->reserve(input_curr_points.size());
+    }
+
+    const PoseRecord derived_curr_pose = poseFromRelativeMotion(prev_pose, relative_rotation, relative_translation, relative_scale);
+    const PoseRecord& curr_pose = curr_pose_override != nullptr ? *curr_pose_override : derived_curr_pose;
+
+    vector<Point3f> local_points;
+    Mat scaled_translation = relative_translation.clone();
+    scaled_translation *= relative_scale;
+    triangulation(
+        input_prev_points,
+        input_curr_points,
+        camera_matrix,
+        relative_rotation,
+        scaled_translation,
+        local_points);
+    const int triangulated_count = min(
+        static_cast<int>(min(input_prev_points.size(), input_curr_points.size())),
+        static_cast<int>(local_points.size()));
+    world_points.reserve(triangulated_count);
+    for (int i = 0; i < triangulated_count; ++i) {
+        const Point3f& point_local = local_points[i];
+        if (!std::isfinite(point_local.x) || !std::isfinite(point_local.y) || !std::isfinite(point_local.z)) {
+            continue;
+        }
+        if (finite_point_count != nullptr) {
+            ++(*finite_point_count);
+        }
+
+        if (point_local.z <= 1e-6f) {
+            continue;
+        }
+        if (positive_depth_count != nullptr) {
+            ++(*positive_depth_count);
+        }
+        if (point_local.z < kMinLandmarkDepth || point_local.z > kMaxLandmarkDepth) {
+            continue;
+        }
+
+        const Matx33d prev_rotation_cw = prev_pose.rotation;
+        const Vec3d prev_translation_world = prev_pose.translation;
+        const Vec3d point_world_vec =
+            prev_rotation_cw * Vec3d(point_local.x, point_local.y, point_local.z) + prev_translation_world;
+
+        const Point2d reproj_prev = projectWorldPoint(
+            Point3d(point_world_vec[0], point_world_vec[1], point_world_vec[2]),
+            camera_matrix,
+            prev_pose);
+        const Point2d reproj_curr = projectWorldPoint(
+            Point3d(point_world_vec[0], point_world_vec[1], point_world_vec[2]),
+            camera_matrix,
+            curr_pose);
+        if (!std::isfinite(reproj_prev.x) || !std::isfinite(reproj_prev.y) ||
+            !std::isfinite(reproj_curr.x) || !std::isfinite(reproj_curr.y)) {
+            continue;
+        }
+        if (norm(reproj_prev - Point2d(input_prev_points[i])) > kTriangulationReprojectionError ||
+            norm(reproj_curr - Point2d(input_curr_points[i])) > kTriangulationReprojectionError) {
+            continue;
+        }
+
+        world_points.emplace_back(
+            static_cast<float>(point_world_vec[0]),
+            static_cast<float>(point_world_vec[1]),
+            static_cast<float>(point_world_vec[2]));
+        if (filtered_prev_points != nullptr) {
+            filtered_prev_points->push_back(input_prev_points[i]);
+        }
+        if (filtered_curr_points != nullptr) {
+            filtered_curr_points->push_back(input_curr_points[i]);
+        }
+    }
+
+    return !world_points.empty();
+}
+
+void compactTracksByIndices(
+    vector<Point2f>& prev_points,
+    vector<Point2f>& curr_points,
+    vector<Point3f>& world_points,
+    const vector<int>& inlier_indices) {
+    vector<Point2f> filtered_prev;
+    vector<Point2f> filtered_curr;
+    vector<Point3f> filtered_world;
+    filtered_prev.reserve(inlier_indices.size());
+    filtered_curr.reserve(inlier_indices.size());
+    filtered_world.reserve(inlier_indices.size());
+
+    for (int index : inlier_indices) {
+        if (index < 0 ||
+            index >= static_cast<int>(prev_points.size()) ||
+            index >= static_cast<int>(curr_points.size()) ||
+            index >= static_cast<int>(world_points.size())) {
+            continue;
+        }
+        filtered_prev.push_back(prev_points[index]);
+        filtered_curr.push_back(curr_points[index]);
+        filtered_world.push_back(world_points[index]);
+    }
+
+    prev_points.swap(filtered_prev);
+    curr_points.swap(filtered_curr);
+    world_points.swap(filtered_world);
+}
+
+bool solvePoseWithPnP(
+    const vector<Point3f>& world_points,
+    const vector<Point2f>& image_points,
+    const Mat& camera_matrix,
+    const PoseRecord& initial_guess,
+    PoseRecord& pose,
+    vector<int>& inlier_indices) {
+    inlier_indices.clear();
+    if (world_points.size() < 4 || image_points.size() < 4 || world_points.size() != image_points.size()) {
+        return false;
+    }
+
+    Mat rvec;
+    Mat tvec;
+    poseToPnPGuess(initial_guess, rvec, tvec);
+    vector<int> raw_inliers;
+    const bool solved = solvePnPRansac(
+        world_points,
+        image_points,
+        camera_matrix,
+        noArray(),
+        rvec,
+        tvec,
+        true,
+        100,
+        kPnPReprojectionError,
+        0.99,
+        raw_inliers,
+        SOLVEPNP_EPNP);
+    if (!solved || static_cast<int>(raw_inliers.size()) < kMinPnPInliers) {
+        return false;
+    }
+
+    vector<Point3f> inlier_world_points;
+    vector<Point2f> inlier_image_points;
+    inlier_world_points.reserve(raw_inliers.size());
+    inlier_image_points.reserve(raw_inliers.size());
+    for (int index : raw_inliers) {
+        if (index < 0 || index >= static_cast<int>(world_points.size()) || index >= static_cast<int>(image_points.size())) {
+            continue;
+        }
+        inlier_world_points.push_back(world_points[index]);
+        inlier_image_points.push_back(image_points[index]);
+    }
+
+    if (static_cast<int>(inlier_world_points.size()) < kMinPnPInliers) {
+        return false;
+    }
+
+    if (!solvePnP(
+            inlier_world_points,
+            inlier_image_points,
+            camera_matrix,
+            noArray(),
+            rvec,
+            tvec,
+            true,
+            SOLVEPNP_ITERATIVE)) {
+        return false;
+    }
+
+    pose = poseFromPnP(rvec, tvec);
+    inlier_indices.swap(raw_inliers);
+    return true;
 }
 
 Point2f projectTracePoint(
@@ -668,6 +1109,78 @@ int featureTracking(
     return static_cast<int>(curr_points.size());
 }
 
+int featureTrackingWithLandmarks(
+    const Mat& prev_image,
+    const Mat& curr_image,
+    vector<Point2f>& prev_points,
+    vector<Point2f>& curr_points,
+    vector<Point3f>& landmarks,
+    vector<uchar>& status) {
+    if (prev_points.size() != landmarks.size()) {
+        prev_points.clear();
+        curr_points.clear();
+        landmarks.clear();
+        return 0;
+    }
+
+    vector<float> errors;
+    vector<Point2f> backward_points;
+    vector<uchar> backward_status;
+    vector<float> backward_errors;
+    static const Size kWindowSize(21, 21);
+    static const TermCriteria kTermCriteria(TermCriteria::COUNT | TermCriteria::EPS, 20, 0.03);
+    calcOpticalFlowPyrLK(
+        prev_image,
+        curr_image,
+        prev_points,
+        curr_points,
+        status,
+        errors,
+        kWindowSize,
+        3,
+        kTermCriteria);
+    calcOpticalFlowPyrLK(
+        curr_image,
+        prev_image,
+        curr_points,
+        backward_points,
+        backward_status,
+        backward_errors,
+        kWindowSize,
+        3,
+        kTermCriteria);
+
+    vector<Point2f> filtered_prev_points;
+    vector<Point2f> filtered_curr_points;
+    vector<Point3f> filtered_landmarks;
+    filtered_prev_points.reserve(prev_points.size());
+    filtered_curr_points.reserve(curr_points.size());
+    filtered_landmarks.reserve(landmarks.size());
+
+    const int width = curr_image.cols;
+    const int height = curr_image.rows;
+    for (size_t i = 0; i < status.size() && i < landmarks.size(); ++i) {
+        if (status[i] == 0 || backward_status[i] == 0) {
+            continue;
+        }
+        const Point2f& point = curr_points[i];
+        if (point.x < 0.0f || point.y < 0.0f || point.x >= width || point.y >= height) {
+            continue;
+        }
+        if (norm(prev_points[i] - backward_points[i]) > kMaxForwardBackwardError) {
+            continue;
+        }
+        filtered_prev_points.push_back(prev_points[i]);
+        filtered_curr_points.push_back(point);
+        filtered_landmarks.push_back(landmarks[i]);
+    }
+
+    prev_points.swap(filtered_prev_points);
+    curr_points.swap(filtered_curr_points);
+    landmarks.swap(filtered_landmarks);
+    return static_cast<int>(curr_points.size());
+}
+
 void compactPointsByMask(vector<Point2f>& prev_points, vector<Point2f>& curr_points, const Mat& mask) {
     // findEssentialMat/recoverPose 的 mask 标记内点，这里同步压缩两帧对应点。
     // mask 中非零值表示该匹配点符合估计出的极几何关系；外点通常来自误匹配、动态物体或遮挡。
@@ -677,7 +1190,8 @@ void compactPointsByMask(vector<Point2f>& prev_points, vector<Point2f>& curr_poi
     filtered_prev.reserve(prev_points.size());
     filtered_curr.reserve(curr_points.size());
 
-    for (int i = 0; i < mask.rows && i < static_cast<int>(prev_points.size()) && i < static_cast<int>(curr_points.size()); ++i) {
+    const int mask_count = max(mask.rows, mask.cols);
+    for (int i = 0; i < mask_count && i < static_cast<int>(prev_points.size()) && i < static_cast<int>(curr_points.size()); ++i) {
         // OpenCV 的 mask 可能是 1xN，也可能是 Nx1，这里兼容两种形状。
         const uchar keep = mask.rows == 1 ? mask.at<uchar>(0, i) : mask.at<uchar>(i, 0);
         if (keep == 0) {
@@ -710,24 +1224,26 @@ void triangulation(
     // 注意：当前主流程没有调用 triangulation，这个函数保留用于三角化特征点或调试深度。
     // pose_1 是 [I|0]，pose_2 是 [R|t]，两帧归一化坐标通过线性三角化得到 3D 点。
     Mat pose_1 = (Mat_<float>(3, 4) <<
-        1, 0, 0, 0,
-        0, 1, 0, 0,
-        0, 0, 1, 0);
+        1.0f, 0.0f, 0.0f, 0.0f,
+        0.0f, 1.0f, 0.0f, 0.0f,
+        0.0f, 0.0f, 1.0f, 0.0f);
     Mat pose_2 = (Mat_<float>(3, 4) <<
-        rotation.at<double>(0, 0), rotation.at<double>(0, 1), rotation.at<double>(0, 2), translation.at<double>(0, 0),
-        rotation.at<double>(1, 0), rotation.at<double>(1, 1), rotation.at<double>(1, 2), translation.at<double>(1, 0),
-        rotation.at<double>(2, 0), rotation.at<double>(2, 1), rotation.at<double>(2, 2), translation.at<double>(2, 0));
+        static_cast<float>(rotation.at<double>(0, 0)), static_cast<float>(rotation.at<double>(0, 1)), static_cast<float>(rotation.at<double>(0, 2)), static_cast<float>(translation.at<double>(0, 0)),
+        static_cast<float>(rotation.at<double>(1, 0)), static_cast<float>(rotation.at<double>(1, 1)), static_cast<float>(rotation.at<double>(1, 2)), static_cast<float>(translation.at<double>(1, 0)),
+        static_cast<float>(rotation.at<double>(2, 0)), static_cast<float>(rotation.at<double>(2, 1)), static_cast<float>(rotation.at<double>(2, 2)), static_cast<float>(translation.at<double>(2, 0)));
 
-    vector<Point2f> normalized_1;
-    vector<Point2f> normalized_2;
-    normalized_1.reserve(points_1.size());
-    normalized_2.reserve(points_2.size());
+    Mat normalized_1(2, static_cast<int>(points_1.size()), CV_32F);
+    Mat normalized_2(2, static_cast<int>(points_2.size()), CV_32F);
 
     // triangulatePoints 输入的是归一化坐标，因此投影矩阵中不再乘相机内参 K。
     // 如果使用像素坐标，则投影矩阵需要写成 K[I|0] 和 K[R|t]；这里选择先归一化点。
     for (size_t i = 0; i < points_1.size(); ++i) {
-        normalized_1.push_back(pixel2cam(points_1[i], camera_matrix));
-        normalized_2.push_back(pixel2cam(points_2[i], camera_matrix));
+        const Point2f point_1 = pixel2cam(points_1[i], camera_matrix);
+        const Point2f point_2 = pixel2cam(points_2[i], camera_matrix);
+        normalized_1.at<float>(0, static_cast<int>(i)) = point_1.x;
+        normalized_1.at<float>(1, static_cast<int>(i)) = point_1.y;
+        normalized_2.at<float>(0, static_cast<int>(i)) = point_2.x;
+        normalized_2.at<float>(1, static_cast<int>(i)) = point_2.y;
     }
 
     Mat points_4d;
@@ -738,7 +1254,11 @@ void triangulation(
         // 齐次坐标除以 w，得到三维欧式坐标。
         // points_4d 每一列是 [X, Y, Z, W]^T，归一化后保存为 Point3f。
         Mat column = points_4d.col(i);
-        column /= column.at<float>(3, 0);
+        const float w = column.at<float>(3, 0);
+        if (!std::isfinite(w) || std::abs(w) <= 1e-9f) {
+            continue;
+        }
+        column /= w;
         points.emplace_back(
             column.at<float>(0, 0),
             column.at<float>(1, 0),
@@ -792,6 +1312,14 @@ bool isVerboseLoggingEnabled() {
     // 默认只打印关键进度，避免处理长序列时输出过多。
     const char* verbose = std::getenv("VO_VERBOSE_LOG");
     return verbose != nullptr && std::string(verbose) == "1";
+}
+
+bool isPnPEnabled() {
+    const char* pnp = std::getenv("VO_ENABLE_PNP");
+    if (pnp == nullptr) {
+        return true;
+    }
+    return std::string(pnp) != "0";
 }
 
 double getImageScale() {
@@ -872,9 +1400,9 @@ int main(int argc, char** argv) {
 
     const int segment_frame_count = segment_end_frame - segment_start_frame + 1;
 
-    // 用前两帧完成初始特征跟踪和相对位姿估计。
+    // 用前两帧完成初始特征跟踪、相对位姿估计和首批地图点三角化。
     // 第 0 帧检测 FAST 特征，第 1 帧用 LK 光流找到对应点；
-    // 有了两帧对应点后才能估计本质矩阵和初始相对位姿。
+    // 有了两帧对应点后先估计本质矩阵和相对位姿，再三角化出后续 PnP 所需的 3D 点。
     Mat img_1 = readAndResizeImage(paths.left_image_pattern, segment_start_frame, image_scale);
     Mat img_2 = readAndResizeImage(paths.left_image_pattern, segment_start_frame + 1, image_scale);
     if (img_1.empty() || img_2.empty()) {
@@ -922,6 +1450,40 @@ int main(int argc, char** argv) {
     }
     compactPointsByMask(points1, points2, mask);
 
+    const bool enable_pnp = isPnPEnabled();
+    const double initial_scale = getAbsoluteScale(gt_positions, segment_start_frame + 1);
+    PoseRecord geometry_pose = poseFromInitialRelativeMotion(rotation, translation, initial_scale);
+    PoseRecord output_pose = poseFromInitialOutputMotion(rotation, translation, initial_scale);
+
+    vector<Point2f> init_prev_features = points1;
+    vector<Point2f> init_curr_features = points2;
+    vector<Point2f> init_prev_landmark_features = points1;
+    vector<Point2f> init_curr_landmark_features = points2;
+    vector<Point3f> tracked_landmarks;
+    const bool init_triangulated =
+        enable_pnp &&
+        shouldTriangulateTracks(init_prev_landmark_features, init_curr_landmark_features, initial_scale) &&
+        triangulateWorldLandmarks(
+            init_prev_landmark_features,
+            init_curr_landmark_features,
+            camera_matrix,
+            PoseRecord(),
+            rotation,
+            translation,
+            initial_scale,
+            &geometry_pose,
+            tracked_landmarks,
+            &init_prev_landmark_features,
+            &init_curr_landmark_features);
+    if (!init_triangulated || static_cast<int>(tracked_landmarks.size()) < kMinTriangulatedLandmarks) {
+        tracked_landmarks.clear();
+        init_prev_landmark_features.clear();
+        init_curr_landmark_features.clear();
+        if (enable_pnp) {
+            cerr << "Initialization triangulation is insufficient; the next frame will rebuild landmarks via 2D-2D." << endl;
+        }
+    }
+
     // 窗口显示是可选功能：有本地显示服务时实时显示当前图像和轨迹，否则自动无头运行。
     const bool enable_visualization = isVisualizationEnabled();
     const bool verbose_logging = isVerboseLoggingEnabled();
@@ -934,27 +1496,30 @@ int main(int argc, char** argv) {
     }
     Mat prev_image = img_2;
     Mat curr_image;
-    vector<Point2f> prev_features = points2;
+    vector<Point2f> prev_features = init_curr_features;
     vector<Point2f> curr_features;
     curr_features.reserve(prev_features.size());
-    // 主循环中 prev_image/prev_features 表示上一帧及其可继续跟踪的特征；
-    // curr_image/curr_features 表示当前帧及上一帧特征跟踪过来的对应点。
-
-    // raw_pose 保存当前累计世界位姿；rotation 存为逆向旋转以便把帧间位移累加到世界坐标。
-    // recoverPose 得到的是“上一帧到当前帧”的相对运动，translation 表示当前坐标系下的方向。
-    // 代码使用 -delta_translation 并乘以累计旋转，把相对平移方向转换到世界坐标后再累加。
-    PoseRecord raw_pose;
-    const double initial_scale = getAbsoluteScale(gt_positions, segment_start_frame + 1);
-    raw_pose.rotation = toMatx33d(rotation.t());
-    raw_pose.translation = (initial_scale > 0.0) ? initial_scale * toVec3d(translation) : toVec3d(translation);
+    // prev_image/prev_features 始终是 2D-2D 主干的上一帧状态。
+    // keyframe_landmarks 保存当前短寿命地图的 3D 点；
+    // keyframe_image/keyframe_features 保存这些 3D 点在“上一帧图像”中的 2D 观测，
+    // 下一帧只需要把这些观测连续跟踪到当前帧，再做 3D-2D PnP。
+    Mat keyframe_image = img_2;
+    vector<Point2f> keyframe_features = init_curr_landmark_features;
+    vector<Point3f> keyframe_landmarks = tracked_landmarks;
+    PoseRecord keyframe_pose = geometry_pose;
+    int keyframe_frame_id = segment_start_frame + 1;
+    int keyframe_map_frame_id = segment_start_frame + 1;
 
     // trajectory 和 trajectory_frame_ids 一一对应，用于输出 TUM 轨迹、绘制估计轨迹并索引真值位置。
     // 初始估计来自第 0 到第 1 帧，所以第一条轨迹记录对应 frame_id=1。
     vector<PoseRecord> trajectory;
     trajectory.reserve(segment_frame_count);
+    vector<PoseRecord> geometry_trajectory;
+    geometry_trajectory.reserve(segment_frame_count);
     vector<int> trajectory_frame_ids;
     trajectory_frame_ids.reserve(segment_frame_count);
-    trajectory.push_back(raw_pose);
+    trajectory.push_back(output_pose);
+    geometry_trajectory.push_back(geometry_pose);
     trajectory_frame_ids.push_back(segment_start_frame + 1);
 
     future<Mat> next_frame_future;
@@ -1000,34 +1565,31 @@ int main(int argc, char** argv) {
 
         vector<uchar> tracking_status;
         curr_features.clear();
-        // 对上一帧保留下来的特征点进行光流跟踪，得到当前帧对应点。
-        // featureTracking 会原地过滤 prev_features 和 curr_features，只留下通过检查的匹配。
-        featureTracking(prev_image, curr_image, prev_features, curr_features, tracking_status);
+        if (!prev_features.empty()) {
+            featureTracking(prev_image, curr_image, prev_features, curr_features, tracking_status);
+        }
         if (prev_features.size() < 8 || curr_features.size() < 8) {
             if (verbose_logging) {
                 cout << "Frame " << frame_id << ": not enough tracked features, re-detecting." << endl;
             }
-            // 跟踪点过少时在上一帧重新检测特征，并再次尝试跟踪到当前帧。
-            // 这样可以应对快速运动、模糊、纹理变化导致老特征大量丢失的情况。
             featureDetection(prev_image, prev_features, kTargetFeatureCount);
             curr_features.clear();
             featureTracking(prev_image, curr_image, prev_features, curr_features, tracking_status);
             if (prev_features.size() < 8 || curr_features.size() < 8) {
-                // 重检测仍失败时跳过本帧位姿更新，避免用不可靠对应点污染轨迹。
-                // 此时把 prev_image 更新为当前帧，相当于从当前帧重新开始积累可跟踪特征。
+                trajectory.push_back(output_pose);
+                geometry_trajectory.push_back(geometry_pose);
+                trajectory_frame_ids.push_back(frame_id);
                 prev_image = curr_image;
-                prev_features = curr_features;
+                featureDetection(curr_image, prev_features, kTargetFeatureCount);
                 const int processed_frames = frame_id - segment_start_frame + 1;
                 if (shouldReportProgress(processed_frames, segment_frame_count)) {
                     cout << "Frame " << frame_id << " (" << processed_frames << "/" << segment_frame_count << ")"
-                         << " tracked=0 status=reinit-failed" << endl;
+                         << " tracked=0 inliers=0 status=reinit-failed" << endl;
                 }
                 continue;
             }
         }
 
-        // 对当前帧和上一帧的匹配点重新估计本质矩阵。
-        // 这里每一帧都重新用 RANSAC，是因为误匹配和动态物体会随时间变化。
         essential_matrix = findEssentialMat(
             prev_features,
             curr_features,
@@ -1037,7 +1599,7 @@ int main(int argc, char** argv) {
             0.999,
             1.0,
             mask);
-        const int inlier_count = recoverPose(
+        int inlier_count = recoverPose(
             essential_matrix,
             prev_features,
             curr_features,
@@ -1047,14 +1609,12 @@ int main(int argc, char** argv) {
             principal_point,
             mask);
         if (inlier_count < kMinPoseInliers) {
-            // RANSAC 内点过少说明本帧几何关系不可靠，只记录上一帧位姿并刷新特征。
-            // 可能原因包括：图像纹理少、车辆转弯/运动过快、动态物体占比高、光流误匹配较多。
-            // 这里不更新 raw_pose，但仍向 trajectory 写入当前 frame_id 对应的旧位姿，使输出帧序列连续。
             if (verbose_logging) {
-                cout << "Frame " << frame_id << ": pose inliers dropped to " << inlier_count << ", skipping update." << endl;
+                cout << "Frame " << frame_id << ": 2D-2D pose failed." << endl;
             }
             featureDetection(curr_image, curr_features, kTargetFeatureCount);
-            trajectory.push_back(raw_pose);
+            trajectory.push_back(output_pose);
+            geometry_trajectory.push_back(geometry_pose);
             trajectory_frame_ids.push_back(frame_id);
             prev_image = curr_image;
             prev_features = curr_features;
@@ -1068,31 +1628,179 @@ int main(int argc, char** argv) {
             continue;
         }
 
-        const Vec3d delta_translation = toVec3d(translation);
-
-        // 用真值相邻帧距离恢复单目尺度，再把当前帧间平移累加到世界坐标系。
-        // 更新公式：
-        //   raw_pose.translation += scale * raw_pose.rotation * (-delta_translation)
-        //   raw_pose.rotation = R_relative^T * raw_pose.rotation
-        // 其中 scale 来自真值，delta_translation 来自 recoverPose，只提供方向。
+        compactPointsByMask(prev_features, curr_features, mask);
         const double scale = getAbsoluteScale(gt_positions, frame_id);
-        if (scale > kMinTranslationScale) {
-            raw_pose.translation += scale * (raw_pose.rotation * (-delta_translation));
-            raw_pose.rotation = toMatx33d(rotation.t()) * raw_pose.rotation;
-        } else if (verbose_logging) {
-            // 相邻真值位移太小会让方向噪声占主导，跳过该帧位姿更新更稳。
-            cout << "Frame " << frame_id << ": scale below threshold." << endl;
+        if (scale <= kMinTranslationScale) {
+            if (verbose_logging) {
+                cout << "Frame " << frame_id << ": scale below threshold." << endl;
+            }
+            trajectory.push_back(output_pose);
+            geometry_trajectory.push_back(geometry_pose);
+            trajectory_frame_ids.push_back(frame_id);
+            prev_image = curr_image;
+            prev_features = curr_features;
+            const int processed_frames = frame_id - segment_start_frame + 1;
+            if (shouldReportProgress(processed_frames, segment_frame_count)) {
+                cout << "Frame " << frame_id << " (" << processed_frames << "/" << segment_frame_count << ")"
+                     << " tracked=" << curr_features.size()
+                     << " inliers=" << inlier_count
+                     << " status=skip-small-baseline" << endl;
+            }
+            continue;
         }
 
-        trajectory.push_back(raw_pose);
+        PoseRecord base_geometry_pose = poseFromRelativeMotion(geometry_pose, rotation, translation, scale);
+        PoseRecord estimated_geometry_pose = base_geometry_pose;
+        PoseRecord base_output_pose = accumulateOutputPose(output_pose, rotation, translation, scale);
+        PoseRecord output_pose_for_publish = base_output_pose;
+        PoseRecord next_output_pose = base_output_pose;
+        string status_text = "2d2d";
+        const double two_view_rotation_degrees = rotationAngleDegrees(toMatx33d(rotation.t()), Matx33d::eye());
+
+        vector<Point2f> pnp_prev_features = keyframe_features;
+        vector<Point2f> pnp_curr_features;
+        vector<Point3f> pnp_landmarks = keyframe_landmarks;
+        vector<uchar> pnp_tracking_status;
+        const int keyframe_track_age = frame_id - keyframe_frame_id;
+        const int keyframe_map_age = frame_id - keyframe_map_frame_id;
+        if (enable_pnp &&
+            !keyframe_image.empty() &&
+            !keyframe_features.empty() &&
+            !keyframe_landmarks.empty() &&
+            keyframe_track_age <= kMaxKeyframeTrackAge &&
+            keyframe_map_age <= kMaxKeyframeTrackAge &&
+            featureTrackingWithLandmarks(
+                keyframe_image,
+                curr_image,
+                pnp_prev_features,
+                pnp_curr_features,
+                pnp_landmarks,
+                pnp_tracking_status) >= kMinKeyframePnPInliers) {
+            vector<int> pnp_inlier_indices;
+            PoseRecord pnp_pose;
+            if (solvePoseWithPnP(pnp_landmarks, pnp_curr_features, camera_matrix, base_geometry_pose, pnp_pose, pnp_inlier_indices) &&
+                static_cast<int>(pnp_inlier_indices.size()) >= kMinKeyframePnPInliers &&
+                isPnPPoseConsistent(pnp_pose, base_geometry_pose, scale)) {
+                Mat corrected_relative_rotation;
+                Mat corrected_relative_translation;
+                double corrected_relative_scale = 0.0;
+                compactTracksByIndices(pnp_prev_features, pnp_curr_features, pnp_landmarks, pnp_inlier_indices);
+                if (relativeMotionFromPoses(
+                        geometry_pose,
+                        pnp_pose,
+                        corrected_relative_rotation,
+                        corrected_relative_translation,
+                        corrected_relative_scale)) {
+                    const double pnp_rotation_delta_deg =
+                        rotationAngleDegrees(pnp_pose.rotation, base_geometry_pose.rotation);
+                    const double pnp_translation_delta =
+                        norm(pnp_pose.translation - base_geometry_pose.translation);
+                    if (shouldApplyPnPToOutput(
+                            pnp_pose,
+                            base_geometry_pose,
+                            scale,
+                            static_cast<int>(pnp_inlier_indices.size()),
+                            keyframe_map_age,
+                            static_cast<int>(curr_features.size()),
+                            two_view_rotation_degrees)) {
+                        output_pose_for_publish = base_output_pose;
+                        output_pose_for_publish.rotation = pnp_pose.rotation;
+                        next_output_pose = output_pose_for_publish;
+                        next_output_pose.translation = base_output_pose.translation;
+                        status_text = "pnp";
+                    } else {
+                        status_text = "pnp-candidate";
+                    }
+                    if (verbose_logging) {
+                        cout << "Frame " << frame_id
+                             << ": accepted PnP correction"
+                             << " map_age=" << keyframe_map_age
+                             << " track_age=" << keyframe_track_age
+                             << " landmarks=" << pnp_landmarks.size()
+                             << " inliers=" << pnp_inlier_indices.size()
+                             << " rot_delta_deg=" << pnp_rotation_delta_deg
+                             << " trans_delta_m=" << pnp_translation_delta
+                             << " output_applied=" << (status_text == "pnp" ? 1 : 0)
+                             << endl;
+                    }
+                    keyframe_image = curr_image;
+                    keyframe_features = pnp_curr_features;
+                    keyframe_landmarks = pnp_landmarks;
+                    keyframe_pose = base_geometry_pose;
+                    keyframe_frame_id = frame_id;
+                } else if (verbose_logging) {
+                    cout << "Frame " << frame_id << ": rejected PnP correction due to degenerate relative motion." << endl;
+                }
+            } else {
+                if (!pnp_curr_features.empty() && !pnp_landmarks.empty()) {
+                    keyframe_image = curr_image;
+                    keyframe_features = pnp_curr_features;
+                    keyframe_landmarks = pnp_landmarks;
+                    keyframe_frame_id = frame_id;
+                }
+                if (verbose_logging) {
+                    cout << "Frame " << frame_id << ": rejected PnP correction, using 2D-2D pose." << endl;
+                }
+            }
+        }
+
+        vector<Point2f> triangulation_prev_features = prev_features;
+        vector<Point2f> triangulation_curr_features = curr_features;
+        vector<Point3f> rebuilt_landmarks;
+        const int rebuild_input_tracks = static_cast<int>(min(
+            triangulation_prev_features.size(),
+            triangulation_curr_features.size()));
+        const bool can_triangulate = shouldTriangulateTracks(triangulation_prev_features, triangulation_curr_features, scale);
+        const bool should_refresh_keyframe =
+            enable_pnp &&
+            (keyframe_landmarks.empty() ||
+            static_cast<int>(keyframe_landmarks.size()) < kMinKeyframePnPInliers ||
+            keyframe_map_age >= kMaxKeyframeTrackAge);
+        if (should_refresh_keyframe &&
+            can_triangulate &&
+            triangulateWorldLandmarks(
+                triangulation_prev_features,
+                triangulation_curr_features,
+                camera_matrix,
+                geometry_pose,
+                rotation,
+                translation,
+                scale,
+                &base_geometry_pose,
+                rebuilt_landmarks,
+                &triangulation_prev_features,
+                &triangulation_curr_features) &&
+            static_cast<int>(rebuilt_landmarks.size()) >= kMinKeyframePnPInliers) {
+            keyframe_image = curr_image;
+            keyframe_features = triangulation_curr_features;
+            keyframe_landmarks = rebuilt_landmarks;
+            keyframe_pose = estimated_geometry_pose;
+            keyframe_frame_id = frame_id;
+            keyframe_map_frame_id = frame_id;
+            if (status_text == "2d2d") {
+                status_text = "rebuild-2d2d";
+            }
+        } else if (should_refresh_keyframe) {
+            if (keyframe_landmarks.empty()) {
+                keyframe_image = curr_image;
+                keyframe_pose = estimated_geometry_pose;
+                keyframe_frame_id = frame_id;
+            }
+            if (verbose_logging && !can_triangulate) {
+                cout << "Frame " << frame_id << ": skipped keyframe rebuild due to low baseline/parallax." << endl;
+            } else if (verbose_logging && rebuild_input_tracks > 0) {
+                cout << "Frame " << frame_id << ": keyframe rebuild produced too few landmarks." << endl;
+            }
+        }
+
+        geometry_pose = estimated_geometry_pose;
+        output_pose = next_output_pose;
+
+        trajectory.push_back(output_pose_for_publish);
+        geometry_trajectory.push_back(geometry_pose);
         trajectory_frame_ids.push_back(frame_id);
-        // 只保留本质矩阵估计中的内点，下一轮继续跟踪更可靠的特征。
-        // 注意 compact 后的 curr_features 会成为下一轮 prev_features。
-        compactPointsByMask(prev_features, curr_features, mask);
 
         if (curr_features.size() < kMinTrackedFeatures) {
-            // 特征点数量不足时在当前帧重新检测，保证后续帧有足够的跟踪点。
-            // 重新检测会打断旧特征轨迹，但能防止特征数量持续下降导致后面无法估计位姿。
             if (verbose_logging) {
                 cout << "Frame " << frame_id << ": tracked features down to " << curr_features.size() << ", re-detecting." << endl;
             }
@@ -1101,18 +1809,17 @@ int main(int argc, char** argv) {
 
         const int processed_frames = frame_id - segment_start_frame + 1;
         if (shouldReportProgress(processed_frames, segment_frame_count)) {
-            // 进度信息包含当前保留的特征数、recoverPose 内点数和累计平移，便于判断运行质量。
             cout << "Frame " << frame_id << " (" << processed_frames << "/" << segment_frame_count << ")"
                  << " tracked=" << curr_features.size()
                  << " inliers=" << inlier_count
-                 << " pose=(" << raw_pose.translation[0] << ", "
-                 << raw_pose.translation[1] << ", "
-                 << raw_pose.translation[2] << ")" << endl;
+                 << " status=" << status_text
+                 << " pose=(" << output_pose_for_publish.translation[0] << ", "
+                 << output_pose_for_publish.translation[1] << ", "
+                 << output_pose_for_publish.translation[2] << ")" << endl;
         }
 
         prev_image = curr_image;
         prev_features = curr_features;
-        // 本轮结束后，当前帧成为下一轮的上一帧，当前帧特征成为下一轮要继续跟踪的特征。
 
         if (enable_visualization) {
             // 实时显示当前灰度图和 X-Z 平面轨迹。waitKey(1) 同时负责刷新 OpenCV 窗口事件。
@@ -1125,7 +1832,9 @@ int main(int argc, char** argv) {
 
     // 处理结束后保存估计轨迹文本，并生成最终轨迹对比图。
     // position.txt 使用 TUM 格式，可直接用 evo_ape/evo_rpe 评估；map2.png 中黑色为真值，绿色为 VO 估计。
-    if (!ensureParentDirectory(paths.output_pose_path) || !ensureParentDirectory(paths.output_map_path)) {
+    if (!ensureParentDirectory(paths.output_pose_path) ||
+        !ensureParentDirectory(paths.output_geometry_pose_path) ||
+        !ensureParentDirectory(paths.output_map_path)) {
         return -1;
     }
     ofstream output(paths.output_pose_path);
@@ -1133,17 +1842,25 @@ int main(int argc, char** argv) {
         cerr << "Unable to open output file: " << paths.output_pose_path << endl;
         return -1;
     }
+    ofstream geometry_output(paths.output_geometry_pose_path);
+    if (!geometry_output.is_open()) {
+        cerr << "Unable to open output file: " << paths.output_geometry_pose_path << endl;
+        return -1;
+    }
     for (size_t i = 0; i < trajectory.size(); ++i) {
         const int frame_id = trajectory_frame_ids[i];
         if (frame_id >= 0 && frame_id < static_cast<int>(gt_timestamps.size())) {
             appendPose(output, gt_timestamps[frame_id], trajectory[i]);
+            appendPose(geometry_output, gt_timestamps[frame_id], geometry_trajectory[i]);
         }
     }
     output.close();
+    geometry_output.close();
     // 最后一张轨迹图即使在无 GUI 模式下也会保存，方便离线查看。
     Mat trace = renderTraceCanvas(gt_positions, trajectory, trajectory_frame_ids, segment_frame_count, segment_frame_count);
     imwrite(paths.output_map_path, trace);
     cout << "Finished. Saved TUM trajectory to " << paths.output_pose_path
+         << ", geometry trajectory to " << paths.output_geometry_pose_path
          << " and map to " << paths.output_map_path << endl;
     return 0;
 }

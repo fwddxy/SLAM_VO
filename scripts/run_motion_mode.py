@@ -16,7 +16,7 @@ from typing import Iterable
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 MODES_ROOT = REPO_ROOT / "experiments" / "motion_modes"
-OUTPUT_ROOT = REPO_ROOT / "output" / "motion_modes"
+DEFAULT_OUTPUT_ROOT = REPO_ROOT / "output" / "motion_modes"
 VO_BINARY = REPO_ROOT / "build" / "VO"
 GT_PATH = REPO_ROOT / "Kitti" / "gt-tum07.txt"
 
@@ -155,14 +155,21 @@ def write_run_log(path: Path, stdout: str | None, stderr: str | None) -> None:
     path.write_text("\n\n".join(chunk for chunk in chunks if chunk) + ("\n" if chunks else ""), encoding="utf-8")
 
 
-def run_segment(mode_dir: Path, row: dict[str, str], gt_lines: list[str], skip_evo: bool, gui: bool) -> None:
+def run_segment(
+    mode_dir: Path,
+    row: dict[str, str],
+    gt_lines: list[str],
+    skip_evo: bool,
+    gui: bool,
+    output_root: Path,
+) -> None:
     mode_name = mode_dir.name
     segment_id = row["segment_id"]
     warmup_start_frame = int(row["warmup_start_frame"])
     start_frame = int(row["start_frame"])
     end_frame = int(row["end_frame"])
     eval_start_frame = max(start_frame, warmup_start_frame + 1)
-    segment_output = OUTPUT_ROOT / mode_name / segment_id
+    segment_output = output_root / mode_name / segment_id
     segment_output.mkdir(parents=True, exist_ok=True)
 
     output_root_arg = str(segment_output.relative_to(REPO_ROOT))
@@ -335,10 +342,15 @@ def run_segment(mode_dir: Path, row: dict[str, str], gt_lines: list[str], skip_e
     (segment_output / "segment.json").write_text(json.dumps(metadata, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
-def record_run_failure(mode_dir: Path, row: dict[str, str], error: subprocess.CalledProcessError) -> None:
+def record_run_failure(
+    mode_dir: Path,
+    row: dict[str, str],
+    error: subprocess.CalledProcessError,
+    output_root: Path,
+) -> None:
     mode_name = mode_dir.name
     segment_id = row["segment_id"]
-    segment_output = OUTPUT_ROOT / mode_name / segment_id
+    segment_output = output_root / mode_name / segment_id
     segment_output.mkdir(parents=True, exist_ok=True)
     metadata = {
         "mode": mode_name,
@@ -370,10 +382,18 @@ def main() -> int:
     parser.add_argument("--primary-only", action="store_true", help="Only run rows marked is_primary=1.")
     parser.add_argument("--skip-evo", action="store_true", help="Skip evo evaluation and only keep VO outputs.")
     parser.add_argument("--gui", action="store_true", help="Keep GUI enabled for the VO binary.")
+    parser.add_argument(
+        "--output-root",
+        default=str(DEFAULT_OUTPUT_ROOT),
+        help="Root directory for motion-mode outputs. Default: output/motion_modes",
+    )
     args = parser.parse_args()
 
     ensure_vo_binary()
     gt_lines = load_gt_lines()
+    output_root = Path(args.output_root)
+    if not output_root.is_absolute():
+        output_root = REPO_ROOT / output_root
 
     if args.mode:
         mode_dirs = [MODES_ROOT / args.mode]
@@ -390,9 +410,16 @@ def main() -> int:
         for row in selected:
             print(f"[run] {mode_dir.name}/{row['segment_id']}  frames={row['start_frame']}..{row['end_frame']}")
             try:
-                run_segment(mode_dir, row, gt_lines, skip_evo=args.skip_evo, gui=args.gui)
+                run_segment(
+                    mode_dir,
+                    row,
+                    gt_lines,
+                    skip_evo=args.skip_evo,
+                    gui=args.gui,
+                    output_root=output_root,
+                )
             except subprocess.CalledProcessError as exc:
-                record_run_failure(mode_dir, row, exc)
+                record_run_failure(mode_dir, row, exc, output_root=output_root)
                 print(
                     f"[warn] {mode_dir.name}/{row['segment_id']} failed during VO run "
                     f"(returncode={exc.returncode}). Continuing with remaining segments.",

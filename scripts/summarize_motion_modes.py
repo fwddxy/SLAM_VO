@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 import csv
 import json
 import math
@@ -10,8 +11,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-OUTPUT_ROOT = REPO_ROOT / "output" / "motion_modes"
-SUMMARY_ROOT = OUTPUT_ROOT / "summary"
+DEFAULT_OUTPUT_ROOT = REPO_ROOT / "output" / "motion_modes"
 
 METRIC_PATTERN = re.compile(r"^\s*([a-z]+)\s+([0-9eE.+-]+)\s*$")
 
@@ -92,9 +92,9 @@ def parse_run_log(path: Path) -> dict[str, object]:
     return result
 
 
-def build_rows() -> list[dict[str, object]]:
+def build_rows(output_root: Path) -> list[dict[str, object]]:
     rows: list[dict[str, object]] = []
-    for metadata_path in sorted(OUTPUT_ROOT.glob("*/*/segment.json")):
+    for metadata_path in sorted(output_root.glob("*/*/segment.json")):
         metadata = read_json(metadata_path)
         segment_dir = metadata_path.parent
         estimate_path = REPO_ROOT / metadata["estimate_path"]
@@ -284,17 +284,30 @@ def write_mode_statistics_markdown(path: Path, rows: list[dict[str, object]]) ->
 
 
 def main() -> int:
-    rows = build_rows()
+    parser = argparse.ArgumentParser(description="Summarize motion-mode outputs.")
+    parser.add_argument(
+        "--output-root",
+        default=str(DEFAULT_OUTPUT_ROOT),
+        help="Root directory containing motion-mode outputs. Default: output/motion_modes",
+    )
+    args = parser.parse_args()
+
+    output_root = Path(args.output_root)
+    if not output_root.is_absolute():
+        output_root = REPO_ROOT / output_root
+    summary_root = output_root / "summary"
+
+    rows = build_rows(output_root)
     primary_rows = [row for row in rows if row["is_primary"]]
     mode_stats_rows = build_mode_statistics(rows)
 
-    write_csv(SUMMARY_ROOT / "all_segments.csv", rows)
-    write_csv(SUMMARY_ROOT / "primary_segments.csv", primary_rows)
-    write_csv(SUMMARY_ROOT / "mode_statistics.csv", mode_stats_rows)
-    write_markdown(SUMMARY_ROOT / "primary_segments.md", primary_rows)
-    write_markdown(SUMMARY_ROOT / "all_segments.md", rows)
-    write_mode_statistics_markdown(SUMMARY_ROOT / "mode_statistics.md", mode_stats_rows)
-    print(f"Wrote {len(rows)} segment rows to {SUMMARY_ROOT}")
+    write_csv(summary_root / "all_segments.csv", rows)
+    write_csv(summary_root / "primary_segments.csv", primary_rows)
+    write_csv(summary_root / "mode_statistics.csv", mode_stats_rows)
+    write_markdown(summary_root / "primary_segments.md", primary_rows)
+    write_markdown(summary_root / "all_segments.md", rows)
+    write_mode_statistics_markdown(summary_root / "mode_statistics.md", mode_stats_rows)
+    print(f"Wrote {len(rows)} segment rows to {summary_root}")
     return 0
 
 
