@@ -60,6 +60,10 @@ constexpr int kMaxOutputPnPTrackedFeatures = 2200;
 namespace fs = std::filesystem;
 
 struct RunOptions {
+    // 运行区间控制参数。
+    // start_frame/end_frame 用于选择原始序列中的闭区间；
+    // frame_count 是从 start_frame 开始处理的帧数；
+    // output_root_override 允许把结果输出到自定义目录。
     int start_frame = 0;
     int end_frame = -1;
     int frame_count = -1;
@@ -236,6 +240,10 @@ Vec3d toVec3d(const Mat& translation) {
 }
 
 void poseToWorldToCamera(const PoseRecord& pose, Matx33d& rotation_wc, Vec3d& translation_wc) {
+    // PoseRecord 内部保存的是相机到世界的 R_cw 和相机中心 t_cw。
+    // PnP、投影矩阵等 OpenCV 接口通常需要世界到相机的 R_wc 和 t_wc：
+    //   X_cam = R_wc * X_world + t_wc
+    // 因此 R_wc = R_cw^T，t_wc = -R_wc * t_cw。
     rotation_wc = pose.rotation.t();
     translation_wc = -(rotation_wc * pose.translation);
 }
@@ -245,6 +253,9 @@ PoseRecord poseFromRelativeMotion(
     const Mat& relative_rotation,
     const Mat& relative_translation,
     double scale) {
+    // 从上一帧几何位姿和 recoverPose 的相对运动推算当前几何位姿。
+    // relative_rotation/relative_translation 表示上一帧到当前帧的相机运动；
+    // translation 只有方向，真实长度由 scale 提供。
     PoseRecord curr_pose;
     curr_pose.rotation = prev_pose.rotation * toMatx33d(relative_rotation.t());
     curr_pose.translation = prev_pose.translation + curr_pose.rotation * (-scale * toVec3d(relative_translation));
@@ -255,6 +266,7 @@ PoseRecord poseFromInitialRelativeMotion(
     const Mat& relative_rotation,
     const Mat& relative_translation,
     double scale) {
+    // 初始两帧没有上一帧累计位姿，所以从单位位姿开始积分一次相对运动。
     return poseFromRelativeMotion(PoseRecord(), relative_rotation, relative_translation, scale);
 }
 
@@ -263,6 +275,8 @@ PoseRecord accumulateOutputPose(
     const Mat& relative_rotation,
     const Mat& relative_translation,
     double scale) {
+    // 输出轨迹沿用原始 2D-2D 累计方式，和 geometry_pose 的积分公式略有区别。
+    // 保留这个函数是为了兼容原有轨迹方向和评估结果。
     PoseRecord curr_pose;
     curr_pose.translation = prev_pose.translation + scale * (prev_pose.rotation * (-toVec3d(relative_translation)));
     curr_pose.rotation = toMatx33d(relative_rotation.t()) * prev_pose.rotation;
@@ -273,6 +287,8 @@ PoseRecord poseFromInitialOutputMotion(
     const Mat& relative_rotation,
     const Mat& relative_translation,
     double scale) {
+    // 初始化输出轨迹的第一段相对运动。
+    // 若真值尺度不可用，则至少保留 recoverPose 给出的单位方向，避免初始位置全为零。
     PoseRecord pose;
     pose.rotation = toMatx33d(relative_rotation.t());
     pose.translation = (scale > 0.0) ? scale * toVec3d(relative_translation) : toVec3d(relative_translation);
@@ -285,6 +301,8 @@ bool relativeMotionFromPoses(
     Mat& relative_rotation,
     Mat& relative_translation,
     double& relative_scale) {
+    // 根据两个绝对位姿反推出 recoverPose 风格的相对运动。
+    // 这个函数主要用于 PnP 结果被接受后，计算 PnP 位姿相对于上一几何位姿的运动量。
     const Matx33d relative_rotation_matx = curr_pose.rotation.t() * prev_pose.rotation;
     relative_rotation = (Mat_<double>(3, 3) <<
         relative_rotation_matx(0, 0), relative_rotation_matx(0, 1), relative_rotation_matx(0, 2),
@@ -295,6 +313,7 @@ bool relativeMotionFromPoses(
     const Vec3d scaled_relative_translation = -(curr_pose.rotation.t() * delta_world);
     relative_scale = norm(scaled_relative_translation);
     if (relative_scale <= 1e-9) {
+        // 平移长度接近 0 时方向没有意义，返回 false 让调用方丢弃该相对运动。
         relative_translation = (Mat_<double>(3, 1) << 0.0, 0.0, 0.0);
         return false;
     }
@@ -305,6 +324,8 @@ bool relativeMotionFromPoses(
 }
 
 PoseRecord poseFromPnP(const Mat& rvec, const Mat& tvec) {
+    // solvePnP 输出的是世界到相机的 rvec/tvec。
+    // 这里转换回 PoseRecord 的相机到世界表示，便于和 VO 累计位姿统一比较。
     Mat rotation_wc_mat;
     Rodrigues(rvec, rotation_wc_mat);
 
@@ -317,6 +338,8 @@ PoseRecord poseFromPnP(const Mat& rvec, const Mat& tvec) {
 }
 
 void poseToPnPGuess(const PoseRecord& pose, Mat& rvec, Mat& tvec) {
+    // 将当前 VO 估计位姿转换为 solvePnP 可使用的初值。
+    // useExtrinsicGuess=true 时，OpenCV 会从这个初值附近优化，降低跳到错误解的概率。
     Matx33d rotation_wc;
     Vec3d translation_wc;
     poseToWorldToCamera(pose, rotation_wc, translation_wc);
@@ -332,6 +355,7 @@ void poseToPnPGuess(const PoseRecord& pose, Mat& rvec, Mat& tvec) {
 }
 
 Mat buildProjectionMatrix(const Mat& camera_matrix, const PoseRecord& pose) {
+    // 构造完整投影矩阵 P = K [R_wc | t_wc]，用于把世界点投影到像素平面。
     Matx33d rotation_wc;
     Vec3d translation_wc;
     poseToWorldToCamera(pose, rotation_wc, translation_wc);
@@ -344,6 +368,8 @@ Mat buildProjectionMatrix(const Mat& camera_matrix, const PoseRecord& pose) {
 }
 
 Point2d projectWorldPoint(const Point3d& point_world, const Mat& camera_matrix, const PoseRecord& pose) {
+    // 将一个世界坐标系下的 3D 点投影到当前相机图像中。
+    // 返回 NaN 表示点在相机后方或深度无效，调用方会把该点过滤掉。
     Matx33d rotation_wc;
     Vec3d translation_wc;
     poseToWorldToCamera(pose, rotation_wc, translation_wc);
@@ -365,12 +391,16 @@ Point2d projectWorldPoint(const Point3d& point_world, const Mat& camera_matrix, 
 }
 
 double rotationAngleDegrees(const Matx33d& lhs, const Matx33d& rhs) {
+    // 根据两个旋转矩阵的相对旋转迹计算夹角，结果单位为度。
+    // clamp 用于抵消浮点误差，避免 acos 输入略微超过 [-1, 1]。
     const Matx33d delta = lhs * rhs.t();
     const double cosine = std::clamp((delta(0, 0) + delta(1, 1) + delta(2, 2) - 1.0) * 0.5, -1.0, 1.0);
     return std::acos(cosine) * 180.0 / CV_PI;
 }
 
 bool isPnPPoseConsistent(const PoseRecord& pnp_pose, const PoseRecord& reference_pose, double frame_scale) {
+    // PnP 可能受到错误 3D-2D 对应影响而跳变，因此先和 2D-2D 主干位姿做一致性检查。
+    // 平移误差阈值随当前帧真值尺度放大，同时设置 0.5m 下限避免小尺度帧过严。
     const double translation_limit = std::max(0.5, frame_scale * kMaxPnPTranslationDeltaScale);
     const double translation_delta = norm(pnp_pose.translation - reference_pose.translation);
     if (translation_delta > translation_limit) {
@@ -420,6 +450,8 @@ bool shouldApplyPnPToOutput(
 }
 
 double medianParallax(const vector<Point2f>& prev_points, const vector<Point2f>& curr_points) {
+    // 计算匹配点在图像上的中位视差，用于判断是否适合三角化。
+    // 中位数比平均值更稳健，少量误跟踪点不会显著影响判断。
     if (prev_points.size() != curr_points.size() || prev_points.empty()) {
         return 0.0;
     }
@@ -441,6 +473,8 @@ double medianParallax(const vector<Point2f>& prev_points, const vector<Point2f>&
 }
 
 bool shouldTriangulateTracks(const vector<Point2f>& prev_points, const vector<Point2f>& curr_points, double baseline) {
+    // 三角化要求同时满足：匹配点数量足够、相机真实基线足够、图像视差足够。
+    // 基线或视差太小时，三角化深度会非常不稳定，生成的 3D 点不适合 PnP。
     if (prev_points.size() < static_cast<size_t>(kMinTriangulatedLandmarks) || curr_points.size() != prev_points.size()) {
         return false;
     }
@@ -499,6 +533,8 @@ bool triangulateWorldLandmarks(
     const PoseRecord derived_curr_pose = poseFromRelativeMotion(prev_pose, relative_rotation, relative_translation, relative_scale);
     const PoseRecord& curr_pose = curr_pose_override != nullptr ? *curr_pose_override : derived_curr_pose;
 
+    // triangulation 得到的是 prev_pose 相机坐标系下的局部 3D 点。
+    // 后面会用 prev_pose 把这些点变换到世界坐标系，方便跨帧 PnP 复用。
     vector<Point3f> local_points;
     Mat scaled_translation = relative_translation.clone();
     scaled_translation *= relative_scale;
@@ -515,6 +551,7 @@ bool triangulateWorldLandmarks(
     world_points.reserve(triangulated_count);
     for (int i = 0; i < triangulated_count; ++i) {
         const Point3f& point_local = local_points[i];
+        // 过滤 NaN/Inf，避免无效三角化点进入后续 PnP。
         if (!std::isfinite(point_local.x) || !std::isfinite(point_local.y) || !std::isfinite(point_local.z)) {
             continue;
         }
@@ -523,12 +560,14 @@ bool triangulateWorldLandmarks(
         }
 
         if (point_local.z <= 1e-6f) {
+            // 在参考相机后方的点不满足正常成像几何，直接丢弃。
             continue;
         }
         if (positive_depth_count != nullptr) {
             ++(*positive_depth_count);
         }
         if (point_local.z < kMinLandmarkDepth || point_local.z > kMaxLandmarkDepth) {
+            // 过近点容易受噪声影响，过远点深度不稳定；只保留合理深度范围内的地图点。
             continue;
         }
 
@@ -537,6 +576,8 @@ bool triangulateWorldLandmarks(
         const Vec3d point_world_vec =
             prev_rotation_cw * Vec3d(point_local.x, point_local.y, point_local.z) + prev_translation_world;
 
+        // 用两帧重投影误差做最后筛选：
+        // 三角化点投回上一帧和当前帧后，都应接近原始光流观测。
         const Point2d reproj_prev = projectWorldPoint(
             Point3d(point_world_vec[0], point_world_vec[1], point_world_vec[2]),
             camera_matrix,
@@ -551,6 +592,7 @@ bool triangulateWorldLandmarks(
         }
         if (norm(reproj_prev - Point2d(input_prev_points[i])) > kTriangulationReprojectionError ||
             norm(reproj_curr - Point2d(input_curr_points[i])) > kTriangulationReprojectionError) {
+            // 重投影误差过大通常意味着光流匹配错误或三角化深度不可靠。
             continue;
         }
 
@@ -574,6 +616,8 @@ void compactTracksByIndices(
     vector<Point2f>& curr_points,
     vector<Point3f>& world_points,
     const vector<int>& inlier_indices) {
+    // PnP RANSAC 返回内点下标后，需要同步压缩 2D 轨迹和 3D 地图点。
+    // 这样 keyframe_features、当前观测和 world_points 仍保持同一索引对应同一个空间点。
     vector<Point2f> filtered_prev;
     vector<Point2f> filtered_curr;
     vector<Point3f> filtered_world;
@@ -640,6 +684,7 @@ bool solvePoseWithPnP(
     inlier_world_points.reserve(raw_inliers.size());
     inlier_image_points.reserve(raw_inliers.size());
     for (int index : raw_inliers) {
+        // OpenCV 返回的是原输入数组的下标，先做边界检查再取内点。
         if (index < 0 || index >= static_cast<int>(world_points.size()) || index >= static_cast<int>(image_points.size())) {
             continue;
         }
@@ -663,6 +708,7 @@ bool solvePoseWithPnP(
         return false;
     }
 
+    // refine 后的 rvec/tvec 转回世界坐标系下的 PoseRecord。
     pose = poseFromPnP(rvec, tvec);
     inlier_indices.swap(raw_inliers);
     return true;
@@ -764,6 +810,7 @@ Mat renderTraceCanvas(
 }
 
 void printUsage(const char* program_name) {
+    // 打印命令行用法。支持整段运行，也支持指定起止帧或指定帧数运行。
     cout << "Usage:\n"
          << "  " << program_name << " [frame_count]\n"
          << "  " << program_name << " --start-frame N --end-frame M [--output-root REL_OR_ABS_PATH]\n"
@@ -777,6 +824,8 @@ void printUsage(const char* program_name) {
 }
 
 bool parseNonNegativeInt(const string& text, const string& option_name, int& value, string& error_message) {
+    // 使用 strtol 严格解析非负整数，确保整段字符串都被消费。
+    // 这样 "12abc"、负数和超出 int 范围的值都会被明确拒绝。
     char* end_ptr = nullptr;
     errno = 0;
     const long parsed = std::strtol(text.c_str(), &end_ptr, 10);
@@ -793,6 +842,8 @@ bool parseNonNegativeInt(const string& text, const string& option_name, int& val
 }
 
 bool parseRunOptions(int argc, char** argv, RunOptions& options, bool& show_help, string& error_message) {
+    // 手写轻量参数解析，避免为几个简单选项引入额外依赖。
+    // 位置参数 frame_count 和 --frame-count 二者只允许出现一个。
     for (int i = 1; i < argc; ++i) {
         const string argument(argv[i]);
         if (argument == "--help" || argument == "-h") {
@@ -800,6 +851,7 @@ bool parseRunOptions(int argc, char** argv, RunOptions& options, bool& show_help
             return true;
         }
         if (argument == "--start-frame" || argument == "--end-frame" || argument == "--frame-count" || argument == "--output-root") {
+            // 这些选项都要求后面跟一个值。
             if (i + 1 >= argc) {
                 error_message = "Missing value for option: " + argument;
                 return false;
@@ -827,10 +879,12 @@ bool parseRunOptions(int argc, char** argv, RunOptions& options, bool& show_help
             continue;
         }
         if (!argument.empty() && argument[0] == '-') {
+            // 以 - 开头但不在白名单中的参数视为未知选项。
             error_message = "Unknown option: " + argument;
             return false;
         }
         if (options.frame_count >= 0) {
+            // 防止用户同时写多个位置参数导致范围语义不清。
             error_message = "Only one positional frame_count argument is supported.";
             return false;
         }
@@ -847,6 +901,7 @@ bool parseRunOptions(int argc, char** argv, RunOptions& options, bool& show_help
 
 Vec4d rotationToTumQuaternion(const Matx33d& rotation) {
     // TUM 轨迹使用 qx qy qz qw 顺序；这里从累计旋转矩阵转成单位四元数。
+    // 根据矩阵迹选择数值更稳定的分支，避免在某些旋转角附近除以很小的数。
     const double trace = rotation(0, 0) + rotation(1, 1) + rotation(2, 2);
     double qx = 0.0;
     double qy = 0.0;
@@ -888,6 +943,7 @@ Vec4d rotationToTumQuaternion(const Matx33d& rotation) {
     qz /= norm;
     qw /= norm;
     if (qw < 0.0) {
+        // 四元数 q 和 -q 表示同一个旋转，这里固定 qw >= 0，便于输出更连续。
         qx = -qx;
         qy = -qy;
         qz = -qz;
@@ -1391,6 +1447,8 @@ int main(int argc, char** argv) {
         return -1;
     }
 
+    // 根据命令行参数确定本次处理的帧区间。
+    // start_frame/end_frame 使用原始数据集帧号，便于截取任意子序列调试。
     const int segment_start_frame = run_options.start_frame;
     if (segment_start_frame < 0 || segment_start_frame >= available_frames - 1) {
         cerr << "start-frame must leave at least two available frames inside the sequence." << endl;
@@ -1399,9 +1457,11 @@ int main(int argc, char** argv) {
 
     int segment_end_frame = available_frames - 1;
     if (run_options.end_frame >= 0) {
+        // end_frame 是闭区间终点，超过真值长度时自动截断到最后一帧。
         segment_end_frame = min(run_options.end_frame, available_frames - 1);
     }
     if (run_options.frame_count > 0) {
+        // frame_count 与 end_frame 同时给出时，取二者更短的范围。
         const long long capped_end = static_cast<long long>(segment_start_frame) + run_options.frame_count - 1;
         const int frame_count_end = capped_end > available_frames - 1
             ? available_frames - 1
@@ -1467,6 +1527,8 @@ int main(int argc, char** argv) {
 
     const bool enable_pnp = isPnPEnabled();
     const double initial_scale = getAbsoluteScale(gt_positions, segment_start_frame + 1);
+    // geometry_pose 是内部几何位姿，用于三角化、PnP 初值和一致性检查。
+    // output_pose 是最终输出轨迹位姿，保留原 2D-2D 轨迹累计方式，并允许有限 PnP 姿态修正。
     PoseRecord geometry_pose = poseFromInitialRelativeMotion(rotation, translation, initial_scale);
     PoseRecord output_pose = poseFromInitialOutputMotion(rotation, translation, initial_scale);
 
@@ -1475,6 +1537,8 @@ int main(int argc, char** argv) {
     vector<Point2f> init_prev_landmark_features = points1;
     vector<Point2f> init_curr_landmark_features = points2;
     vector<Point3f> tracked_landmarks;
+    // 如果启用了 PnP，初始化阶段会先尝试用前两帧内点生成第一批短时地图点。
+    // 三角化失败并不会终止程序，只是后续暂时只依赖 2D-2D 主干，等视差合适时再重建地图。
     const bool init_triangulated =
         enable_pnp &&
         shouldTriangulateTracks(init_prev_landmark_features, init_curr_landmark_features, initial_scale) &&
@@ -1524,6 +1588,8 @@ int main(int argc, char** argv) {
     PoseRecord keyframe_pose = geometry_pose;
     int keyframe_frame_id = segment_start_frame + 1;
     int keyframe_map_frame_id = segment_start_frame + 1;
+    // keyframe_frame_id 表示 keyframe_image 对应的最近一帧；
+    // keyframe_map_frame_id 表示当前 3D 地图是在哪一帧重建出来的，用于限制地图寿命。
 
     // trajectory 和 trajectory_frame_ids 一一对应，用于输出 TUM 轨迹、绘制估计轨迹并索引真值位置。
     // 初始估计来自第 0 到第 1 帧，所以第一条轨迹记录对应 frame_id=1。
@@ -1581,6 +1647,7 @@ int main(int argc, char** argv) {
         vector<uchar> tracking_status;
         curr_features.clear();
         if (!prev_features.empty()) {
+            // 2D-2D 主干：上一帧特征直接跟踪到当前帧，用于本质矩阵估计。
             featureTracking(prev_image, curr_image, prev_features, curr_features, tracking_status);
         }
         if (prev_features.size() < 8 || curr_features.size() < 8) {
@@ -1591,6 +1658,8 @@ int main(int argc, char** argv) {
             curr_features.clear();
             featureTracking(prev_image, curr_image, prev_features, curr_features, tracking_status);
             if (prev_features.size() < 8 || curr_features.size() < 8) {
+                // 重检测后仍没有足够匹配时，本帧不更新任何位姿。
+                // 但会在当前帧重新检测特征，为下一帧恢复跟踪做准备。
                 trajectory.push_back(output_pose);
                 geometry_trajectory.push_back(geometry_pose);
                 trajectory_frame_ids.push_back(frame_id);
@@ -1605,6 +1674,8 @@ int main(int argc, char** argv) {
             }
         }
 
+        // 先用 2D-2D 匹配估计本质矩阵，这是整套流程的主干运动估计。
+        // 后面的 PnP 只在严格条件下作为辅助修正。
         essential_matrix = findEssentialMat(
             prev_features,
             curr_features,
@@ -1624,6 +1695,8 @@ int main(int argc, char** argv) {
             principal_point,
             mask);
         if (inlier_count < kMinPoseInliers) {
+            // 本质矩阵内点不足时，说明当前两帧几何关系不可信。
+            // 这里保留上一帧位姿输出，使轨迹长度和帧号仍保持对齐。
             if (verbose_logging) {
                 cout << "Frame " << frame_id << ": 2D-2D pose failed." << endl;
             }
@@ -1646,6 +1719,8 @@ int main(int argc, char** argv) {
         compactPointsByMask(prev_features, curr_features, mask);
         const double scale = getAbsoluteScale(gt_positions, frame_id);
         if (scale <= kMinTranslationScale) {
+            // 真值位移过小的帧没有可靠尺度，直接跳过位姿更新。
+            // 这种帧通常对轨迹贡献很小，但会放大 recoverPose 的方向噪声。
             if (verbose_logging) {
                 cout << "Frame " << frame_id << ": scale below threshold." << endl;
             }
@@ -1681,6 +1756,7 @@ int main(int argc, char** argv) {
         vector<uchar> pnp_tracking_status;
         const int keyframe_track_age = frame_id - keyframe_frame_id;
         const int keyframe_map_age = frame_id - keyframe_map_frame_id;
+        // 只有 PnP 开启、短时地图仍在寿命范围内、且地图点能跟踪出足够 2D 观测时，才尝试 PnP。
         if (enable_pnp &&
             !keyframe_image.empty() &&
             !keyframe_features.empty() &&
@@ -1713,6 +1789,8 @@ int main(int argc, char** argv) {
                         corrected_relative_rotation,
                         corrected_relative_translation,
                         corrected_relative_scale)) {
+                    // 通过 relativeMotionFromPoses 可把 PnP 绝对位姿转换为和主干相同的相对运动表达。
+                    // 当前版本只利用这个检查结果，不直接用它替换 geometry_pose。
                     const double pnp_rotation_delta_deg =
                         rotationAngleDegrees(pnp_pose.rotation, base_geometry_pose.rotation);
                     const double pnp_translation_delta =
@@ -1753,11 +1831,15 @@ int main(int argc, char** argv) {
                     keyframe_landmarks = pnp_landmarks;
                     keyframe_pose = base_geometry_pose;
                     keyframe_frame_id = frame_id;
+                    // PnP 成功后，把 keyframe_image 推进到当前帧，并只保留 PnP 内点地图。
+                    // 这样下一帧继续从当前图像跟踪，减少长距离光流造成的丢点。
                 } else if (verbose_logging) {
                     cout << "Frame " << frame_id << ": rejected PnP correction due to degenerate relative motion." << endl;
                 }
             } else {
                 if (!pnp_curr_features.empty() && !pnp_landmarks.empty()) {
+                    // 即使本次 PnP 解没有通过一致性检查，只要地图点仍能跟踪，
+                    // 就把 2D 观测推进到当前帧，延长这批短时地图的可用时间。
                     keyframe_image = curr_image;
                     keyframe_features = pnp_curr_features;
                     keyframe_landmarks = pnp_landmarks;
@@ -1781,6 +1863,7 @@ int main(int argc, char** argv) {
             (keyframe_landmarks.empty() ||
             static_cast<int>(keyframe_landmarks.size()) < kMinKeyframePnPInliers ||
             keyframe_map_age >= kMaxKeyframeTrackAge);
+        // 当地图为空、点数不足或寿命太长时，尝试用当前 2D-2D 内点重新三角化一批地图点。
         if (should_refresh_keyframe &&
             can_triangulate &&
             // 只有 2D-2D 主干在当前帧提供了足够基线和视差，才重建一份新的短时 3D 地图。
@@ -1804,11 +1887,14 @@ int main(int argc, char** argv) {
             keyframe_pose = estimated_geometry_pose;
             keyframe_frame_id = frame_id;
             keyframe_map_frame_id = frame_id;
+            // 重建成功后，当前帧既是新的观测 keyframe，也是这批地图的出生帧。
             if (status_text == "2d2d") {
                 status_text = "rebuild-2d2d";
             }
         } else if (should_refresh_keyframe) {
             if (keyframe_landmarks.empty()) {
+                // 如果地图已经空了但当前又不能三角化，至少更新 keyframe_image，
+                // 等下一帧出现足够视差时再尝试重建。
                 keyframe_image = curr_image;
                 keyframe_pose = estimated_geometry_pose;
                 keyframe_frame_id = frame_id;
@@ -1822,6 +1908,8 @@ int main(int argc, char** argv) {
 
         geometry_pose = estimated_geometry_pose;
         output_pose = next_output_pose;
+        // geometry_pose 始终按 2D-2D 主干推进；
+        // output_pose 则可能带有通过门控的 PnP 旋转修正。
 
         trajectory.push_back(output_pose_for_publish);
         geometry_trajectory.push_back(geometry_pose);
