@@ -28,4 +28,5 @@
 
 - 当前所有片段均来自 `KITTI 07`
 - 本目录只负责描述“跑哪一段”
-- 运行说明见项目根目录的 `README.md`
+- 上层目录说明见 [experiments/README.md](/home/xywu/桌面/SLAM/experiments/README.md)
+- 运行说明见项目根目录的 [README.md](/home/xywu/桌面/SLAM/README.md)

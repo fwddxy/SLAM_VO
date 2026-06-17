@@ -206,12 +206,18 @@ def run_segment(
         )
 
     estimate_path = segment_output / "position" / "position.txt"
+    geometry_estimate_path = segment_output / "position" / "geometry_position.txt"
     full_estimate_path = segment_output / "position" / "position_full.txt"
+    full_geometry_estimate_path = segment_output / "position" / "geometry_position_full.txt"
     shutil.copy2(estimate_path, full_estimate_path)
+    if geometry_estimate_path.exists():
+        shutil.copy2(geometry_estimate_path, full_geometry_estimate_path)
 
     reference_gt = write_gt_slice(gt_lines, eval_start_frame, end_frame, segment_output / "reference" / "gt_tum_segment.txt")
     allowed_timestamps = get_eval_timestamps(gt_lines, eval_start_frame, end_frame)
     slice_estimate_tum(estimate_path, allowed_timestamps)
+    if geometry_estimate_path.exists():
+        slice_estimate_tum(geometry_estimate_path, allowed_timestamps)
     metadata = {
         "mode": mode_name,
         "segment_id": segment_id,
@@ -227,7 +233,19 @@ def run_segment(
         "run_log": str(run_log_path.relative_to(REPO_ROOT)),
         "reference_gt": str(reference_gt.relative_to(REPO_ROOT)),
         "full_estimate_path": str(full_estimate_path.relative_to(REPO_ROOT)),
+        "full_geometry_estimate_path": (
+            str(full_geometry_estimate_path.relative_to(REPO_ROOT))
+            if full_geometry_estimate_path.exists()
+            else ""
+        ),
         "estimate_path": str(estimate_path.relative_to(REPO_ROOT)),
+        "geometry_estimate_path": (
+            str(geometry_estimate_path.relative_to(REPO_ROOT))
+            if geometry_estimate_path.exists()
+            else ""
+        ),
+        "estimate_semantics": "final_geometry_spine",
+        "geometry_estimate_semantics": "pure_two_view_diagnostic",
     }
     (segment_output / "segment.json").write_text(json.dumps(metadata, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 

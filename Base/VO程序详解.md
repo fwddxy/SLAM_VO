@@ -249,7 +249,7 @@ timestamp tx ty tz qx qy qz qw
 对应变量：
 
 - `trajectory`
-- `output_pose`
+- `geometry_pose`
 
 这是“最终对外发布”的轨迹，也是默认给 `evo` 评估的轨迹。
 
@@ -260,9 +260,9 @@ timestamp tx ty tz qx qy qz qw
 对应变量：
 
 - `geometry_trajectory`
-- `geometry_pose`
+- `two_view_pose`
 
-这条轨迹更接近“纯 2D-2D 主干的内部几何状态”。
+这条轨迹是“纯 `recoverPose` 2D-2D 主干”的诊断轨迹，用来和最终输出主干对照。
 
 #### 轨迹对比图
 
@@ -403,7 +403,7 @@ timestamp tx ty tz qx qy qz qw
 主流程中的位置：
 
 - `geometry_pose`
-- `output_pose`
+- `two_view_pose`
 - `keyframe_pose`
 - `trajectory`
 - `geometry_trajectory`
@@ -480,7 +480,7 @@ timestamp tx ty tz qx qy qz qw
 - `kMinKeyframePnPInliers = 30`
   - 认为一批 keyframe 地图点足够支持稳定 PnP 的最低数量。
 - `kPreferredKeyframePnPInliers = 80`
-  - 允许 PnP 真正写入最终输出轨迹时更偏好的内点数。
+  - 允许 PnP 真正接管最终主干时更偏好的内点数。
 - `kMaxKeyframeTrackAge = 20`
   - 短时地图或其观测被连续跟踪的最长寿命。
 - `kMaxPnPRotationDeltaDegrees = 8.0`
@@ -488,19 +488,19 @@ timestamp tx ty tz qx qy qz qw
 - `kMaxPnPTranslationDeltaScale = 3.0`
   - PnP 位姿与 2D-2D 主干位姿之间允许的最大平移差尺度因子。
 - `kTrustedPnPRotationDeltaDegrees = 1.5`
-  - PnP 真正作用于输出轨迹时要求更严格的旋转一致性。
+  - PnP 真正接管主干时要求更严格的旋转一致性。
 - `kTrustedPnPTranslationDeltaScale = 0.75`
-  - PnP 真正作用于输出轨迹时要求更严格的平移一致性。
+  - PnP 真正接管主干时要求更严格的平移一致性。
 - `kMaxOutputPnPScale = 1.0`
-  - 仅在小尺度运动时允许 PnP 介入最终输出。
+  - 仅在小尺度运动时允许 PnP 介入最终主干。
 - `kMinOutputPnPKeyframeAge = 1`
-  - 地图至少存在一定年龄后，才允许 PnP 改写输出。
+  - 地图至少存在一定年龄后，才允许 PnP 接管主干。
 - `kMinOutputPnPRotationDegrees = 0.0`
   - 当前配置下只要满足其他条件，不额外要求最小旋转角。
 - `kMaxOutputPnPTrackedFeatures = 2200`
   - 当 2D-2D 跟踪点过多时，不让 PnP 抢主导。
 
-这些阈值共同体现了一个设计取向：程序信任 2D-2D 主干，把 PnP 视为保守的补偿，而不是主导位姿来源。
+这些阈值共同体现了一个设计取向：程序信任 2D-2D 主干，把 PnP 视为保守的候选接管者，而不是默认位姿来源。
 
 ---
 
@@ -681,21 +681,24 @@ timestamp tx ty tz qx qy qz qw
 
 因此最终初始化平移不是“纯视觉恢复的尺度”，而是“视觉方向 + 真值长度”。
 
-### 7.6 建立两套初始 pose
+### 7.6 建立最终主干与诊断支路
 
 初始化后程序同时建立：
 
 - `geometry_pose = poseFromInitialRelativeMotion(...)`
-- `output_pose = poseFromInitialOutputMotion(...)`
+- `two_view_pose = geometry_pose`
 
-这两者都来源于初始化相对运动，但积分方式不同。
+这两者在初始化时数值相同，但后续语义不同。
 
 它们的区别先提前记住一句话：
 
-- `geometry_pose`：内部几何主干位姿
-- `output_pose`：最终输出轨迹使用的位姿状态
+- `geometry_pose`：最终对外发布的主干位姿
+- `two_view_pose`：纯 2D-2D / `recoverPose` 诊断支路
 
-后面主循环会继续维持这两条线并行存在。
+后面主循环会继续维持这两条线并行存在：
+
+- `geometry_pose` 可以在严格门控通过时被 PnP 整个位姿接管
+- `two_view_pose` 始终只保留纯 2D-2D 积分结果
 
 ### 7.7 初始化短时地图
 
@@ -845,26 +848,25 @@ for frame_id = segment_start_frame + 2 ... segment_end_frame
 
 为什么要这样做？因为在几乎静止或极小位移情况下，`recoverPose` 的平移方向会非常容易被噪声放大，强行积分反而会让轨迹更差。
 
-### 8.7 更新 `geometry_pose` 与 `output_pose`
+### 8.7 更新最终主干与 2D-2D 诊断支路
 
 一旦当前帧 2D-2D 位姿和尺度都可用，程序会先构造两份基线结果：
 
+- `base_two_view_pose = poseFromRelativeMotion(two_view_pose, rotation, translation, scale)`
 - `base_geometry_pose = poseFromRelativeMotion(geometry_pose, rotation, translation, scale)`
-- `base_output_pose = accumulateOutputPose(output_pose, rotation, translation, scale)`
 
 这里非常关键：
 
-- `geometry_pose` 的积分公式和内部坐标意义，与 `output_pose` 并不完全一致
-- `base_geometry_pose` 是给几何、三角化、PnP 一致性检查使用的参考
-- `base_output_pose` 是默认准备写入最终轨迹的结果
+- `base_two_view_pose` 是纯 2D-2D 支路当前帧的结果
+- `base_geometry_pose` 是最终主干在“不采用 PnP 时”的默认结果
+- 两者都使用 `poseFromRelativeMotion()`，位姿语义自洽
+- 区别不再是“积分公式不同”，而是“是否允许 PnP 接管”
 
 接着程序先设定：
 
 - `estimated_geometry_pose = base_geometry_pose`
-- `output_pose_for_publish = base_output_pose`
-- `next_output_pose = base_output_pose`
 
-意思是：如果后面 PnP 没有通过，就完全使用这条 2D-2D 主干结果。
+意思是：如果后面 PnP 没有通过，就完全使用 `base_geometry_pose` 作为最终输出主干。
 
 ### 8.8 尝试 PnP 修正
 
@@ -927,13 +929,13 @@ PnP 初值来自：
 
 只有通过一致性检查，PnP 才会进入下一步。
 
-#### 第四步：决定 PnP 是否真的写入最终输出
+#### 第四步：决定 PnP 是否真的接管最终主干
 
 函数：
 
-- `shouldApplyPnPToOutput()`
+- `shouldAdoptPnPPose()`
 
-这里门控更严格。即使 PnP 位姿是可解且一致的，也不一定真的会修改最终输出轨迹。代码当前策略非常保守，只有在下面条件都较好时才会介入：
+这里门控更严格。即使 PnP 位姿是可解且一致的，也不一定真的会接管最终主干。代码当前策略非常保守，只有在下面条件都较好时才会介入：
 
 - 当前帧尺度不大
 - PnP 内点足够多
@@ -943,17 +945,15 @@ PnP 初值来自：
 
 如果门控通过：
 
-- `output_pose_for_publish.rotation = pnp_pose.rotation`
-- `next_output_pose.rotation = pnp_pose.rotation`
-- `next_output_pose.translation = base_output_pose.translation`
+- `estimated_geometry_pose = pnp_pose`
 
 这里有一个非常重要的结论：
 
-- PnP 当前只改输出旋转
-- 不改 `geometry_pose`
-- 也不直接改最终输出的平移累计
+- PnP 现在不是“只改旋转”
+- 而是在通过门控时，直接用自己的绝对位姿接管当前主干
+- 也就是说，旋转和平移会一起生效
 
-这说明程序把 PnP 当成“姿态修正器”，而不是“全量接管位姿来源”。
+这说明程序把 PnP 当成“可选主干接管者”，但前提是它必须和 2D-2D 主干高度一致。
 
 ### 8.9 尝试重建 keyframe 地图
 
@@ -991,11 +991,11 @@ PnP 初值来自：
 在本帧处理末尾，程序会：
 
 1. 更新当前状态：
+   - `two_view_pose = base_two_view_pose`
    - `geometry_pose = estimated_geometry_pose`
-   - `output_pose = next_output_pose`
 2. 将结果写入轨迹容器：
-   - `trajectory.push_back(output_pose_for_publish)`
-   - `geometry_trajectory.push_back(geometry_pose)`
+   - `trajectory.push_back(geometry_pose)`
+   - `geometry_trajectory.push_back(two_view_pose)`
    - `trajectory_frame_ids.push_back(frame_id)`
 3. 若当前跟踪点过少，则在当前帧重新检测特征
 4. 若开启 GUI，则显示：
@@ -1023,10 +1023,10 @@ PnP 初值来自：
 6. 用 `mask` 保留几何内点
 7. 从真值读取当前帧绝对尺度 `scale`
 8. 计算 `base_geometry_pose`
-9. 计算 `base_output_pose`
+9. 计算 `base_two_view_pose`
 10. 如果短时地图可用，则尝试 PnP
 11. 如果地图不足，则尝试重新三角化新地图
-12. 更新 `geometry_pose` 和 `output_pose`
+12. 更新 `geometry_pose` 和 `two_view_pose`
 13. 记录 `trajectory`、`geometry_trajectory`
 14. 必要时重检测 FAST 特征
 15. 可视化并进入下一帧
@@ -1055,12 +1055,10 @@ PnP 初值来自：
 | `curr_image` | 主干当前帧图像 | 当前正在处理的图像 |
 | `prev_features` | `prev_image` 上的主干特征 | 将用于 `findEssentialMat` 的前一帧点 |
 | `curr_features` | `curr_image` 上的主干特征 | 与 `prev_features` 一一对应 |
-| `geometry_pose` | 上一时刻内部几何位姿 | 下一帧计算 `base_geometry_pose` 的起点 |
-| `output_pose` | 上一时刻输出轨迹位姿 | 下一帧计算 `base_output_pose` 的起点 |
-| `base_geometry_pose` | 当前帧按 2D-2D 主干积分得到的几何位姿 | PnP 一致性检查的参考值 |
-| `base_output_pose` | 当前帧按默认输出策略积分得到的位姿 | 若无 PnP 修正，它就是最终输出 |
-| `output_pose_for_publish` | 当前帧真正写入 `trajectory` 的位姿 | 可能是纯 2D-2D，也可能带 PnP 旋转修正 |
-| `next_output_pose` | 循环结束后保存为 `output_pose` 的状态 | 供下一帧继续累计 |
+| `geometry_pose` | 上一时刻最终对外主干位姿 | 下一帧计算 `base_geometry_pose` 的起点 |
+| `two_view_pose` | 上一时刻纯 2D-2D 诊断位姿 | 下一帧计算 `base_two_view_pose` 的起点 |
+| `base_geometry_pose` | 当前帧按 2D-2D 主干积分得到的默认主干位姿 | PnP 一致性检查的参考值 |
+| `estimated_geometry_pose` | 当前帧最终采用的主干位姿 | 可能是 `base_geometry_pose`，也可能是 `pnp_pose` |
 | `keyframe_image` | 当前短时地图参考图像 | PnP 时从它把观测跟踪到当前帧 |
 | `keyframe_features` | `keyframe_image` 上的 2D 特征 | 与 `keyframe_landmarks` 一一对应 |
 | `keyframe_landmarks` | 当前短时地图的 3D 点 | PnP 的 3D 输入 |
@@ -1068,15 +1066,15 @@ PnP 初值来自：
 | `keyframe_frame_id` | 当前 keyframe 观测的最近帧号 | 用来计算跟踪年龄 |
 | `keyframe_map_frame_id` | 这批地图的出生帧号 | 用来限制地图寿命 |
 | `trajectory` | 最终输出轨迹序列 | 最终写入 `position.txt` |
-| `geometry_trajectory` | 内部几何主干轨迹序列 | 最终写入 `geometry_position.txt` |
+| `geometry_trajectory` | 纯 2D-2D 诊断轨迹序列 | 最终写入 `geometry_position.txt` |
 | `trajectory_frame_ids` | 每个轨迹条目对应的数据集帧号 | 用来对齐真值时间戳 |
 
 重点记忆：
 
 - `prev_*` / `curr_*` 是 2D-2D 主干状态
 - `keyframe_*` 是短时地图与 PnP 状态
-- `geometry_*` 是内部几何主干轨迹
-- `output_*` / `trajectory` 是最终对外输出轨迹
+- `geometry_pose` / `trajectory` 是最终对外主干
+- `two_view_pose` / `geometry_trajectory` 是纯 2D-2D 诊断轨迹
 
 ---
 
@@ -1162,25 +1160,25 @@ PnP 初值来自：
 - `keyframe_frame_id` 管“观测被跟踪到哪一帧了”
 - `keyframe_map_frame_id` 管“这批 3D 点已经活了多久”
 
-### 11.5 为什么当前策略只让 PnP 修正输出旋转
+### 11.5 为什么当前策略仍然对 PnP 很保守
 
 代码中最值得注意的一点是：
 
-- `geometry_pose` 始终按照 2D-2D 主干推进
-- PnP 即使成功，也不直接替换 `geometry_pose`
-- PnP 只在门控通过时，用自己的旋转替换 `output_pose_for_publish.rotation`
+- `two_view_pose` 始终按照 2D-2D 主干推进
+- `geometry_pose` 默认也按 2D-2D 主干推进
+- 只有在门控通过时，PnP 才会直接替换当前 `estimated_geometry_pose`
 
 这说明作者对 PnP 的使用态度非常保守：
 
-- 不相信 PnP 足以全面接管位姿
-- 但相信它在某些情况下能提供更稳定的旋转修正
+- 不让 PnP 在弱证据下随意改主干
+- 但在强证据下，允许它整个位姿接管当前帧
 
 这也是为什么文档里必须分清：
 
-- 几何主干轨迹
-- 最终输出轨迹
+- 最终对外主干轨迹
+- 纯 2D-2D 诊断轨迹
 
-否则很容易以为 PnP 一成功就彻底接管了当前帧位姿。
+否则很容易以为 `geometry_position.txt` 才是主干，或者误以为 PnP 仍然只改旋转。
 
 ---
 
@@ -1253,18 +1251,18 @@ t_wc = -R_wc * t_cw
 
 作用：
 
-- 计算输出轨迹使用的累计位姿
+- 保留旧版本的历史兼容输出积分方式
 
 输入输出与 `poseFromRelativeMotion()` 类似，但积分公式不同。
 
 在主流程中的位置：
 
-- 主循环中构造 `base_output_pose`
+- 当前默认主流程已不再使用
 
 理解重点：
 
-- 这说明程序内部就明确维护了两套累计规则
-- 不要假设 `geometry_pose` 和 `output_pose` 只是名字不同
+- 它代表一条历史兼容支路
+- 当前最终对外主干已经统一切到 `poseFromRelativeMotion()/geometry_pose`
 
 ### 12.5 `poseToWorldToCamera()`
 
@@ -1330,12 +1328,12 @@ t_wc = -R_wc * t_cw
 
 在主流程中的位置：
 
-- PnP 成功后，将 PnP 绝对位姿转换成与主干同风格的相对运动表达
+- 当前默认主流程已不再依赖它来决定是否采用 PnP
 
 理解重点：
 
 - 这个函数更多用于“比较和检查”
-- 当前版本并没有用它直接替换几何主干积分
+- 当前版本并没有用它来驱动主干切换
 
 ---
 
@@ -1472,10 +1470,10 @@ t_wc = -R_wc * t_cw
 
 #### `accumulateOutputPose()`
 
-- 作用：生成最终输出轨迹使用的累计位姿
+- 作用：历史兼容输出积分函数
 - 输入：上一输出 pose、相对运动和尺度
 - 输出：当前输出 pose
-- 主流程位置：输出轨迹积分
+- 主流程位置：当前默认主流程已不再使用，仅保留作历史结果对照
 
 ### 13.5 三角化与地图点筛选
 
@@ -1537,9 +1535,9 @@ t_wc = -R_wc * t_cw
 - 输出：布尔值
 - 主流程位置：PnP 门控第一层
 
-#### `shouldApplyPnPToOutput()`
+#### `shouldAdoptPnPPose()`
 
-- 作用：决定 PnP 是否真的改写最终输出轨迹
+- 作用：决定 PnP 是否真的接管当前最终主干位姿
 - 输入：PnP pose、参考 pose、尺度、内点数、地图年龄等
 - 输出：布尔值
 - 主流程位置：PnP 门控第二层
@@ -1549,7 +1547,7 @@ t_wc = -R_wc * t_cw
 - 作用：把绝对 pose 还原成相对运动形式
 - 输入：前后绝对 pose
 - 输出：相对旋转、方向和平移尺度
-- 主流程位置：PnP 结果检查
+- 主流程位置：当前默认主流程已不再依赖它决定是否采用 PnP
 
 ### 13.7 轨迹输出与可视化
 
@@ -1610,8 +1608,9 @@ t_wc = -R_wc * t_cw
 
 程序明确保持：
 
-- `geometry_pose` 由 2D-2D 主干推进
-- PnP 只在严格门控下修正输出旋转
+- `two_view_pose` 始终保留纯 2D-2D 主干
+- `geometry_pose` 默认由 2D-2D 主干推进
+- PnP 只在严格门控下接管 `geometry_pose`
 
 优点：
 
@@ -1619,8 +1618,8 @@ t_wc = -R_wc * t_cw
 
 局限：
 
-- 没有充分利用 PnP 可能带来的位姿约束能力
-- 输出轨迹和内部几何轨迹会并行存在，理解成本更高
+- 不是每次有 PnP 就立刻采用
+- 最终主干和纯 2D-2D 诊断轨迹会并行存在，理解成本更高
 
 ### 14.3 地图是短时的，不是长期全局地图
 
@@ -1713,7 +1712,7 @@ t_wc = -R_wc * t_cw
 目标：
 
 - 搞清楚 `R_cw`、`R_wc`、`t_cw`、`t_wc`
-- 搞清楚两套 pose 为什么并存
+- 搞清楚为什么现在保留的是“最终主干 + 诊断支路”
 
 ### 第四遍：读三角化和 PnP
 
@@ -1724,7 +1723,7 @@ t_wc = -R_wc * t_cw
 - `featureTrackingWithLandmarks()`
 - `solvePoseWithPnP()`
 - `isPnPPoseConsistent()`
-- `shouldApplyPnPToOutput()`
+- `shouldAdoptPnPPose()`
 
 目标：
 
@@ -1750,9 +1749,9 @@ t_wc = -R_wc * t_cw
 
 因为这份程序不是纯视觉独立恢复绝对尺度，而是借助真值相邻帧距离给 `recoverPose` 输出的平移方向补上长度。
 
-### 16.2 为什么会有 `geometry_pose` 和 `output_pose` 两套 pose
+### 16.2 为什么会有 `geometry_pose` 和 `two_view_pose` 两套 pose
 
-因为程序把“内部几何主干状态”和“最终对外输出轨迹状态”分开维护。PnP 修正当前策略只作用于输出轨迹的旋转，不直接重写几何主干。
+因为程序把“最终对外主干状态”和“纯 2D-2D 诊断状态”分开维护。`geometry_pose` 是最终发布轨迹，`two_view_pose` 用于保留不受 PnP 接管影响的纯两视图结果。
 
 ### 16.3 为什么 `triangulation()` 不是长期建图
 
@@ -1760,7 +1759,7 @@ t_wc = -R_wc * t_cw
 
 ### 16.4 为什么 PnP 不直接替代主干
 
-因为错误的 3D-2D 对应会让 PnP 发生跳变。当前代码选择保守策略，只在与 2D-2D 主干高度一致时，才让 PnP 对最终输出旋转做有限修正。
+因为错误的 3D-2D 对应会让 PnP 发生跳变。当前代码选择保守策略，只在与 2D-2D 主干高度一致时，才让 PnP 整个位姿接管当前主干。
 
 ### 16.5 为什么有些帧会“没有更新位姿”
 
@@ -1780,9 +1779,9 @@ t_wc = -R_wc * t_cw
 
 1. 这份程序的主干位姿来源是什么？
 2. 为什么单目平移还要读真值？
-3. `geometry_pose` 和 `output_pose` 的区别是什么？
+3. `geometry_pose` 和 `two_view_pose` 的区别是什么？
 4. `keyframe_landmarks` 是怎么来的，又会因为什么失效？
-5. PnP 为什么大多数时候只是候选修正而不是主导位姿？
+5. PnP 为什么大多数时候只是候选接管而不是直接主导位姿？
 6. 主循环里 `prev_features`、`curr_features`、`keyframe_features` 各自代表哪一层状态？
 
 如果这些问题你都能说清楚，那么再去看 `My_VO.cpp` 时，代码就不再是“很多 OpenCV API 堆在一起”，而会变成一条完整可追踪的程序执行链。

@@ -34,28 +34,34 @@ constexpr double kDefaultImageScale = 1.0;
 constexpr int kTraceCanvasSize = 1000;
 constexpr int kProgressReportInterval = 50;
 constexpr double kTracePadding = 40.0;
+constexpr int kTracePrefixAlignmentFrames = 150;
 constexpr float kMaxForwardBackwardError = 1.0f;
 constexpr int kMinInitialPoseInliers = 5;
 constexpr int kMinPoseInliers = 20;
 constexpr int kMinPnPInliers = 12;
 constexpr int kMinTriangulatedLandmarks = 4;
 constexpr float kPnPReprojectionError = 4.0f;
-constexpr double kTriangulationReprojectionError = 5.0;
-constexpr double kMinTriangulationParallaxPixels = 5.0;
-constexpr double kMinTriangulationBaseline = 0.1;
+constexpr double kTriangulationReprojectionError = 3.0;
+constexpr double kMinTriangulationParallaxPixels = 8.0;
+constexpr double kMinTriangulationBaseline = 0.15;
 constexpr double kMinLandmarkDepth = 0.1;
 constexpr double kMaxLandmarkDepth = 80.0;
 constexpr int kMinKeyframePnPInliers = 30;
-constexpr int kPreferredKeyframePnPInliers = 80;
+constexpr int kPreferredKeyframePnPInliers = 100;
 constexpr int kMaxKeyframeTrackAge = 20;
+constexpr int kMaxPnPMapAge = 8;
 constexpr double kMaxPnPRotationDeltaDegrees = 8.0;
 constexpr double kMaxPnPTranslationDeltaScale = 3.0;
 constexpr double kTrustedPnPRotationDeltaDegrees = 1.5;
 constexpr double kTrustedPnPTranslationDeltaScale = 0.75;
 constexpr double kMaxOutputPnPScale = 1.0;
 constexpr int kMinOutputPnPKeyframeAge = 1;
-constexpr double kMinOutputPnPRotationDegrees = 0.0;
-constexpr int kMaxOutputPnPTrackedFeatures = 2200;
+constexpr double kMinOutputPnPRotationDegrees = 0.5;
+constexpr int kMaxOutputPnPTrackedFeatures = 1600;
+constexpr double kMinPnPMapRetentionRatio = 0.45;
+constexpr double kMinAdoptPnPMapRetentionRatio = 0.60;
+constexpr double kMinAdoptPnPInlierRatio = 0.70;
+constexpr double kRefreshLandmarkRetentionRatio = 0.50;
 
 namespace fs = std::filesystem;
 
@@ -270,6 +276,14 @@ PoseRecord poseFromInitialRelativeMotion(
     return poseFromRelativeMotion(PoseRecord(), relative_rotation, relative_translation, scale);
 }
 
+/*
+ * 旧版本保留过一条“历史兼容输出积分”支路：
+ * - 旋转按左乘累计；
+ * - 平移按上一帧旋转投影后直接累加；
+ * 这和 PoseRecord 的相机到世界绝对位姿定义并不完全自洽。
+ * 当前默认输出已统一切到 poseFromRelativeMotion()/geometry_pose 主干，
+ * 因此这里只保留实现供排查历史结果时对照，不再作为默认对外输出。
+ */
 PoseRecord accumulateOutputPose(
     const PoseRecord& prev_pose,
     const Mat& relative_rotation,
@@ -281,18 +295,6 @@ PoseRecord accumulateOutputPose(
     curr_pose.translation = prev_pose.translation + scale * (prev_pose.rotation * (-toVec3d(relative_translation)));
     curr_pose.rotation = toMatx33d(relative_rotation.t()) * prev_pose.rotation;
     return curr_pose;
-}
-
-PoseRecord poseFromInitialOutputMotion(
-    const Mat& relative_rotation,
-    const Mat& relative_translation,
-    double scale) {
-    // 初始化输出轨迹的第一段相对运动。
-    // 若真值尺度不可用，则至少保留 recoverPose 给出的单位方向，避免初始位置全为零。
-    PoseRecord pose;
-    pose.rotation = toMatx33d(relative_rotation.t());
-    pose.translation = (scale > 0.0) ? scale * toVec3d(relative_translation) : toVec3d(relative_translation);
-    return pose;
 }
 
 bool relativeMotionFromPoses(
@@ -409,23 +411,38 @@ bool isPnPPoseConsistent(const PoseRecord& pnp_pose, const PoseRecord& reference
     return rotationAngleDegrees(pnp_pose.rotation, reference_pose.rotation) <= kMaxPnPRotationDeltaDegrees;
 }
 
-bool shouldApplyPnPToOutput(
+bool shouldAdoptPnPPose(
     const PoseRecord& pnp_pose,
     const PoseRecord& reference_pose,
     double frame_scale,
     int pnp_inlier_count,
+    int tracked_landmark_count,
+    int initial_landmark_count,
     int keyframe_map_age,
     int two_view_track_count,
     double two_view_rotation_degrees) {
-    // 这里决定“PnP 结果是否真的写入最终输出轨迹”。
-    // 当前策略非常保守：PnP 只作为 2D-2D 的补偿项，而不是主干位姿来源。
+    // 这里决定“PnP 结果是否真的接管当前主干位姿”。
+    // 当前策略仍然保守：PnP 只在和 2D-2D 主干高度一致时才会被采用。
     // 只有在小尺度、PnP 内点很多、PnP 与 2D-2D 姿态差异很小、
     // 短时地图已经累计到足够年龄、当前 2D-2D 跟踪数已经明显下降、
-    // 并且当前相机运动是旋转主导时，才允许 PnP 改写输出。
+    // 并且当前相机运动是旋转主导时，才允许 PnP 接管主干。
     if (frame_scale > kMaxOutputPnPScale) {
         return false;
     }
     if (pnp_inlier_count < kPreferredKeyframePnPInliers) {
+        return false;
+    }
+    if (tracked_landmark_count <= 0 || initial_landmark_count <= 0) {
+        return false;
+    }
+    const double landmark_retention_ratio =
+        static_cast<double>(tracked_landmark_count) / static_cast<double>(initial_landmark_count);
+    if (landmark_retention_ratio < kMinAdoptPnPMapRetentionRatio) {
+        return false;
+    }
+    const double pnp_inlier_ratio =
+        static_cast<double>(pnp_inlier_count) / static_cast<double>(tracked_landmark_count);
+    if (pnp_inlier_ratio < kMinAdoptPnPInlierRatio) {
         return false;
     }
 
@@ -447,6 +464,13 @@ bool shouldApplyPnPToOutput(
         return false;
     }
     return two_view_rotation_degrees >= kMinOutputPnPRotationDegrees;
+}
+
+double landmarkRetentionRatio(int tracked_landmark_count, int initial_landmark_count) {
+    if (tracked_landmark_count <= 0 || initial_landmark_count <= 0) {
+        return 0.0;
+    }
+    return static_cast<double>(tracked_landmark_count) / static_cast<double>(initial_landmark_count);
 }
 
 double medianParallax(const vector<Point2f>& prev_points, const vector<Point2f>& curr_points) {
@@ -730,6 +754,85 @@ Point2f projectTracePoint(
         static_cast<float>(kTraceCanvasSize - offset_y - (z - min_z) * scale));
 }
 
+bool alignEstimatedPositionsToGroundTruth(
+    const vector<Vec3d>& gt_positions,
+    const vector<PoseRecord>& estimated_poses,
+    const vector<int>& frame_ids,
+    int max_alignment_samples,
+    vector<Vec3d>& aligned_positions) {
+    // 这里只用于轨迹图可视化，对估计轨迹做不带尺度项的刚体对齐。
+    // 这样 map2.png 的视觉口径会更接近 evo 的 `-a` 对齐结果，
+    // 不改变 position.txt 中保存的原始最终主干轨迹。
+    if (estimated_poses.empty() || estimated_poses.size() != frame_ids.size()) {
+        aligned_positions.clear();
+        return false;
+    }
+
+    vector<Vec3d> gt_samples;
+    vector<Vec3d> est_samples;
+    gt_samples.reserve(estimated_poses.size());
+    est_samples.reserve(estimated_poses.size());
+    for (size_t i = 0; i < estimated_poses.size(); ++i) {
+        if (max_alignment_samples > 0 && static_cast<int>(gt_samples.size()) >= max_alignment_samples) {
+            break;
+        }
+        const int frame_id = frame_ids[i];
+        if (frame_id < 0 || frame_id >= static_cast<int>(gt_positions.size())) {
+            continue;
+        }
+        gt_samples.push_back(gt_positions[frame_id]);
+        est_samples.push_back(estimated_poses[i].translation);
+    }
+    if (gt_samples.size() < 3) {
+        aligned_positions.clear();
+        return false;
+    }
+
+    Vec3d gt_centroid(0.0, 0.0, 0.0);
+    Vec3d est_centroid(0.0, 0.0, 0.0);
+    for (size_t i = 0; i < gt_samples.size(); ++i) {
+        gt_centroid += gt_samples[i];
+        est_centroid += est_samples[i];
+    }
+    gt_centroid *= 1.0 / static_cast<double>(gt_samples.size());
+    est_centroid *= 1.0 / static_cast<double>(est_samples.size());
+
+    Mat covariance = Mat::zeros(3, 3, CV_64F);
+    for (size_t i = 0; i < gt_samples.size(); ++i) {
+        const Vec3d centered_est = est_samples[i] - est_centroid;
+        const Vec3d centered_gt = gt_samples[i] - gt_centroid;
+        for (int row = 0; row < 3; ++row) {
+            for (int col = 0; col < 3; ++col) {
+                covariance.at<double>(row, col) += centered_est[row] * centered_gt[col];
+            }
+        }
+    }
+
+    SVD svd(covariance, SVD::FULL_UV);
+    Mat rotation = svd.vt.t() * svd.u.t();
+    if (determinant(rotation) < 0.0) {
+        Mat correction = Mat::eye(3, 3, CV_64F);
+        correction.at<double>(2, 2) = -1.0;
+        rotation = svd.vt.t() * correction * svd.u.t();
+    }
+
+    const Mat est_centroid_mat = (Mat_<double>(3, 1) << est_centroid[0], est_centroid[1], est_centroid[2]);
+    const Mat gt_centroid_mat = (Mat_<double>(3, 1) << gt_centroid[0], gt_centroid[1], gt_centroid[2]);
+    const Mat translation = gt_centroid_mat - rotation * est_centroid_mat;
+
+    aligned_positions.clear();
+    aligned_positions.reserve(estimated_poses.size());
+    for (const PoseRecord& pose : estimated_poses) {
+        const Mat est_point = (Mat_<double>(3, 1) << pose.translation[0], pose.translation[1], pose.translation[2]);
+        const Mat aligned_point = rotation * est_point + translation;
+        aligned_positions.emplace_back(
+            aligned_point.at<double>(0, 0),
+            aligned_point.at<double>(1, 0),
+            aligned_point.at<double>(2, 0));
+    }
+    return true;
+}
+
 bool shouldReportProgress(int processed_frames, int total_frames) {
     // 前几帧、固定间隔以及最后一帧打印进度，避免长序列刷屏。
     return processed_frames <= 5 ||
@@ -741,6 +844,8 @@ Mat renderTraceCanvas(
     const vector<Vec3d>& gt_positions,
     const vector<PoseRecord>& estimated_poses,
     const vector<int>& frame_ids,
+    int alignment_sample_count,
+    const string& estimate_label,
     int processed_frames,
     int total_frames) {
     // 根据当前已经累计的真值和估计位姿动态缩放画布，保证完整轨迹可见。
@@ -748,10 +853,24 @@ Mat renderTraceCanvas(
     // 因此需要 frame_ids 记录每个估计点对应的真实帧号。
     Mat trace(kTraceCanvasSize, kTraceCanvasSize, CV_8UC3, Scalar(255, 255, 255));
     putText(trace, "Black--Ground Truth", Point2f(10, 30), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 0, 0), 1, 8);
-    putText(trace, "Green--VO", Point2f(10, 50), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 255, 0), 1, 8);
+    putText(trace, estimate_label, Point2f(10, 50), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 255, 0), 1, 8);
 
     if (estimated_poses.empty() || frame_ids.empty()) {
         return trace;
+    }
+
+    vector<Vec3d> display_positions;
+    const bool aligned = alignEstimatedPositionsToGroundTruth(
+        gt_positions,
+        estimated_poses,
+        frame_ids,
+        alignment_sample_count,
+        display_positions);
+    if (!aligned) {
+        display_positions.reserve(estimated_poses.size());
+        for (const PoseRecord& pose : estimated_poses) {
+            display_positions.push_back(pose.translation);
+        }
     }
 
     double min_x = numeric_limits<double>::max();
@@ -764,7 +883,7 @@ Mat renderTraceCanvas(
     for (size_t i = 0; i < estimated_poses.size(); ++i) {
         const int frame_id = frame_ids[i];
         const Vec3d& gt = gt_positions[frame_id];
-        const Vec3d& est = estimated_poses[i].translation;
+        const Vec3d& est = display_positions[i];
         min_x = min(min_x, min(gt[0], est[0]));
         max_x = max(max_x, max(gt[0], est[0]));
         min_z = min(min_z, min(gt[2], est[2]));
@@ -787,7 +906,7 @@ Mat renderTraceCanvas(
     for (size_t i = 0; i < estimated_poses.size(); ++i) {
         const int frame_id = frame_ids[i];
         const Vec3d& gt = gt_positions[frame_id];
-        const Vec3d& est = estimated_poses[i].translation;
+        const Vec3d& est = display_positions[i];
 
         circle(trace, projectTracePoint(gt[0], gt[2], min_x, min_z, scale, offset_x, offset_y), 1, Scalar(0, 0, 0), 1);
         circle(trace, projectTracePoint(est[0], est[2], min_x, min_z, scale, offset_x, offset_y), 1, Scalar(0, 255, 0), 1);
@@ -1527,10 +1646,10 @@ int main(int argc, char** argv) {
 
     const bool enable_pnp = isPnPEnabled();
     const double initial_scale = getAbsoluteScale(gt_positions, segment_start_frame + 1);
-    // geometry_pose 是内部几何位姿，用于三角化、PnP 初值和一致性检查。
-    // output_pose 是最终输出轨迹位姿，保留原 2D-2D 轨迹累计方式，并允许有限 PnP 姿态修正。
+    // geometry_pose 是最终对外发布的自洽几何主干。
+    // two_view_pose 保留一条纯 2D-2D / recoverPose 诊断支路，用于和最终主干对照。
     PoseRecord geometry_pose = poseFromInitialRelativeMotion(rotation, translation, initial_scale);
-    PoseRecord output_pose = poseFromInitialOutputMotion(rotation, translation, initial_scale);
+    PoseRecord two_view_pose = geometry_pose;
 
     vector<Point2f> init_prev_features = points1;
     vector<Point2f> init_curr_features = points2;
@@ -1588,10 +1707,12 @@ int main(int argc, char** argv) {
     PoseRecord keyframe_pose = geometry_pose;
     int keyframe_frame_id = segment_start_frame + 1;
     int keyframe_map_frame_id = segment_start_frame + 1;
+    int keyframe_initial_landmark_count = static_cast<int>(keyframe_landmarks.size());
     // keyframe_frame_id 表示 keyframe_image 对应的最近一帧；
     // keyframe_map_frame_id 表示当前 3D 地图是在哪一帧重建出来的，用于限制地图寿命。
 
-    // trajectory 和 trajectory_frame_ids 一一对应，用于输出 TUM 轨迹、绘制估计轨迹并索引真值位置。
+    // trajectory 和 trajectory_frame_ids 一一对应，用于输出最终主干 TUM 轨迹、绘制估计轨迹并索引真值位置。
+    // geometry_trajectory 保留纯 2D-2D 诊断轨迹。
     // 初始估计来自第 0 到第 1 帧，所以第一条轨迹记录对应 frame_id=1。
     vector<PoseRecord> trajectory;
     trajectory.reserve(segment_frame_count);
@@ -1599,8 +1720,8 @@ int main(int argc, char** argv) {
     geometry_trajectory.reserve(segment_frame_count);
     vector<int> trajectory_frame_ids;
     trajectory_frame_ids.reserve(segment_frame_count);
-    trajectory.push_back(output_pose);
-    geometry_trajectory.push_back(geometry_pose);
+    trajectory.push_back(geometry_pose);
+    geometry_trajectory.push_back(two_view_pose);
     trajectory_frame_ids.push_back(segment_start_frame + 1);
 
     future<Mat> next_frame_future;
@@ -1660,8 +1781,8 @@ int main(int argc, char** argv) {
             if (prev_features.size() < 8 || curr_features.size() < 8) {
                 // 重检测后仍没有足够匹配时，本帧不更新任何位姿。
                 // 但会在当前帧重新检测特征，为下一帧恢复跟踪做准备。
-                trajectory.push_back(output_pose);
-                geometry_trajectory.push_back(geometry_pose);
+                trajectory.push_back(geometry_pose);
+                geometry_trajectory.push_back(two_view_pose);
                 trajectory_frame_ids.push_back(frame_id);
                 prev_image = curr_image;
                 featureDetection(curr_image, prev_features, kTargetFeatureCount);
@@ -1701,8 +1822,8 @@ int main(int argc, char** argv) {
                 cout << "Frame " << frame_id << ": 2D-2D pose failed." << endl;
             }
             featureDetection(curr_image, curr_features, kTargetFeatureCount);
-            trajectory.push_back(output_pose);
-            geometry_trajectory.push_back(geometry_pose);
+            trajectory.push_back(geometry_pose);
+            geometry_trajectory.push_back(two_view_pose);
             trajectory_frame_ids.push_back(frame_id);
             prev_image = curr_image;
             prev_features = curr_features;
@@ -1724,8 +1845,8 @@ int main(int argc, char** argv) {
             if (verbose_logging) {
                 cout << "Frame " << frame_id << ": scale below threshold." << endl;
             }
-            trajectory.push_back(output_pose);
-            geometry_trajectory.push_back(geometry_pose);
+            trajectory.push_back(geometry_pose);
+            geometry_trajectory.push_back(two_view_pose);
             trajectory_frame_ids.push_back(frame_id);
             prev_image = curr_image;
             prev_features = curr_features;
@@ -1739,14 +1860,9 @@ int main(int argc, char** argv) {
             continue;
         }
 
+        PoseRecord base_two_view_pose = poseFromRelativeMotion(two_view_pose, rotation, translation, scale);
         PoseRecord base_geometry_pose = poseFromRelativeMotion(geometry_pose, rotation, translation, scale);
         PoseRecord estimated_geometry_pose = base_geometry_pose;
-        PoseRecord base_output_pose = accumulateOutputPose(output_pose, rotation, translation, scale);
-        // output_pose_for_publish 是“当前帧最终写到 trajectory 里的结果”；
-        // next_output_pose 是“下一帧继续积分时采用的输出状态”。
-        // 当前主干策略里，PnP 即使被允许生效，也只接管输出旋转，不接管平移累计。
-        PoseRecord output_pose_for_publish = base_output_pose;
-        PoseRecord next_output_pose = base_output_pose;
         string status_text = "2d2d";
         const double two_view_rotation_degrees = rotationAngleDegrees(toMatx33d(rotation.t()), Matx33d::eye());
 
@@ -1756,13 +1872,16 @@ int main(int argc, char** argv) {
         vector<uchar> pnp_tracking_status;
         const int keyframe_track_age = frame_id - keyframe_frame_id;
         const int keyframe_map_age = frame_id - keyframe_map_frame_id;
+        const double current_landmark_retention =
+            landmarkRetentionRatio(static_cast<int>(keyframe_landmarks.size()), keyframe_initial_landmark_count);
         // 只有 PnP 开启、短时地图仍在寿命范围内、且地图点能跟踪出足够 2D 观测时，才尝试 PnP。
         if (enable_pnp &&
             !keyframe_image.empty() &&
             !keyframe_features.empty() &&
             !keyframe_landmarks.empty() &&
             keyframe_track_age <= kMaxKeyframeTrackAge &&
-            keyframe_map_age <= kMaxKeyframeTrackAge &&
+            keyframe_map_age <= kMaxPnPMapAge &&
+            current_landmark_retention >= kMinPnPMapRetentionRatio &&
             featureTrackingWithLandmarks(
                 keyframe_image,
                 curr_image,
@@ -1773,69 +1892,57 @@ int main(int argc, char** argv) {
             // 这一段是 3D-2D PnP 主路径：
             // 1. 从当前 keyframe 的短时地图出发，把地图点跟踪到当前帧。
             // 2. 用这些 3D-2D 对应求 PnP 位姿。
-            // 3. 如果 PnP 通过一致性与门控检查，再决定是否作用到输出轨迹。
+            // 3. 如果 PnP 通过一致性与门控检查，再决定是否接管最终几何主干。
             vector<int> pnp_inlier_indices;
             PoseRecord pnp_pose;
+            const int tracked_pnp_landmark_count = static_cast<int>(pnp_landmarks.size());
             if (solvePoseWithPnP(pnp_landmarks, pnp_curr_features, camera_matrix, base_geometry_pose, pnp_pose, pnp_inlier_indices) &&
                 static_cast<int>(pnp_inlier_indices.size()) >= kMinKeyframePnPInliers &&
                 isPnPPoseConsistent(pnp_pose, base_geometry_pose, scale)) {
-                Mat corrected_relative_rotation;
-                Mat corrected_relative_translation;
-                double corrected_relative_scale = 0.0;
                 compactTracksByIndices(pnp_prev_features, pnp_curr_features, pnp_landmarks, pnp_inlier_indices);
-                if (relativeMotionFromPoses(
-                        geometry_pose,
+                const double pnp_rotation_delta_deg =
+                    rotationAngleDegrees(pnp_pose.rotation, base_geometry_pose.rotation);
+                const double pnp_translation_delta =
+                    norm(pnp_pose.translation - base_geometry_pose.translation);
+                if (shouldAdoptPnPPose(
                         pnp_pose,
-                        corrected_relative_rotation,
-                        corrected_relative_translation,
-                        corrected_relative_scale)) {
-                    // 通过 relativeMotionFromPoses 可把 PnP 绝对位姿转换为和主干相同的相对运动表达。
-                    // 当前版本只利用这个检查结果，不直接用它替换 geometry_pose。
-                    const double pnp_rotation_delta_deg =
-                        rotationAngleDegrees(pnp_pose.rotation, base_geometry_pose.rotation);
-                    const double pnp_translation_delta =
-                        norm(pnp_pose.translation - base_geometry_pose.translation);
-                    if (shouldApplyPnPToOutput(
-                            pnp_pose,
-                            base_geometry_pose,
-                            scale,
-                            static_cast<int>(pnp_inlier_indices.size()),
-                            keyframe_map_age,
-                            static_cast<int>(curr_features.size()),
-                            two_view_rotation_degrees)) {
-                        // 当前真正“起作用”的位置在这里：
-                        // PnP 不改 geometry_pose，也不改平移累计；
-                        // 它只把当前输出姿态和后续输出状态的旋转，替换为 PnP 的旋转。
-                        output_pose_for_publish = base_output_pose;
-                        output_pose_for_publish.rotation = pnp_pose.rotation;
-                        next_output_pose = output_pose_for_publish;
-                        next_output_pose.translation = base_output_pose.translation;
-                        status_text = "pnp";
-                    } else {
-                        status_text = "pnp-candidate";
-                    }
-                    if (verbose_logging) {
-                        cout << "Frame " << frame_id
-                             << ": accepted PnP correction"
-                             << " map_age=" << keyframe_map_age
-                             << " track_age=" << keyframe_track_age
-                             << " landmarks=" << pnp_landmarks.size()
-                             << " inliers=" << pnp_inlier_indices.size()
-                             << " rot_delta_deg=" << pnp_rotation_delta_deg
-                             << " trans_delta_m=" << pnp_translation_delta
-                             << " output_applied=" << (status_text == "pnp" ? 1 : 0)
-                             << endl;
-                    }
-                    keyframe_image = curr_image;
-                    keyframe_features = pnp_curr_features;
-                    keyframe_landmarks = pnp_landmarks;
-                    keyframe_pose = base_geometry_pose;
-                    keyframe_frame_id = frame_id;
-                    // PnP 成功后，把 keyframe_image 推进到当前帧，并只保留 PnP 内点地图。
-                    // 这样下一帧继续从当前图像跟踪，减少长距离光流造成的丢点。
-                } else if (verbose_logging) {
-                    cout << "Frame " << frame_id << ": rejected PnP correction due to degenerate relative motion." << endl;
+                        base_geometry_pose,
+                        scale,
+                        static_cast<int>(pnp_inlier_indices.size()),
+                        tracked_pnp_landmark_count,
+                        keyframe_initial_landmark_count,
+                        keyframe_map_age,
+                        static_cast<int>(curr_features.size()),
+                        two_view_rotation_degrees)) {
+                    // 通过门控后，PnP 直接接管当前绝对位姿。
+                    // 这样主干中的旋转和平移都来自同一绝对解，不再出现“只改旋转、不改平移”的分叉。
+                    estimated_geometry_pose = pnp_pose;
+                    status_text = "pnp";
+                } else {
+                    status_text = "pnp-candidate";
                 }
+                if (verbose_logging) {
+                    cout << "Frame " << frame_id
+                         << ": accepted PnP correction"
+                         << " map_age=" << keyframe_map_age
+                         << " track_age=" << keyframe_track_age
+                         << " retention=" << landmarkRetentionRatio(
+                                static_cast<int>(pnp_landmarks.size()),
+                                keyframe_initial_landmark_count)
+                         << " landmarks=" << pnp_landmarks.size()
+                         << " inliers=" << pnp_inlier_indices.size()
+                         << " rot_delta_deg=" << pnp_rotation_delta_deg
+                         << " trans_delta_m=" << pnp_translation_delta
+                         << " adopted=" << (status_text == "pnp" ? 1 : 0)
+                         << endl;
+                }
+                keyframe_image = curr_image;
+                keyframe_features = pnp_curr_features;
+                keyframe_landmarks = pnp_landmarks;
+                keyframe_pose = estimated_geometry_pose;
+                keyframe_frame_id = frame_id;
+                // PnP 成功后，把 keyframe_image 推进到当前帧，并只保留 PnP 内点地图。
+                // 这样下一帧继续从当前图像跟踪，减少长距离光流造成的丢点。
             } else {
                 if (!pnp_curr_features.empty() && !pnp_landmarks.empty()) {
                     // 即使本次 PnP 解没有通过一致性检查，只要地图点仍能跟踪，
@@ -1858,11 +1965,14 @@ int main(int argc, char** argv) {
             triangulation_prev_features.size(),
             triangulation_curr_features.size()));
         const bool can_triangulate = shouldTriangulateTracks(triangulation_prev_features, triangulation_curr_features, scale);
+        const double refresh_landmark_retention =
+            landmarkRetentionRatio(static_cast<int>(keyframe_landmarks.size()), keyframe_initial_landmark_count);
         const bool should_refresh_keyframe =
             enable_pnp &&
             (keyframe_landmarks.empty() ||
             static_cast<int>(keyframe_landmarks.size()) < kMinKeyframePnPInliers ||
-            keyframe_map_age >= kMaxKeyframeTrackAge);
+            keyframe_map_age >= kMaxPnPMapAge ||
+            refresh_landmark_retention < kRefreshLandmarkRetentionRatio);
         // 当地图为空、点数不足或寿命太长时，尝试用当前 2D-2D 内点重新三角化一批地图点。
         if (should_refresh_keyframe &&
             can_triangulate &&
@@ -1876,7 +1986,7 @@ int main(int argc, char** argv) {
                 rotation,
                 translation,
                 scale,
-                &base_geometry_pose,
+                &estimated_geometry_pose,
                 rebuilt_landmarks,
                 &triangulation_prev_features,
                 &triangulation_curr_features) &&
@@ -1887,6 +1997,7 @@ int main(int argc, char** argv) {
             keyframe_pose = estimated_geometry_pose;
             keyframe_frame_id = frame_id;
             keyframe_map_frame_id = frame_id;
+            keyframe_initial_landmark_count = static_cast<int>(rebuilt_landmarks.size());
             // 重建成功后，当前帧既是新的观测 keyframe，也是这批地图的出生帧。
             if (status_text == "2d2d") {
                 status_text = "rebuild-2d2d";
@@ -1906,13 +2017,13 @@ int main(int argc, char** argv) {
             }
         }
 
+        two_view_pose = base_two_view_pose;
         geometry_pose = estimated_geometry_pose;
-        output_pose = next_output_pose;
-        // geometry_pose 始终按 2D-2D 主干推进；
-        // output_pose 则可能带有通过门控的 PnP 旋转修正。
+        // two_view_pose 始终保留纯 2D-2D 主干；
+        // geometry_pose 是最终对外主干，可在通过门控时由 PnP 整个位姿接管。
 
-        trajectory.push_back(output_pose_for_publish);
-        geometry_trajectory.push_back(geometry_pose);
+        trajectory.push_back(geometry_pose);
+        geometry_trajectory.push_back(two_view_pose);
         trajectory_frame_ids.push_back(frame_id);
 
         if (curr_features.size() < kMinTrackedFeatures) {
@@ -1928,9 +2039,9 @@ int main(int argc, char** argv) {
                  << " tracked=" << curr_features.size()
                  << " inliers=" << inlier_count
                  << " status=" << status_text
-                 << " pose=(" << output_pose_for_publish.translation[0] << ", "
-                 << output_pose_for_publish.translation[1] << ", "
-                 << output_pose_for_publish.translation[2] << ")" << endl;
+                 << " pose=(" << geometry_pose.translation[0] << ", "
+                 << geometry_pose.translation[1] << ", "
+                 << geometry_pose.translation[2] << ")" << endl;
         }
 
         prev_image = curr_image;
@@ -1938,7 +2049,14 @@ int main(int argc, char** argv) {
 
         if (enable_visualization) {
             // 实时显示当前灰度图和 X-Z 平面轨迹。waitKey(1) 同时负责刷新 OpenCV 窗口事件。
-            Mat trace = renderTraceCanvas(gt_positions, trajectory, trajectory_frame_ids, processed_frames, segment_frame_count);
+            Mat trace = renderTraceCanvas(
+                gt_positions,
+                trajectory,
+                trajectory_frame_ids,
+                kTracePrefixAlignmentFrames,
+                "Green--VO (prefix aligned)",
+                processed_frames,
+                segment_frame_count);
             imshow("CAMERA IMAGE", curr_image);
             imshow("Trajectory Drawing", trace);
             waitKey(1);
@@ -1946,7 +2064,8 @@ int main(int argc, char** argv) {
     }
 
     // 处理结束后保存估计轨迹文本，并生成最终轨迹对比图。
-    // position.txt 使用 TUM 格式，可直接用 evo_ape/evo_rpe 评估；map2.png 中黑色为真值，绿色为 VO 估计。
+    // position.txt 使用最终对外主干；geometry_position.txt 保留纯 2D-2D 诊断轨迹。
+    // 两者都使用 TUM 格式，可直接用 evo_ape/evo_rpe 评估；map2.png 中黑色为真值，绿色为 VO 估计。
     if (!ensureParentDirectory(paths.output_pose_path) ||
         !ensureParentDirectory(paths.output_geometry_pose_path) ||
         !ensureParentDirectory(paths.output_map_path)) {
@@ -1972,8 +2091,29 @@ int main(int argc, char** argv) {
     output.close();
     geometry_output.close();
     // 最后一张轨迹图即使在无 GUI 模式下也会保存，方便离线查看。
-    Mat trace = renderTraceCanvas(gt_positions, trajectory, trajectory_frame_ids, segment_frame_count, segment_frame_count);
-    imwrite(paths.output_map_path, trace);
+    Mat prefix_aligned_trace = renderTraceCanvas(
+        gt_positions,
+        trajectory,
+        trajectory_frame_ids,
+        kTracePrefixAlignmentFrames,
+        "Green--VO (prefix aligned)",
+        segment_frame_count,
+        segment_frame_count);
+    imwrite(paths.output_map_path, prefix_aligned_trace);
+
+    const fs::path global_aligned_map_path =
+        fs::path(paths.output_map_path).parent_path() / "map2_global_aligned.png";
+    if (ensureParentDirectory(global_aligned_map_path.string())) {
+        Mat global_aligned_trace = renderTraceCanvas(
+            gt_positions,
+            trajectory,
+            trajectory_frame_ids,
+            -1,
+            "Green--VO (global aligned)",
+            segment_frame_count,
+            segment_frame_count);
+        imwrite(global_aligned_map_path.string(), global_aligned_trace);
+    }
     cout << "Finished. Saved TUM trajectory to " << paths.output_pose_path
          << ", geometry trajectory to " << paths.output_geometry_pose_path
          << " and map to " << paths.output_map_path << endl;

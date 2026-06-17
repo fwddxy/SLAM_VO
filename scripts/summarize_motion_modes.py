@@ -97,10 +97,31 @@ def build_rows(output_root: Path) -> list[dict[str, object]]:
     for metadata_path in sorted(output_root.glob("*/*/segment.json")):
         metadata = read_json(metadata_path)
         segment_dir = metadata_path.parent
-        estimate_path = REPO_ROOT / metadata["estimate_path"]
-        full_estimate_path = REPO_ROOT / metadata["full_estimate_path"]
-        reference_gt = REPO_ROOT / metadata["reference_gt"]
-        run_log_path = REPO_ROOT / metadata["run_log"]
+        estimate_path_text = metadata.get("estimate_path", "")
+        full_estimate_path_text = metadata.get("full_estimate_path", "")
+        geometry_estimate_path_text = metadata.get("geometry_estimate_path", "")
+        full_geometry_estimate_path_text = metadata.get("full_geometry_estimate_path", "")
+        reference_gt_text = metadata.get("reference_gt", "")
+        run_log_text = metadata.get("run_log", "")
+
+        estimate_path = REPO_ROOT / estimate_path_text if estimate_path_text else segment_dir / "position" / "position.txt"
+        full_estimate_path = (
+            REPO_ROOT / full_estimate_path_text
+            if full_estimate_path_text
+            else segment_dir / "position" / "position_full.txt"
+        )
+        geometry_estimate_path = (
+            REPO_ROOT / geometry_estimate_path_text
+            if geometry_estimate_path_text
+            else segment_dir / "position" / "geometry_position.txt"
+        )
+        full_geometry_estimate_path = (
+            REPO_ROOT / full_geometry_estimate_path_text
+            if full_geometry_estimate_path_text
+            else segment_dir / "position" / "geometry_position_full.txt"
+        )
+        reference_gt = REPO_ROOT / reference_gt_text if reference_gt_text else segment_dir / "reference" / "gt_tum_segment.txt"
+        run_log_path = REPO_ROOT / run_log_text if run_log_text else segment_dir / "run.log"
 
         ape_metrics = parse_evo_metrics(segment_dir / "ape" / "evo_ape_metrics.txt")
         rpe_metrics = parse_evo_metrics(segment_dir / "rpe" / "evo_rpe_metrics.txt")
@@ -118,8 +139,12 @@ def build_rows(output_root: Path) -> list[dict[str, object]]:
             "evaluated_frames": count_nonempty_lines(reference_gt),
             "estimate_frames": count_nonempty_lines(estimate_path),
             "full_run_frames": count_nonempty_lines(full_estimate_path),
+            "geometry_estimate_frames": count_nonempty_lines(geometry_estimate_path),
+            "geometry_full_run_frames": count_nonempty_lines(full_geometry_estimate_path),
             "run_status": metadata.get("run_status", "unknown"),
             "evo_status": metadata.get("evo_status", "not-run"),
+            "estimate_semantics": metadata.get("estimate_semantics", "final_geometry_spine"),
+            "geometry_estimate_semantics": metadata.get("geometry_estimate_semantics", ""),
             "ape_rmse_m": ape_metrics.get("rmse", ""),
             "ape_mean_m": ape_metrics.get("mean", ""),
             "ape_median_m": ape_metrics.get("median", ""),
