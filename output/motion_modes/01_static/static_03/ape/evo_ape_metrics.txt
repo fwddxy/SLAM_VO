@@ -1,0 +1,33 @@
+--------------------------------------------------------------------------------
+Loaded 10 stamps and poses from: /home/xywu/桌面/SLAM/output/motion_modes/01_static/static_03/reference/gt_tum_segment.txt
+Loaded 10 stamps and poses from: /home/xywu/桌面/SLAM/output/motion_modes/01_static/static_03/position/position.txt
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 10 of max. 10 possible matching timestamps between...
+	/home/xywu/桌面/SLAM/output/motion_modes/01_static/static_03/reference/gt_tum_segment.txt
+and:	/home/xywu/桌面/SLAM/output/motion_modes/01_static/static_03/position/position.txt
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Origin alignment transformation:
+[[ 0.9997899   0.00397224 -0.02010904 -0.10074727]
+ [-0.0039094   0.99998736  0.00316319 -0.15396551]
+ [ 0.02012135 -0.00308391  0.99979279  0.09342555]
+ [ 0.          0.          0.          1.        ]]
+--------------------------------------------------------------------------------
+Compared 10 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with origin alignment)
+
+       max	0.039043
+      mean	0.026268
+    median	0.033010
+       min	0.000000
+      rmse	0.029746
+       sse	0.008848
+       std	0.013959
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to /home/xywu/桌面/SLAM/output/motion_modes/01_static/static_03/ape/evo_ape_plot.pdf

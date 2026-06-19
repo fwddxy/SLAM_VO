@@ -1,0 +1,69 @@
+Visualization disabled. GUI opens by default when a usable local display socket is present. Set VO_ENABLE_GUI=0 to force headless mode.
+Custom output root: output/motion_modes/03_low_translation/low_translation_01
+Selected frame range: [620, 663] (44 frames)
+Processing 44 frames...
+Frame 622: skipped keyframe rebuild due to low baseline/parallax.
+Frame 622: tracked features down to 874, re-detecting.
+Frame 622 (3/44) tracked=2000 inliers=874 status=2d2d pose=(0.0626667, -0.0285288, 1.64109)
+Frame 623: skipped keyframe rebuild due to low baseline/parallax.
+Frame 623 (4/44) tracked=1267 inliers=1267 status=2d2d pose=(0.0571533, -0.0614461, 2.42885)
+Frame 624: skipped keyframe rebuild due to low baseline/parallax.
+Frame 624 (5/44) tracked=1008 inliers=1008 status=2d2d pose=(0.0988049, -0.0816453, 3.19204)
+Frame 625: skipped keyframe rebuild due to low baseline/parallax.
+Frame 625: tracked features down to 884, re-detecting.
+Frame 626: skipped keyframe rebuild due to low baseline/parallax.
+Frame 627: skipped keyframe rebuild due to low baseline/parallax.
+Frame 627: tracked features down to 926, re-detecting.
+Frame 628: skipped keyframe rebuild due to low baseline/parallax.
+Frame 629: skipped keyframe rebuild due to low baseline/parallax.
+Frame 629: tracked features down to 915, re-detecting.
+Frame 630: skipped keyframe rebuild due to low baseline/parallax.
+Frame 631: skipped keyframe rebuild due to low baseline/parallax.
+Frame 631: tracked features down to 815, re-detecting.
+Frame 632: skipped keyframe rebuild due to low baseline/parallax.
+Frame 633: skipped keyframe rebuild due to low baseline/parallax.
+Frame 634: skipped keyframe rebuild due to low baseline/parallax.
+Frame 635: skipped keyframe rebuild due to low baseline/parallax.
+Frame 635: tracked features down to 301, re-detecting.
+Frame 636: skipped keyframe rebuild due to low baseline/parallax.
+Frame 636: tracked features down to 577, re-detecting.
+Frame 637: skipped keyframe rebuild due to low baseline/parallax.
+Frame 638: tracked features down to 628, re-detecting.
+Frame 639: accepted PnP correction map_age=1 track_age=1 retention=0.659236 landmarks=414 inliers=414 rot_delta_deg=0.274943 trans_delta_m=0.0297779 adopted=0
+Frame 639: tracked features down to 277, re-detecting.
+Frame 640: accepted PnP correction map_age=2 track_age=1 retention=0.243631 landmarks=153 inliers=153 rot_delta_deg=1.19405 trans_delta_m=0.275851 adopted=0
+Frame 640: skipped keyframe rebuild due to low baseline/parallax.
+Frame 640: tracked features down to 509, re-detecting.
+Frame 641: tracked features down to 91, re-detecting.
+Frame 642: accepted PnP correction map_age=1 track_age=1 retention=0.714286 landmarks=65 inliers=65 rot_delta_deg=1.66143 trans_delta_m=0.274648 adopted=0
+Frame 642: tracked features down to 984, re-detecting.
+Frame 643: accepted PnP correction map_age=2 track_age=1 retention=0.659341 landmarks=60 inliers=60 rot_delta_deg=1.80044 trans_delta_m=0.325693 adopted=0
+Frame 643: tracked features down to 28, re-detecting.
+Frame 644: accepted PnP correction map_age=3 track_age=1 retention=0.56044 landmarks=51 inliers=51 rot_delta_deg=2.14569 trans_delta_m=0.469426 adopted=0
+Frame 644: tracked features down to 35, re-detecting.
+Frame 645: 2D-2D pose failed.
+Frame 646: 2D-2D pose failed.
+Frame 647: 2D-2D pose failed.
+Frame 648: 2D-2D pose failed.
+Frame 649: 2D-2D pose failed.
+Frame 650: skipped keyframe rebuild due to low baseline/parallax.
+Frame 650: tracked features down to 72, re-detecting.
+Frame 651: skipped keyframe rebuild due to low baseline/parallax.
+Frame 651: tracked features down to 27, re-detecting.
+Frame 652: 2D-2D pose failed.
+Frame 653: skipped keyframe rebuild due to low baseline/parallax.
+Frame 653: tracked features down to 44, re-detecting.
+Frame 654: 2D-2D pose failed.
+Frame 655: 2D-2D pose failed.
+Frame 656: 2D-2D pose failed.
+Frame 657: scale below threshold.
+Frame 658: 2D-2D pose failed.
+Frame 659: 2D-2D pose failed.
+Frame 660: 2D-2D pose failed.
+Frame 661: 2D-2D pose failed.
+Frame 662: 2D-2D pose failed.
+Frame 663: 2D-2D pose failed.
+Frame 663 (44/44) tracked=2000 inliers=0 status=skip-pose
+Finished. Saved TUM trajectory to /home/xywu/桌面/SLAM/output/motion_modes/03_low_translation/low_translation_01/position/position.txt, geometry trajectory to /home/xywu/桌面/SLAM/output/motion_modes/03_low_translation/low_translation_01/position/geometry_position.txt and map to /home/xywu/桌面/SLAM/output/motion_modes/03_low_translation/low_translation_01/traj/map2.png
+
+Initialization triangulation is insufficient; the next frame will rebuild landmarks via 2D-2D.

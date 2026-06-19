@@ -1,0 +1,73 @@
+Visualization disabled. GUI opens by default when a usable local display socket is present. Set VO_ENABLE_GUI=0 to force headless mode.
+Custom output root: output/motion_modes/02_rotation_dominant/rotation_03
+Selected frame range: [720, 764] (45 frames)
+Processing 45 frames...
+Frame 722: 2D-2D pose failed.
+Frame 722 (3/45) tracked=2000 inliers=7 status=skip-pose
+Frame 723: scale below threshold.
+Frame 723 (4/45) tracked=49 inliers=49 status=skip-small-baseline
+Frame 724: scale below threshold.
+Frame 724 (5/45) tracked=49 inliers=49 status=skip-small-baseline
+Frame 725: scale below threshold.
+Frame 726: scale below threshold.
+Frame 727: not enough tracked features, re-detecting.
+Frame 727: 2D-2D pose failed.
+Frame 728: 2D-2D pose failed.
+Frame 729: 2D-2D pose failed.
+Frame 730: 2D-2D pose failed.
+Frame 731: 2D-2D pose failed.
+Frame 732: scale below threshold.
+Frame 733: 2D-2D pose failed.
+Frame 734: 2D-2D pose failed.
+Frame 735: 2D-2D pose failed.
+Frame 736: 2D-2D pose failed.
+Frame 737: 2D-2D pose failed.
+Frame 738: 2D-2D pose failed.
+Frame 739: 2D-2D pose failed.
+Frame 740: 2D-2D pose failed.
+Frame 741: tracked features down to 65, re-detecting.
+Frame 742: accepted PnP correction map_age=1 track_age=1 retention=0.969231 landmarks=63 inliers=63 rot_delta_deg=0.142179 trans_delta_m=0.0242536 adopted=0
+Frame 742: tracked features down to 55, re-detecting.
+Frame 743: accepted PnP correction map_age=2 track_age=1 retention=0.938462 landmarks=61 inliers=61 rot_delta_deg=0.344939 trans_delta_m=0.0624886 adopted=0
+Frame 743: tracked features down to 95, re-detecting.
+Frame 744: accepted PnP correction map_age=3 track_age=1 retention=0.830769 landmarks=54 inliers=54 rot_delta_deg=0.623625 trans_delta_m=0.121291 adopted=0
+Frame 744: tracked features down to 100, re-detecting.
+Frame 745: accepted PnP correction map_age=4 track_age=1 retention=0.707692 landmarks=46 inliers=46 rot_delta_deg=0.698031 trans_delta_m=0.482153 adopted=0
+Frame 745: tracked features down to 102, re-detecting.
+Frame 746: accepted PnP correction map_age=5 track_age=1 retention=0.707692 landmarks=46 inliers=46 rot_delta_deg=1.01775 trans_delta_m=0.621517 adopted=0
+Frame 746: tracked features down to 303, re-detecting.
+Frame 747: accepted PnP correction map_age=6 track_age=1 retention=0.707692 landmarks=46 inliers=46 rot_delta_deg=1.401 trans_delta_m=0.765755 adopted=0
+Frame 747: tracked features down to 495, re-detecting.
+Frame 748: tracked features down to 728, re-detecting.
+Frame 749: tracked features down to 654, re-detecting.
+Frame 750: accepted PnP correction map_age=1 track_age=1 retention=0.845566 landmarks=553 inliers=553 rot_delta_deg=0.298735 trans_delta_m=0.0705992 adopted=1
+Frame 750: tracked features down to 780, re-detecting.
+Frame 751: accepted PnP correction map_age=2 track_age=1 retention=0.617737 landmarks=404 inliers=404 rot_delta_deg=0.126473 trans_delta_m=0.0311887 adopted=1
+Frame 751: tracked features down to 563, re-detecting.
+Frame 752: accepted PnP correction map_age=3 track_age=1 retention=0.487768 landmarks=319 inliers=319 rot_delta_deg=0.173671 trans_delta_m=0.040813 adopted=0
+Frame 752: tracked features down to 581, re-detecting.
+Frame 753: accepted PnP correction map_age=1 track_age=1 retention=0.815835 landmarks=474 inliers=474 rot_delta_deg=0.0855525 trans_delta_m=0.022226 adopted=1
+Frame 753: tracked features down to 427, re-detecting.
+Frame 754: accepted PnP correction map_age=2 track_age=1 retention=0.57315 landmarks=333 inliers=333 rot_delta_deg=0.313552 trans_delta_m=0.0619814 adopted=0
+Frame 754: tracked features down to 384, re-detecting.
+Frame 755: accepted PnP correction map_age=3 track_age=1 retention=0.497418 landmarks=289 inliers=289 rot_delta_deg=0.372997 trans_delta_m=0.0945042 adopted=0
+Frame 755: tracked features down to 449, re-detecting.
+Frame 756: accepted PnP correction map_age=1 track_age=1 retention=0.98441 landmarks=442 inliers=442 rot_delta_deg=0.131049 trans_delta_m=0.0512726 adopted=1
+Frame 756: tracked features down to 666, re-detecting.
+Frame 757: accepted PnP correction map_age=2 track_age=1 retention=0.957684 landmarks=430 inliers=430 rot_delta_deg=0.0557204 trans_delta_m=0.0585236 adopted=1
+Frame 757: tracked features down to 740, re-detecting.
+Frame 758: accepted PnP correction map_age=3 track_age=1 retention=0.757238 landmarks=340 inliers=340 rot_delta_deg=0.149324 trans_delta_m=0.0292695 adopted=1
+Frame 758: tracked features down to 784, re-detecting.
+Frame 759: accepted PnP correction map_age=4 track_age=1 retention=0.659243 landmarks=296 inliers=296 rot_delta_deg=0.230018 trans_delta_m=0.0577795 adopted=1
+Frame 759: tracked features down to 733, re-detecting.
+Frame 760: accepted PnP correction map_age=5 track_age=1 retention=0.518931 landmarks=233 inliers=233 rot_delta_deg=0.240972 trans_delta_m=0.0924808 adopted=1
+Frame 760: tracked features down to 966, re-detecting.
+Frame 761: accepted PnP correction map_age=6 track_age=1 retention=0.447661 landmarks=201 inliers=201 rot_delta_deg=0.31699 trans_delta_m=0.0683927 adopted=0
+Frame 762: accepted PnP correction map_age=1 track_age=1 retention=0.876522 landmarks=1008 inliers=1008 rot_delta_deg=0.100963 trans_delta_m=0.0231365 adopted=1
+Frame 762: tracked features down to 899, re-detecting.
+Frame 763: accepted PnP correction map_age=2 track_age=1 retention=0.753913 landmarks=867 inliers=867 rot_delta_deg=0.12568 trans_delta_m=0.0274972 adopted=1
+Frame 764: accepted PnP correction map_age=3 track_age=1 retention=0.626087 landmarks=720 inliers=720 rot_delta_deg=0.178927 trans_delta_m=0.0498343 adopted=1
+Frame 764 (45/45) tracked=1212 inliers=1212 status=pnp pose=(-7.56632, 0.039756, 7.81826)
+Finished. Saved TUM trajectory to /home/xywu/桌面/SLAM/output/motion_modes/02_rotation_dominant/rotation_03/position/position.txt, geometry trajectory to /home/xywu/桌面/SLAM/output/motion_modes/02_rotation_dominant/rotation_03/position/geometry_position.txt and map to /home/xywu/桌面/SLAM/output/motion_modes/02_rotation_dominant/rotation_03/traj/map2.png
+
+Initialization triangulation is insufficient; the next frame will rebuild landmarks via 2D-2D.

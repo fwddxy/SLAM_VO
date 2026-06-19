@@ -1,0 +1,35 @@
+--------------------------------------------------------------------------------
+Loaded 20 stamps and poses from: /home/xywu/桌面/SLAM/output/motion_modes/01_static/static_01/reference/gt_tum_segment.txt
+Loaded 20 stamps and poses from: /home/xywu/桌面/SLAM/output/motion_modes/01_static/static_01/position/position.txt
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 20 of max. 20 possible matching timestamps between...
+	/home/xywu/桌面/SLAM/output/motion_modes/01_static/static_01/reference/gt_tum_segment.txt
+and:	/home/xywu/桌面/SLAM/output/motion_modes/01_static/static_01/position/position.txt
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Origin alignment transformation:
+[[-9.98413843e-01  3.07342165e-02  4.71720793e-02 -1.46323561e+02]
+ [ 3.28867591e-02  9.98420350e-01  4.55550909e-02  3.76829186e+00]
+ [-4.56974639e-02  4.70341702e-02 -9.97847448e-01 -8.18275767e+01]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
+--------------------------------------------------------------------------------
+Found 19 pairs with delta 1 (frames) among 20 poses using consecutive pairs.
+Compared 19 relative pose pairs, delta = 1 (frames) with consecutive pairs.
+Calculating RPE for translation part pose relation...
+--------------------------------------------------------------------------------
+RPE w.r.t. translation part (m)
+for delta = 1 (frames) using consecutive pairs
+(with origin alignment)
+
+       max	0.006391
+      mean	0.002720
+    median	0.002320
+       min	0.000619
+      rmse	0.003163
+       sse	0.000190
+       std	0.001613
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to /home/xywu/桌面/SLAM/output/motion_modes/01_static/static_01/rpe/evo_rpe_plot.pdf

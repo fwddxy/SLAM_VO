@@ -1,0 +1,35 @@
+--------------------------------------------------------------------------------
+Loaded 20 stamps and poses from: /home/xywu/桌面/SLAM/output/motion_modes/03_low_translation/low_translation_03/reference/gt_tum_segment.txt
+Loaded 20 stamps and poses from: /home/xywu/桌面/SLAM/output/motion_modes/03_low_translation/low_translation_03/position/position.txt
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 20 of max. 20 possible matching timestamps between...
+	/home/xywu/桌面/SLAM/output/motion_modes/03_low_translation/low_translation_03/reference/gt_tum_segment.txt
+and:	/home/xywu/桌面/SLAM/output/motion_modes/03_low_translation/low_translation_03/position/position.txt
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Origin alignment transformation:
+[[-9.98148920e-01  1.47351632e-02  5.90051527e-02 -1.46131372e+02]
+ [ 1.75235095e-02  9.98740190e-01  4.70208498e-02  3.26134913e+00]
+ [-5.82379575e-02  4.79677878e-02 -9.97149654e-01 -6.95495649e+01]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
+--------------------------------------------------------------------------------
+Found 19 pairs with delta 1 (frames) among 20 poses using consecutive pairs.
+Compared 19 relative pose pairs, delta = 1 (frames) with consecutive pairs.
+Calculating RPE for translation part pose relation...
+--------------------------------------------------------------------------------
+RPE w.r.t. translation part (m)
+for delta = 1 (frames) using consecutive pairs
+(with origin alignment)
+
+       max	0.119768
+      mean	0.045101
+    median	0.026589
+       min	0.002062
+      rmse	0.062422
+       sse	0.074033
+       std	0.043155
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to /home/xywu/桌面/SLAM/output/motion_modes/03_low_translation/low_translation_03/rpe/evo_rpe_plot.pdf

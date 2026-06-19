@@ -1,0 +1,48 @@
+Visualization disabled. GUI opens by default when a usable local display socket is present. Set VO_ENABLE_GUI=0 to force headless mode.
+Custom output root: output/motion_modes/04_nominal_translation/nominal_01
+Selected frame range: [190, 219] (30 frames)
+Processing 30 frames...
+Frame 192: accepted PnP correction map_age=1 track_age=1 retention=0.835842 landmarks=1166 inliers=1166 rot_delta_deg=0.167581 trans_delta_m=0.0168779 adopted=0
+Frame 192: tracked features down to 901, re-detecting.
+Frame 192 (3/30) tracked=2000 inliers=901 status=pnp-candidate pose=(-0.00137399, -0.0197141, 1.65428)
+Frame 193: accepted PnP correction map_age=2 track_age=1 retention=0.621505 landmarks=867 inliers=867 rot_delta_deg=0.344863 trans_delta_m=0.0472564 adopted=0
+Frame 193 (4/30) tracked=1154 inliers=1154 status=pnp-candidate pose=(-0.0118784, -0.0451524, 2.49232)
+Frame 194: accepted PnP correction map_age=3 track_age=1 retention=0.488889 landmarks=682 inliers=682 rot_delta_deg=0.350528 trans_delta_m=0.061268 adopted=0
+Frame 194: tracked features down to 869, re-detecting.
+Frame 194 (5/30) tracked=2000 inliers=869 status=pnp-candidate pose=(-0.0200986, -0.0466138, 3.33885)
+Frame 195: accepted PnP correction map_age=1 track_age=1 retention=0.9229 landmarks=802 inliers=802 rot_delta_deg=0.117133 trans_delta_m=0.020642 adopted=0
+Frame 196: accepted PnP correction map_age=2 track_age=1 retention=0.864212 landmarks=751 inliers=751 rot_delta_deg=0.0898768 trans_delta_m=0.0303658 adopted=0
+Frame 197: accepted PnP correction map_age=3 track_age=1 retention=0.708861 landmarks=616 inliers=616 rot_delta_deg=0.0992615 trans_delta_m=0.023164 adopted=0
+Frame 197: tracked features down to 867, re-detecting.
+Frame 198: accepted PnP correction map_age=4 track_age=1 retention=0.47641 landmarks=414 inliers=414 rot_delta_deg=0.132064 trans_delta_m=0.0472459 adopted=0
+Frame 199: accepted PnP correction map_age=1 track_age=1 retention=0.755732 landmarks=857 inliers=857 rot_delta_deg=0.0374648 trans_delta_m=0.00880771 adopted=0
+Frame 199: tracked features down to 854, re-detecting.
+Frame 200: accepted PnP correction map_age=2 track_age=1 retention=0.64903 landmarks=736 inliers=736 rot_delta_deg=0.0608525 trans_delta_m=0.0108328 adopted=0
+Frame 201: accepted PnP correction map_age=3 track_age=1 retention=0.559083 landmarks=634 inliers=634 rot_delta_deg=0.118634 trans_delta_m=0.0365572 adopted=0
+Frame 201: tracked features down to 857, re-detecting.
+Frame 202: accepted PnP correction map_age=4 track_age=1 retention=0.407407 landmarks=462 inliers=462 rot_delta_deg=0.145704 trans_delta_m=0.0340722 adopted=0
+Frame 203: accepted PnP correction map_age=1 track_age=1 retention=0.788276 landmarks=901 inliers=901 rot_delta_deg=0.0268252 trans_delta_m=0.010291 adopted=0
+Frame 203: tracked features down to 880, re-detecting.
+Frame 204: accepted PnP correction map_age=2 track_age=1 retention=0.712161 landmarks=814 inliers=814 rot_delta_deg=0.10564 trans_delta_m=0.0396081 adopted=0
+Frame 205: accepted PnP correction map_age=3 track_age=1 retention=0.657043 landmarks=751 inliers=751 rot_delta_deg=0.352401 trans_delta_m=0.127473 adopted=0
+Frame 205: tracked features down to 940, re-detecting.
+Frame 206: accepted PnP correction map_age=4 track_age=1 retention=0.570429 landmarks=652 inliers=652 rot_delta_deg=0.29374 trans_delta_m=0.0843538 adopted=0
+Frame 207: accepted PnP correction map_age=5 track_age=1 retention=0.515311 landmarks=589 inliers=589 rot_delta_deg=0.41958 trans_delta_m=0.12243 adopted=0
+Frame 208: accepted PnP correction map_age=6 track_age=1 retention=0.483815 landmarks=553 inliers=553 rot_delta_deg=0.513953 trans_delta_m=0.146584 adopted=0
+Frame 209: accepted PnP correction map_age=1 track_age=1 retention=0.947977 landmarks=984 inliers=984 rot_delta_deg=0.353073 trans_delta_m=0.0984688 adopted=0
+Frame 209: tracked features down to 863, re-detecting.
+Frame 210: accepted PnP correction map_age=2 track_age=1 retention=0.824663 landmarks=856 inliers=856 rot_delta_deg=0.464668 trans_delta_m=0.135743 adopted=0
+Frame 211: accepted PnP correction map_age=3 track_age=1 retention=0.680154 landmarks=706 inliers=706 rot_delta_deg=0.470854 trans_delta_m=0.11125 adopted=0
+Frame 212: accepted PnP correction map_age=4 track_age=1 retention=0.569364 landmarks=591 inliers=591 rot_delta_deg=0.750072 trans_delta_m=0.15342 adopted=0
+Frame 213: accepted PnP correction map_age=5 track_age=1 retention=0.44316 landmarks=460 inliers=460 rot_delta_deg=1.13985 trans_delta_m=0.215565 adopted=0
+Frame 213: tracked features down to 949, re-detecting.
+Frame 214: accepted PnP correction map_age=1 track_age=1 retention=0.923077 landmarks=876 inliers=876 rot_delta_deg=0.088021 trans_delta_m=0.0390282 adopted=0
+Frame 215: accepted PnP correction map_age=2 track_age=1 retention=0.800843 landmarks=760 inliers=760 rot_delta_deg=0.256716 trans_delta_m=0.0295357 adopted=0
+Frame 216: accepted PnP correction map_age=3 track_age=1 retention=0.631191 landmarks=599 inliers=599 rot_delta_deg=0.710918 trans_delta_m=0.110512 adopted=1
+Frame 216: tracked features down to 660, re-detecting.
+Frame 217: accepted PnP correction map_age=4 track_age=1 retention=0.523709 landmarks=497 inliers=497 rot_delta_deg=0.121933 trans_delta_m=0.0322555 adopted=0
+Frame 218: accepted PnP correction map_age=5 track_age=1 retention=0.376185 landmarks=357 inliers=357 rot_delta_deg=0.159216 trans_delta_m=0.0709448 adopted=0
+Frame 218: tracked features down to 842, re-detecting.
+Frame 219: accepted PnP correction map_age=1 track_age=1 retention=0.804038 landmarks=677 inliers=677 rot_delta_deg=0.0476309 trans_delta_m=0.00634282 adopted=0
+Frame 219 (30/30) tracked=1048 inliers=1048 status=pnp-candidate pose=(-0.160659, -0.249646, 24.6509)
+Finished. Saved TUM trajectory to /home/xywu/桌面/SLAM/output/motion_modes/04_nominal_translation/nominal_01/position/position.txt, geometry trajectory to /home/xywu/桌面/SLAM/output/motion_modes/04_nominal_translation/nominal_01/position/geometry_position.txt and map to /home/xywu/桌面/SLAM/output/motion_modes/04_nominal_translation/nominal_01/traj/map2.png

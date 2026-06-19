@@ -1,0 +1,93 @@
+Visualization disabled. GUI opens by default when a usable local display socket is present. Set VO_ENABLE_GUI=0 to force headless mode.
+Custom output root: output/motion_modes/06_transition/transition_02
+Selected frame range: [652, 733] (82 frames)
+Processing 82 frames...
+Frame 654: skipped keyframe rebuild due to low baseline/parallax.
+Frame 654: tracked features down to 24, re-detecting.
+Frame 654 (3/82) tracked=2000 inliers=24 status=2d2d pose=(0.179019, 0.0101478, 0.168435)
+Frame 655: 2D-2D pose failed.
+Frame 655 (4/82) tracked=2000 inliers=0 status=skip-pose
+Frame 656: 2D-2D pose failed.
+Frame 656 (5/82) tracked=2000 inliers=7 status=skip-pose
+Frame 657: scale below threshold.
+Frame 658: 2D-2D pose failed.
+Frame 659: 2D-2D pose failed.
+Frame 660: 2D-2D pose failed.
+Frame 661: 2D-2D pose failed.
+Frame 662: 2D-2D pose failed.
+Frame 663: 2D-2D pose failed.
+Frame 664: 2D-2D pose failed.
+Frame 665: 2D-2D pose failed.
+Frame 666: 2D-2D pose failed.
+Frame 667: 2D-2D pose failed.
+Frame 668: 2D-2D pose failed.
+Frame 669: 2D-2D pose failed.
+Frame 670: 2D-2D pose failed.
+Frame 671: 2D-2D pose failed.
+Frame 672: 2D-2D pose failed.
+Frame 673: 2D-2D pose failed.
+Frame 674: 2D-2D pose failed.
+Frame 675: 2D-2D pose failed.
+Frame 676: 2D-2D pose failed.
+Frame 677: 2D-2D pose failed.
+Frame 678: 2D-2D pose failed.
+Frame 679: 2D-2D pose failed.
+Frame 680: 2D-2D pose failed.
+Frame 681: 2D-2D pose failed.
+Frame 682: 2D-2D pose failed.
+Frame 683: 2D-2D pose failed.
+Frame 684: 2D-2D pose failed.
+Frame 685: 2D-2D pose failed.
+Frame 686: 2D-2D pose failed.
+Frame 687: 2D-2D pose failed.
+Frame 688: 2D-2D pose failed.
+Frame 689: 2D-2D pose failed.
+Frame 690: 2D-2D pose failed.
+Frame 691: 2D-2D pose failed.
+Frame 692: 2D-2D pose failed.
+Frame 693: 2D-2D pose failed.
+Frame 694: 2D-2D pose failed.
+Frame 695: 2D-2D pose failed.
+Frame 696: 2D-2D pose failed.
+Frame 697: 2D-2D pose failed.
+Frame 698: 2D-2D pose failed.
+Frame 699: 2D-2D pose failed.
+Frame 700: 2D-2D pose failed.
+Frame 701: 2D-2D pose failed.
+Frame 701 (50/82) tracked=2000 inliers=13 status=skip-pose
+Frame 702: 2D-2D pose failed.
+Frame 703: 2D-2D pose failed.
+Frame 704: 2D-2D pose failed.
+Frame 705: 2D-2D pose failed.
+Frame 706: 2D-2D pose failed.
+Frame 707: 2D-2D pose failed.
+Frame 708: 2D-2D pose failed.
+Frame 709: scale below threshold.
+Frame 710: scale below threshold.
+Frame 711: scale below threshold.
+Frame 712: scale below threshold.
+Frame 713: scale below threshold.
+Frame 714: scale below threshold.
+Frame 715: scale below threshold.
+Frame 716: scale below threshold.
+Frame 717: scale below threshold.
+Frame 718: scale below threshold.
+Frame 719: scale below threshold.
+Frame 720: scale below threshold.
+Frame 721: 2D-2D pose failed.
+Frame 722: scale below threshold.
+Frame 723: scale below threshold.
+Frame 724: scale below threshold.
+Frame 725: 2D-2D pose failed.
+Frame 726: 2D-2D pose failed.
+Frame 727: 2D-2D pose failed.
+Frame 728: 2D-2D pose failed.
+Frame 729: 2D-2D pose failed.
+Frame 730: 2D-2D pose failed.
+Frame 731: 2D-2D pose failed.
+Frame 732: scale below threshold.
+Frame 733: 2D-2D pose failed.
+Frame 733 (82/82) tracked=2000 inliers=2 status=skip-pose
+Finished. Saved TUM trajectory to /home/xywu/桌面/SLAM/output/motion_modes/06_transition/transition_02/position/position.txt, geometry trajectory to /home/xywu/桌面/SLAM/output/motion_modes/06_transition/transition_02/position/geometry_position.txt and map to /home/xywu/桌面/SLAM/output/motion_modes/06_transition/transition_02/traj/map2.png
+
+Initialization triangulation is insufficient; the next frame will rebuild landmarks via 2D-2D.

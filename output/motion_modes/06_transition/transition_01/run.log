@@ -1,0 +1,53 @@
+Visualization disabled. GUI opens by default when a usable local display socket is present. Set VO_ENABLE_GUI=0 to force headless mode.
+Custom output root: output/motion_modes/06_transition/transition_01
+Selected frame range: [618, 647] (30 frames)
+Processing 30 frames...
+Frame 620: accepted PnP correction map_age=1 track_age=1 retention=0.748828 landmarks=799 inliers=799 rot_delta_deg=0.292906 trans_delta_m=0.116023 adopted=0
+Frame 620: tracked features down to 746, re-detecting.
+Frame 620 (3/30) tracked=2000 inliers=746 status=pnp-candidate pose=(-0.0706388, -0.0268889, 1.71556)
+Frame 621: accepted PnP correction map_age=2 track_age=1 retention=0.584817 landmarks=624 inliers=624 rot_delta_deg=0.451493 trans_delta_m=0.15395 adopted=0
+Frame 621 (4/30) tracked=1108 inliers=1108 status=pnp-candidate pose=(-0.0722318, -0.0276549, 2.5487)
+Frame 622: accepted PnP correction map_age=3 track_age=1 retention=0.489222 landmarks=522 inliers=522 rot_delta_deg=0.469169 trans_delta_m=0.081974 adopted=0
+Frame 622: skipped keyframe rebuild due to low baseline/parallax.
+Frame 622: tracked features down to 874, re-detecting.
+Frame 622 (5/30) tracked=2000 inliers=874 status=pnp-candidate pose=(0.00818651, -0.0560401, 3.35594)
+Frame 623: accepted PnP correction map_age=4 track_age=1 retention=0.410497 landmarks=438 inliers=438 rot_delta_deg=0.708251 trans_delta_m=0.110967 adopted=0
+Frame 623: skipped keyframe rebuild due to low baseline/parallax.
+Frame 624: skipped keyframe rebuild due to low baseline/parallax.
+Frame 625: skipped keyframe rebuild due to low baseline/parallax.
+Frame 625: tracked features down to 884, re-detecting.
+Frame 626: skipped keyframe rebuild due to low baseline/parallax.
+Frame 627: skipped keyframe rebuild due to low baseline/parallax.
+Frame 627: tracked features down to 926, re-detecting.
+Frame 628: skipped keyframe rebuild due to low baseline/parallax.
+Frame 629: skipped keyframe rebuild due to low baseline/parallax.
+Frame 629: tracked features down to 915, re-detecting.
+Frame 630: skipped keyframe rebuild due to low baseline/parallax.
+Frame 631: skipped keyframe rebuild due to low baseline/parallax.
+Frame 631: tracked features down to 815, re-detecting.
+Frame 632: skipped keyframe rebuild due to low baseline/parallax.
+Frame 633: skipped keyframe rebuild due to low baseline/parallax.
+Frame 634: skipped keyframe rebuild due to low baseline/parallax.
+Frame 635: skipped keyframe rebuild due to low baseline/parallax.
+Frame 635: tracked features down to 301, re-detecting.
+Frame 636: skipped keyframe rebuild due to low baseline/parallax.
+Frame 636: tracked features down to 577, re-detecting.
+Frame 637: skipped keyframe rebuild due to low baseline/parallax.
+Frame 638: tracked features down to 628, re-detecting.
+Frame 639: accepted PnP correction map_age=1 track_age=1 retention=0.659236 landmarks=414 inliers=414 rot_delta_deg=0.274944 trans_delta_m=0.029778 adopted=0
+Frame 639: tracked features down to 277, re-detecting.
+Frame 640: accepted PnP correction map_age=2 track_age=1 retention=0.243631 landmarks=153 inliers=153 rot_delta_deg=1.19405 trans_delta_m=0.275852 adopted=0
+Frame 640: skipped keyframe rebuild due to low baseline/parallax.
+Frame 640: tracked features down to 509, re-detecting.
+Frame 641: tracked features down to 91, re-detecting.
+Frame 642: accepted PnP correction map_age=1 track_age=1 retention=0.681319 landmarks=62 inliers=62 rot_delta_deg=1.66492 trans_delta_m=0.270413 adopted=0
+Frame 642: tracked features down to 984, re-detecting.
+Frame 643: accepted PnP correction map_age=2 track_age=1 retention=0.626374 landmarks=57 inliers=57 rot_delta_deg=1.87234 trans_delta_m=0.312277 adopted=0
+Frame 643: tracked features down to 28, re-detecting.
+Frame 644: accepted PnP correction map_age=3 track_age=1 retention=0.56044 landmarks=51 inliers=51 rot_delta_deg=2.14569 trans_delta_m=0.469427 adopted=0
+Frame 644: tracked features down to 35, re-detecting.
+Frame 645: 2D-2D pose failed.
+Frame 646: 2D-2D pose failed.
+Frame 647: 2D-2D pose failed.
+Frame 647 (30/30) tracked=2000 inliers=11 status=skip-pose
+Finished. Saved TUM trajectory to /home/xywu/桌面/SLAM/output/motion_modes/06_transition/transition_01/position/position.txt, geometry trajectory to /home/xywu/桌面/SLAM/output/motion_modes/06_transition/transition_01/position/geometry_position.txt and map to /home/xywu/桌面/SLAM/output/motion_modes/06_transition/transition_01/traj/map2.png

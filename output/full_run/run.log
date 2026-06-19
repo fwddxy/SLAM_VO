@@ -1,0 +1,1745 @@
+Initialization triangulation is insufficient; the next frame will rebuild landmarks via 2D-2D.
+Visualization disabled. GUI opens by default when a usable local display socket is present. Set VO_ENABLE_GUI=0 to force headless mode.
+Custom output root: output/full_run_tuned_pnp
+Using all available frames: 1101
+Processing 1101 frames...
+Frame 2: 2D-2D pose failed.
+Frame 2 (3/1101) tracked=2000 inliers=3 status=skip-pose
+Frame 3: 2D-2D pose failed.
+Frame 3 (4/1101) tracked=2000 inliers=8 status=skip-pose
+Frame 4: skipped keyframe rebuild due to low baseline/parallax.
+Frame 4: tracked features down to 52, re-detecting.
+Frame 4 (5/1101) tracked=2000 inliers=52 status=2d2d pose=(0.00267159, -0.00335898, 0.0126941)
+Frame 5: skipped keyframe rebuild due to low baseline/parallax.
+Frame 5: tracked features down to 40, re-detecting.
+Frame 6: skipped keyframe rebuild due to low baseline/parallax.
+Frame 6: tracked features down to 48, re-detecting.
+Frame 7: skipped keyframe rebuild due to low baseline/parallax.
+Frame 7: tracked features down to 91, re-detecting.
+Frame 8: tracked features down to 191, re-detecting.
+Frame 9: accepted PnP correction map_age=1 track_age=1 retention=0.947644 landmarks=181 inliers=181 rot_delta_deg=0.346866 trans_delta_m=0.0425587 adopted=1
+Frame 9: tracked features down to 201, re-detecting.
+Frame 10: accepted PnP correction map_age=2 track_age=1 retention=0.848168 landmarks=162 inliers=162 rot_delta_deg=0.231157 trans_delta_m=0.0281427 adopted=1
+Frame 10: tracked features down to 179, re-detecting.
+Frame 11: accepted PnP correction map_age=3 track_age=1 retention=0.701571 landmarks=134 inliers=134 rot_delta_deg=0.657222 trans_delta_m=0.116752 adopted=1
+Frame 11: tracked features down to 180, re-detecting.
+Frame 12: accepted PnP correction map_age=4 track_age=1 retention=0.675393 landmarks=129 inliers=129 rot_delta_deg=0.483201 trans_delta_m=0.0705594 adopted=1
+Frame 12: tracked features down to 94, re-detecting.
+Frame 13: accepted PnP correction map_age=5 track_age=1 retention=0.675393 landmarks=129 inliers=129 rot_delta_deg=0.0797306 trans_delta_m=0.0406468 adopted=1
+Frame 13: tracked features down to 159, re-detecting.
+Frame 14: accepted PnP correction map_age=6 track_age=1 retention=0.675393 landmarks=129 inliers=129 rot_delta_deg=0.105732 trans_delta_m=0.0467064 adopted=1
+Frame 14: tracked features down to 194, re-detecting.
+Frame 15: accepted PnP correction map_age=7 track_age=1 retention=0.649215 landmarks=124 inliers=124 rot_delta_deg=0.164666 trans_delta_m=0.0575733 adopted=1
+Frame 15: tracked features down to 264, re-detecting.
+Frame 16: accepted PnP correction map_age=8 track_age=1 retention=0.602094 landmarks=115 inliers=115 rot_delta_deg=0.275311 trans_delta_m=0.0760061 adopted=1
+Frame 16: tracked features down to 414, re-detecting.
+Frame 17: accepted PnP correction map_age=1 track_age=1 retention=1 landmarks=413 inliers=413 rot_delta_deg=0.25584 trans_delta_m=0.0706128 adopted=1
+Frame 17: tracked features down to 299, re-detecting.
+Frame 18: accepted PnP correction map_age=2 track_age=1 retention=0.997579 landmarks=412 inliers=412 rot_delta_deg=0.0429424 trans_delta_m=0.011638 adopted=1
+Frame 18: tracked features down to 459, re-detecting.
+Frame 19: accepted PnP correction map_age=3 track_age=1 retention=0.997579 landmarks=412 inliers=412 rot_delta_deg=0.0485445 trans_delta_m=0.0102091 adopted=1
+Frame 19: tracked features down to 517, re-detecting.
+Frame 20: accepted PnP correction map_age=4 track_age=1 retention=0.975787 landmarks=403 inliers=403 rot_delta_deg=0.0117366 trans_delta_m=0.002384 adopted=1
+Frame 20: tracked features down to 689, re-detecting.
+Frame 21: accepted PnP correction map_age=5 track_age=1 retention=0.929782 landmarks=384 inliers=384 rot_delta_deg=0.0272948 trans_delta_m=0.00391773 adopted=1
+Frame 21: tracked features down to 724, re-detecting.
+Frame 22: accepted PnP correction map_age=6 track_age=1 retention=0.869249 landmarks=359 inliers=359 rot_delta_deg=0.0422928 trans_delta_m=0.00833516 adopted=1
+Frame 22: tracked features down to 757, re-detecting.
+Frame 23: accepted PnP correction map_age=7 track_age=1 retention=0.801453 landmarks=331 inliers=331 rot_delta_deg=0.113486 trans_delta_m=0.0163839 adopted=1
+Frame 23: tracked features down to 927, re-detecting.
+Frame 24: accepted PnP correction map_age=8 track_age=1 retention=0.690073 landmarks=285 inliers=285 rot_delta_deg=0.128822 trans_delta_m=0.0121664 adopted=1
+Frame 24: tracked features down to 850, re-detecting.
+Frame 25: accepted PnP correction map_age=1 track_age=1 retention=0.925882 landmarks=787 inliers=787 rot_delta_deg=0.17436 trans_delta_m=0.0469749 adopted=1
+Frame 25: tracked features down to 861, re-detecting.
+Frame 26: accepted PnP correction map_age=2 track_age=1 retention=0.815294 landmarks=693 inliers=693 rot_delta_deg=0.194119 trans_delta_m=0.0353651 adopted=1
+Frame 26: tracked features down to 866, re-detecting.
+Frame 27: accepted PnP correction map_age=3 track_age=1 retention=0.670588 landmarks=570 inliers=570 rot_delta_deg=0.143012 trans_delta_m=0.0255749 adopted=1
+Frame 27: tracked features down to 813, re-detecting.
+Frame 28: accepted PnP correction map_age=4 track_age=1 retention=0.423529 landmarks=360 inliers=360 rot_delta_deg=0.547786 trans_delta_m=0.0951847 adopted=0
+Frame 28: tracked features down to 750, re-detecting.
+Frame 29: accepted PnP correction map_age=1 track_age=1 retention=0.814667 landmarks=611 inliers=611 rot_delta_deg=0.147247 trans_delta_m=0.0222134 adopted=1
+Frame 29: tracked features down to 653, re-detecting.
+Frame 30: accepted PnP correction map_age=2 track_age=1 retention=0.476 landmarks=357 inliers=357 rot_delta_deg=0.0473363 trans_delta_m=0.0156885 adopted=0
+Frame 30: tracked features down to 547, re-detecting.
+Frame 31: accepted PnP correction map_age=1 track_age=1 retention=0.718464 landmarks=393 inliers=393 rot_delta_deg=0.0676311 trans_delta_m=0.00741518 adopted=1
+Frame 31: tracked features down to 498, re-detecting.
+Frame 32: accepted PnP correction map_age=2 track_age=1 retention=0.6234 landmarks=341 inliers=341 rot_delta_deg=0.0850446 trans_delta_m=0.00806234 adopted=1
+Frame 32: tracked features down to 467, re-detecting.
+Frame 33: accepted PnP correction map_age=3 track_age=1 retention=0.526508 landmarks=288 inliers=288 rot_delta_deg=0.108798 trans_delta_m=0.0137788 adopted=0
+Frame 33: tracked features down to 550, re-detecting.
+Frame 34: accepted PnP correction map_age=4 track_age=1 retention=0.447898 landmarks=245 inliers=245 rot_delta_deg=0.216537 trans_delta_m=0.0278158 adopted=0
+Frame 34: tracked features down to 605, re-detecting.
+Frame 35: accepted PnP correction map_age=1 track_age=1 retention=0.889256 landmarks=538 inliers=538 rot_delta_deg=0.0775772 trans_delta_m=0.0208135 adopted=1
+Frame 35: tracked features down to 415, re-detecting.
+Frame 36: accepted PnP correction map_age=2 track_age=1 retention=0.780165 landmarks=472 inliers=472 rot_delta_deg=0.150089 trans_delta_m=0.0323636 adopted=1
+Frame 36: tracked features down to 531, re-detecting.
+Frame 37: accepted PnP correction map_age=3 track_age=1 retention=0.695868 landmarks=421 inliers=421 rot_delta_deg=0.252787 trans_delta_m=0.0894316 adopted=1
+Frame 37: tracked features down to 339, re-detecting.
+Frame 38: accepted PnP correction map_age=4 track_age=1 retention=0.631405 landmarks=382 inliers=382 rot_delta_deg=0.380936 trans_delta_m=0.0829247 adopted=1
+Frame 38: tracked features down to 608, re-detecting.
+Frame 39: accepted PnP correction map_age=5 track_age=1 retention=0.469421 landmarks=284 inliers=284 rot_delta_deg=0.953347 trans_delta_m=0.137577 adopted=1
+Frame 39: tracked features down to 739, re-detecting.
+Frame 40: accepted PnP correction map_age=1 track_age=1 retention=0.974828 landmarks=426 inliers=426 rot_delta_deg=0.918548 trans_delta_m=0.120942 adopted=1
+Frame 40: tracked features down to 750, re-detecting.
+Frame 41: accepted PnP correction map_age=2 track_age=1 retention=0.894737 landmarks=391 inliers=391 rot_delta_deg=0.112867 trans_delta_m=0.010532 adopted=1
+Frame 41: tracked features down to 698, re-detecting.
+Frame 42: accepted PnP correction map_age=3 track_age=1 retention=0.723112 landmarks=316 inliers=316 rot_delta_deg=0.150473 trans_delta_m=0.0385893 adopted=1
+Frame 42: tracked features down to 906, re-detecting.
+Frame 43: accepted PnP correction map_age=4 track_age=1 retention=0.530892 landmarks=232 inliers=232 rot_delta_deg=0.187372 trans_delta_m=0.0318491 adopted=1
+Frame 43: tracked features down to 855, re-detecting.
+Frame 44: accepted PnP correction map_age=5 track_age=1 retention=0.334096 landmarks=146 inliers=146 rot_delta_deg=0.216367 trans_delta_m=0.0592164 adopted=0
+Frame 44: tracked features down to 876, re-detecting.
+Frame 45: accepted PnP correction map_age=1 track_age=1 retention=0.856164 landmarks=750 inliers=750 rot_delta_deg=0.0299746 trans_delta_m=0.0157451 adopted=1
+Frame 45: tracked features down to 859, re-detecting.
+Frame 46: accepted PnP correction map_age=2 track_age=1 retention=0.756849 landmarks=663 inliers=663 rot_delta_deg=0.124501 trans_delta_m=0.0657355 adopted=1
+Frame 46: tracked features down to 690, re-detecting.
+Frame 47: accepted PnP correction map_age=3 track_age=1 retention=0.533105 landmarks=467 inliers=467 rot_delta_deg=0.127931 trans_delta_m=0.0365311 adopted=1
+Frame 47: tracked features down to 820, re-detecting.
+Frame 48: accepted PnP correction map_age=4 track_age=1 retention=0.422374 landmarks=370 inliers=370 rot_delta_deg=0.0416816 trans_delta_m=0.0184216 adopted=0
+Frame 49: accepted PnP correction map_age=1 track_age=1 retention=0.918292 landmarks=989 inliers=989 rot_delta_deg=0.0852105 trans_delta_m=0.017008 adopted=0
+Frame 49: tracked features down to 736, re-detecting.
+Frame 49 (50/1101) tracked=2000 inliers=736 status=pnp-candidate pose=(-11.6644, 0.128829, 4.46601)
+Frame 50: accepted PnP correction map_age=2 track_age=1 retention=0.81987 landmarks=883 inliers=883 rot_delta_deg=0.195421 trans_delta_m=0.0394494 adopted=0
+Frame 50: tracked features down to 912, re-detecting.
+Frame 51: accepted PnP correction map_age=3 track_age=1 retention=0.670381 landmarks=722 inliers=722 rot_delta_deg=0.34347 trans_delta_m=0.0609907 adopted=0
+Frame 51: tracked features down to 831, re-detecting.
+Frame 52: accepted PnP correction map_age=4 track_age=1 retention=0.544104 landmarks=586 inliers=586 rot_delta_deg=0.478534 trans_delta_m=0.0794331 adopted=0
+Frame 52: tracked features down to 984, re-detecting.
+Frame 53: accepted PnP correction map_age=5 track_age=1 retention=0.45961 landmarks=495 inliers=495 rot_delta_deg=0.611264 trans_delta_m=0.0901024 adopted=0
+Frame 54: accepted PnP correction map_age=1 track_age=1 retention=0.877145 landmarks=971 inliers=971 rot_delta_deg=0.194606 trans_delta_m=0.0431212 adopted=0
+Frame 54: tracked features down to 944, re-detecting.
+Frame 55: accepted PnP correction map_age=2 track_age=1 retention=0.701897 landmarks=777 inliers=777 rot_delta_deg=0.204603 trans_delta_m=0.0501133 adopted=0
+Frame 55: tracked features down to 973, re-detecting.
+Frame 56: accepted PnP correction map_age=3 track_age=1 retention=0.514905 landmarks=570 inliers=570 rot_delta_deg=0.217459 trans_delta_m=0.0492209 adopted=0
+Frame 56: tracked features down to 785, re-detecting.
+Frame 57: accepted PnP correction map_age=4 track_age=1 retention=0.411021 landmarks=455 inliers=455 rot_delta_deg=0.202194 trans_delta_m=0.0175836 adopted=0
+Frame 57: tracked features down to 808, re-detecting.
+Frame 58: accepted PnP correction map_age=1 track_age=1 retention=0.816832 landmarks=660 inliers=660 rot_delta_deg=0.0501854 trans_delta_m=0.035858 adopted=0
+Frame 58: tracked features down to 933, re-detecting.
+Frame 59: accepted PnP correction map_age=2 track_age=1 retention=0.653465 landmarks=528 inliers=528 rot_delta_deg=0.118151 trans_delta_m=0.0561972 adopted=0
+Frame 59: tracked features down to 938, re-detecting.
+Frame 60: accepted PnP correction map_age=3 track_age=1 retention=0.561881 landmarks=454 inliers=454 rot_delta_deg=0.160803 trans_delta_m=0.103536 adopted=0
+Frame 60: tracked features down to 884, re-detecting.
+Frame 61: accepted PnP correction map_age=4 track_age=1 retention=0.444307 landmarks=359 inliers=359 rot_delta_deg=0.330768 trans_delta_m=0.186444 adopted=0
+Frame 61: skipped keyframe rebuild due to low baseline/parallax.
+Frame 61: tracked features down to 880, re-detecting.
+Frame 62: skipped keyframe rebuild due to low baseline/parallax.
+Frame 62: tracked features down to 919, re-detecting.
+Frame 63: skipped keyframe rebuild due to low baseline/parallax.
+Frame 63: tracked features down to 892, re-detecting.
+Frame 64: skipped keyframe rebuild due to low baseline/parallax.
+Frame 65: skipped keyframe rebuild due to low baseline/parallax.
+Frame 65: tracked features down to 966, re-detecting.
+Frame 67: accepted PnP correction map_age=1 track_age=1 retention=0.94107 landmarks=1038 inliers=1038 rot_delta_deg=0.0279578 trans_delta_m=0.0257416 adopted=0
+Frame 67: tracked features down to 977, re-detecting.
+Frame 68: accepted PnP correction map_age=2 track_age=1 retention=0.842248 landmarks=929 inliers=929 rot_delta_deg=0.0467019 trans_delta_m=0.0369581 adopted=0
+Frame 69: accepted PnP correction map_age=3 track_age=1 retention=0.770626 landmarks=850 inliers=850 rot_delta_deg=0.039396 trans_delta_m=0.0513122 adopted=0
+Frame 70: accepted PnP correction map_age=4 track_age=1 retention=0.710789 landmarks=784 inliers=784 rot_delta_deg=0.132019 trans_delta_m=0.0896101 adopted=0
+Frame 70: tracked features down to 981, re-detecting.
+Frame 71: accepted PnP correction map_age=5 track_age=1 retention=0.609248 landmarks=672 inliers=672 rot_delta_deg=0.105795 trans_delta_m=0.0908937 adopted=0
+Frame 72: accepted PnP correction map_age=6 track_age=1 retention=0.551224 landmarks=608 inliers=608 rot_delta_deg=0.199351 trans_delta_m=0.124418 adopted=0
+Frame 73: accepted PnP correction map_age=7 track_age=1 retention=0.491387 landmarks=542 inliers=542 rot_delta_deg=0.558235 trans_delta_m=0.222869 adopted=0
+Frame 73: tracked features down to 975, re-detecting.
+Frame 74: accepted PnP correction map_age=1 track_age=1 retention=0.907692 landmarks=885 inliers=885 rot_delta_deg=0.183318 trans_delta_m=0.0179502 adopted=0
+Frame 75: accepted PnP correction map_age=2 track_age=1 retention=0.702564 landmarks=685 inliers=685 rot_delta_deg=0.563258 trans_delta_m=0.0390427 adopted=0
+Frame 75: tracked features down to 958, re-detecting.
+Frame 76: accepted PnP correction map_age=3 track_age=1 retention=0.568205 landmarks=554 inliers=554 rot_delta_deg=0.770126 trans_delta_m=0.0342488 adopted=0
+Frame 77: accepted PnP correction map_age=4 track_age=1 retention=0.409231 landmarks=399 inliers=399 rot_delta_deg=1.08453 trans_delta_m=0.114599 adopted=0
+Frame 78: accepted PnP correction map_age=1 track_age=1 retention=0.904293 landmarks=1011 inliers=1011 rot_delta_deg=0.278783 trans_delta_m=0.123884 adopted=0
+Frame 78: tracked features down to 941, re-detecting.
+Frame 79: accepted PnP correction map_age=2 track_age=1 retention=0.836315 landmarks=935 inliers=935 rot_delta_deg=0.223526 trans_delta_m=0.0739704 adopted=0
+Frame 80: accepted PnP correction map_age=3 track_age=1 retention=0.775492 landmarks=867 inliers=867 rot_delta_deg=0.203675 trans_delta_m=0.0689828 adopted=0
+Frame 81: accepted PnP correction map_age=4 track_age=1 retention=0.722719 landmarks=808 inliers=808 rot_delta_deg=0.19453 trans_delta_m=0.0513324 adopted=0
+Frame 82: accepted PnP correction map_age=5 track_age=1 retention=0.651163 landmarks=728 inliers=728 rot_delta_deg=0.328406 trans_delta_m=0.0863644 adopted=0
+Frame 82: tracked features down to 917, re-detecting.
+Frame 83: accepted PnP correction map_age=6 track_age=1 retention=0.494633 landmarks=553 inliers=553 rot_delta_deg=0.36708 trans_delta_m=0.0963647 adopted=0
+Frame 84: accepted PnP correction map_age=1 track_age=1 retention=0.929196 landmarks=1168 inliers=1168 rot_delta_deg=0.0878627 trans_delta_m=0.0187466 adopted=0
+Frame 85: accepted PnP correction map_age=2 track_age=1 retention=0.887033 landmarks=1115 inliers=1115 rot_delta_deg=0.0739886 trans_delta_m=0.0442513 adopted=0
+Frame 86: accepted PnP correction map_age=3 track_age=1 retention=0.788385 landmarks=991 inliers=991 rot_delta_deg=0.0384458 trans_delta_m=0.0118699 adopted=0
+Frame 86: tracked features down to 940, re-detecting.
+Frame 87: accepted PnP correction map_age=4 track_age=1 retention=0.703262 landmarks=884 inliers=884 rot_delta_deg=0.119447 trans_delta_m=0.0443016 adopted=0
+Frame 88: accepted PnP correction map_age=5 track_age=1 retention=0.600636 landmarks=755 inliers=755 rot_delta_deg=0.382139 trans_delta_m=0.0903081 adopted=0
+Frame 89: accepted PnP correction map_age=6 track_age=1 retention=0.505171 landmarks=635 inliers=635 rot_delta_deg=0.316409 trans_delta_m=0.104956 adopted=0
+Frame 90: accepted PnP correction map_age=7 track_age=1 retention=0.417661 landmarks=525 inliers=525 rot_delta_deg=0.283547 trans_delta_m=0.104755 adopted=0
+Frame 90: tracked features down to 909, re-detecting.
+Frame 91: accepted PnP correction map_age=1 track_age=1 retention=0.953795 landmarks=867 inliers=867 rot_delta_deg=0.0806926 trans_delta_m=0.0155321 adopted=0
+Frame 92: accepted PnP correction map_age=2 track_age=1 retention=0.860286 landmarks=782 inliers=782 rot_delta_deg=0.144397 trans_delta_m=0.0156841 adopted=0
+Frame 93: accepted PnP correction map_age=3 track_age=1 retention=0.734873 landmarks=668 inliers=668 rot_delta_deg=0.174362 trans_delta_m=0.0187731 adopted=0
+Frame 93: tracked features down to 953, re-detecting.
+Frame 94: accepted PnP correction map_age=4 track_age=1 retention=0.619362 landmarks=563 inliers=563 rot_delta_deg=0.31131 trans_delta_m=0.0593481 adopted=0
+Frame 95: accepted PnP correction map_age=5 track_age=1 retention=0.50275 landmarks=457 inliers=457 rot_delta_deg=0.471774 trans_delta_m=0.0932999 adopted=0
+Frame 96: accepted PnP correction map_age=6 track_age=1 retention=0.335534 landmarks=305 inliers=305 rot_delta_deg=0.501946 trans_delta_m=0.124791 adopted=0
+Frame 96: tracked features down to 915, re-detecting.
+Frame 97: accepted PnP correction map_age=1 track_age=1 retention=0.83388 landmarks=763 inliers=763 rot_delta_deg=0.385023 trans_delta_m=0.0657825 adopted=0
+Frame 98: accepted PnP correction map_age=2 track_age=1 retention=0.695082 landmarks=636 inliers=636 rot_delta_deg=0.79951 trans_delta_m=0.127662 adopted=0
+Frame 99: accepted PnP correction map_age=3 track_age=1 retention=0.500546 landmarks=458 inliers=458 rot_delta_deg=1.08597 trans_delta_m=0.161832 adopted=0
+Frame 99: tracked features down to 890, re-detecting.
+Frame 99 (100/1101) tracked=2000 inliers=890 status=pnp-candidate pose=(-51.27, 0.697124, 1.59505)
+Frame 100: accepted PnP correction map_age=4 track_age=1 retention=0.285246 landmarks=261 inliers=261 rot_delta_deg=1.52952 trans_delta_m=0.181433 adopted=0
+Frame 101: accepted PnP correction map_age=1 track_age=1 retention=0.814203 landmarks=986 inliers=986 rot_delta_deg=0.0358746 trans_delta_m=0.00528888 adopted=0
+Frame 101: tracked features down to 976, re-detecting.
+Frame 102: accepted PnP correction map_age=2 track_age=1 retention=0.6218 landmarks=753 inliers=753 rot_delta_deg=0.0815639 trans_delta_m=0.0141609 adopted=0
+Frame 102: tracked features down to 970, re-detecting.
+Frame 103: accepted PnP correction map_age=3 track_age=1 retention=0.479769 landmarks=581 inliers=581 rot_delta_deg=0.109671 trans_delta_m=0.0158995 adopted=0
+Frame 103: skipped keyframe rebuild due to low baseline/parallax.
+Frame 103: tracked features down to 953, re-detecting.
+Frame 104: accepted PnP correction map_age=4 track_age=1 retention=0.393064 landmarks=476 inliers=476 rot_delta_deg=0.111524 trans_delta_m=0.0114988 adopted=0
+Frame 104: skipped keyframe rebuild due to low baseline/parallax.
+Frame 104: tracked features down to 926, re-detecting.
+Frame 105: skipped keyframe rebuild due to low baseline/parallax.
+Frame 106: tracked features down to 830, re-detecting.
+Frame 107: accepted PnP correction map_age=1 track_age=1 retention=0.955422 landmarks=793 inliers=793 rot_delta_deg=0.0542237 trans_delta_m=0.0261737 adopted=0
+Frame 108: accepted PnP correction map_age=2 track_age=1 retention=0.854217 landmarks=709 inliers=709 rot_delta_deg=0.216484 trans_delta_m=0.0727619 adopted=0
+Frame 108: tracked features down to 836, re-detecting.
+Frame 109: accepted PnP correction map_age=3 track_age=1 retention=0.724096 landmarks=601 inliers=601 rot_delta_deg=0.18349 trans_delta_m=0.0627836 adopted=0
+Frame 110: accepted PnP correction map_age=4 track_age=1 retention=0.657831 landmarks=546 inliers=546 rot_delta_deg=0.157743 trans_delta_m=0.0669466 adopted=0
+Frame 110: tracked features down to 899, re-detecting.
+Frame 111: accepted PnP correction map_age=5 track_age=1 retention=0.592771 landmarks=492 inliers=492 rot_delta_deg=0.196237 trans_delta_m=0.0736806 adopted=0
+Frame 112: accepted PnP correction map_age=6 track_age=1 retention=0.557831 landmarks=463 inliers=463 rot_delta_deg=0.348561 trans_delta_m=0.0829658 adopted=0
+Frame 113: accepted PnP correction map_age=7 track_age=1 retention=0.478313 landmarks=397 inliers=397 rot_delta_deg=0.400797 trans_delta_m=0.12194 adopted=0
+Frame 113: tracked features down to 869, re-detecting.
+Frame 114: accepted PnP correction map_age=1 track_age=1 retention=0.944764 landmarks=821 inliers=821 rot_delta_deg=0.037135 trans_delta_m=0.00832781 adopted=0
+Frame 115: accepted PnP correction map_age=2 track_age=1 retention=0.875719 landmarks=761 inliers=761 rot_delta_deg=0.091559 trans_delta_m=0.0145067 adopted=0
+Frame 116: accepted PnP correction map_age=3 track_age=1 retention=0.798619 landmarks=694 inliers=694 rot_delta_deg=0.163273 trans_delta_m=0.0341658 adopted=0
+Frame 116: tracked features down to 967, re-detecting.
+Frame 117: accepted PnP correction map_age=4 track_age=1 retention=0.739931 landmarks=643 inliers=643 rot_delta_deg=0.127297 trans_delta_m=0.0229965 adopted=1
+Frame 118: accepted PnP correction map_age=5 track_age=1 retention=0.636364 landmarks=553 inliers=553 rot_delta_deg=0.0224687 trans_delta_m=0.00847412 adopted=1
+Frame 119: accepted PnP correction map_age=6 track_age=1 retention=0.565017 landmarks=491 inliers=491 rot_delta_deg=0.0694328 trans_delta_m=0.0268019 adopted=0
+Frame 119: tracked features down to 894, re-detecting.
+Frame 120: accepted PnP correction map_age=7 track_age=1 retention=0.505178 landmarks=439 inliers=439 rot_delta_deg=0.0221159 trans_delta_m=0.0110408 adopted=0
+Frame 120: tracked features down to 989, re-detecting.
+Frame 121: accepted PnP correction map_age=8 track_age=1 retention=0.457998 landmarks=398 inliers=398 rot_delta_deg=0.100915 trans_delta_m=0.0245843 adopted=0
+Frame 121: tracked features down to 923, re-detecting.
+Frame 122: accepted PnP correction map_age=1 track_age=1 retention=0.931744 landmarks=860 inliers=860 rot_delta_deg=0.016926 trans_delta_m=0.0148525 adopted=1
+Frame 123: accepted PnP correction map_age=2 track_age=1 retention=0.813651 landmarks=751 inliers=751 rot_delta_deg=0.0827868 trans_delta_m=0.0179516 adopted=1
+Frame 123: tracked features down to 893, re-detecting.
+Frame 124: accepted PnP correction map_age=3 track_age=1 retention=0.697725 landmarks=644 inliers=644 rot_delta_deg=0.0868101 trans_delta_m=0.0143138 adopted=1
+Frame 124: tracked features down to 985, re-detecting.
+Frame 125: accepted PnP correction map_age=4 track_age=1 retention=0.656555 landmarks=606 inliers=606 rot_delta_deg=0.188012 trans_delta_m=0.0501842 adopted=1
+Frame 125: tracked features down to 972, re-detecting.
+Frame 126: accepted PnP correction map_age=5 track_age=1 retention=0.495125 landmarks=457 inliers=457 rot_delta_deg=0.20177 trans_delta_m=0.126293 adopted=0
+Frame 126: tracked features down to 848, re-detecting.
+Frame 127: accepted PnP correction map_age=1 track_age=1 retention=0.856132 landmarks=726 inliers=726 rot_delta_deg=0.0606757 trans_delta_m=0.0301991 adopted=1
+Frame 127: tracked features down to 864, re-detecting.
+Frame 128: accepted PnP correction map_age=2 track_age=1 retention=0.78184 landmarks=663 inliers=663 rot_delta_deg=0.216892 trans_delta_m=0.0465935 adopted=1
+Frame 128: tracked features down to 829, re-detecting.
+Frame 129: accepted PnP correction map_age=3 track_age=1 retention=0.621462 landmarks=527 inliers=527 rot_delta_deg=0.185188 trans_delta_m=0.0309477 adopted=1
+Frame 129: tracked features down to 903, re-detecting.
+Frame 130: accepted PnP correction map_age=4 track_age=1 retention=0.545991 landmarks=463 inliers=463 rot_delta_deg=0.120584 trans_delta_m=0.0304314 adopted=1
+Frame 131: accepted PnP correction map_age=5 track_age=1 retention=0.442217 landmarks=375 inliers=375 rot_delta_deg=0.152557 trans_delta_m=0.0477035 adopted=0
+Frame 131: tracked features down to 910, re-detecting.
+Frame 132: accepted PnP correction map_age=1 track_age=1 retention=0.953846 landmarks=868 inliers=868 rot_delta_deg=0.0583696 trans_delta_m=0.0177325 adopted=1
+Frame 133: accepted PnP correction map_age=2 track_age=1 retention=0.927473 landmarks=844 inliers=844 rot_delta_deg=0.220772 trans_delta_m=0.0342296 adopted=1
+Frame 134: accepted PnP correction map_age=3 track_age=1 retention=0.842857 landmarks=767 inliers=767 rot_delta_deg=0.231951 trans_delta_m=0.0353387 adopted=1
+Frame 134: tracked features down to 997, re-detecting.
+Frame 135: accepted PnP correction map_age=4 track_age=1 retention=0.717582 landmarks=653 inliers=653 rot_delta_deg=0.0935962 trans_delta_m=0.0299945 adopted=1
+Frame 136: accepted PnP correction map_age=5 track_age=1 retention=0.6 landmarks=546 inliers=546 rot_delta_deg=0.0864555 trans_delta_m=0.0197875 adopted=1
+Frame 137: accepted PnP correction map_age=6 track_age=1 retention=0.413187 landmarks=376 inliers=376 rot_delta_deg=0.295157 trans_delta_m=0.074899 adopted=0
+Frame 137: tracked features down to 837, re-detecting.
+Frame 138: accepted PnP correction map_age=1 track_age=1 retention=0.602151 landmarks=504 inliers=504 rot_delta_deg=0.194052 trans_delta_m=0.0417927 adopted=1
+Frame 138: tracked features down to 894, re-detecting.
+Frame 139: accepted PnP correction map_age=2 track_age=1 retention=0.391876 landmarks=328 inliers=328 rot_delta_deg=0.147431 trans_delta_m=0.0315281 adopted=0
+Frame 139: tracked features down to 806, re-detecting.
+Frame 140: accepted PnP correction map_age=1 track_age=1 retention=0.841191 landmarks=678 inliers=678 rot_delta_deg=0.0645146 trans_delta_m=0.0230999 adopted=1
+Frame 140: tracked features down to 815, re-detecting.
+Frame 141: accepted PnP correction map_age=2 track_age=1 retention=0.717122 landmarks=578 inliers=578 rot_delta_deg=0.138466 trans_delta_m=0.0422567 adopted=1
+Frame 141: tracked features down to 767, re-detecting.
+Frame 142: accepted PnP correction map_age=3 track_age=1 retention=0.601737 landmarks=485 inliers=485 rot_delta_deg=0.0825699 trans_delta_m=0.0623405 adopted=1
+Frame 142: tracked features down to 902, re-detecting.
+Frame 143: accepted PnP correction map_age=4 track_age=1 retention=0.547146 landmarks=441 inliers=441 rot_delta_deg=0.0384915 trans_delta_m=0.0691887 adopted=0
+Frame 143: tracked features down to 959, re-detecting.
+Frame 144: accepted PnP correction map_age=5 track_age=1 retention=0.442928 landmarks=357 inliers=357 rot_delta_deg=0.324222 trans_delta_m=0.195467 adopted=0
+Frame 144: tracked features down to 974, re-detecting.
+Frame 145: accepted PnP correction map_age=1 track_age=1 retention=0.764887 landmarks=745 inliers=745 rot_delta_deg=0.023991 trans_delta_m=0.00475717 adopted=1
+Frame 145: tracked features down to 828, re-detecting.
+Frame 146: accepted PnP correction map_age=2 track_age=1 retention=0.572895 landmarks=558 inliers=558 rot_delta_deg=0.150117 trans_delta_m=0.0526945 adopted=1
+Frame 146: tracked features down to 811, re-detecting.
+Frame 147: accepted PnP correction map_age=3 track_age=1 retention=0.456879 landmarks=445 inliers=445 rot_delta_deg=0.0625781 trans_delta_m=0.0800492 adopted=0
+Frame 147: tracked features down to 845, re-detecting.
+Frame 148: accepted PnP correction map_age=1 track_age=1 retention=0.939645 landmarks=794 inliers=794 rot_delta_deg=0.0387046 trans_delta_m=0.00565013 adopted=1
+Frame 148: tracked features down to 925, re-detecting.
+Frame 149: accepted PnP correction map_age=2 track_age=1 retention=0.908876 landmarks=768 inliers=768 rot_delta_deg=0.0842354 trans_delta_m=0.0204342 adopted=1
+Frame 149: tracked features down to 989, re-detecting.
+Frame 149 (150/1101) tracked=2000 inliers=989 status=pnp pose=(-75.8668, 0.696906, 8.62711)
+Frame 150: accepted PnP correction map_age=3 track_age=1 retention=0.863905 landmarks=730 inliers=730 rot_delta_deg=0.101542 trans_delta_m=0.0231967 adopted=1
+Frame 151: accepted PnP correction map_age=4 track_age=1 retention=0.808284 landmarks=683 inliers=683 rot_delta_deg=0.0597861 trans_delta_m=0.0279978 adopted=1
+Frame 152: accepted PnP correction map_age=5 track_age=1 retention=0.715976 landmarks=605 inliers=605 rot_delta_deg=0.116969 trans_delta_m=0.0371957 adopted=1
+Frame 152: tracked features down to 837, re-detecting.
+Frame 153: accepted PnP correction map_age=6 track_age=1 retention=0.571598 landmarks=483 inliers=483 rot_delta_deg=0.0290655 trans_delta_m=0.00835961 adopted=0
+Frame 154: accepted PnP correction map_age=7 track_age=1 retention=0.463905 landmarks=392 inliers=392 rot_delta_deg=0.0604269 trans_delta_m=0.0265226 adopted=0
+Frame 154: tracked features down to 742, re-detecting.
+Frame 155: accepted PnP correction map_age=1 track_age=1 retention=0.727763 landmarks=540 inliers=540 rot_delta_deg=0.0896213 trans_delta_m=0.0115181 adopted=1
+Frame 155: tracked features down to 941, re-detecting.
+Frame 156: accepted PnP correction map_age=2 track_age=1 retention=0.510782 landmarks=379 inliers=379 rot_delta_deg=0.07005 trans_delta_m=0.0378041 adopted=0
+Frame 156: tracked features down to 820, re-detecting.
+Frame 157: accepted PnP correction map_age=3 track_age=1 retention=0.450135 landmarks=334 inliers=334 rot_delta_deg=0.122098 trans_delta_m=0.0669177 adopted=0
+Frame 157: tracked features down to 990, re-detecting.
+Frame 158: accepted PnP correction map_age=1 track_age=1 retention=0.939394 landmarks=930 inliers=930 rot_delta_deg=0.0367608 trans_delta_m=0.012716 adopted=1
+Frame 159: accepted PnP correction map_age=2 track_age=1 retention=0.919192 landmarks=910 inliers=910 rot_delta_deg=0.050816 trans_delta_m=0.0173972 adopted=1
+Frame 160: accepted PnP correction map_age=3 track_age=1 retention=0.848485 landmarks=840 inliers=840 rot_delta_deg=0.11889 trans_delta_m=0.018993 adopted=1
+Frame 160: tracked features down to 979, re-detecting.
+Frame 161: accepted PnP correction map_age=4 track_age=1 retention=0.738384 landmarks=731 inliers=731 rot_delta_deg=0.117402 trans_delta_m=0.0427384 adopted=1
+Frame 162: accepted PnP correction map_age=5 track_age=1 retention=0.653535 landmarks=647 inliers=647 rot_delta_deg=0.210978 trans_delta_m=0.062581 adopted=1
+Frame 163: accepted PnP correction map_age=6 track_age=1 retention=0.576768 landmarks=571 inliers=571 rot_delta_deg=0.151807 trans_delta_m=0.0403647 adopted=0
+Frame 163: tracked features down to 990, re-detecting.
+Frame 164: accepted PnP correction map_age=7 track_age=1 retention=0.483838 landmarks=479 inliers=479 rot_delta_deg=0.317448 trans_delta_m=0.115328 adopted=0
+Frame 165: accepted PnP correction map_age=1 track_age=1 retention=0.889813 landmarks=1284 inliers=1284 rot_delta_deg=0.118107 trans_delta_m=0.0153366 adopted=0
+Frame 166: accepted PnP correction map_age=2 track_age=1 retention=0.79903 landmarks=1153 inliers=1153 rot_delta_deg=0.0676293 trans_delta_m=0.0134322 adopted=0
+Frame 167: accepted PnP correction map_age=3 track_age=1 retention=0.71587 landmarks=1033 inliers=1033 rot_delta_deg=0.173317 trans_delta_m=0.0476967 adopted=0
+Frame 168: accepted PnP correction map_age=4 track_age=1 retention=0.585586 landmarks=845 inliers=845 rot_delta_deg=0.180581 trans_delta_m=0.0553427 adopted=0
+Frame 168: tracked features down to 885, re-detecting.
+Frame 169: accepted PnP correction map_age=5 track_age=1 retention=0.512128 landmarks=739 inliers=739 rot_delta_deg=0.207792 trans_delta_m=0.0438032 adopted=0
+Frame 170: accepted PnP correction map_age=6 track_age=1 retention=0.435897 landmarks=629 inliers=629 rot_delta_deg=0.101796 trans_delta_m=0.0377001 adopted=0
+Frame 171: accepted PnP correction map_age=1 track_age=1 retention=0.867575 landmarks=891 inliers=891 rot_delta_deg=0.0647678 trans_delta_m=0.0145981 adopted=0
+Frame 171: tracked features down to 827, re-detecting.
+Frame 172: accepted PnP correction map_age=2 track_age=1 retention=0.789679 landmarks=811 inliers=811 rot_delta_deg=0.0438379 trans_delta_m=0.0198053 adopted=0
+Frame 173: accepted PnP correction map_age=3 track_age=1 retention=0.596884 landmarks=613 inliers=613 rot_delta_deg=0.18259 trans_delta_m=0.0157956 adopted=0
+Frame 173: tracked features down to 655, re-detecting.
+Frame 174: accepted PnP correction map_age=4 track_age=1 retention=0.435248 landmarks=447 inliers=447 rot_delta_deg=0.142258 trans_delta_m=0.0409074 adopted=0
+Frame 175: accepted PnP correction map_age=1 track_age=1 retention=0.842291 landmarks=956 inliers=956 rot_delta_deg=0.085105 trans_delta_m=0.0207373 adopted=0
+Frame 175: tracked features down to 904, re-detecting.
+Frame 176: accepted PnP correction map_age=2 track_age=1 retention=0.673128 landmarks=764 inliers=764 rot_delta_deg=0.0560353 trans_delta_m=0.0201794 adopted=0
+Frame 177: accepted PnP correction map_age=3 track_age=1 retention=0.577974 landmarks=656 inliers=656 rot_delta_deg=0.10961 trans_delta_m=0.0211035 adopted=0
+Frame 177: tracked features down to 866, re-detecting.
+Frame 178: accepted PnP correction map_age=4 track_age=1 retention=0.432599 landmarks=491 inliers=491 rot_delta_deg=0.0931184 trans_delta_m=0.0244122 adopted=0
+Frame 179: accepted PnP correction map_age=1 track_age=1 retention=0.705492 landmarks=745 inliers=745 rot_delta_deg=0.0750129 trans_delta_m=0.0244432 adopted=0
+Frame 179: tracked features down to 710, re-detecting.
+Frame 180: accepted PnP correction map_age=2 track_age=1 retention=0.52178 landmarks=551 inliers=551 rot_delta_deg=0.176077 trans_delta_m=0.0419887 adopted=0
+Frame 180: tracked features down to 855, re-detecting.
+Frame 181: accepted PnP correction map_age=3 track_age=1 retention=0.421402 landmarks=445 inliers=445 rot_delta_deg=0.234612 trans_delta_m=0.0550469 adopted=0
+Frame 181: tracked features down to 853, re-detecting.
+Frame 182: accepted PnP correction map_age=1 track_age=1 retention=0.719812 landmarks=614 inliers=614 rot_delta_deg=0.0185185 trans_delta_m=0.00547788 adopted=0
+Frame 182: tracked features down to 825, re-detecting.
+Frame 183: accepted PnP correction map_age=2 track_age=1 retention=0.617819 landmarks=527 inliers=527 rot_delta_deg=0.0610274 trans_delta_m=0.0279629 adopted=0
+Frame 183: tracked features down to 781, re-detecting.
+Frame 184: accepted PnP correction map_age=3 track_age=1 retention=0.538101 landmarks=459 inliers=459 rot_delta_deg=0.0408327 trans_delta_m=0.0235643 adopted=0
+Frame 184: tracked features down to 917, re-detecting.
+Frame 185: accepted PnP correction map_age=4 track_age=1 retention=0.397421 landmarks=339 inliers=339 rot_delta_deg=0.136738 trans_delta_m=0.0223894 adopted=0
+Frame 185: skipped keyframe rebuild due to low baseline/parallax.
+Frame 185: tracked features down to 766, re-detecting.
+Frame 186: skipped keyframe rebuild due to low baseline/parallax.
+Frame 186: tracked features down to 753, re-detecting.
+Frame 187: skipped keyframe rebuild due to low baseline/parallax.
+Frame 187: tracked features down to 819, re-detecting.
+Frame 188: skipped keyframe rebuild due to low baseline/parallax.
+Frame 188: tracked features down to 873, re-detecting.
+Frame 190: accepted PnP correction map_age=1 track_age=1 retention=0.903198 landmarks=1045 inliers=1045 rot_delta_deg=0.0827299 trans_delta_m=0.00941231 adopted=0
+Frame 191: accepted PnP correction map_age=2 track_age=1 retention=0.776145 landmarks=898 inliers=898 rot_delta_deg=0.13792 trans_delta_m=0.0323825 adopted=0
+Frame 191: tracked features down to 895, re-detecting.
+Frame 192: accepted PnP correction map_age=3 track_age=1 retention=0.661193 landmarks=765 inliers=765 rot_delta_deg=0.193237 trans_delta_m=0.0334154 adopted=0
+Frame 193: accepted PnP correction map_age=4 track_age=1 retention=0.560069 landmarks=648 inliers=648 rot_delta_deg=0.208344 trans_delta_m=0.0367828 adopted=0
+Frame 193: tracked features down to 992, re-detecting.
+Frame 194: accepted PnP correction map_age=5 track_age=1 retention=0.468453 landmarks=542 inliers=542 rot_delta_deg=0.309462 trans_delta_m=0.0820984 adopted=0
+Frame 195: accepted PnP correction map_age=1 track_age=1 retention=0.899485 landmarks=1047 inliers=1047 rot_delta_deg=0.216701 trans_delta_m=0.0821035 adopted=0
+Frame 195: tracked features down to 972, re-detecting.
+Frame 196: accepted PnP correction map_age=2 track_age=1 retention=0.806701 landmarks=939 inliers=939 rot_delta_deg=0.235763 trans_delta_m=0.125661 adopted=0
+Frame 197: accepted PnP correction map_age=3 track_age=1 retention=0.620275 landmarks=722 inliers=722 rot_delta_deg=0.380238 trans_delta_m=0.161696 adopted=0
+Frame 198: accepted PnP correction map_age=4 track_age=1 retention=0.396048 landmarks=461 inliers=461 rot_delta_deg=0.583262 trans_delta_m=0.272791 adopted=0
+Frame 198: tracked features down to 834, re-detecting.
+Frame 199: accepted PnP correction map_age=1 track_age=1 retention=0.804556 landmarks=671 inliers=671 rot_delta_deg=0.0287133 trans_delta_m=0.00809202 adopted=0
+Frame 199 (200/1101) tracked=1060 inliers=1060 status=pnp-candidate pose=(-80.8364, -0.39076, 46.7139)
+Frame 200: accepted PnP correction map_age=2 track_age=1 retention=0.691847 landmarks=577 inliers=577 rot_delta_deg=0.0596752 trans_delta_m=0.0111592 adopted=0
+Frame 200: tracked features down to 877, re-detecting.
+Frame 201: accepted PnP correction map_age=3 track_age=1 retention=0.58753 landmarks=490 inliers=490 rot_delta_deg=0.149839 trans_delta_m=0.041512 adopted=0
+Frame 202: accepted PnP correction map_age=4 track_age=1 retention=0.465228 landmarks=388 inliers=388 rot_delta_deg=0.205109 trans_delta_m=0.079438 adopted=0
+Frame 202: tracked features down to 835, re-detecting.
+Frame 203: accepted PnP correction map_age=1 track_age=1 retention=0.831138 landmarks=694 inliers=694 rot_delta_deg=0.0705612 trans_delta_m=0.0190341 adopted=0
+Frame 204: accepted PnP correction map_age=2 track_age=1 retention=0.74012 landmarks=618 inliers=618 rot_delta_deg=0.113791 trans_delta_m=0.0495236 adopted=0
+Frame 204: tracked features down to 940, re-detecting.
+Frame 205: accepted PnP correction map_age=3 track_age=1 retention=0.702994 landmarks=587 inliers=587 rot_delta_deg=0.188737 trans_delta_m=0.058325 adopted=0
+Frame 206: accepted PnP correction map_age=4 track_age=1 retention=0.627545 landmarks=524 inliers=524 rot_delta_deg=0.206431 trans_delta_m=0.0402232 adopted=0
+Frame 207: accepted PnP correction map_age=5 track_age=1 retention=0.541317 landmarks=452 inliers=452 rot_delta_deg=0.186774 trans_delta_m=0.0489057 adopted=0
+Frame 207: tracked features down to 957, re-detecting.
+Frame 208: accepted PnP correction map_age=6 track_age=1 retention=0.512575 landmarks=428 inliers=428 rot_delta_deg=0.254294 trans_delta_m=0.0520413 adopted=0
+Frame 209: accepted PnP correction map_age=7 track_age=1 retention=0.45988 landmarks=384 inliers=384 rot_delta_deg=0.399263 trans_delta_m=0.129561 adopted=0
+Frame 210: accepted PnP correction map_age=1 track_age=1 retention=0.907859 landmarks=1005 inliers=1005 rot_delta_deg=0.108794 trans_delta_m=0.0540712 adopted=0
+Frame 210: tracked features down to 968, re-detecting.
+Frame 211: accepted PnP correction map_age=2 track_age=1 retention=0.766034 landmarks=848 inliers=848 rot_delta_deg=0.235473 trans_delta_m=0.0906172 adopted=1
+Frame 212: accepted PnP correction map_age=3 track_age=1 retention=0.609756 landmarks=675 inliers=675 rot_delta_deg=0.219907 trans_delta_m=0.0599208 adopted=0
+Frame 213: accepted PnP correction map_age=4 track_age=1 retention=0.490515 landmarks=543 inliers=543 rot_delta_deg=0.625425 trans_delta_m=0.192343 adopted=0
+Frame 214: accepted PnP correction map_age=1 track_age=1 retention=0.902277 landmarks=951 inliers=951 rot_delta_deg=0.206792 trans_delta_m=0.0362206 adopted=0
+Frame 214: tracked features down to 914, re-detecting.
+Frame 215: accepted PnP correction map_age=2 track_age=1 retention=0.775142 landmarks=817 inliers=817 rot_delta_deg=0.202328 trans_delta_m=0.0464014 adopted=0
+Frame 216: accepted PnP correction map_age=3 track_age=1 retention=0.56167 landmarks=592 inliers=592 rot_delta_deg=0.146208 trans_delta_m=0.0687033 adopted=0
+Frame 216: tracked features down to 988, re-detecting.
+Frame 217: accepted PnP correction map_age=4 track_age=1 retention=0.476281 landmarks=502 inliers=502 rot_delta_deg=0.154715 trans_delta_m=0.0841488 adopted=0
+Frame 218: accepted PnP correction map_age=1 track_age=1 retention=0.752688 landmarks=840 inliers=840 rot_delta_deg=0.0731411 trans_delta_m=0.0270601 adopted=0
+Frame 218: tracked features down to 842, re-detecting.
+Frame 219: accepted PnP correction map_age=2 track_age=1 retention=0.560036 landmarks=625 inliers=625 rot_delta_deg=0.195368 trans_delta_m=0.0683604 adopted=0
+Frame 220: accepted PnP correction map_age=3 track_age=1 retention=0.37276 landmarks=416 inliers=416 rot_delta_deg=0.260097 trans_delta_m=0.110236 adopted=0
+Frame 220: tracked features down to 781, re-detecting.
+Frame 221: accepted PnP correction map_age=1 track_age=1 retention=0.847631 landmarks=662 inliers=662 rot_delta_deg=0.0952019 trans_delta_m=0.00974307 adopted=0
+Frame 222: accepted PnP correction map_age=2 track_age=1 retention=0.62484 landmarks=488 inliers=488 rot_delta_deg=0.0857482 trans_delta_m=0.0234037 adopted=0
+Frame 222: tracked features down to 780, re-detecting.
+Frame 223: accepted PnP correction map_age=3 track_age=1 retention=0.471191 landmarks=368 inliers=368 rot_delta_deg=0.181892 trans_delta_m=0.0289879 adopted=0
+Frame 223: tracked features down to 848, re-detecting.
+Frame 224: accepted PnP correction map_age=1 track_age=1 retention=0.79717 landmarks=676 inliers=676 rot_delta_deg=0.107118 trans_delta_m=0.0483165 adopted=0
+Frame 224: tracked features down to 942, re-detecting.
+Frame 225: accepted PnP correction map_age=2 track_age=1 retention=0.673349 landmarks=571 inliers=571 rot_delta_deg=0.0921897 trans_delta_m=0.0725972 adopted=0
+Frame 226: accepted PnP correction map_age=3 track_age=1 retention=0.540094 landmarks=458 inliers=458 rot_delta_deg=0.253409 trans_delta_m=0.142962 adopted=0
+Frame 226: tracked features down to 828, re-detecting.
+Frame 227: accepted PnP correction map_age=4 track_age=1 retention=0.420991 landmarks=357 inliers=357 rot_delta_deg=0.286186 trans_delta_m=0.178926 adopted=0
+Frame 228: accepted PnP correction map_age=1 track_age=1 retention=0.838302 landmarks=928 inliers=928 rot_delta_deg=0.0762548 trans_delta_m=0.0055421 adopted=0
+Frame 228: tracked features down to 825, re-detecting.
+Frame 229: accepted PnP correction map_age=2 track_age=1 retention=0.739837 landmarks=819 inliers=819 rot_delta_deg=0.0846114 trans_delta_m=0.0185716 adopted=0
+Frame 230: accepted PnP correction map_age=3 track_age=1 retention=0.614273 landmarks=680 inliers=680 rot_delta_deg=0.15939 trans_delta_m=0.0183622 adopted=0
+Frame 230: tracked features down to 917, re-detecting.
+Frame 231: accepted PnP correction map_age=4 track_age=1 retention=0.497742 landmarks=551 inliers=551 rot_delta_deg=0.15618 trans_delta_m=0.0171956 adopted=0
+Frame 232: accepted PnP correction map_age=1 track_age=1 retention=0.816759 landmarks=887 inliers=887 rot_delta_deg=0.599321 trans_delta_m=0.0834373 adopted=1
+Frame 232: tracked features down to 812, re-detecting.
+Frame 233: accepted PnP correction map_age=2 track_age=1 retention=0.705341 landmarks=766 inliers=766 rot_delta_deg=0.0330153 trans_delta_m=0.0129089 adopted=0
+Frame 234: accepted PnP correction map_age=3 track_age=1 retention=0.573665 landmarks=623 inliers=623 rot_delta_deg=0.253849 trans_delta_m=0.0217144 adopted=0
+Frame 234: tracked features down to 834, re-detecting.
+Frame 235: accepted PnP correction map_age=4 track_age=1 retention=0.453959 landmarks=493 inliers=493 rot_delta_deg=0.188968 trans_delta_m=0.0285088 adopted=0
+Frame 236: accepted PnP correction map_age=1 track_age=1 retention=0.804878 landmarks=891 inliers=891 rot_delta_deg=0.111772 trans_delta_m=0.0229414 adopted=1
+Frame 236: tracked features down to 878, re-detecting.
+Frame 237: accepted PnP correction map_age=2 track_age=1 retention=0.666667 landmarks=738 inliers=738 rot_delta_deg=0.118734 trans_delta_m=0.0252932 adopted=0
+Frame 237: tracked features down to 941, re-detecting.
+Frame 238: accepted PnP correction map_age=3 track_age=1 retention=0.496838 landmarks=550 inliers=550 rot_delta_deg=0.178406 trans_delta_m=0.0491921 adopted=0
+Frame 238: tracked features down to 763, re-detecting.
+Frame 239: accepted PnP correction map_age=1 track_age=1 retention=0.770642 landmarks=588 inliers=588 rot_delta_deg=0.049851 trans_delta_m=0.00753633 adopted=1
+Frame 239: tracked features down to 804, re-detecting.
+Frame 240: accepted PnP correction map_age=2 track_age=1 retention=0.49017 landmarks=374 inliers=374 rot_delta_deg=0.183611 trans_delta_m=0.0131201 adopted=0
+Frame 240: tracked features down to 704, re-detecting.
+Frame 241: accepted PnP correction map_age=1 track_age=1 retention=0.852273 landmarks=600 inliers=600 rot_delta_deg=0.136679 trans_delta_m=0.0339051 adopted=1
+Frame 241: tracked features down to 763, re-detecting.
+Frame 242: accepted PnP correction map_age=2 track_age=1 retention=0.794034 landmarks=559 inliers=559 rot_delta_deg=0.144774 trans_delta_m=0.0414078 adopted=1
+Frame 242: tracked features down to 919, re-detecting.
+Frame 243: accepted PnP correction map_age=3 track_age=1 retention=0.734375 landmarks=517 inliers=517 rot_delta_deg=0.0781468 trans_delta_m=0.0287656 adopted=1
+Frame 244: accepted PnP correction map_age=4 track_age=1 retention=0.678977 landmarks=478 inliers=478 rot_delta_deg=0.223089 trans_delta_m=0.141715 adopted=1
+Frame 244: tracked features down to 913, re-detecting.
+Frame 245: accepted PnP correction map_age=5 track_age=1 retention=0.605114 landmarks=426 inliers=426 rot_delta_deg=0.12018 trans_delta_m=0.0433894 adopted=1
+Frame 246: accepted PnP correction map_age=6 track_age=1 retention=0.49858 landmarks=351 inliers=351 rot_delta_deg=0.461537 trans_delta_m=0.239361 adopted=0
+Frame 246: tracked features down to 984, re-detecting.
+Frame 247: accepted PnP correction map_age=1 track_age=1 retention=0.881098 landmarks=867 inliers=867 rot_delta_deg=0.128153 trans_delta_m=0.0345891 adopted=1
+Frame 248: accepted PnP correction map_age=2 track_age=1 retention=0.841463 landmarks=828 inliers=828 rot_delta_deg=0.175188 trans_delta_m=0.0446859 adopted=1
+Frame 249: accepted PnP correction map_age=3 track_age=1 retention=0.804878 landmarks=792 inliers=792 rot_delta_deg=0.29724 trans_delta_m=0.0540577 adopted=1
+Frame 249: tracked features down to 968, re-detecting.
+Frame 249 (250/1101) tracked=2000 inliers=968 status=pnp pose=(-87.8708, -1.78183, 85.9507)
+Frame 250: accepted PnP correction map_age=4 track_age=1 retention=0.72561 landmarks=714 inliers=714 rot_delta_deg=0.089589 trans_delta_m=0.0255219 adopted=1
+Frame 251: accepted PnP correction map_age=5 track_age=1 retention=0.651423 landmarks=641 inliers=641 rot_delta_deg=0.262547 trans_delta_m=0.0412821 adopted=1
+Frame 252: accepted PnP correction map_age=6 track_age=1 retention=0.567073 landmarks=558 inliers=558 rot_delta_deg=0.259724 trans_delta_m=0.0833989 adopted=0
+Frame 252: tracked features down to 973, re-detecting.
+Frame 253: accepted PnP correction map_age=7 track_age=1 retention=0.462398 landmarks=455 inliers=455 rot_delta_deg=0.432855 trans_delta_m=0.0593343 adopted=0
+Frame 254: accepted PnP correction map_age=1 track_age=1 retention=0.872581 landmarks=1082 inliers=1082 rot_delta_deg=0.123793 trans_delta_m=0.0237046 adopted=1
+Frame 255: accepted PnP correction map_age=2 track_age=1 retention=0.775 landmarks=961 inliers=961 rot_delta_deg=0.260437 trans_delta_m=0.0240929 adopted=1
+Frame 255: tracked features down to 872, re-detecting.
+Frame 256: accepted PnP correction map_age=3 track_age=1 retention=0.708065 landmarks=878 inliers=878 rot_delta_deg=0.0502702 trans_delta_m=0.0176934 adopted=1
+Frame 257: accepted PnP correction map_age=4 track_age=1 retention=0.583871 landmarks=724 inliers=724 rot_delta_deg=0.0835975 trans_delta_m=0.0284906 adopted=1
+Frame 258: accepted PnP correction map_age=5 track_age=1 retention=0.495968 landmarks=615 inliers=615 rot_delta_deg=0.0641972 trans_delta_m=0.0298053 adopted=0
+Frame 258: tracked features down to 986, re-detecting.
+Frame 259: accepted PnP correction map_age=1 track_age=1 retention=0.823529 landmarks=812 inliers=812 rot_delta_deg=0.263887 trans_delta_m=0.0364849 adopted=1
+Frame 260: accepted PnP correction map_age=2 track_age=1 retention=0.677485 landmarks=668 inliers=668 rot_delta_deg=0.0928244 trans_delta_m=0.0221185 adopted=1
+Frame 260: tracked features down to 960, re-detecting.
+Frame 261: accepted PnP correction map_age=3 track_age=1 retention=0.523327 landmarks=516 inliers=516 rot_delta_deg=0.0420616 trans_delta_m=0.0270733 adopted=0
+Frame 262: accepted PnP correction map_age=4 track_age=1 retention=0.39858 landmarks=393 inliers=393 rot_delta_deg=0.157373 trans_delta_m=0.0719687 adopted=0
+Frame 262: tracked features down to 764, re-detecting.
+Frame 263: accepted PnP correction map_age=1 track_age=1 retention=0.777487 landmarks=594 inliers=594 rot_delta_deg=0.285951 trans_delta_m=0.0548766 adopted=0
+Frame 264: accepted PnP correction map_age=2 track_age=1 retention=0.701571 landmarks=536 inliers=536 rot_delta_deg=0.353244 trans_delta_m=0.0771695 adopted=0
+Frame 264: tracked features down to 695, re-detecting.
+Frame 265: accepted PnP correction map_age=3 track_age=1 retention=0.543194 landmarks=415 inliers=415 rot_delta_deg=0.370483 trans_delta_m=0.0962302 adopted=0
+Frame 265: tracked features down to 883, re-detecting.
+Frame 266: accepted PnP correction map_age=4 track_age=1 retention=0.420157 landmarks=321 inliers=321 rot_delta_deg=0.392101 trans_delta_m=0.107362 adopted=0
+Frame 267: accepted PnP correction map_age=1 track_age=1 retention=0.800562 landmarks=855 inliers=855 rot_delta_deg=0.0879236 trans_delta_m=0.0131985 adopted=0
+Frame 267: tracked features down to 743, re-detecting.
+Frame 268: accepted PnP correction map_age=2 track_age=1 retention=0.635768 landmarks=679 inliers=679 rot_delta_deg=0.0598195 trans_delta_m=0.0206191 adopted=0
+Frame 269: accepted PnP correction map_age=3 track_age=1 retention=0.568352 landmarks=607 inliers=607 rot_delta_deg=0.137999 trans_delta_m=0.0333232 adopted=0
+Frame 269: tracked features down to 702, re-detecting.
+Frame 270: accepted PnP correction map_age=4 track_age=1 retention=0.529963 landmarks=566 inliers=566 rot_delta_deg=0.213459 trans_delta_m=0.0378321 adopted=0
+Frame 271: accepted PnP correction map_age=5 track_age=1 retention=0.445693 landmarks=476 inliers=476 rot_delta_deg=0.367986 trans_delta_m=0.0614742 adopted=0
+Frame 272: accepted PnP correction map_age=1 track_age=1 retention=0.831841 landmarks=836 inliers=836 rot_delta_deg=0.0473669 trans_delta_m=0.00323438 adopted=0
+Frame 272: tracked features down to 772, re-detecting.
+Frame 273: accepted PnP correction map_age=2 track_age=1 retention=0.618905 landmarks=622 inliers=622 rot_delta_deg=0.1606 trans_delta_m=0.0595145 adopted=0
+Frame 274: accepted PnP correction map_age=3 track_age=1 retention=0.535323 landmarks=538 inliers=538 rot_delta_deg=0.13819 trans_delta_m=0.0576415 adopted=0
+Frame 274: tracked features down to 912, re-detecting.
+Frame 275: accepted PnP correction map_age=4 track_age=1 retention=0.474627 landmarks=477 inliers=477 rot_delta_deg=0.14013 trans_delta_m=0.0598898 adopted=0
+Frame 275: skipped keyframe rebuild due to low baseline/parallax.
+Frame 276: accepted PnP correction map_age=5 track_age=1 retention=0.426866 landmarks=429 inliers=429 rot_delta_deg=0.206382 trans_delta_m=0.0642195 adopted=0
+Frame 276: skipped keyframe rebuild due to low baseline/parallax.
+Frame 276: tracked features down to 877, re-detecting.
+Frame 277: skipped keyframe rebuild due to low baseline/parallax.
+Frame 278: skipped keyframe rebuild due to low baseline/parallax.
+Frame 278: tracked features down to 993, re-detecting.
+Frame 279: skipped keyframe rebuild due to low baseline/parallax.
+Frame 281: accepted PnP correction map_age=1 track_age=1 retention=0.899341 landmarks=956 inliers=956 rot_delta_deg=0.191885 trans_delta_m=0.0854815 adopted=1
+Frame 281: tracked features down to 817, re-detecting.
+Frame 282: accepted PnP correction map_age=2 track_age=1 retention=0.878645 landmarks=934 inliers=934 rot_delta_deg=0.0589239 trans_delta_m=0.0143371 adopted=0
+Frame 283: accepted PnP correction map_age=3 track_age=1 retention=0.826905 landmarks=879 inliers=879 rot_delta_deg=0.119952 trans_delta_m=0.0337516 adopted=0
+Frame 284: accepted PnP correction map_age=4 track_age=1 retention=0.809972 landmarks=861 inliers=861 rot_delta_deg=0.20309 trans_delta_m=0.0361673 adopted=0
+Frame 285: accepted PnP correction map_age=5 track_age=1 retention=0.771402 landmarks=820 inliers=820 rot_delta_deg=0.3682 trans_delta_m=0.108114 adopted=0
+Frame 286: accepted PnP correction map_age=6 track_age=1 retention=0.74318 landmarks=790 inliers=790 rot_delta_deg=0.649285 trans_delta_m=0.202342 adopted=0
+Frame 286: tracked features down to 739, re-detecting.
+Frame 287: accepted PnP correction map_age=7 track_age=1 retention=0.682973 landmarks=726 inliers=726 rot_delta_deg=0.781382 trans_delta_m=0.258586 adopted=0
+Frame 288: accepted PnP correction map_age=8 track_age=1 retention=0.667921 landmarks=710 inliers=710 rot_delta_deg=0.874594 trans_delta_m=0.289391 adopted=0
+Frame 288: skipped keyframe rebuild due to low baseline/parallax.
+Frame 289: skipped keyframe rebuild due to low baseline/parallax.
+Frame 290: skipped keyframe rebuild due to low baseline/parallax.
+Frame 291: skipped keyframe rebuild due to low baseline/parallax.
+Frame 292: skipped keyframe rebuild due to low baseline/parallax.
+Frame 292: tracked features down to 897, re-detecting.
+Frame 293: skipped keyframe rebuild due to low baseline/parallax.
+Frame 294: skipped keyframe rebuild due to low baseline/parallax.
+Frame 294: tracked features down to 990, re-detecting.
+Frame 295: skipped keyframe rebuild due to low baseline/parallax.
+Frame 296: skipped keyframe rebuild due to low baseline/parallax.
+Frame 297: skipped keyframe rebuild due to low baseline/parallax.
+Frame 297: tracked features down to 953, re-detecting.
+Frame 298: skipped keyframe rebuild due to low baseline/parallax.
+Frame 299: skipped keyframe rebuild due to low baseline/parallax.
+Frame 299 (300/1101) tracked=1041 inliers=1041 status=2d2d pose=(-104.243, -2.98591, 115.757)
+Frame 300: tracked features down to 896, re-detecting.
+Frame 301: accepted PnP correction map_age=1 track_age=1 retention=0.977679 landmarks=876 inliers=876 rot_delta_deg=0.0281491 trans_delta_m=0.00615222 adopted=1
+Frame 302: accepted PnP correction map_age=2 track_age=1 retention=0.939732 landmarks=842 inliers=842 rot_delta_deg=0.0195223 trans_delta_m=0.00584124 adopted=1
+Frame 302: tracked features down to 679, re-detecting.
+Frame 303: accepted PnP correction map_age=3 track_age=1 retention=0.907366 landmarks=813 inliers=813 rot_delta_deg=0.0557653 trans_delta_m=0.0102808 adopted=1
+Frame 303: tracked features down to 873, re-detecting.
+Frame 304: accepted PnP correction map_age=4 track_age=1 retention=0.890625 landmarks=798 inliers=798 rot_delta_deg=0.0617449 trans_delta_m=0.0133217 adopted=1
+Frame 304: tracked features down to 695, re-detecting.
+Frame 305: accepted PnP correction map_age=5 track_age=1 retention=0.878348 landmarks=787 inliers=787 rot_delta_deg=0.0861151 trans_delta_m=0.0144369 adopted=1
+Frame 305: tracked features down to 692, re-detecting.
+Frame 306: accepted PnP correction map_age=6 track_age=1 retention=0.862723 landmarks=773 inliers=773 rot_delta_deg=0.0509519 trans_delta_m=0.00740867 adopted=1
+Frame 306: tracked features down to 695, re-detecting.
+Frame 307: accepted PnP correction map_age=7 track_age=1 retention=0.833705 landmarks=747 inliers=747 rot_delta_deg=0.0952646 trans_delta_m=0.0168113 adopted=1
+Frame 307: tracked features down to 706, re-detecting.
+Frame 308: accepted PnP correction map_age=8 track_age=1 retention=0.81808 landmarks=733 inliers=733 rot_delta_deg=0.0673086 trans_delta_m=0.0120578 adopted=1
+Frame 308: tracked features down to 711, re-detecting.
+Frame 309: accepted PnP correction map_age=1 track_age=1 retention=0.926864 landmarks=659 inliers=659 rot_delta_deg=0.149846 trans_delta_m=0.0293659 adopted=1
+Frame 309: tracked features down to 570, re-detecting.
+Frame 310: accepted PnP correction map_age=2 track_age=1 retention=0.874824 landmarks=622 inliers=622 rot_delta_deg=0.165406 trans_delta_m=0.013641 adopted=1
+Frame 310: tracked features down to 432, re-detecting.
+Frame 311: accepted PnP correction map_age=3 track_age=1 retention=0.860759 landmarks=612 inliers=612 rot_delta_deg=0.265084 trans_delta_m=0.0557925 adopted=1
+Frame 311: tracked features down to 383, re-detecting.
+Frame 312: accepted PnP correction map_age=4 track_age=1 retention=0.78481 landmarks=558 inliers=558 rot_delta_deg=0.182145 trans_delta_m=0.0313591 adopted=1
+Frame 312: tracked features down to 478, re-detecting.
+Frame 313: accepted PnP correction map_age=5 track_age=1 retention=0.682138 landmarks=485 inliers=485 rot_delta_deg=0.272064 trans_delta_m=0.0450391 adopted=1
+Frame 313: tracked features down to 587, re-detecting.
+Frame 314: accepted PnP correction map_age=6 track_age=1 retention=0.634318 landmarks=451 inliers=451 rot_delta_deg=0.315537 trans_delta_m=0.0525974 adopted=1
+Frame 314: tracked features down to 621, re-detecting.
+Frame 315: accepted PnP correction map_age=7 track_age=1 retention=0.542897 landmarks=386 inliers=386 rot_delta_deg=0.196179 trans_delta_m=0.0309826 adopted=0
+Frame 315: tracked features down to 605, re-detecting.
+Frame 316: accepted PnP correction map_age=8 track_age=1 retention=0.37834 landmarks=269 inliers=269 rot_delta_deg=0.484866 trans_delta_m=0.0751567 adopted=0
+Frame 317: accepted PnP correction map_age=1 track_age=1 retention=0.919149 landmarks=1080 inliers=1080 rot_delta_deg=0.443062 trans_delta_m=0.0716643 adopted=1
+Frame 317: tracked features down to 473, re-detecting.
+Frame 318: accepted PnP correction map_age=2 track_age=1 retention=0.784681 landmarks=922 inliers=922 rot_delta_deg=0.150373 trans_delta_m=0.0622431 adopted=1
+Frame 318: tracked features down to 564, re-detecting.
+Frame 319: accepted PnP correction map_age=3 track_age=1 retention=0.701277 landmarks=824 inliers=824 rot_delta_deg=0.180092 trans_delta_m=0.0574465 adopted=1
+Frame 319: tracked features down to 815, re-detecting.
+Frame 320: accepted PnP correction map_age=4 track_age=1 retention=0.560851 landmarks=659 inliers=659 rot_delta_deg=0.629823 trans_delta_m=0.0992058 adopted=1
+Frame 320: tracked features down to 879, re-detecting.
+Frame 321: accepted PnP correction map_age=5 track_age=1 retention=0.480851 landmarks=565 inliers=565 rot_delta_deg=0.161295 trans_delta_m=0.0486401 adopted=0
+Frame 321: tracked features down to 753, re-detecting.
+Frame 322: accepted PnP correction map_age=1 track_age=1 retention=0.806109 landmarks=607 inliers=607 rot_delta_deg=0.244642 trans_delta_m=0.0466266 adopted=1
+Frame 322: tracked features down to 931, re-detecting.
+Frame 323: accepted PnP correction map_age=2 track_age=1 retention=0.515272 landmarks=388 inliers=388 rot_delta_deg=0.0638988 trans_delta_m=0.0159232 adopted=0
+Frame 323: tracked features down to 629, re-detecting.
+Frame 324: accepted PnP correction map_age=3 track_age=1 retention=0.386454 landmarks=291 inliers=291 rot_delta_deg=0.166905 trans_delta_m=0.0240049 adopted=0
+Frame 324: tracked features down to 788, re-detecting.
+Frame 325: accepted PnP correction map_age=1 track_age=1 retention=0.699239 landmarks=551 inliers=551 rot_delta_deg=0.0639333 trans_delta_m=0.0139273 adopted=1
+Frame 325: tracked features down to 652, re-detecting.
+Frame 326: accepted PnP correction map_age=2 track_age=1 retention=0.559645 landmarks=441 inliers=441 rot_delta_deg=0.273663 trans_delta_m=0.0466795 adopted=0
+Frame 327: accepted PnP correction map_age=3 track_age=1 retention=0.369289 landmarks=291 inliers=291 rot_delta_deg=0.408452 trans_delta_m=0.0637553 adopted=0
+Frame 328: accepted PnP correction map_age=1 track_age=1 retention=0.897601 landmarks=973 inliers=973 rot_delta_deg=0.0706281 trans_delta_m=0.0203248 adopted=1
+Frame 328: tracked features down to 973, re-detecting.
+Frame 329: accepted PnP correction map_age=2 track_age=1 retention=0.785055 landmarks=851 inliers=851 rot_delta_deg=0.106601 trans_delta_m=0.022593 adopted=1
+Frame 330: accepted PnP correction map_age=3 track_age=1 retention=0.661439 landmarks=717 inliers=717 rot_delta_deg=0.219464 trans_delta_m=0.0445119 adopted=1
+Frame 330: tracked features down to 838, re-detecting.
+Frame 331: accepted PnP correction map_age=4 track_age=1 retention=0.607011 landmarks=658 inliers=658 rot_delta_deg=0.0925582 trans_delta_m=0.028653 adopted=1
+Frame 332: accepted PnP correction map_age=5 track_age=1 retention=0.569188 landmarks=617 inliers=617 rot_delta_deg=0.101032 trans_delta_m=0.0227406 adopted=0
+Frame 333: accepted PnP correction map_age=6 track_age=1 retention=0.51107 landmarks=554 inliers=554 rot_delta_deg=0.479104 trans_delta_m=0.0995981 adopted=0
+Frame 333: tracked features down to 901, re-detecting.
+Frame 334: accepted PnP correction map_age=7 track_age=1 retention=0.440959 landmarks=478 inliers=478 rot_delta_deg=0.688359 trans_delta_m=0.134994 adopted=0
+Frame 335: accepted PnP correction map_age=1 track_age=1 retention=0.726843 landmarks=769 inliers=769 rot_delta_deg=0.139413 trans_delta_m=0.0226752 adopted=1
+Frame 335: tracked features down to 769, re-detecting.
+Frame 336: accepted PnP correction map_age=2 track_age=1 retention=0.604915 landmarks=640 inliers=640 rot_delta_deg=0.0367883 trans_delta_m=0.0236004 adopted=1
+Frame 336: tracked features down to 766, re-detecting.
+Frame 337: accepted PnP correction map_age=3 track_age=1 retention=0.432892 landmarks=458 inliers=458 rot_delta_deg=0.118797 trans_delta_m=0.0176495 adopted=0
+Frame 337: tracked features down to 641, re-detecting.
+Frame 338: accepted PnP correction map_age=1 track_age=1 retention=0.828393 landmarks=531 inliers=531 rot_delta_deg=0.0458892 trans_delta_m=0.0107092 adopted=1
+Frame 338: tracked features down to 612, re-detecting.
+Frame 339: accepted PnP correction map_age=2 track_age=1 retention=0.638066 landmarks=409 inliers=409 rot_delta_deg=0.16909 trans_delta_m=0.0254825 adopted=1
+Frame 339: tracked features down to 784, re-detecting.
+Frame 340: accepted PnP correction map_age=3 track_age=1 retention=0.558502 landmarks=358 inliers=358 rot_delta_deg=0.143629 trans_delta_m=0.0302223 adopted=0
+Frame 340: tracked features down to 576, re-detecting.
+Frame 341: accepted PnP correction map_age=4 track_age=1 retention=0.383775 landmarks=246 inliers=246 rot_delta_deg=0.29633 trans_delta_m=0.0718345 adopted=0
+Frame 341: tracked features down to 417, re-detecting.
+Frame 342: accepted PnP correction map_age=1 track_age=1 retention=0.376499 landmarks=157 inliers=157 rot_delta_deg=0.0799154 trans_delta_m=0.0220651 adopted=0
+Frame 342: tracked features down to 512, re-detecting.
+Frame 343: accepted PnP correction map_age=1 track_age=1 retention=0.673828 landmarks=345 inliers=345 rot_delta_deg=0.200604 trans_delta_m=0.0236221 adopted=1
+Frame 343: tracked features down to 457, re-detecting.
+Frame 344: accepted PnP correction map_age=2 track_age=1 retention=0.5625 landmarks=288 inliers=288 rot_delta_deg=0.17336 trans_delta_m=0.0333425 adopted=0
+Frame 344: tracked features down to 544, re-detecting.
+Frame 345: accepted PnP correction map_age=3 track_age=1 retention=0.402344 landmarks=206 inliers=206 rot_delta_deg=0.344121 trans_delta_m=0.0707249 adopted=0
+Frame 345: tracked features down to 523, re-detecting.
+Frame 346: accepted PnP correction map_age=1 track_age=1 retention=0.707457 landmarks=370 inliers=370 rot_delta_deg=0.0754684 trans_delta_m=0.0367758 adopted=1
+Frame 346: tracked features down to 727, re-detecting.
+Frame 347: accepted PnP correction map_age=2 track_age=1 retention=0.51434 landmarks=269 inliers=269 rot_delta_deg=0.0824316 trans_delta_m=0.0251182 adopted=0
+Frame 347: tracked features down to 917, re-detecting.
+Frame 348: accepted PnP correction map_age=3 track_age=1 retention=0.466539 landmarks=244 inliers=244 rot_delta_deg=0.153132 trans_delta_m=0.0430223 adopted=0
+Frame 348: tracked features down to 972, re-detecting.
+Frame 349: accepted PnP correction map_age=1 track_age=1 retention=0.891975 landmarks=867 inliers=867 rot_delta_deg=0.0593822 trans_delta_m=0.0243409 adopted=1
+Frame 349 (350/1101) tracked=1120 inliers=1120 status=pnp pose=(-118.5, -2.72463, 114.74)
+Frame 350: accepted PnP correction map_age=2 track_age=1 retention=0.853909 landmarks=830 inliers=830 rot_delta_deg=0.0286061 trans_delta_m=0.0225901 adopted=1
+Frame 351: accepted PnP correction map_age=3 track_age=1 retention=0.761317 landmarks=740 inliers=740 rot_delta_deg=0.154427 trans_delta_m=0.0453851 adopted=0
+Frame 351: tracked features down to 959, re-detecting.
+Frame 352: accepted PnP correction map_age=4 track_age=1 retention=0.72428 landmarks=704 inliers=704 rot_delta_deg=0.201579 trans_delta_m=0.0625179 adopted=0
+Frame 353: accepted PnP correction map_age=5 track_age=1 retention=0.664609 landmarks=646 inliers=646 rot_delta_deg=0.2031 trans_delta_m=0.0744781 adopted=0
+Frame 354: accepted PnP correction map_age=6 track_age=1 retention=0.625514 landmarks=608 inliers=608 rot_delta_deg=0.34706 trans_delta_m=0.140307 adopted=0
+Frame 355: accepted PnP correction map_age=7 track_age=1 retention=0.600823 landmarks=584 inliers=584 rot_delta_deg=0.474186 trans_delta_m=0.182939 adopted=0
+Frame 355: tracked features down to 986, re-detecting.
+Frame 356: accepted PnP correction map_age=8 track_age=1 retention=0.550412 landmarks=535 inliers=535 rot_delta_deg=0.642933 trans_delta_m=0.239538 adopted=0
+Frame 356: skipped keyframe rebuild due to low baseline/parallax.
+Frame 357: skipped keyframe rebuild due to low baseline/parallax.
+Frame 358: skipped keyframe rebuild due to low baseline/parallax.
+Frame 359: skipped keyframe rebuild due to low baseline/parallax.
+Frame 360: skipped keyframe rebuild due to low baseline/parallax.
+Frame 360: tracked features down to 999, re-detecting.
+Frame 362: accepted PnP correction map_age=1 track_age=1 retention=0.918202 landmarks=1246 inliers=1246 rot_delta_deg=0.0761104 trans_delta_m=0.0257173 adopted=0
+Frame 363: accepted PnP correction map_age=2 track_age=1 retention=0.840088 landmarks=1140 inliers=1140 rot_delta_deg=0.128433 trans_delta_m=0.0377161 adopted=0
+Frame 364: accepted PnP correction map_age=3 track_age=1 retention=0.745026 landmarks=1011 inliers=1011 rot_delta_deg=0.138344 trans_delta_m=0.033557 adopted=0
+Frame 364: tracked features down to 997, re-detecting.
+Frame 365: accepted PnP correction map_age=4 track_age=1 retention=0.670597 landmarks=910 inliers=910 rot_delta_deg=0.154215 trans_delta_m=0.0472586 adopted=0
+Frame 366: accepted PnP correction map_age=5 track_age=1 retention=0.575534 landmarks=781 inliers=781 rot_delta_deg=0.150232 trans_delta_m=0.0526446 adopted=0
+Frame 367: accepted PnP correction map_age=6 track_age=1 retention=0.481945 landmarks=654 inliers=654 rot_delta_deg=0.134418 trans_delta_m=0.0880639 adopted=0
+Frame 368: accepted PnP correction map_age=1 track_age=1 retention=0.914257 landmarks=917 inliers=917 rot_delta_deg=0.0278699 trans_delta_m=0.0108093 adopted=0
+Frame 368: tracked features down to 927, re-detecting.
+Frame 369: accepted PnP correction map_age=2 track_age=1 retention=0.803589 landmarks=806 inliers=806 rot_delta_deg=0.101989 trans_delta_m=0.0131023 adopted=0
+Frame 370: accepted PnP correction map_age=3 track_age=1 retention=0.712861 landmarks=715 inliers=715 rot_delta_deg=0.0340634 trans_delta_m=0.0149713 adopted=0
+Frame 371: accepted PnP correction map_age=4 track_age=1 retention=0.62014 landmarks=622 inliers=622 rot_delta_deg=0.202472 trans_delta_m=0.0524499 adopted=0
+Frame 372: accepted PnP correction map_age=5 track_age=1 retention=0.4666 landmarks=468 inliers=468 rot_delta_deg=0.240109 trans_delta_m=0.0526483 adopted=0
+Frame 372: tracked features down to 773, re-detecting.
+Frame 373: accepted PnP correction map_age=1 track_age=1 retention=0.803364 landmarks=621 inliers=621 rot_delta_deg=0.039125 trans_delta_m=0.0170201 adopted=0
+Frame 374: accepted PnP correction map_age=2 track_age=1 retention=0.681759 landmarks=527 inliers=527 rot_delta_deg=0.113382 trans_delta_m=0.0428603 adopted=0
+Frame 374: tracked features down to 927, re-detecting.
+Frame 375: accepted PnP correction map_age=3 track_age=1 retention=0.560155 landmarks=433 inliers=433 rot_delta_deg=0.252017 trans_delta_m=0.059899 adopted=0
+Frame 376: accepted PnP correction map_age=4 track_age=1 retention=0.413972 landmarks=320 inliers=320 rot_delta_deg=0.439567 trans_delta_m=0.0826283 adopted=0
+Frame 376: tracked features down to 937, re-detecting.
+Frame 377: accepted PnP correction map_age=1 track_age=1 retention=0.713981 landmarks=669 inliers=669 rot_delta_deg=0.0452211 trans_delta_m=0.0184448 adopted=0
+Frame 377: tracked features down to 973, re-detecting.
+Frame 378: accepted PnP correction map_age=2 track_age=1 retention=0.534685 landmarks=501 inliers=501 rot_delta_deg=0.0733744 trans_delta_m=0.0352323 adopted=0
+Frame 378: tracked features down to 924, re-detecting.
+Frame 379: accepted PnP correction map_age=3 track_age=1 retention=0.440768 landmarks=413 inliers=413 rot_delta_deg=0.153702 trans_delta_m=0.042464 adopted=0
+Frame 379: skipped keyframe rebuild due to low baseline/parallax.
+Frame 379: tracked features down to 964, re-detecting.
+Frame 380: skipped keyframe rebuild due to low baseline/parallax.
+Frame 381: skipped keyframe rebuild due to low baseline/parallax.
+Frame 381: tracked features down to 904, re-detecting.
+Frame 382: skipped keyframe rebuild due to low baseline/parallax.
+Frame 383: skipped keyframe rebuild due to low baseline/parallax.
+Frame 384: skipped keyframe rebuild due to low baseline/parallax.
+Frame 385: skipped keyframe rebuild due to low baseline/parallax.
+Frame 385: tracked features down to 926, re-detecting.
+Frame 386: skipped keyframe rebuild due to low baseline/parallax.
+Frame 387: skipped keyframe rebuild due to low baseline/parallax.
+Frame 388: skipped keyframe rebuild due to low baseline/parallax.
+Frame 389: skipped keyframe rebuild due to low baseline/parallax.
+Frame 389: tracked features down to 961, re-detecting.
+Frame 390: skipped keyframe rebuild due to low baseline/parallax.
+Frame 391: skipped keyframe rebuild due to low baseline/parallax.
+Frame 393: accepted PnP correction map_age=1 track_age=1 retention=0.90431 landmarks=1049 inliers=1049 rot_delta_deg=0.116276 trans_delta_m=0.0231068 adopted=0
+Frame 393: tracked features down to 991, re-detecting.
+Frame 394: accepted PnP correction map_age=2 track_age=1 retention=0.796552 landmarks=924 inliers=924 rot_delta_deg=0.139593 trans_delta_m=0.0284497 adopted=0
+Frame 395: accepted PnP correction map_age=3 track_age=1 retention=0.702586 landmarks=815 inliers=815 rot_delta_deg=0.21426 trans_delta_m=0.057054 adopted=0
+Frame 396: accepted PnP correction map_age=4 track_age=1 retention=0.606897 landmarks=704 inliers=704 rot_delta_deg=0.215169 trans_delta_m=0.0514113 adopted=0
+Frame 397: accepted PnP correction map_age=5 track_age=1 retention=0.512069 landmarks=594 inliers=594 rot_delta_deg=0.159242 trans_delta_m=0.0413553 adopted=0
+Frame 397: tracked features down to 905, re-detecting.
+Frame 398: accepted PnP correction map_age=6 track_age=1 retention=0.362931 landmarks=421 inliers=421 rot_delta_deg=0.175007 trans_delta_m=0.0789377 adopted=0
+Frame 398: skipped keyframe rebuild due to low baseline/parallax.
+Frame 399: skipped keyframe rebuild due to low baseline/parallax.
+Frame 399 (400/1101) tracked=1131 inliers=1131 status=2d2d pose=(-151.132, -0.892556, 82.337)
+Frame 400: skipped keyframe rebuild due to low baseline/parallax.
+Frame 401: skipped keyframe rebuild due to low baseline/parallax.
+Frame 401: tracked features down to 785, re-detecting.
+Frame 402: skipped keyframe rebuild due to low baseline/parallax.
+Frame 403: skipped keyframe rebuild due to low baseline/parallax.
+Frame 403: tracked features down to 895, re-detecting.
+Frame 404: skipped keyframe rebuild due to low baseline/parallax.
+Frame 405: skipped keyframe rebuild due to low baseline/parallax.
+Frame 405: tracked features down to 827, re-detecting.
+Frame 407: accepted PnP correction map_age=1 track_age=1 retention=0.870516 landmarks=995 inliers=995 rot_delta_deg=0.0612287 trans_delta_m=0.0195004 adopted=0
+Frame 407: tracked features down to 986, re-detecting.
+Frame 408: accepted PnP correction map_age=2 track_age=1 retention=0.746282 landmarks=853 inliers=853 rot_delta_deg=0.0582079 trans_delta_m=0.0229817 adopted=0
+Frame 409: accepted PnP correction map_age=3 track_age=1 retention=0.669291 landmarks=765 inliers=765 rot_delta_deg=0.110134 trans_delta_m=0.0272764 adopted=0
+Frame 410: accepted PnP correction map_age=4 track_age=1 retention=0.593176 landmarks=678 inliers=678 rot_delta_deg=0.0474704 trans_delta_m=0.034689 adopted=0
+Frame 410: tracked features down to 872, re-detecting.
+Frame 411: accepted PnP correction map_age=5 track_age=1 retention=0.476815 landmarks=545 inliers=545 rot_delta_deg=0.210766 trans_delta_m=0.101541 adopted=0
+Frame 412: accepted PnP correction map_age=1 track_age=1 retention=0.898505 landmarks=1142 inliers=1142 rot_delta_deg=0.114455 trans_delta_m=0.0240039 adopted=0
+Frame 412: tracked features down to 987, re-detecting.
+Frame 413: accepted PnP correction map_age=2 track_age=1 retention=0.810386 landmarks=1030 inliers=1030 rot_delta_deg=0.163214 trans_delta_m=0.0313066 adopted=0
+Frame 414: accepted PnP correction map_age=3 track_age=1 retention=0.733281 landmarks=932 inliers=932 rot_delta_deg=0.214327 trans_delta_m=0.0240248 adopted=0
+Frame 415: accepted PnP correction map_age=4 track_age=1 retention=0.612116 landmarks=778 inliers=778 rot_delta_deg=0.194322 trans_delta_m=0.0263658 adopted=0
+Frame 415: tracked features down to 902, re-detecting.
+Frame 416: accepted PnP correction map_age=5 track_age=1 retention=0.461841 landmarks=587 inliers=587 rot_delta_deg=0.1269 trans_delta_m=0.036182 adopted=0
+Frame 417: accepted PnP correction map_age=1 track_age=1 retention=0.854678 landmarks=941 inliers=941 rot_delta_deg=0.0391226 trans_delta_m=0.00684015 adopted=0
+Frame 417: tracked features down to 881, re-detecting.
+Frame 418: accepted PnP correction map_age=2 track_age=1 retention=0.653951 landmarks=720 inliers=720 rot_delta_deg=0.0259773 trans_delta_m=0.0166701 adopted=0
+Frame 419: accepted PnP correction map_age=3 track_age=1 retention=0.544051 landmarks=599 inliers=599 rot_delta_deg=0.0439862 trans_delta_m=0.0248743 adopted=0
+Frame 419: tracked features down to 878, re-detecting.
+Frame 420: accepted PnP correction map_age=4 track_age=1 retention=0.425976 landmarks=469 inliers=469 rot_delta_deg=0.0933758 trans_delta_m=0.0224334 adopted=0
+Frame 420: skipped keyframe rebuild due to low baseline/parallax.
+Frame 421: skipped keyframe rebuild due to low baseline/parallax.
+Frame 421: tracked features down to 803, re-detecting.
+Frame 422: skipped keyframe rebuild due to low baseline/parallax.
+Frame 423: skipped keyframe rebuild due to low baseline/parallax.
+Frame 423: tracked features down to 866, re-detecting.
+Frame 424: skipped keyframe rebuild due to low baseline/parallax.
+Frame 425: skipped keyframe rebuild due to low baseline/parallax.
+Frame 425: tracked features down to 965, re-detecting.
+Frame 426: skipped keyframe rebuild due to low baseline/parallax.
+Frame 427: skipped keyframe rebuild due to low baseline/parallax.
+Frame 428: skipped keyframe rebuild due to low baseline/parallax.
+Frame 429: skipped keyframe rebuild due to low baseline/parallax.
+Frame 429: tracked features down to 911, re-detecting.
+Frame 430: skipped keyframe rebuild due to low baseline/parallax.
+Frame 431: skipped keyframe rebuild due to low baseline/parallax.
+Frame 432: skipped keyframe rebuild due to low baseline/parallax.
+Frame 432: tracked features down to 766, re-detecting.
+Frame 433: skipped keyframe rebuild due to low baseline/parallax.
+Frame 434: skipped keyframe rebuild due to low baseline/parallax.
+Frame 435: skipped keyframe rebuild due to low baseline/parallax.
+Frame 436: skipped keyframe rebuild due to low baseline/parallax.
+Frame 437: skipped keyframe rebuild due to low baseline/parallax.
+Frame 438: skipped keyframe rebuild due to low baseline/parallax.
+Frame 438: tracked features down to 903, re-detecting.
+Frame 439: skipped keyframe rebuild due to low baseline/parallax.
+Frame 440: skipped keyframe rebuild due to low baseline/parallax.
+Frame 441: skipped keyframe rebuild due to low baseline/parallax.
+Frame 442: skipped keyframe rebuild due to low baseline/parallax.
+Frame 442: tracked features down to 982, re-detecting.
+Frame 443: skipped keyframe rebuild due to low baseline/parallax.
+Frame 444: skipped keyframe rebuild due to low baseline/parallax.
+Frame 446: accepted PnP correction map_age=1 track_age=1 retention=0.94511 landmarks=947 inliers=947 rot_delta_deg=0.0502129 trans_delta_m=0.0112837 adopted=1
+Frame 446: tracked features down to 934, re-detecting.
+Frame 447: accepted PnP correction map_age=2 track_age=1 retention=0.888224 landmarks=890 inliers=890 rot_delta_deg=0.157352 trans_delta_m=0.0679104 adopted=1
+Frame 448: accepted PnP correction map_age=3 track_age=1 retention=0.838323 landmarks=840 inliers=840 rot_delta_deg=0.0240953 trans_delta_m=0.0102998 adopted=1
+Frame 449: accepted PnP correction map_age=4 track_age=1 retention=0.782435 landmarks=784 inliers=784 rot_delta_deg=0.139572 trans_delta_m=0.0496794 adopted=1
+Frame 449 (450/1101) tracked=1280 inliers=1280 status=pnp pose=(-181.409, 1.25408, 51.859)
+Frame 450: accepted PnP correction map_age=5 track_age=1 retention=0.709581 landmarks=711 inliers=711 rot_delta_deg=0.428296 trans_delta_m=0.121127 adopted=1
+Frame 451: accepted PnP correction map_age=6 track_age=1 retention=0.641717 landmarks=643 inliers=643 rot_delta_deg=0.131487 trans_delta_m=0.0494249 adopted=1
+Frame 451: tracked features down to 961, re-detecting.
+Frame 452: accepted PnP correction map_age=7 track_age=1 retention=0.562874 landmarks=564 inliers=564 rot_delta_deg=0.0122759 trans_delta_m=0.00783298 adopted=0
+Frame 453: accepted PnP correction map_age=8 track_age=1 retention=0.418164 landmarks=419 inliers=419 rot_delta_deg=0.216486 trans_delta_m=0.099257 adopted=0
+Frame 454: accepted PnP correction map_age=1 track_age=1 retention=0.827068 landmarks=990 inliers=990 rot_delta_deg=0.100893 trans_delta_m=0.029759 adopted=1
+Frame 454: tracked features down to 985, re-detecting.
+Frame 455: accepted PnP correction map_age=2 track_age=1 retention=0.691729 landmarks=828 inliers=828 rot_delta_deg=0.0568096 trans_delta_m=0.0135399 adopted=1
+Frame 456: accepted PnP correction map_age=3 track_age=1 retention=0.62406 landmarks=747 inliers=747 rot_delta_deg=0.145004 trans_delta_m=0.030971 adopted=1
+Frame 457: accepted PnP correction map_age=4 track_age=1 retention=0.544695 landmarks=652 inliers=652 rot_delta_deg=0.266483 trans_delta_m=0.0781348 adopted=0
+Frame 458: accepted PnP correction map_age=5 track_age=1 retention=0.47452 landmarks=568 inliers=568 rot_delta_deg=0.286947 trans_delta_m=0.0850498 adopted=0
+Frame 458: tracked features down to 906, re-detecting.
+Frame 459: accepted PnP correction map_age=1 track_age=1 retention=0.954746 landmarks=865 inliers=865 rot_delta_deg=0.0694101 trans_delta_m=0.0264006 adopted=1
+Frame 460: accepted PnP correction map_age=2 track_age=1 retention=0.905077 landmarks=820 inliers=820 rot_delta_deg=0.130403 trans_delta_m=0.0322599 adopted=1
+Frame 461: accepted PnP correction map_age=3 track_age=1 retention=0.83223 landmarks=754 inliers=754 rot_delta_deg=0.261581 trans_delta_m=0.0668136 adopted=1
+Frame 462: accepted PnP correction map_age=4 track_age=1 retention=0.736203 landmarks=667 inliers=667 rot_delta_deg=0.249703 trans_delta_m=0.0603526 adopted=1
+Frame 462: tracked features down to 985, re-detecting.
+Frame 463: accepted PnP correction map_age=5 track_age=1 retention=0.639073 landmarks=579 inliers=579 rot_delta_deg=0.209539 trans_delta_m=0.0296372 adopted=1
+Frame 464: accepted PnP correction map_age=6 track_age=1 retention=0.54415 landmarks=493 inliers=493 rot_delta_deg=0.0522434 trans_delta_m=0.0561854 adopted=0
+Frame 465: accepted PnP correction map_age=7 track_age=1 retention=0.479029 landmarks=434 inliers=434 rot_delta_deg=0.108031 trans_delta_m=0.0469766 adopted=0
+Frame 465: tracked features down to 908, re-detecting.
+Frame 466: accepted PnP correction map_age=1 track_age=1 retention=0.903084 landmarks=820 inliers=820 rot_delta_deg=0.137262 trans_delta_m=0.0281951 adopted=1
+Frame 467: accepted PnP correction map_age=2 track_age=1 retention=0.800661 landmarks=727 inliers=727 rot_delta_deg=0.348317 trans_delta_m=0.0687524 adopted=1
+Frame 467: tracked features down to 970, re-detecting.
+Frame 468: accepted PnP correction map_age=3 track_age=1 retention=0.61674 landmarks=560 inliers=560 rot_delta_deg=0.088961 trans_delta_m=0.0177425 adopted=1
+Frame 469: accepted PnP correction map_age=4 track_age=1 retention=0.454846 landmarks=413 inliers=413 rot_delta_deg=0.139216 trans_delta_m=0.0219915 adopted=0
+Frame 469: tracked features down to 852, re-detecting.
+Frame 470: accepted PnP correction map_age=1 track_age=1 retention=0.916667 landmarks=781 inliers=781 rot_delta_deg=0.145783 trans_delta_m=0.029475 adopted=1
+Frame 471: accepted PnP correction map_age=2 track_age=1 retention=0.778169 landmarks=663 inliers=663 rot_delta_deg=0.324879 trans_delta_m=0.0573059 adopted=1
+Frame 471: tracked features down to 953, re-detecting.
+Frame 472: accepted PnP correction map_age=3 track_age=1 retention=0.580986 landmarks=495 inliers=495 rot_delta_deg=0.608336 trans_delta_m=0.0934993 adopted=1
+Frame 473: accepted PnP correction map_age=4 track_age=1 retention=0.454225 landmarks=387 inliers=387 rot_delta_deg=0.157223 trans_delta_m=0.038866 adopted=0
+Frame 473: tracked features down to 857, re-detecting.
+Frame 474: accepted PnP correction map_age=1 track_age=1 retention=0.768961 landmarks=659 inliers=659 rot_delta_deg=0.0694957 trans_delta_m=0.0207779 adopted=1
+Frame 474: tracked features down to 906, re-detecting.
+Frame 475: accepted PnP correction map_age=2 track_age=1 retention=0.570595 landmarks=489 inliers=489 rot_delta_deg=0.121669 trans_delta_m=0.0233597 adopted=1
+Frame 475: tracked features down to 797, re-detecting.
+Frame 476: accepted PnP correction map_age=3 track_age=1 retention=0.322054 landmarks=276 inliers=276 rot_delta_deg=0.214948 trans_delta_m=0.0701801 adopted=0
+Frame 476: tracked features down to 632, re-detecting.
+Frame 477: accepted PnP correction map_age=1 track_age=1 retention=0.791139 landmarks=500 inliers=500 rot_delta_deg=0.090137 trans_delta_m=0.0130588 adopted=1
+Frame 477: tracked features down to 797, re-detecting.
+Frame 478: accepted PnP correction map_age=2 track_age=1 retention=0.65981 landmarks=417 inliers=417 rot_delta_deg=0.0620992 trans_delta_m=0.0230459 adopted=1
+Frame 478: tracked features down to 833, re-detecting.
+Frame 479: accepted PnP correction map_age=3 track_age=1 retention=0.52057 landmarks=329 inliers=329 rot_delta_deg=0.258648 trans_delta_m=0.0627056 adopted=0
+Frame 479: tracked features down to 951, re-detecting.
+Frame 480: accepted PnP correction map_age=4 track_age=1 retention=0.438291 landmarks=277 inliers=277 rot_delta_deg=0.287436 trans_delta_m=0.121795 adopted=0
+Frame 480: tracked features down to 875, re-detecting.
+Frame 481: accepted PnP correction map_age=1 track_age=1 retention=0.881143 landmarks=771 inliers=771 rot_delta_deg=0.0744527 trans_delta_m=0.0156322 adopted=1
+Frame 481: tracked features down to 975, re-detecting.
+Frame 482: accepted PnP correction map_age=2 track_age=1 retention=0.704 landmarks=616 inliers=616 rot_delta_deg=0.12736 trans_delta_m=0.0194833 adopted=1
+Frame 483: accepted PnP correction map_age=3 track_age=1 retention=0.633143 landmarks=554 inliers=554 rot_delta_deg=0.0684265 trans_delta_m=0.010055 adopted=1
+Frame 483: tracked features down to 700, re-detecting.
+Frame 484: accepted PnP correction map_age=4 track_age=1 retention=0.544 landmarks=476 inliers=476 rot_delta_deg=0.117626 trans_delta_m=0.0229545 adopted=0
+Frame 485: accepted PnP correction map_age=5 track_age=1 retention=0.409143 landmarks=358 inliers=358 rot_delta_deg=0.19932 trans_delta_m=0.0344809 adopted=0
+Frame 486: accepted PnP correction map_age=1 track_age=1 retention=0.757727 landmarks=760 inliers=760 rot_delta_deg=0.0645885 trans_delta_m=0.0279533 adopted=1
+Frame 486: tracked features down to 727, re-detecting.
+Frame 487: accepted PnP correction map_age=2 track_age=1 retention=0.683948 landmarks=686 inliers=686 rot_delta_deg=0.101029 trans_delta_m=0.0326241 adopted=1
+Frame 488: accepted PnP correction map_age=3 track_age=1 retention=0.617149 landmarks=619 inliers=619 rot_delta_deg=0.103147 trans_delta_m=0.0151206 adopted=0
+Frame 488: tracked features down to 996, re-detecting.
+Frame 489: accepted PnP correction map_age=4 track_age=1 retention=0.546361 landmarks=548 inliers=548 rot_delta_deg=0.107057 trans_delta_m=0.034052 adopted=0
+Frame 490: accepted PnP correction map_age=5 track_age=1 retention=0.473579 landmarks=475 inliers=475 rot_delta_deg=0.167863 trans_delta_m=0.0398086 adopted=0
+Frame 491: accepted PnP correction map_age=1 track_age=1 retention=0.921638 landmarks=1035 inliers=1035 rot_delta_deg=0.0601912 trans_delta_m=0.0137267 adopted=0
+Frame 492: accepted PnP correction map_age=2 track_age=1 retention=0.844167 landmarks=948 inliers=948 rot_delta_deg=0.0686927 trans_delta_m=0.0152156 adopted=0
+Frame 492: tracked features down to 944, re-detecting.
+Frame 493: accepted PnP correction map_age=3 track_age=1 retention=0.737311 landmarks=828 inliers=828 rot_delta_deg=0.084809 trans_delta_m=0.0198193 adopted=0
+Frame 494: accepted PnP correction map_age=4 track_age=1 retention=0.626002 landmarks=703 inliers=703 rot_delta_deg=0.148394 trans_delta_m=0.0344651 adopted=0
+Frame 495: accepted PnP correction map_age=5 track_age=1 retention=0.491541 landmarks=552 inliers=552 rot_delta_deg=0.494109 trans_delta_m=0.0755687 adopted=0
+Frame 495: tracked features down to 812, re-detecting.
+Frame 496: accepted PnP correction map_age=1 track_age=1 retention=0.83867 landmarks=681 inliers=681 rot_delta_deg=0.426854 trans_delta_m=0.0854842 adopted=0
+Frame 497: accepted PnP correction map_age=2 track_age=1 retention=0.731527 landmarks=594 inliers=594 rot_delta_deg=0.722804 trans_delta_m=0.141893 adopted=0
+Frame 497: tracked features down to 907, re-detecting.
+Frame 498: accepted PnP correction map_age=3 track_age=1 retention=0.597291 landmarks=485 inliers=485 rot_delta_deg=1.00504 trans_delta_m=0.195842 adopted=0
+Frame 499: accepted PnP correction map_age=4 track_age=1 retention=0.400246 landmarks=325 inliers=325 rot_delta_deg=1.34674 trans_delta_m=0.277273 adopted=0
+Frame 499: tracked features down to 765, re-detecting.
+Frame 499 (500/1101) tracked=2000 inliers=765 status=pnp-candidate pose=(-174.521, 2.32728, 30.1865)
+Frame 500: accepted PnP correction map_age=1 track_age=1 retention=0.801307 landmarks=613 inliers=613 rot_delta_deg=0.0431282 trans_delta_m=0.00729512 adopted=0
+Frame 501: accepted PnP correction map_age=2 track_age=1 retention=0.677124 landmarks=518 inliers=518 rot_delta_deg=0.338159 trans_delta_m=0.034117 adopted=0
+Frame 501: tracked features down to 745, re-detecting.
+Frame 502: accepted PnP correction map_age=3 track_age=1 retention=0.475817 landmarks=364 inliers=364 rot_delta_deg=0.693877 trans_delta_m=0.0748321 adopted=0
+Frame 503: accepted PnP correction map_age=1 track_age=1 retention=0.642792 landmarks=700 inliers=700 rot_delta_deg=0.541589 trans_delta_m=0.0393757 adopted=0
+Frame 503: tracked features down to 670, re-detecting.
+Frame 504: accepted PnP correction map_age=2 track_age=1 retention=0.474747 landmarks=517 inliers=517 rot_delta_deg=0.709459 trans_delta_m=0.0591262 adopted=0
+Frame 504: tracked features down to 763, re-detecting.
+Frame 505: accepted PnP correction map_age=1 track_age=1 retention=0.760157 landmarks=580 inliers=580 rot_delta_deg=0.196133 trans_delta_m=0.0188618 adopted=0
+Frame 505: tracked features down to 823, re-detecting.
+Frame 506: accepted PnP correction map_age=2 track_age=1 retention=0.562254 landmarks=429 inliers=429 rot_delta_deg=0.344302 trans_delta_m=0.0467088 adopted=0
+Frame 506: tracked features down to 841, re-detecting.
+Frame 507: accepted PnP correction map_age=3 track_age=1 retention=0.414155 landmarks=316 inliers=316 rot_delta_deg=0.408103 trans_delta_m=0.0583926 adopted=0
+Frame 507: tracked features down to 770, re-detecting.
+Frame 508: accepted PnP correction map_age=1 track_age=1 retention=0.707792 landmarks=545 inliers=545 rot_delta_deg=0.171968 trans_delta_m=0.0551522 adopted=0
+Frame 508: tracked features down to 730, re-detecting.
+Frame 509: accepted PnP correction map_age=2 track_age=1 retention=0.642857 landmarks=495 inliers=495 rot_delta_deg=0.238059 trans_delta_m=0.102478 adopted=0
+Frame 509: tracked features down to 722, re-detecting.
+Frame 510: accepted PnP correction map_age=3 track_age=1 retention=0.558442 landmarks=430 inliers=430 rot_delta_deg=0.300671 trans_delta_m=0.123849 adopted=0
+Frame 510: tracked features down to 778, re-detecting.
+Frame 511: accepted PnP correction map_age=4 track_age=1 retention=0.516883 landmarks=398 inliers=398 rot_delta_deg=0.492487 trans_delta_m=0.159932 adopted=0
+Frame 511: tracked features down to 868, re-detecting.
+Frame 512: accepted PnP correction map_age=5 track_age=1 retention=0.498701 landmarks=384 inliers=384 rot_delta_deg=0.635514 trans_delta_m=0.237287 adopted=0
+Frame 513: accepted PnP correction map_age=1 track_age=1 retention=0.906191 landmarks=966 inliers=966 rot_delta_deg=0.144199 trans_delta_m=0.0666286 adopted=0
+Frame 513: tracked features down to 972, re-detecting.
+Frame 514: accepted PnP correction map_age=2 track_age=1 retention=0.832083 landmarks=887 inliers=887 rot_delta_deg=0.328907 trans_delta_m=0.142745 adopted=0
+Frame 515: accepted PnP correction map_age=3 track_age=1 retention=0.719512 landmarks=767 inliers=767 rot_delta_deg=3.88453 trans_delta_m=1.20188 adopted=0
+Frame 515: tracked features down to 884, re-detecting.
+Frame 516: accepted PnP correction map_age=4 track_age=1 retention=0.635084 landmarks=677 inliers=677 rot_delta_deg=4.04138 trans_delta_m=1.23156 adopted=0
+Frame 517: accepted PnP correction map_age=5 track_age=1 retention=0.554409 landmarks=591 inliers=591 rot_delta_deg=4.07267 trans_delta_m=1.19989 adopted=0
+Frame 517: tracked features down to 932, re-detecting.
+Frame 518: accepted PnP correction map_age=6 track_age=1 retention=0.466229 landmarks=497 inliers=497 rot_delta_deg=4.2904 trans_delta_m=1.25094 adopted=0
+Frame 519: accepted PnP correction map_age=1 track_age=1 retention=0.896975 landmarks=1097 inliers=1097 rot_delta_deg=0.292866 trans_delta_m=0.0392222 adopted=0
+Frame 519: tracked features down to 957, re-detecting.
+Frame 520: accepted PnP correction map_age=2 track_age=1 retention=0.787408 landmarks=963 inliers=963 rot_delta_deg=0.308867 trans_delta_m=0.0552571 adopted=0
+Frame 521: accepted PnP correction map_age=3 track_age=1 retention=0.572363 landmarks=700 inliers=700 rot_delta_deg=0.265942 trans_delta_m=0.0674406 adopted=0
+Frame 521: tracked features down to 854, re-detecting.
+Frame 522: accepted PnP correction map_age=4 track_age=1 retention=0.455437 landmarks=557 inliers=557 rot_delta_deg=0.234151 trans_delta_m=0.0999601 adopted=0
+Frame 523: accepted PnP correction map_age=1 track_age=1 retention=0.862957 landmarks=1039 inliers=1039 rot_delta_deg=0.0528635 trans_delta_m=0.0219504 adopted=0
+Frame 524: accepted PnP correction map_age=2 track_age=1 retention=0.717608 landmarks=864 inliers=864 rot_delta_deg=0.172973 trans_delta_m=0.0373746 adopted=0
+Frame 524: tracked features down to 805, re-detecting.
+Frame 525: accepted PnP correction map_age=3 track_age=1 retention=0.629568 landmarks=758 inliers=758 rot_delta_deg=0.449223 trans_delta_m=0.0700388 adopted=0
+Frame 526: accepted PnP correction map_age=4 track_age=1 retention=0.432724 landmarks=521 inliers=521 rot_delta_deg=0.487399 trans_delta_m=0.109138 adopted=0
+Frame 526: tracked features down to 845, re-detecting.
+Frame 527: accepted PnP correction map_age=1 track_age=1 retention=0.689941 landmarks=583 inliers=583 rot_delta_deg=0.176587 trans_delta_m=0.0354726 adopted=1
+Frame 527: tracked features down to 973, re-detecting.
+Frame 528: accepted PnP correction map_age=2 track_age=1 retention=0.523077 landmarks=442 inliers=442 rot_delta_deg=0.0743128 trans_delta_m=0.049734 adopted=0
+Frame 528: tracked features down to 975, re-detecting.
+Frame 529: accepted PnP correction map_age=3 track_age=1 retention=0.424852 landmarks=359 inliers=359 rot_delta_deg=0.139049 trans_delta_m=0.156185 adopted=0
+Frame 529: tracked features down to 905, re-detecting.
+Frame 530: accepted PnP correction map_age=1 track_age=1 retention=0.805525 landmarks=729 inliers=729 rot_delta_deg=0.156467 trans_delta_m=0.0342617 adopted=0
+Frame 531: accepted PnP correction map_age=2 track_age=1 retention=0.670718 landmarks=607 inliers=607 rot_delta_deg=0.301332 trans_delta_m=0.0292787 adopted=0
+Frame 531: tracked features down to 609, re-detecting.
+Frame 532: accepted PnP correction map_age=3 track_age=1 retention=0.542541 landmarks=491 inliers=491 rot_delta_deg=0.305712 trans_delta_m=0.0430396 adopted=0
+Frame 533: accepted PnP correction map_age=4 track_age=1 retention=0.438674 landmarks=397 inliers=397 rot_delta_deg=0.323637 trans_delta_m=0.0507947 adopted=0
+Frame 533: skipped keyframe rebuild due to low baseline/parallax.
+Frame 533: tracked features down to 794, re-detecting.
+Frame 535: accepted PnP correction map_age=1 track_age=1 retention=0.816421 landmarks=885 inliers=885 rot_delta_deg=0.0888508 trans_delta_m=0.0366359 adopted=0
+Frame 535: tracked features down to 858, re-detecting.
+Frame 536: accepted PnP correction map_age=2 track_age=1 retention=0.617159 landmarks=669 inliers=669 rot_delta_deg=0.0533599 trans_delta_m=0.049052 adopted=1
+Frame 537: accepted PnP correction map_age=3 track_age=1 retention=0.47786 landmarks=518 inliers=518 rot_delta_deg=0.0524117 trans_delta_m=0.024477 adopted=0
+Frame 537: tracked features down to 745, re-detecting.
+Frame 538: accepted PnP correction map_age=1 track_age=1 retention=0.877852 landmarks=654 inliers=654 rot_delta_deg=0.0976604 trans_delta_m=0.0713973 adopted=1
+Frame 538: tracked features down to 944, re-detecting.
+Frame 539: accepted PnP correction map_age=2 track_age=1 retention=0.814765 landmarks=607 inliers=607 rot_delta_deg=0.0407358 trans_delta_m=0.0101872 adopted=1
+Frame 540: accepted PnP correction map_age=3 track_age=1 retention=0.692617 landmarks=516 inliers=516 rot_delta_deg=0.0369699 trans_delta_m=0.0329321 adopted=1
+Frame 540: tracked features down to 743, re-detecting.
+Frame 541: accepted PnP correction map_age=4 track_age=1 retention=0.640268 landmarks=477 inliers=477 rot_delta_deg=0.0476984 trans_delta_m=0.0400786 adopted=1
+Frame 541: tracked features down to 860, re-detecting.
+Frame 542: accepted PnP correction map_age=5 track_age=1 retention=0.574497 landmarks=428 inliers=428 rot_delta_deg=0.109179 trans_delta_m=0.0297055 adopted=0
+Frame 542: tracked features down to 775, re-detecting.
+Frame 543: accepted PnP correction map_age=6 track_age=1 retention=0.511409 landmarks=381 inliers=381 rot_delta_deg=0.248019 trans_delta_m=0.141132 adopted=0
+Frame 543: tracked features down to 739, re-detecting.
+Frame 544: accepted PnP correction map_age=7 track_age=1 retention=0.445638 landmarks=332 inliers=332 rot_delta_deg=0.347128 trans_delta_m=0.201574 adopted=0
+Frame 544: tracked features down to 824, re-detecting.
+Frame 545: accepted PnP correction map_age=1 track_age=1 retention=0.754854 landmarks=622 inliers=622 rot_delta_deg=0.0934744 trans_delta_m=0.0656756 adopted=1
+Frame 545: tracked features down to 859, re-detecting.
+Frame 546: accepted PnP correction map_age=2 track_age=1 retention=0.714806 landmarks=589 inliers=589 rot_delta_deg=0.216133 trans_delta_m=0.0829395 adopted=1
+Frame 546: tracked features down to 942, re-detecting.
+Frame 547: accepted PnP correction map_age=3 track_age=1 retention=0.587379 landmarks=484 inliers=484 rot_delta_deg=0.129377 trans_delta_m=0.11093 adopted=1
+Frame 547: tracked features down to 957, re-detecting.
+Frame 548: accepted PnP correction map_age=4 track_age=1 retention=0.51335 landmarks=423 inliers=423 rot_delta_deg=0.15563 trans_delta_m=0.0752183 adopted=0
+Frame 549: accepted PnP correction map_age=5 track_age=1 retention=0.413835 landmarks=341 inliers=341 rot_delta_deg=0.421154 trans_delta_m=0.179399 adopted=0
+Frame 549: tracked features down to 841, re-detecting.
+Frame 549 (550/1101) tracked=2000 inliers=841 status=pnp-candidate pose=(-145.07, 3.35682, -0.814142)
+Frame 550: accepted PnP correction map_age=1 track_age=1 retention=0.816885 landmarks=687 inliers=687 rot_delta_deg=0.146712 trans_delta_m=0.0438387 adopted=1
+Frame 551: accepted PnP correction map_age=2 track_age=1 retention=0.665874 landmarks=560 inliers=560 rot_delta_deg=0.220514 trans_delta_m=0.068329 adopted=1
+Frame 551: tracked features down to 908, re-detecting.
+Frame 552: accepted PnP correction map_age=3 track_age=1 retention=0.516052 landmarks=434 inliers=434 rot_delta_deg=0.0598675 trans_delta_m=0.0842421 adopted=1
+Frame 553: accepted PnP correction map_age=4 track_age=1 retention=0.428062 landmarks=360 inliers=360 rot_delta_deg=0.113914 trans_delta_m=0.169831 adopted=0
+Frame 553: tracked features down to 979, re-detecting.
+Frame 554: accepted PnP correction map_age=1 track_age=1 retention=0.895812 landmarks=877 inliers=877 rot_delta_deg=0.117916 trans_delta_m=0.0294264 adopted=1
+Frame 555: accepted PnP correction map_age=2 track_age=1 retention=0.72523 landmarks=710 inliers=710 rot_delta_deg=0.248644 trans_delta_m=0.129768 adopted=1
+Frame 555: tracked features down to 993, re-detecting.
+Frame 556: accepted PnP correction map_age=3 track_age=1 retention=0.59857 landmarks=586 inliers=586 rot_delta_deg=0.0972426 trans_delta_m=0.0935304 adopted=1
+Frame 557: accepted PnP correction map_age=4 track_age=1 retention=0.465781 landmarks=456 inliers=456 rot_delta_deg=0.0776431 trans_delta_m=0.0451575 adopted=0
+Frame 557: tracked features down to 930, re-detecting.
+Frame 558: accepted PnP correction map_age=1 track_age=1 retention=0.753763 landmarks=701 inliers=701 rot_delta_deg=0.0521156 trans_delta_m=0.0213145 adopted=1
+Frame 558: tracked features down to 980, re-detecting.
+Frame 559: accepted PnP correction map_age=2 track_age=1 retention=0.648387 landmarks=603 inliers=603 rot_delta_deg=0.0787634 trans_delta_m=0.0323872 adopted=1
+Frame 560: accepted PnP correction map_age=3 track_age=1 retention=0.576344 landmarks=536 inliers=536 rot_delta_deg=0.216332 trans_delta_m=0.0759346 adopted=0
+Frame 560: tracked features down to 926, re-detecting.
+Frame 561: accepted PnP correction map_age=4 track_age=1 retention=0.490323 landmarks=456 inliers=456 rot_delta_deg=0.454149 trans_delta_m=0.16195 adopted=0
+Frame 562: accepted PnP correction map_age=1 track_age=1 retention=0.880363 landmarks=1067 inliers=1067 rot_delta_deg=0.252821 trans_delta_m=0.122782 adopted=0
+Frame 563: accepted PnP correction map_age=2 track_age=1 retention=0.725248 landmarks=879 inliers=879 rot_delta_deg=0.089145 trans_delta_m=0.0763243 adopted=1
+Frame 563: tracked features down to 828, re-detecting.
+Frame 564: accepted PnP correction map_age=3 track_age=1 retention=0.596535 landmarks=723 inliers=723 rot_delta_deg=0.164842 trans_delta_m=0.0757377 adopted=0
+Frame 565: accepted PnP correction map_age=4 track_age=1 retention=0.497525 landmarks=603 inliers=603 rot_delta_deg=0.32167 trans_delta_m=0.166014 adopted=0
+Frame 565: tracked features down to 844, re-detecting.
+Frame 566: accepted PnP correction map_age=1 track_age=1 retention=0.85782 landmarks=724 inliers=724 rot_delta_deg=0.032115 trans_delta_m=0.0183404 adopted=0
+Frame 567: accepted PnP correction map_age=2 track_age=1 retention=0.651659 landmarks=550 inliers=550 rot_delta_deg=0.0769814 trans_delta_m=0.038718 adopted=0
+Frame 567: tracked features down to 703, re-detecting.
+Frame 568: accepted PnP correction map_age=3 track_age=1 retention=0.521327 landmarks=440 inliers=440 rot_delta_deg=0.0966652 trans_delta_m=0.0491952 adopted=0
+Frame 569: accepted PnP correction map_age=4 track_age=1 retention=0.363744 landmarks=307 inliers=307 rot_delta_deg=0.266986 trans_delta_m=0.0424481 adopted=0
+Frame 569: tracked features down to 764, re-detecting.
+Frame 570: accepted PnP correction map_age=1 track_age=1 retention=0.73822 landmarks=564 inliers=564 rot_delta_deg=0.138691 trans_delta_m=0.0287675 adopted=0
+Frame 570: tracked features down to 984, re-detecting.
+Frame 571: accepted PnP correction map_age=2 track_age=1 retention=0.573298 landmarks=438 inliers=438 rot_delta_deg=0.292062 trans_delta_m=0.0653793 adopted=0
+Frame 572: accepted PnP correction map_age=3 track_age=1 retention=0.446335 landmarks=341 inliers=341 rot_delta_deg=0.313684 trans_delta_m=0.0687953 adopted=0
+Frame 572: tracked features down to 803, re-detecting.
+Frame 573: accepted PnP correction map_age=1 track_age=1 retention=0.845579 landmarks=679 inliers=679 rot_delta_deg=0.187355 trans_delta_m=0.0423156 adopted=0
+Frame 574: accepted PnP correction map_age=2 track_age=1 retention=0.650062 landmarks=522 inliers=522 rot_delta_deg=0.498647 trans_delta_m=0.0882422 adopted=0
+Frame 574: tracked features down to 896, re-detecting.
+Frame 575: accepted PnP correction map_age=3 track_age=1 retention=0.498132 landmarks=400 inliers=400 rot_delta_deg=0.723723 trans_delta_m=0.10302 adopted=0
+Frame 576: accepted PnP correction map_age=1 track_age=1 retention=0.79815 landmarks=949 inliers=949 rot_delta_deg=0.0939788 trans_delta_m=0.047379 adopted=0
+Frame 576: tracked features down to 824, re-detecting.
+Frame 577: accepted PnP correction map_age=2 track_age=1 retention=0.554247 landmarks=659 inliers=659 rot_delta_deg=0.12593 trans_delta_m=0.0508432 adopted=0
+Frame 577: tracked features down to 965, re-detecting.
+Frame 578: accepted PnP correction map_age=3 track_age=1 retention=0.441548 landmarks=525 inliers=525 rot_delta_deg=0.185814 trans_delta_m=0.130064 adopted=0
+Frame 578: tracked features down to 791, re-detecting.
+Frame 579: accepted PnP correction map_age=1 track_age=1 retention=0.841972 landmarks=666 inliers=666 rot_delta_deg=0.0703057 trans_delta_m=0.0234758 adopted=0
+Frame 579: tracked features down to 887, re-detecting.
+Frame 580: accepted PnP correction map_age=2 track_age=1 retention=0.713021 landmarks=564 inliers=564 rot_delta_deg=0.0781907 trans_delta_m=0.0380291 adopted=0
+Frame 581: accepted PnP correction map_age=3 track_age=1 retention=0.643489 landmarks=509 inliers=509 rot_delta_deg=0.162438 trans_delta_m=0.0528726 adopted=0
+Frame 582: accepted PnP correction map_age=4 track_age=1 retention=0.549937 landmarks=435 inliers=435 rot_delta_deg=0.21778 trans_delta_m=0.0758582 adopted=0
+Frame 582: tracked features down to 916, re-detecting.
+Frame 583: accepted PnP correction map_age=5 track_age=1 retention=0.399494 landmarks=316 inliers=316 rot_delta_deg=0.388628 trans_delta_m=0.123092 adopted=0
+Frame 584: accepted PnP correction map_age=1 track_age=1 retention=0.70775 landmarks=758 inliers=758 rot_delta_deg=0.0536702 trans_delta_m=0.0198677 adopted=0
+Frame 584: tracked features down to 681, re-detecting.
+Frame 585: accepted PnP correction map_age=2 track_age=1 retention=0.542484 landmarks=581 inliers=581 rot_delta_deg=0.153623 trans_delta_m=0.0543596 adopted=0
+Frame 586: accepted PnP correction map_age=3 track_age=1 retention=0.318394 landmarks=341 inliers=341 rot_delta_deg=0.242804 trans_delta_m=0.0875797 adopted=0
+Frame 586: skipped keyframe rebuild due to low baseline/parallax.
+Frame 586: tracked features down to 542, re-detecting.
+Frame 587: skipped keyframe rebuild due to low baseline/parallax.
+Frame 587: tracked features down to 502, re-detecting.
+Frame 588: skipped keyframe rebuild due to low baseline/parallax.
+Frame 588: tracked features down to 741, re-detecting.
+Frame 589: skipped keyframe rebuild due to low baseline/parallax.
+Frame 589: tracked features down to 911, re-detecting.
+Frame 590: skipped keyframe rebuild due to low baseline/parallax.
+Frame 591: skipped keyframe rebuild due to low baseline/parallax.
+Frame 591: tracked features down to 917, re-detecting.
+Frame 593: accepted PnP correction map_age=1 track_age=1 retention=0.872979 landmarks=1134 inliers=1134 rot_delta_deg=0.0551373 trans_delta_m=0.032695 adopted=0
+Frame 594: accepted PnP correction map_age=2 track_age=1 retention=0.806774 landmarks=1048 inliers=1048 rot_delta_deg=0.239375 trans_delta_m=0.136104 adopted=0
+Frame 594: tracked features down to 879, re-detecting.
+Frame 595: accepted PnP correction map_age=3 track_age=1 retention=0.711316 landmarks=924 inliers=924 rot_delta_deg=0.0854042 trans_delta_m=0.0679395 adopted=0
+Frame 596: accepted PnP correction map_age=4 track_age=1 retention=0.645112 landmarks=838 inliers=838 rot_delta_deg=0.160841 trans_delta_m=0.102941 adopted=0
+Frame 597: accepted PnP correction map_age=5 track_age=1 retention=0.557352 landmarks=724 inliers=724 rot_delta_deg=0.300392 trans_delta_m=0.159166 adopted=0
+Frame 597: tracked features down to 892, re-detecting.
+Frame 598: accepted PnP correction map_age=6 track_age=1 retention=0.509623 landmarks=662 inliers=662 rot_delta_deg=0.187137 trans_delta_m=0.118273 adopted=0
+Frame 599: accepted PnP correction map_age=7 track_age=1 retention=0.413395 landmarks=537 inliers=537 rot_delta_deg=0.193688 trans_delta_m=0.169859 adopted=0
+Frame 599 (600/1101) tracked=1062 inliers=1062 status=pnp-candidate pose=(-131.414, 5.40043, -48.4208)
+Frame 600: accepted PnP correction map_age=1 track_age=1 retention=0.890772 landmarks=946 inliers=946 rot_delta_deg=0.0743843 trans_delta_m=0.0172435 adopted=0
+Frame 600: tracked features down to 939, re-detecting.
+Frame 601: accepted PnP correction map_age=2 track_age=1 retention=0.787194 landmarks=836 inliers=836 rot_delta_deg=0.169111 trans_delta_m=0.0570415 adopted=0
+Frame 602: accepted PnP correction map_age=3 track_age=1 retention=0.654426 landmarks=695 inliers=695 rot_delta_deg=0.223484 trans_delta_m=0.0687903 adopted=0
+Frame 603: accepted PnP correction map_age=4 track_age=1 retention=0.567797 landmarks=603 inliers=603 rot_delta_deg=0.309062 trans_delta_m=0.0809772 adopted=0
+Frame 603: tracked features down to 856, re-detecting.
+Frame 604: accepted PnP correction map_age=5 track_age=1 retention=0.478343 landmarks=508 inliers=508 rot_delta_deg=0.288017 trans_delta_m=0.0578189 adopted=0
+Frame 605: accepted PnP correction map_age=1 track_age=1 retention=0.868327 landmarks=976 inliers=976 rot_delta_deg=0.0517728 trans_delta_m=0.0231958 adopted=0
+Frame 605: tracked features down to 950, re-detecting.
+Frame 606: accepted PnP correction map_age=2 track_age=1 retention=0.772242 landmarks=868 inliers=868 rot_delta_deg=0.0739241 trans_delta_m=0.0807117 adopted=0
+Frame 607: accepted PnP correction map_age=3 track_age=1 retention=0.677046 landmarks=761 inliers=761 rot_delta_deg=0.15519 trans_delta_m=0.107998 adopted=0
+Frame 607: tracked features down to 788, re-detecting.
+Frame 608: accepted PnP correction map_age=4 track_age=1 retention=0.604093 landmarks=679 inliers=679 rot_delta_deg=0.139971 trans_delta_m=0.10349 adopted=0
+Frame 609: accepted PnP correction map_age=5 track_age=1 retention=0.487544 landmarks=548 inliers=548 rot_delta_deg=0.0905394 trans_delta_m=0.128435 adopted=0
+Frame 610: accepted PnP correction map_age=1 track_age=1 retention=0.887477 landmarks=978 inliers=978 rot_delta_deg=0.225557 trans_delta_m=0.055141 adopted=0
+Frame 610: tracked features down to 833, re-detecting.
+Frame 611: accepted PnP correction map_age=2 track_age=1 retention=0.783122 landmarks=863 inliers=863 rot_delta_deg=0.479295 trans_delta_m=0.0915687 adopted=0
+Frame 612: accepted PnP correction map_age=3 track_age=1 retention=0.650635 landmarks=717 inliers=717 rot_delta_deg=0.633395 trans_delta_m=0.213471 adopted=0
+Frame 612: tracked features down to 925, re-detecting.
+Frame 613: accepted PnP correction map_age=4 track_age=1 retention=0.57078 landmarks=629 inliers=629 rot_delta_deg=0.768323 trans_delta_m=0.243159 adopted=0
+Frame 614: accepted PnP correction map_age=5 track_age=1 retention=0.406534 landmarks=448 inliers=448 rot_delta_deg=0.954258 trans_delta_m=0.234126 adopted=0
+Frame 615: accepted PnP correction map_age=1 track_age=1 retention=0.855199 landmarks=880 inliers=880 rot_delta_deg=0.126016 trans_delta_m=0.047077 adopted=0
+Frame 615: tracked features down to 797, re-detecting.
+Frame 616: accepted PnP correction map_age=2 track_age=1 retention=0.600583 landmarks=618 inliers=618 rot_delta_deg=0.2081 trans_delta_m=0.141679 adopted=0
+Frame 617: accepted PnP correction map_age=3 track_age=1 retention=0.447036 landmarks=460 inliers=460 rot_delta_deg=0.420315 trans_delta_m=0.297058 adopted=0
+Frame 617: skipped keyframe rebuild due to low baseline/parallax.
+Frame 617: tracked features down to 824, re-detecting.
+Frame 618: skipped keyframe rebuild due to low baseline/parallax.
+Frame 619: skipped keyframe rebuild due to low baseline/parallax.
+Frame 619: tracked features down to 810, re-detecting.
+Frame 621: accepted PnP correction map_age=1 track_age=1 retention=0.779016 landmarks=839 inliers=839 rot_delta_deg=0.640813 trans_delta_m=0.327362 adopted=1
+Frame 621: tracked features down to 837, re-detecting.
+Frame 622: accepted PnP correction map_age=2 track_age=1 retention=0.67688 landmarks=729 inliers=729 rot_delta_deg=0.169259 trans_delta_m=0.116921 adopted=0
+Frame 623: accepted PnP correction map_age=3 track_age=1 retention=0.636955 landmarks=686 inliers=686 rot_delta_deg=0.16663 trans_delta_m=0.0658664 adopted=1
+Frame 623: tracked features down to 992, re-detecting.
+Frame 624: accepted PnP correction map_age=4 track_age=1 retention=0.562674 landmarks=606 inliers=606 rot_delta_deg=0.0517522 trans_delta_m=0.00924642 adopted=0
+Frame 625: accepted PnP correction map_age=5 track_age=1 retention=0.530176 landmarks=571 inliers=571 rot_delta_deg=0.168268 trans_delta_m=0.0650766 adopted=0
+Frame 626: accepted PnP correction map_age=6 track_age=1 retention=0.507892 landmarks=547 inliers=547 rot_delta_deg=0.368002 trans_delta_m=0.118049 adopted=0
+Frame 626: tracked features down to 971, re-detecting.
+Frame 627: accepted PnP correction map_age=7 track_age=1 retention=0.494893 landmarks=533 inliers=533 rot_delta_deg=0.427981 trans_delta_m=0.135666 adopted=0
+Frame 627: skipped keyframe rebuild due to low baseline/parallax.
+Frame 628: accepted PnP correction map_age=8 track_age=1 retention=0.472609 landmarks=509 inliers=509 rot_delta_deg=0.363874 trans_delta_m=0.102031 adopted=0
+Frame 628: skipped keyframe rebuild due to low baseline/parallax.
+Frame 629: skipped keyframe rebuild due to low baseline/parallax.
+Frame 629: tracked features down to 833, re-detecting.
+Frame 630: skipped keyframe rebuild due to low baseline/parallax.
+Frame 631: skipped keyframe rebuild due to low baseline/parallax.
+Frame 631: tracked features down to 815, re-detecting.
+Frame 632: skipped keyframe rebuild due to low baseline/parallax.
+Frame 633: skipped keyframe rebuild due to low baseline/parallax.
+Frame 634: skipped keyframe rebuild due to low baseline/parallax.
+Frame 635: skipped keyframe rebuild due to low baseline/parallax.
+Frame 635: tracked features down to 301, re-detecting.
+Frame 636: skipped keyframe rebuild due to low baseline/parallax.
+Frame 636: tracked features down to 577, re-detecting.
+Frame 637: skipped keyframe rebuild due to low baseline/parallax.
+Frame 638: tracked features down to 628, re-detecting.
+Frame 639: accepted PnP correction map_age=1 track_age=1 retention=0.665605 landmarks=418 inliers=418 rot_delta_deg=0.270005 trans_delta_m=0.0120471 adopted=0
+Frame 639: tracked features down to 277, re-detecting.
+Frame 640: accepted PnP correction map_age=2 track_age=1 retention=0.243631 landmarks=153 inliers=153 rot_delta_deg=1.19401 trans_delta_m=0.275838 adopted=0
+Frame 640: skipped keyframe rebuild due to low baseline/parallax.
+Frame 640: tracked features down to 509, re-detecting.
+Frame 641: tracked features down to 91, re-detecting.
+Frame 642: accepted PnP correction map_age=1 track_age=1 retention=0.714286 landmarks=65 inliers=65 rot_delta_deg=1.66142 trans_delta_m=0.274648 adopted=0
+Frame 642: tracked features down to 984, re-detecting.
+Frame 643: accepted PnP correction map_age=2 track_age=1 retention=0.659341 landmarks=60 inliers=60 rot_delta_deg=1.80043 trans_delta_m=0.325692 adopted=0
+Frame 643: tracked features down to 28, re-detecting.
+Frame 644: accepted PnP correction map_age=3 track_age=1 retention=0.56044 landmarks=51 inliers=51 rot_delta_deg=2.14569 trans_delta_m=0.469428 adopted=0
+Frame 644: tracked features down to 35, re-detecting.
+Frame 645: 2D-2D pose failed.
+Frame 646: 2D-2D pose failed.
+Frame 647: 2D-2D pose failed.
+Frame 648: 2D-2D pose failed.
+Frame 649: 2D-2D pose failed.
+Frame 649 (650/1101) tracked=2000 inliers=14 status=skip-pose
+Frame 650: skipped keyframe rebuild due to low baseline/parallax.
+Frame 650: tracked features down to 72, re-detecting.
+Frame 651: skipped keyframe rebuild due to low baseline/parallax.
+Frame 651: tracked features down to 27, re-detecting.
+Frame 652: 2D-2D pose failed.
+Frame 653: skipped keyframe rebuild due to low baseline/parallax.
+Frame 653: tracked features down to 44, re-detecting.
+Frame 654: 2D-2D pose failed.
+Frame 655: 2D-2D pose failed.
+Frame 656: 2D-2D pose failed.
+Frame 657: scale below threshold.
+Frame 658: 2D-2D pose failed.
+Frame 659: 2D-2D pose failed.
+Frame 660: 2D-2D pose failed.
+Frame 661: 2D-2D pose failed.
+Frame 662: 2D-2D pose failed.
+Frame 663: 2D-2D pose failed.
+Frame 664: 2D-2D pose failed.
+Frame 665: 2D-2D pose failed.
+Frame 666: 2D-2D pose failed.
+Frame 667: 2D-2D pose failed.
+Frame 668: 2D-2D pose failed.
+Frame 669: 2D-2D pose failed.
+Frame 670: 2D-2D pose failed.
+Frame 671: 2D-2D pose failed.
+Frame 672: 2D-2D pose failed.
+Frame 673: 2D-2D pose failed.
+Frame 674: 2D-2D pose failed.
+Frame 675: 2D-2D pose failed.
+Frame 676: 2D-2D pose failed.
+Frame 677: 2D-2D pose failed.
+Frame 678: 2D-2D pose failed.
+Frame 679: 2D-2D pose failed.
+Frame 680: 2D-2D pose failed.
+Frame 681: 2D-2D pose failed.
+Frame 682: 2D-2D pose failed.
+Frame 683: 2D-2D pose failed.
+Frame 684: 2D-2D pose failed.
+Frame 685: 2D-2D pose failed.
+Frame 686: 2D-2D pose failed.
+Frame 687: 2D-2D pose failed.
+Frame 688: 2D-2D pose failed.
+Frame 689: 2D-2D pose failed.
+Frame 690: 2D-2D pose failed.
+Frame 691: 2D-2D pose failed.
+Frame 692: 2D-2D pose failed.
+Frame 693: 2D-2D pose failed.
+Frame 694: 2D-2D pose failed.
+Frame 695: 2D-2D pose failed.
+Frame 696: 2D-2D pose failed.
+Frame 697: 2D-2D pose failed.
+Frame 698: 2D-2D pose failed.
+Frame 699: 2D-2D pose failed.
+Frame 699 (700/1101) tracked=2000 inliers=0 status=skip-pose
+Frame 700: 2D-2D pose failed.
+Frame 701: 2D-2D pose failed.
+Frame 702: 2D-2D pose failed.
+Frame 703: 2D-2D pose failed.
+Frame 704: 2D-2D pose failed.
+Frame 705: 2D-2D pose failed.
+Frame 706: 2D-2D pose failed.
+Frame 707: 2D-2D pose failed.
+Frame 708: 2D-2D pose failed.
+Frame 709: scale below threshold.
+Frame 710: scale below threshold.
+Frame 711: scale below threshold.
+Frame 712: scale below threshold.
+Frame 713: scale below threshold.
+Frame 714: scale below threshold.
+Frame 715: scale below threshold.
+Frame 716: scale below threshold.
+Frame 717: scale below threshold.
+Frame 718: scale below threshold.
+Frame 719: scale below threshold.
+Frame 720: scale below threshold.
+Frame 721: 2D-2D pose failed.
+Frame 722: scale below threshold.
+Frame 723: scale below threshold.
+Frame 724: scale below threshold.
+Frame 725: 2D-2D pose failed.
+Frame 726: 2D-2D pose failed.
+Frame 727: 2D-2D pose failed.
+Frame 728: 2D-2D pose failed.
+Frame 729: 2D-2D pose failed.
+Frame 730: 2D-2D pose failed.
+Frame 731: 2D-2D pose failed.
+Frame 732: scale below threshold.
+Frame 733: 2D-2D pose failed.
+Frame 734: 2D-2D pose failed.
+Frame 735: 2D-2D pose failed.
+Frame 736: 2D-2D pose failed.
+Frame 737: 2D-2D pose failed.
+Frame 738: 2D-2D pose failed.
+Frame 739: 2D-2D pose failed.
+Frame 740: 2D-2D pose failed.
+Frame 741: tracked features down to 65, re-detecting.
+Frame 742: accepted PnP correction map_age=1 track_age=1 retention=0.969231 landmarks=63 inliers=63 rot_delta_deg=0.142176 trans_delta_m=0.0242531 adopted=0
+Frame 742: tracked features down to 55, re-detecting.
+Frame 743: accepted PnP correction map_age=2 track_age=1 retention=0.938462 landmarks=61 inliers=61 rot_delta_deg=0.344934 trans_delta_m=0.0624883 adopted=0
+Frame 743: tracked features down to 95, re-detecting.
+Frame 744: accepted PnP correction map_age=3 track_age=1 retention=0.830769 landmarks=54 inliers=54 rot_delta_deg=0.623634 trans_delta_m=0.121289 adopted=0
+Frame 744: tracked features down to 100, re-detecting.
+Frame 745: accepted PnP correction map_age=4 track_age=1 retention=0.707692 landmarks=46 inliers=46 rot_delta_deg=0.698061 trans_delta_m=0.48215 adopted=0
+Frame 745: tracked features down to 102, re-detecting.
+Frame 746: accepted PnP correction map_age=5 track_age=1 retention=0.707692 landmarks=46 inliers=46 rot_delta_deg=1.01779 trans_delta_m=0.621514 adopted=0
+Frame 746: tracked features down to 303, re-detecting.
+Frame 747: accepted PnP correction map_age=6 track_age=1 retention=0.707692 landmarks=46 inliers=46 rot_delta_deg=1.40104 trans_delta_m=0.765752 adopted=0
+Frame 747: tracked features down to 495, re-detecting.
+Frame 748: tracked features down to 728, re-detecting.
+Frame 749: tracked features down to 654, re-detecting.
+Frame 749 (750/1101) tracked=2000 inliers=654 status=rebuild-2d2d pose=(-123.337, 6.15398, -81.3919)
+Frame 750: accepted PnP correction map_age=1 track_age=1 retention=0.860856 landmarks=563 inliers=563 rot_delta_deg=0.24645 trans_delta_m=0.0573355 adopted=1
+Frame 750: tracked features down to 780, re-detecting.
+Frame 751: accepted PnP correction map_age=2 track_age=1 retention=0.655963 landmarks=429 inliers=429 rot_delta_deg=0.147641 trans_delta_m=0.0343985 adopted=1
+Frame 751: tracked features down to 563, re-detecting.
+Frame 752: accepted PnP correction map_age=3 track_age=1 retention=0.507645 landmarks=332 inliers=332 rot_delta_deg=0.174787 trans_delta_m=0.0361384 adopted=0
+Frame 752: tracked features down to 581, re-detecting.
+Frame 753: accepted PnP correction map_age=4 track_age=1 retention=0.365443 landmarks=239 inliers=239 rot_delta_deg=0.449562 trans_delta_m=0.102399 adopted=0
+Frame 753: tracked features down to 427, re-detecting.
+Frame 754: accepted PnP correction map_age=1 track_age=1 retention=0.709602 landmarks=303 inliers=303 rot_delta_deg=0.292407 trans_delta_m=0.0533454 adopted=1
+Frame 754: tracked features down to 384, re-detecting.
+Frame 755: accepted PnP correction map_age=2 track_age=1 retention=0.615925 landmarks=263 inliers=263 rot_delta_deg=0.0598196 trans_delta_m=0.0275187 adopted=1
+Frame 755: tracked features down to 449, re-detecting.
+Frame 756: accepted PnP correction map_age=3 track_age=1 retention=0.604215 landmarks=258 inliers=258 rot_delta_deg=0.186689 trans_delta_m=0.023536 adopted=1
+Frame 756: tracked features down to 666, re-detecting.
+Frame 757: accepted PnP correction map_age=4 track_age=1 retention=0.545667 landmarks=233 inliers=233 rot_delta_deg=0.0370231 trans_delta_m=0.0139958 adopted=0
+Frame 757: tracked features down to 740, re-detecting.
+Frame 758: accepted PnP correction map_age=5 track_age=1 retention=0.444965 landmarks=190 inliers=190 rot_delta_deg=0.248206 trans_delta_m=0.0456936 adopted=0
+Frame 758: tracked features down to 784, re-detecting.
+Frame 759: accepted PnP correction map_age=1 track_age=1 retention=0.927296 landmarks=727 inliers=727 rot_delta_deg=0.294897 trans_delta_m=0.084158 adopted=1
+Frame 759: tracked features down to 733, re-detecting.
+Frame 760: accepted PnP correction map_age=2 track_age=1 retention=0.8125 landmarks=637 inliers=637 rot_delta_deg=0.219598 trans_delta_m=0.0373884 adopted=1
+Frame 760: tracked features down to 966, re-detecting.
+Frame 761: accepted PnP correction map_age=3 track_age=1 retention=0.693878 landmarks=544 inliers=544 rot_delta_deg=0.358369 trans_delta_m=0.0895517 adopted=1
+Frame 762: accepted PnP correction map_age=4 track_age=1 retention=0.520408 landmarks=408 inliers=408 rot_delta_deg=0.384491 trans_delta_m=0.121813 adopted=1
+Frame 762: tracked features down to 899, re-detecting.
+Frame 763: accepted PnP correction map_age=5 track_age=1 retention=0.420918 landmarks=330 inliers=330 rot_delta_deg=0.137656 trans_delta_m=0.100855 adopted=0
+Frame 764: accepted PnP correction map_age=1 track_age=1 retention=0.920879 landmarks=1257 inliers=1257 rot_delta_deg=0.0492575 trans_delta_m=0.0124474 adopted=1
+Frame 765: accepted PnP correction map_age=2 track_age=1 retention=0.821978 landmarks=1122 inliers=1122 rot_delta_deg=0.310694 trans_delta_m=0.0576403 adopted=1
+Frame 766: accepted PnP correction map_age=3 track_age=1 retention=0.650549 landmarks=888 inliers=888 rot_delta_deg=0.297239 trans_delta_m=0.0335244 adopted=1
+Frame 766: tracked features down to 878, re-detecting.
+Frame 767: accepted PnP correction map_age=4 track_age=1 retention=0.542857 landmarks=741 inliers=741 rot_delta_deg=0.233859 trans_delta_m=0.0850443 adopted=0
+Frame 768: accepted PnP correction map_age=5 track_age=1 retention=0.427839 landmarks=584 inliers=584 rot_delta_deg=0.740054 trans_delta_m=0.20929 adopted=0
+Frame 768: tracked features down to 991, re-detecting.
+Frame 769: accepted PnP correction map_age=1 track_age=1 retention=0.839556 landmarks=832 inliers=832 rot_delta_deg=0.460274 trans_delta_m=0.110937 adopted=1
+Frame 770: accepted PnP correction map_age=2 track_age=1 retention=0.622603 landmarks=617 inliers=617 rot_delta_deg=0.629906 trans_delta_m=0.173501 adopted=1
+Frame 770: tracked features down to 915, re-detecting.
+Frame 771: accepted PnP correction map_age=3 track_age=1 retention=0.460141 landmarks=456 inliers=456 rot_delta_deg=0.531111 trans_delta_m=0.13432 adopted=0
+Frame 772: accepted PnP correction map_age=1 track_age=1 retention=0.865737 landmarks=993 inliers=993 rot_delta_deg=0.147964 trans_delta_m=0.0353083 adopted=0
+Frame 772: tracked features down to 990, re-detecting.
+Frame 773: accepted PnP correction map_age=2 track_age=1 retention=0.752398 landmarks=863 inliers=863 rot_delta_deg=0.0392029 trans_delta_m=0.0743142 adopted=1
+Frame 774: accepted PnP correction map_age=3 track_age=1 retention=0.650392 landmarks=746 inliers=746 rot_delta_deg=0.270603 trans_delta_m=0.05941 adopted=1
+Frame 774: tracked features down to 859, re-detecting.
+Frame 775: accepted PnP correction map_age=4 track_age=1 retention=0.577158 landmarks=662 inliers=662 rot_delta_deg=0.320437 trans_delta_m=0.0156617 adopted=0
+Frame 776: accepted PnP correction map_age=5 track_age=1 retention=0.414996 landmarks=476 inliers=476 rot_delta_deg=0.342459 trans_delta_m=0.0325564 adopted=0
+Frame 777: accepted PnP correction map_age=1 track_age=1 retention=0.876611 landmarks=952 inliers=952 rot_delta_deg=0.321137 trans_delta_m=0.0747688 adopted=0
+Frame 777: tracked features down to 863, re-detecting.
+Frame 778: accepted PnP correction map_age=2 track_age=1 retention=0.797422 landmarks=866 inliers=866 rot_delta_deg=0.452581 trans_delta_m=0.0798566 adopted=0
+Frame 779: accepted PnP correction map_age=3 track_age=1 retention=0.584715 landmarks=635 inliers=635 rot_delta_deg=0.739884 trans_delta_m=0.160654 adopted=0
+Frame 780: accepted PnP correction map_age=4 track_age=1 retention=0.435543 landmarks=473 inliers=473 rot_delta_deg=0.763699 trans_delta_m=0.174432 adopted=0
+Frame 780: tracked features down to 912, re-detecting.
+Frame 781: accepted PnP correction map_age=1 track_age=1 retention=0.879386 landmarks=802 inliers=802 rot_delta_deg=0.0698351 trans_delta_m=0.0300235 adopted=0
+Frame 782: accepted PnP correction map_age=2 track_age=1 retention=0.718202 landmarks=655 inliers=655 rot_delta_deg=0.132644 trans_delta_m=0.0611956 adopted=0
+Frame 782: tracked features down to 935, re-detecting.
+Frame 783: accepted PnP correction map_age=3 track_age=1 retention=0.616228 landmarks=562 inliers=562 rot_delta_deg=0.192287 trans_delta_m=0.117791 adopted=0
+Frame 784: accepted PnP correction map_age=4 track_age=1 retention=0.537281 landmarks=490 inliers=490 rot_delta_deg=0.20711 trans_delta_m=0.166476 adopted=0
+Frame 784: tracked features down to 976, re-detecting.
+Frame 785: accepted PnP correction map_age=5 track_age=1 retention=0.445175 landmarks=406 inliers=406 rot_delta_deg=0.350103 trans_delta_m=0.17236 adopted=0
+Frame 786: accepted PnP correction map_age=1 track_age=1 retention=0.892298 landmarks=1367 inliers=1367 rot_delta_deg=0.277876 trans_delta_m=0.0618497 adopted=0
+Frame 787: accepted PnP correction map_age=2 track_age=1 retention=0.762402 landmarks=1168 inliers=1168 rot_delta_deg=0.317482 trans_delta_m=0.111637 adopted=0
+Frame 788: accepted PnP correction map_age=3 track_age=1 retention=0.599869 landmarks=919 inliers=919 rot_delta_deg=0.317149 trans_delta_m=0.107959 adopted=0
+Frame 788: tracked features down to 916, re-detecting.
+Frame 789: accepted PnP correction map_age=4 track_age=1 retention=0.442559 landmarks=678 inliers=678 rot_delta_deg=0.558584 trans_delta_m=0.10971 adopted=0
+Frame 789: skipped keyframe rebuild due to low baseline/parallax.
+Frame 790: skipped keyframe rebuild due to low baseline/parallax.
+Frame 790: tracked features down to 901, re-detecting.
+Frame 791: skipped keyframe rebuild due to low baseline/parallax.
+Frame 792: skipped keyframe rebuild due to low baseline/parallax.
+Frame 793: skipped keyframe rebuild due to low baseline/parallax.
+Frame 793: tracked features down to 989, re-detecting.
+Frame 794: skipped keyframe rebuild due to low baseline/parallax.
+Frame 796: accepted PnP correction map_age=1 track_age=1 retention=0.820046 landmarks=1080 inliers=1080 rot_delta_deg=0.134409 trans_delta_m=0.0618262 adopted=0
+Frame 797: accepted PnP correction map_age=2 track_age=1 retention=0.716781 landmarks=944 inliers=944 rot_delta_deg=0.156285 trans_delta_m=0.0854064 adopted=0
+Frame 797: tracked features down to 979, re-detecting.
+Frame 798: accepted PnP correction map_age=3 track_age=1 retention=0.646925 landmarks=852 inliers=852 rot_delta_deg=0.458961 trans_delta_m=0.187833 adopted=0
+Frame 799: accepted PnP correction map_age=4 track_age=1 retention=0.548975 landmarks=723 inliers=723 rot_delta_deg=0.637116 trans_delta_m=0.277368 adopted=0
+Frame 799 (800/1101) tracked=1156 inliers=1156 status=pnp-candidate pose=(-78.8817, 3.47516, -90.9942)
+Frame 800: accepted PnP correction map_age=5 track_age=1 retention=0.419134 landmarks=552 inliers=552 rot_delta_deg=0.689437 trans_delta_m=0.302114 adopted=0
+Frame 800: tracked features down to 952, re-detecting.
+Frame 801: accepted PnP correction map_age=1 track_age=1 retention=0.905462 landmarks=862 inliers=862 rot_delta_deg=0.197258 trans_delta_m=0.059355 adopted=0
+Frame 802: accepted PnP correction map_age=2 track_age=1 retention=0.659664 landmarks=628 inliers=628 rot_delta_deg=0.596322 trans_delta_m=0.199812 adopted=0
+Frame 802: tracked features down to 947, re-detecting.
+Frame 803: accepted PnP correction map_age=3 track_age=1 retention=0.442227 landmarks=421 inliers=421 rot_delta_deg=0.975273 trans_delta_m=0.262636 adopted=0
+Frame 804: accepted PnP correction map_age=1 track_age=1 retention=0.856884 landmarks=946 inliers=946 rot_delta_deg=0.0890241 trans_delta_m=0.0289111 adopted=0
+Frame 804: tracked features down to 913, re-detecting.
+Frame 805: accepted PnP correction map_age=2 track_age=1 retention=0.626812 landmarks=692 inliers=692 rot_delta_deg=0.169543 trans_delta_m=0.0528485 adopted=0
+Frame 806: accepted PnP correction map_age=3 track_age=1 retention=0.496377 landmarks=548 inliers=548 rot_delta_deg=0.548705 trans_delta_m=0.127282 adopted=0
+Frame 806: tracked features down to 846, re-detecting.
+Frame 807: accepted PnP correction map_age=1 track_age=1 retention=0.845154 landmarks=715 inliers=715 rot_delta_deg=0.208609 trans_delta_m=0.048447 adopted=0
+Frame 808: accepted PnP correction map_age=2 track_age=1 retention=0.731678 landmarks=619 inliers=619 rot_delta_deg=0.273296 trans_delta_m=0.144086 adopted=0
+Frame 809: accepted PnP correction map_age=3 track_age=1 retention=0.583924 landmarks=494 inliers=494 rot_delta_deg=0.329733 trans_delta_m=0.237691 adopted=0
+Frame 809: tracked features down to 776, re-detecting.
+Frame 810: accepted PnP correction map_age=4 track_age=1 retention=0.438534 landmarks=371 inliers=371 rot_delta_deg=0.658573 trans_delta_m=0.492479 adopted=0
+Frame 811: accepted PnP correction map_age=1 track_age=1 retention=0.905614 landmarks=1113 inliers=1113 rot_delta_deg=0.189898 trans_delta_m=0.0832222 adopted=0
+Frame 811: tracked features down to 880, re-detecting.
+Frame 812: accepted PnP correction map_age=2 track_age=1 retention=0.794142 landmarks=976 inliers=976 rot_delta_deg=0.185971 trans_delta_m=0.0844942 adopted=0
+Frame 813: accepted PnP correction map_age=3 track_age=1 retention=0.610252 landmarks=750 inliers=750 rot_delta_deg=0.248541 trans_delta_m=0.11591 adopted=0
+Frame 813: tracked features down to 962, re-detecting.
+Frame 814: accepted PnP correction map_age=4 track_age=1 retention=0.520749 landmarks=640 inliers=640 rot_delta_deg=0.388082 trans_delta_m=0.138835 adopted=0
+Frame 815: accepted PnP correction map_age=5 track_age=1 retention=0.414158 landmarks=509 inliers=509 rot_delta_deg=0.451196 trans_delta_m=0.151859 adopted=0
+Frame 815: tracked features down to 835, re-detecting.
+Frame 816: accepted PnP correction map_age=1 track_age=1 retention=0.839521 landmarks=701 inliers=701 rot_delta_deg=0.136668 trans_delta_m=0.0775592 adopted=0
+Frame 817: accepted PnP correction map_age=2 track_age=1 retention=0.683832 landmarks=571 inliers=571 rot_delta_deg=0.153061 trans_delta_m=0.0695406 adopted=0
+Frame 818: accepted PnP correction map_age=3 track_age=1 retention=0.566467 landmarks=473 inliers=473 rot_delta_deg=0.129698 trans_delta_m=0.0685196 adopted=0
+Frame 818: tracked features down to 860, re-detecting.
+Frame 819: accepted PnP correction map_age=4 track_age=1 retention=0.453892 landmarks=379 inliers=379 rot_delta_deg=0.0725166 trans_delta_m=0.0708869 adopted=0
+Frame 820: accepted PnP correction map_age=1 track_age=1 retention=0.825372 landmarks=1054 inliers=1054 rot_delta_deg=0.0951438 trans_delta_m=0.0175659 adopted=0
+Frame 820: tracked features down to 982, re-detecting.
+Frame 821: accepted PnP correction map_age=2 track_age=1 retention=0.706343 landmarks=902 inliers=902 rot_delta_deg=0.111002 trans_delta_m=0.051577 adopted=0
+Frame 822: accepted PnP correction map_age=3 track_age=1 retention=0.576351 landmarks=736 inliers=736 rot_delta_deg=0.155868 trans_delta_m=0.0879896 adopted=0
+Frame 823: accepted PnP correction map_age=4 track_age=1 retention=0.480814 landmarks=614 inliers=614 rot_delta_deg=0.2113 trans_delta_m=0.127764 adopted=0
+Frame 823: skipped keyframe rebuild due to low baseline/parallax.
+Frame 823: tracked features down to 832, re-detecting.
+Frame 824: accepted PnP correction map_age=5 track_age=1 retention=0.425998 landmarks=544 inliers=544 rot_delta_deg=0.305239 trans_delta_m=0.17242 adopted=0
+Frame 824: skipped keyframe rebuild due to low baseline/parallax.
+Frame 825: skipped keyframe rebuild due to low baseline/parallax.
+Frame 826: skipped keyframe rebuild due to low baseline/parallax.
+Frame 826: tracked features down to 879, re-detecting.
+Frame 828: accepted PnP correction map_age=1 track_age=1 retention=0.805331 landmarks=997 inliers=997 rot_delta_deg=0.0794393 trans_delta_m=0.0186208 adopted=0
+Frame 829: accepted PnP correction map_age=2 track_age=1 retention=0.714055 landmarks=884 inliers=884 rot_delta_deg=0.141161 trans_delta_m=0.0536435 adopted=0
+Frame 829: tracked features down to 875, re-detecting.
+Frame 830: accepted PnP correction map_age=3 track_age=1 retention=0.636511 landmarks=788 inliers=788 rot_delta_deg=0.250219 trans_delta_m=0.0736471 adopted=0
+Frame 831: accepted PnP correction map_age=4 track_age=1 retention=0.568659 landmarks=704 inliers=704 rot_delta_deg=0.327654 trans_delta_m=0.09851 adopted=0
+Frame 832: accepted PnP correction map_age=5 track_age=1 retention=0.443457 landmarks=549 inliers=549 rot_delta_deg=0.404497 trans_delta_m=0.0983263 adopted=0
+Frame 832: tracked features down to 927, re-detecting.
+Frame 833: accepted PnP correction map_age=1 track_age=1 retention=0.914779 landmarks=848 inliers=848 rot_delta_deg=0.141509 trans_delta_m=0.03313 adopted=0
+Frame 834: accepted PnP correction map_age=2 track_age=1 retention=0.79288 landmarks=735 inliers=735 rot_delta_deg=0.327217 trans_delta_m=0.087963 adopted=0
+Frame 835: accepted PnP correction map_age=3 track_age=1 retention=0.648328 landmarks=601 inliers=601 rot_delta_deg=0.634396 trans_delta_m=0.148992 adopted=0
+Frame 835: tracked features down to 923, re-detecting.
+Frame 836: accepted PnP correction map_age=4 track_age=1 retention=0.529666 landmarks=491 inliers=491 rot_delta_deg=0.656016 trans_delta_m=0.176387 adopted=0
+Frame 837: accepted PnP correction map_age=5 track_age=1 retention=0.390507 landmarks=362 inliers=362 rot_delta_deg=1.04137 trans_delta_m=0.332526 adopted=0
+Frame 838: accepted PnP correction map_age=1 track_age=1 retention=0.824853 landmarks=843 inliers=843 rot_delta_deg=0.224539 trans_delta_m=0.0886445 adopted=0
+Frame 838: tracked features down to 808, re-detecting.
+Frame 839: accepted PnP correction map_age=2 track_age=1 retention=0.678082 landmarks=693 inliers=693 rot_delta_deg=0.691853 trans_delta_m=0.275993 adopted=0
+Frame 840: accepted PnP correction map_age=3 track_age=1 retention=0.505871 landmarks=517 inliers=517 rot_delta_deg=0.651162 trans_delta_m=0.31122 adopted=0
+Frame 840: tracked features down to 972, re-detecting.
+Frame 841: accepted PnP correction map_age=4 track_age=1 retention=0.449119 landmarks=459 inliers=459 rot_delta_deg=0.745192 trans_delta_m=0.34405 adopted=0
+Frame 842: accepted PnP correction map_age=1 track_age=1 retention=0.819629 landmarks=927 inliers=927 rot_delta_deg=0.209952 trans_delta_m=0.0506617 adopted=0
+Frame 842: tracked features down to 864, re-detecting.
+Frame 843: accepted PnP correction map_age=2 track_age=1 retention=0.729443 landmarks=825 inliers=825 rot_delta_deg=0.146251 trans_delta_m=0.0475687 adopted=0
+Frame 844: accepted PnP correction map_age=3 track_age=1 retention=0.622458 landmarks=704 inliers=704 rot_delta_deg=0.209079 trans_delta_m=0.0848801 adopted=0
+Frame 844: tracked features down to 926, re-detecting.
+Frame 845: accepted PnP correction map_age=4 track_age=1 retention=0.524315 landmarks=593 inliers=593 rot_delta_deg=0.29419 trans_delta_m=0.115704 adopted=0
+Frame 846: accepted PnP correction map_age=5 track_age=1 retention=0.454465 landmarks=514 inliers=514 rot_delta_deg=0.231889 trans_delta_m=0.103682 adopted=0
+Frame 847: accepted PnP correction map_age=1 track_age=1 retention=0.873393 landmarks=883 inliers=883 rot_delta_deg=0.154693 trans_delta_m=0.0450406 adopted=0
+Frame 847: tracked features down to 828, re-detecting.
+Frame 848: accepted PnP correction map_age=2 track_age=1 retention=0.712166 landmarks=720 inliers=720 rot_delta_deg=0.177627 trans_delta_m=0.0475939 adopted=0
+Frame 849: accepted PnP correction map_age=3 track_age=1 retention=0.600396 landmarks=607 inliers=607 rot_delta_deg=0.221159 trans_delta_m=0.0609517 adopted=0
+Frame 849 (850/1101) tracked=1042 inliers=1042 status=pnp-candidate pose=(-24.1868, -0.642452, -99.1741)
+Frame 850: accepted PnP correction map_age=4 track_age=1 retention=0.47181 landmarks=477 inliers=477 rot_delta_deg=0.275216 trans_delta_m=0.0675517 adopted=0
+Frame 850: tracked features down to 778, re-detecting.
+Frame 851: accepted PnP correction map_age=1 track_age=1 retention=0.732648 landmarks=570 inliers=570 rot_delta_deg=0.047503 trans_delta_m=0.0304517 adopted=0
+Frame 852: accepted PnP correction map_age=2 track_age=1 retention=0.534704 landmarks=416 inliers=416 rot_delta_deg=0.150093 trans_delta_m=0.0453005 adopted=0
+Frame 852: tracked features down to 766, re-detecting.
+Frame 853: accepted PnP correction map_age=3 track_age=1 retention=0.40617 landmarks=316 inliers=316 rot_delta_deg=0.24164 trans_delta_m=0.0551442 adopted=0
+Frame 854: accepted PnP correction map_age=1 track_age=1 retention=0.802927 landmarks=823 inliers=823 rot_delta_deg=0.123937 trans_delta_m=0.0404926 adopted=0
+Frame 854: tracked features down to 715, re-detecting.
+Frame 855: accepted PnP correction map_age=2 track_age=1 retention=0.682927 landmarks=700 inliers=700 rot_delta_deg=0.147694 trans_delta_m=0.0479849 adopted=0
+Frame 855: tracked features down to 948, re-detecting.
+Frame 856: accepted PnP correction map_age=3 track_age=1 retention=0.547317 landmarks=561 inliers=561 rot_delta_deg=0.198746 trans_delta_m=0.0689941 adopted=0
+Frame 856: tracked features down to 966, re-detecting.
+Frame 857: accepted PnP correction map_age=4 track_age=1 retention=0.473171 landmarks=485 inliers=485 rot_delta_deg=0.16532 trans_delta_m=0.0613255 adopted=0
+Frame 858: accepted PnP correction map_age=1 track_age=1 retention=0.906219 landmarks=918 inliers=918 rot_delta_deg=0.0947779 trans_delta_m=0.0167822 adopted=0
+Frame 858: tracked features down to 840, re-detecting.
+Frame 859: accepted PnP correction map_age=2 track_age=1 retention=0.82231 landmarks=833 inliers=833 rot_delta_deg=0.156526 trans_delta_m=0.0258037 adopted=0
+Frame 860: accepted PnP correction map_age=3 track_age=1 retention=0.597236 landmarks=605 inliers=605 rot_delta_deg=0.291277 trans_delta_m=0.0471949 adopted=0
+Frame 860: tracked features down to 867, re-detecting.
+Frame 861: accepted PnP correction map_age=4 track_age=1 retention=0.476802 landmarks=483 inliers=483 rot_delta_deg=0.3851 trans_delta_m=0.0758009 adopted=0
+Frame 861: tracked features down to 963, re-detecting.
+Frame 862: accepted PnP correction map_age=1 track_age=1 retention=0.804777 landmarks=775 inliers=775 rot_delta_deg=0.0324405 trans_delta_m=0.0153996 adopted=0
+Frame 862: tracked features down to 981, re-detecting.
+Frame 863: accepted PnP correction map_age=2 track_age=1 retention=0.694704 landmarks=669 inliers=669 rot_delta_deg=0.0210665 trans_delta_m=0.0197126 adopted=0
+Frame 864: accepted PnP correction map_age=3 track_age=1 retention=0.593977 landmarks=572 inliers=572 rot_delta_deg=0.234622 trans_delta_m=0.066874 adopted=0
+Frame 864: tracked features down to 785, re-detecting.
+Frame 865: accepted PnP correction map_age=4 track_age=1 retention=0.505711 landmarks=487 inliers=487 rot_delta_deg=0.311013 trans_delta_m=0.108731 adopted=0
+Frame 866: accepted PnP correction map_age=5 track_age=1 retention=0.402908 landmarks=388 inliers=388 rot_delta_deg=0.283044 trans_delta_m=0.0839255 adopted=0
+Frame 866: tracked features down to 868, re-detecting.
+Frame 867: accepted PnP correction map_age=1 track_age=1 retention=0.847926 landmarks=736 inliers=736 rot_delta_deg=0.0720867 trans_delta_m=0.0480888 adopted=0
+Frame 868: accepted PnP correction map_age=2 track_age=1 retention=0.58871 landmarks=511 inliers=511 rot_delta_deg=0.16723 trans_delta_m=0.101519 adopted=0
+Frame 868: tracked features down to 901, re-detecting.
+Frame 869: accepted PnP correction map_age=3 track_age=1 retention=0.408986 landmarks=355 inliers=355 rot_delta_deg=0.109281 trans_delta_m=0.126861 adopted=0
+Frame 869: tracked features down to 760, re-detecting.
+Frame 870: accepted PnP correction map_age=1 track_age=1 retention=0.664474 landmarks=505 inliers=505 rot_delta_deg=0.0263459 trans_delta_m=0.0174483 adopted=0
+Frame 870: tracked features down to 767, re-detecting.
+Frame 871: accepted PnP correction map_age=2 track_age=1 retention=0.563158 landmarks=428 inliers=428 rot_delta_deg=0.0844983 trans_delta_m=0.0397816 adopted=0
+Frame 871: tracked features down to 804, re-detecting.
+Frame 872: accepted PnP correction map_age=3 track_age=1 retention=0.451316 landmarks=343 inliers=343 rot_delta_deg=0.141856 trans_delta_m=0.0979993 adopted=0
+Frame 872: skipped keyframe rebuild due to low baseline/parallax.
+Frame 872: tracked features down to 735, re-detecting.
+Frame 873: accepted PnP correction map_age=4 track_age=1 retention=0.371053 landmarks=282 inliers=282 rot_delta_deg=0.185551 trans_delta_m=0.130458 adopted=0
+Frame 873: skipped keyframe rebuild due to low baseline/parallax.
+Frame 873: tracked features down to 716, re-detecting.
+Frame 874: skipped keyframe rebuild due to low baseline/parallax.
+Frame 874: tracked features down to 705, re-detecting.
+Frame 875: tracked features down to 806, re-detecting.
+Frame 876: accepted PnP correction map_age=1 track_age=1 retention=0.80273 landmarks=647 inliers=647 rot_delta_deg=0.176007 trans_delta_m=0.0726933 adopted=0
+Frame 876: tracked features down to 847, re-detecting.
+Frame 877: accepted PnP correction map_age=2 track_age=1 retention=0.610422 landmarks=492 inliers=492 rot_delta_deg=0.205724 trans_delta_m=0.111703 adopted=0
+Frame 877: tracked features down to 656, re-detecting.
+Frame 878: accepted PnP correction map_age=3 track_age=1 retention=0.490074 landmarks=395 inliers=395 rot_delta_deg=0.219411 trans_delta_m=0.115797 adopted=0
+Frame 878: skipped keyframe rebuild due to low baseline/parallax.
+Frame 879: accepted PnP correction map_age=4 track_age=1 retention=0.46402 landmarks=374 inliers=374 rot_delta_deg=0.342692 trans_delta_m=0.169653 adopted=0
+Frame 879: tracked features down to 778, re-detecting.
+Frame 880: accepted PnP correction map_age=1 track_age=1 retention=0.888175 landmarks=691 inliers=691 rot_delta_deg=0.0650664 trans_delta_m=0.0227679 adopted=0
+Frame 880: tracked features down to 792, re-detecting.
+Frame 881: accepted PnP correction map_age=2 track_age=1 retention=0.782776 landmarks=609 inliers=609 rot_delta_deg=0.106343 trans_delta_m=0.0183999 adopted=0
+Frame 881: tracked features down to 827, re-detecting.
+Frame 882: accepted PnP correction map_age=3 track_age=1 retention=0.742931 landmarks=578 inliers=578 rot_delta_deg=0.115095 trans_delta_m=0.0354797 adopted=0
+Frame 882: tracked features down to 892, re-detecting.
+Frame 883: accepted PnP correction map_age=4 track_age=1 retention=0.72365 landmarks=563 inliers=563 rot_delta_deg=0.234996 trans_delta_m=0.0395323 adopted=0
+Frame 883: tracked features down to 803, re-detecting.
+Frame 884: accepted PnP correction map_age=5 track_age=1 retention=0.683805 landmarks=532 inliers=532 rot_delta_deg=0.315039 trans_delta_m=0.0441434 adopted=1
+Frame 884: tracked features down to 735, re-detecting.
+Frame 885: accepted PnP correction map_age=6 track_age=1 retention=0.676093 landmarks=526 inliers=526 rot_delta_deg=0.11587 trans_delta_m=0.0635018 adopted=1
+Frame 885: tracked features down to 622, re-detecting.
+Frame 886: accepted PnP correction map_age=7 track_age=1 retention=0.587404 landmarks=457 inliers=457 rot_delta_deg=0.152328 trans_delta_m=0.0759074 adopted=1
+Frame 886: tracked features down to 726, re-detecting.
+Frame 887: accepted PnP correction map_age=8 track_age=1 retention=0.528278 landmarks=411 inliers=411 rot_delta_deg=0.0747647 trans_delta_m=0.0638046 adopted=0
+Frame 887: tracked features down to 766, re-detecting.
+Frame 888: accepted PnP correction map_age=1 track_age=1 retention=0.951697 landmarks=729 inliers=729 rot_delta_deg=0.0762811 trans_delta_m=0.0288613 adopted=1
+Frame 888: tracked features down to 751, re-detecting.
+Frame 889: accepted PnP correction map_age=2 track_age=1 retention=0.869452 landmarks=666 inliers=666 rot_delta_deg=0.0440053 trans_delta_m=0.0217436 adopted=1
+Frame 889: tracked features down to 683, re-detecting.
+Frame 890: accepted PnP correction map_age=3 track_age=1 retention=0.819843 landmarks=628 inliers=628 rot_delta_deg=0.170102 trans_delta_m=0.0522406 adopted=1
+Frame 890: tracked features down to 800, re-detecting.
+Frame 891: accepted PnP correction map_age=4 track_age=1 retention=0.781984 landmarks=599 inliers=599 rot_delta_deg=0.249061 trans_delta_m=0.0877358 adopted=1
+Frame 891: tracked features down to 792, re-detecting.
+Frame 892: accepted PnP correction map_age=5 track_age=1 retention=0.685379 landmarks=525 inliers=525 rot_delta_deg=0.0579508 trans_delta_m=0.032946 adopted=1
+Frame 892: tracked features down to 707, re-detecting.
+Frame 893: accepted PnP correction map_age=6 track_age=1 retention=0.56658 landmarks=434 inliers=434 rot_delta_deg=0.127801 trans_delta_m=0.060086 adopted=1
+Frame 893: tracked features down to 755, re-detecting.
+Frame 894: accepted PnP correction map_age=7 track_age=1 retention=0.441253 landmarks=338 inliers=338 rot_delta_deg=0.109025 trans_delta_m=0.0430692 adopted=0
+Frame 894: tracked features down to 700, re-detecting.
+Frame 895: accepted PnP correction map_age=1 track_age=1 retention=0.788571 landmarks=552 inliers=552 rot_delta_deg=0.0208016 trans_delta_m=0.0164292 adopted=1
+Frame 895: tracked features down to 608, re-detecting.
+Frame 896: accepted PnP correction map_age=2 track_age=1 retention=0.677143 landmarks=474 inliers=474 rot_delta_deg=0.119379 trans_delta_m=0.0348598 adopted=1
+Frame 896: tracked features down to 471, re-detecting.
+Frame 897: accepted PnP correction map_age=3 track_age=1 retention=0.575714 landmarks=403 inliers=403 rot_delta_deg=0.723004 trans_delta_m=0.254934 adopted=0
+Frame 898: accepted PnP correction map_age=4 track_age=1 retention=0.354286 landmarks=248 inliers=248 rot_delta_deg=0.630784 trans_delta_m=0.188133 adopted=0
+Frame 898: tracked features down to 290, re-detecting.
+Frame 899: accepted PnP correction map_age=1 track_age=1 retention=0.934483 landmarks=271 inliers=271 rot_delta_deg=0.161687 trans_delta_m=0.0551638 adopted=1
+Frame 899: tracked features down to 597, re-detecting.
+Frame 899 (900/1101) tracked=2000 inliers=597 status=pnp pose=(17.8681, -4.19091, -104.505)
+Frame 900: accepted PnP correction map_age=2 track_age=1 retention=0.675862 landmarks=196 inliers=196 rot_delta_deg=0.0925826 trans_delta_m=0.0444611 adopted=1
+Frame 900: tracked features down to 451, re-detecting.
+Frame 901: accepted PnP correction map_age=3 track_age=1 retention=0.324138 landmarks=94 inliers=94 rot_delta_deg=0.463991 trans_delta_m=0.214485 adopted=0
+Frame 901: tracked features down to 230, re-detecting.
+Frame 902: accepted PnP correction map_age=1 track_age=1 retention=0.73913 landmarks=170 inliers=170 rot_delta_deg=0.124189 trans_delta_m=0.0459584 adopted=1
+Frame 902: tracked features down to 286, re-detecting.
+Frame 903: accepted PnP correction map_age=2 track_age=1 retention=0.482609 landmarks=111 inliers=111 rot_delta_deg=0.602317 trans_delta_m=0.24615 adopted=0
+Frame 903: tracked features down to 480, re-detecting.
+Frame 904: accepted PnP correction map_age=1 track_age=1 retention=0.779167 landmarks=374 inliers=374 rot_delta_deg=0.623834 trans_delta_m=0.145099 adopted=1
+Frame 904: tracked features down to 398, re-detecting.
+Frame 905: accepted PnP correction map_age=2 track_age=1 retention=0.61875 landmarks=297 inliers=297 rot_delta_deg=0.471138 trans_delta_m=0.11184 adopted=1
+Frame 905: tracked features down to 399, re-detecting.
+Frame 906: accepted PnP correction map_age=3 track_age=1 retention=0.497917 landmarks=239 inliers=239 rot_delta_deg=0.28842 trans_delta_m=0.0913217 adopted=0
+Frame 906: tracked features down to 378, re-detecting.
+Frame 907: accepted PnP correction map_age=1 track_age=1 retention=0.857143 landmarks=324 inliers=324 rot_delta_deg=0.270968 trans_delta_m=0.0686991 adopted=1
+Frame 907: tracked features down to 561, re-detecting.
+Frame 908: accepted PnP correction map_age=2 track_age=1 retention=0.597884 landmarks=226 inliers=226 rot_delta_deg=0.593621 trans_delta_m=0.215686 adopted=1
+Frame 908: tracked features down to 551, re-detecting.
+Frame 909: accepted PnP correction map_age=3 track_age=1 retention=0.486772 landmarks=184 inliers=184 rot_delta_deg=1.25137 trans_delta_m=0.466997 adopted=0
+Frame 909: tracked features down to 548, re-detecting.
+Frame 910: accepted PnP correction map_age=1 track_age=1 retention=0.916058 landmarks=502 inliers=502 rot_delta_deg=0.139688 trans_delta_m=0.0307428 adopted=1
+Frame 910: tracked features down to 630, re-detecting.
+Frame 911: accepted PnP correction map_age=2 track_age=1 retention=0.839416 landmarks=460 inliers=460 rot_delta_deg=0.156337 trans_delta_m=0.0651331 adopted=1
+Frame 911: tracked features down to 605, re-detecting.
+Frame 912: accepted PnP correction map_age=3 track_age=1 retention=0.678832 landmarks=372 inliers=372 rot_delta_deg=0.0416535 trans_delta_m=0.0459445 adopted=1
+Frame 912: tracked features down to 593, re-detecting.
+Frame 913: accepted PnP correction map_age=4 track_age=1 retention=0.531022 landmarks=291 inliers=291 rot_delta_deg=0.157629 trans_delta_m=0.046658 adopted=0
+Frame 913: tracked features down to 596, re-detecting.
+Frame 914: accepted PnP correction map_age=5 track_age=1 retention=0.430657 landmarks=236 inliers=236 rot_delta_deg=0.574718 trans_delta_m=0.122845 adopted=0
+Frame 914: tracked features down to 677, re-detecting.
+Frame 915: accepted PnP correction map_age=1 track_age=1 retention=0.895126 landmarks=606 inliers=606 rot_delta_deg=0.0761113 trans_delta_m=0.0169621 adopted=1
+Frame 915: tracked features down to 685, re-detecting.
+Frame 916: accepted PnP correction map_age=2 track_age=1 retention=0.759232 landmarks=514 inliers=514 rot_delta_deg=0.148016 trans_delta_m=0.0294773 adopted=1
+Frame 916: tracked features down to 733, re-detecting.
+Frame 917: accepted PnP correction map_age=3 track_age=1 retention=0.610044 landmarks=413 inliers=413 rot_delta_deg=0.0901442 trans_delta_m=0.0258047 adopted=1
+Frame 917: tracked features down to 795, re-detecting.
+Frame 918: accepted PnP correction map_age=4 track_age=1 retention=0.491876 landmarks=333 inliers=333 rot_delta_deg=0.148777 trans_delta_m=0.0337966 adopted=0
+Frame 918: tracked features down to 828, re-detecting.
+Frame 919: accepted PnP correction map_age=1 track_age=1 retention=0.905797 landmarks=750 inliers=750 rot_delta_deg=0.102312 trans_delta_m=0.0484588 adopted=1
+Frame 919: tracked features down to 723, re-detecting.
+Frame 920: accepted PnP correction map_age=2 track_age=1 retention=0.836957 landmarks=693 inliers=693 rot_delta_deg=0.0460619 trans_delta_m=0.00737858 adopted=1
+Frame 920: tracked features down to 949, re-detecting.
+Frame 921: accepted PnP correction map_age=3 track_age=1 retention=0.698068 landmarks=578 inliers=578 rot_delta_deg=0.0739867 trans_delta_m=0.0264337 adopted=1
+Frame 921: tracked features down to 913, re-detecting.
+Frame 922: accepted PnP correction map_age=4 track_age=1 retention=0.530193 landmarks=439 inliers=439 rot_delta_deg=0.16716 trans_delta_m=0.0524506 adopted=1
+Frame 922: tracked features down to 820, re-detecting.
+Frame 923: accepted PnP correction map_age=5 track_age=1 retention=0.386473 landmarks=320 inliers=320 rot_delta_deg=0.117938 trans_delta_m=0.0453788 adopted=0
+Frame 923: tracked features down to 848, re-detecting.
+Frame 924: accepted PnP correction map_age=1 track_age=1 retention=0.807783 landmarks=685 inliers=685 rot_delta_deg=0.141271 trans_delta_m=0.0337684 adopted=1
+Frame 924: tracked features down to 801, re-detecting.
+Frame 925: accepted PnP correction map_age=2 track_age=1 retention=0.64033 landmarks=543 inliers=543 rot_delta_deg=0.0706682 trans_delta_m=0.0241521 adopted=1
+Frame 925: tracked features down to 951, re-detecting.
+Frame 926: accepted PnP correction map_age=3 track_age=1 retention=0.456368 landmarks=387 inliers=387 rot_delta_deg=0.0700028 trans_delta_m=0.0431362 adopted=0
+Frame 926: skipped keyframe rebuild due to low baseline/parallax.
+Frame 926: tracked features down to 844, re-detecting.
+Frame 927: accepted PnP correction map_age=4 track_age=1 retention=0.29717 landmarks=252 inliers=252 rot_delta_deg=0.198727 trans_delta_m=0.0741804 adopted=0
+Frame 927: skipped keyframe rebuild due to low baseline/parallax.
+Frame 927: tracked features down to 925, re-detecting.
+Frame 928: skipped keyframe rebuild due to low baseline/parallax.
+Frame 928: tracked features down to 903, re-detecting.
+Frame 929: skipped keyframe rebuild due to low baseline/parallax.
+Frame 930: tracked features down to 659, re-detecting.
+Frame 931: accepted PnP correction map_age=1 track_age=1 retention=0.898331 landmarks=592 inliers=592 rot_delta_deg=0.222835 trans_delta_m=0.0814897 adopted=1
+Frame 932: accepted PnP correction map_age=2 track_age=1 retention=0.808801 landmarks=533 inliers=533 rot_delta_deg=0.165584 trans_delta_m=0.0864879 adopted=1
+Frame 932: tracked features down to 704, re-detecting.
+Frame 933: accepted PnP correction map_age=3 track_age=1 retention=0.641882 landmarks=423 inliers=423 rot_delta_deg=0.246365 trans_delta_m=0.106184 adopted=0
+Frame 933: tracked features down to 791, re-detecting.
+Frame 934: accepted PnP correction map_age=4 track_age=1 retention=0.471927 landmarks=311 inliers=311 rot_delta_deg=0.570001 trans_delta_m=0.219738 adopted=0
+Frame 934: tracked features down to 969, re-detecting.
+Frame 935: accepted PnP correction map_age=1 track_age=1 retention=0.821465 landmarks=796 inliers=796 rot_delta_deg=0.0345179 trans_delta_m=0.0237529 adopted=0
+Frame 935: tracked features down to 935, re-detecting.
+Frame 936: accepted PnP correction map_age=2 track_age=1 retention=0.707946 landmarks=686 inliers=686 rot_delta_deg=0.0609878 trans_delta_m=0.0566702 adopted=0
+Frame 936: tracked features down to 978, re-detecting.
+Frame 937: accepted PnP correction map_age=3 track_age=1 retention=0.626419 landmarks=607 inliers=607 rot_delta_deg=0.169047 trans_delta_m=0.092236 adopted=0
+Frame 938: accepted PnP correction map_age=4 track_age=1 retention=0.577915 landmarks=560 inliers=560 rot_delta_deg=0.271139 trans_delta_m=0.162109 adopted=0
+Frame 938: tracked features down to 806, re-detecting.
+Frame 939: accepted PnP correction map_age=5 track_age=1 retention=0.47162 landmarks=457 inliers=457 rot_delta_deg=0.353922 trans_delta_m=0.218461 adopted=0
+Frame 940: accepted PnP correction map_age=1 track_age=1 retention=0.86425 landmarks=1025 inliers=1025 rot_delta_deg=0.0953311 trans_delta_m=0.0249428 adopted=0
+Frame 940: tracked features down to 999, re-detecting.
+Frame 941: accepted PnP correction map_age=2 track_age=1 retention=0.769815 landmarks=913 inliers=913 rot_delta_deg=0.0881056 trans_delta_m=0.0155506 adopted=0
+Frame 942: accepted PnP correction map_age=3 track_age=1 retention=0.680438 landmarks=807 inliers=807 rot_delta_deg=0.097441 trans_delta_m=0.0169829 adopted=0
+Frame 942: tracked features down to 824, re-detecting.
+Frame 943: accepted PnP correction map_age=4 track_age=1 retention=0.56661 landmarks=672 inliers=672 rot_delta_deg=0.171587 trans_delta_m=0.0256941 adopted=0
+Frame 944: accepted PnP correction map_age=5 track_age=1 retention=0.509275 landmarks=604 inliers=604 rot_delta_deg=0.0589368 trans_delta_m=0.043971 adopted=0
+Frame 944: tracked features down to 999, re-detecting.
+Frame 945: accepted PnP correction map_age=6 track_age=1 retention=0.437605 landmarks=519 inliers=519 rot_delta_deg=0.1476 trans_delta_m=0.0765014 adopted=0
+Frame 946: accepted PnP correction map_age=1 track_age=1 retention=0.783276 landmarks=918 inliers=918 rot_delta_deg=0.217107 trans_delta_m=0.0484166 adopted=0
+Frame 946: tracked features down to 918, re-detecting.
+Frame 947: accepted PnP correction map_age=2 track_age=1 retention=0.677474 landmarks=794 inliers=794 rot_delta_deg=0.367051 trans_delta_m=0.110428 adopted=0
+Frame 948: accepted PnP correction map_age=3 track_age=1 retention=0.559727 landmarks=656 inliers=656 rot_delta_deg=0.637994 trans_delta_m=0.179732 adopted=0
+Frame 949: accepted PnP correction map_age=4 track_age=1 retention=0.436007 landmarks=511 inliers=511 rot_delta_deg=1.1198 trans_delta_m=0.327024 adopted=0
+Frame 949: tracked features down to 941, re-detecting.
+Frame 949 (950/1101) tracked=2000 inliers=941 status=pnp-candidate pose=(29.4433, -4.03534, -78.3319)
+Frame 950: accepted PnP correction map_age=1 track_age=1 retention=0.832094 landmarks=783 inliers=783 rot_delta_deg=0.325628 trans_delta_m=0.0604344 adopted=0
+Frame 951: accepted PnP correction map_age=2 track_age=1 retention=0.738576 landmarks=695 inliers=695 rot_delta_deg=0.657553 trans_delta_m=0.137579 adopted=0
+Frame 951: tracked features down to 933, re-detecting.
+Frame 952: accepted PnP correction map_age=3 track_age=1 retention=0.619554 landmarks=583 inliers=583 rot_delta_deg=1.08979 trans_delta_m=0.173474 adopted=0
+Frame 952: tracked features down to 946, re-detecting.
+Frame 953: accepted PnP correction map_age=4 track_age=1 retention=0.569607 landmarks=536 inliers=536 rot_delta_deg=1.43702 trans_delta_m=0.222379 adopted=0
+Frame 954: accepted PnP correction map_age=5 track_age=1 retention=0.384697 landmarks=362 inliers=362 rot_delta_deg=1.85877 trans_delta_m=0.318415 adopted=0
+Frame 954: tracked features down to 876, re-detecting.
+Frame 955: accepted PnP correction map_age=1 track_age=1 retention=0.78653 landmarks=689 inliers=689 rot_delta_deg=0.0917342 trans_delta_m=0.0502788 adopted=0
+Frame 955: tracked features down to 917, re-detecting.
+Frame 956: accepted PnP correction map_age=2 track_age=1 retention=0.658676 landmarks=577 inliers=577 rot_delta_deg=0.241971 trans_delta_m=0.0661138 adopted=0
+Frame 957: accepted PnP correction map_age=3 track_age=1 retention=0.555936 landmarks=487 inliers=487 rot_delta_deg=0.261564 trans_delta_m=0.0728469 adopted=0
+Frame 957: tracked features down to 801, re-detecting.
+Frame 958: accepted PnP correction map_age=4 track_age=1 retention=0.474886 landmarks=416 inliers=416 rot_delta_deg=0.34614 trans_delta_m=0.104048 adopted=0
+Frame 959: accepted PnP correction map_age=1 track_age=1 retention=0.915918 landmarks=1122 inliers=1122 rot_delta_deg=0.193634 trans_delta_m=0.0425943 adopted=0
+Frame 959: tracked features down to 836, re-detecting.
+Frame 960: accepted PnP correction map_age=2 track_age=1 retention=0.799184 landmarks=979 inliers=979 rot_delta_deg=0.269981 trans_delta_m=0.0763195 adopted=0
+Frame 961: accepted PnP correction map_age=3 track_age=1 retention=0.684082 landmarks=838 inliers=838 rot_delta_deg=0.139848 trans_delta_m=0.0788434 adopted=0
+Frame 962: accepted PnP correction map_age=4 track_age=1 retention=0.57551 landmarks=705 inliers=705 rot_delta_deg=0.396122 trans_delta_m=0.14009 adopted=0
+Frame 962: tracked features down to 810, re-detecting.
+Frame 963: accepted PnP correction map_age=5 track_age=1 retention=0.453061 landmarks=555 inliers=555 rot_delta_deg=0.496832 trans_delta_m=0.222825 adopted=0
+Frame 964: accepted PnP correction map_age=1 track_age=1 retention=0.758765 landmarks=909 inliers=909 rot_delta_deg=0.114328 trans_delta_m=0.0166202 adopted=0
+Frame 964: tracked features down to 742, re-detecting.
+Frame 965: accepted PnP correction map_age=2 track_age=1 retention=0.661937 landmarks=793 inliers=793 rot_delta_deg=0.139532 trans_delta_m=0.0232941 adopted=0
+Frame 966: accepted PnP correction map_age=3 track_age=1 retention=0.549249 landmarks=658 inliers=658 rot_delta_deg=0.0787822 trans_delta_m=0.0260077 adopted=0
+Frame 966: tracked features down to 890, re-detecting.
+Frame 967: accepted PnP correction map_age=4 track_age=1 retention=0.477462 landmarks=572 inliers=572 rot_delta_deg=0.174968 trans_delta_m=0.0504431 adopted=0
+Frame 968: accepted PnP correction map_age=1 track_age=1 retention=0.832845 landmarks=852 inliers=852 rot_delta_deg=0.0914142 trans_delta_m=0.0118652 adopted=0
+Frame 968: tracked features down to 804, re-detecting.
+Frame 969: accepted PnP correction map_age=2 track_age=1 retention=0.635386 landmarks=650 inliers=650 rot_delta_deg=0.177082 trans_delta_m=0.0326464 adopted=0
+Frame 969: tracked features down to 988, re-detecting.
+Frame 970: accepted PnP correction map_age=3 track_age=1 retention=0.531769 landmarks=544 inliers=544 rot_delta_deg=0.334502 trans_delta_m=0.0296048 adopted=0
+Frame 970: tracked features down to 996, re-detecting.
+Frame 971: accepted PnP correction map_age=4 track_age=1 retention=0.44477 landmarks=455 inliers=455 rot_delta_deg=0.354376 trans_delta_m=0.0136533 adopted=0
+Frame 971: tracked features down to 902, re-detecting.
+Frame 972: accepted PnP correction map_age=1 track_age=1 retention=0.915743 landmarks=826 inliers=826 rot_delta_deg=0.128332 trans_delta_m=0.0288151 adopted=0
+Frame 972: tracked features down to 999, re-detecting.
+Frame 973: accepted PnP correction map_age=2 track_age=1 retention=0.810421 landmarks=731 inliers=731 rot_delta_deg=0.285462 trans_delta_m=0.0565243 adopted=0
+Frame 973: tracked features down to 965, re-detecting.
+Frame 974: accepted PnP correction map_age=3 track_age=1 retention=0.723947 landmarks=653 inliers=653 rot_delta_deg=0.394531 trans_delta_m=0.0491946 adopted=0
+Frame 975: accepted PnP correction map_age=4 track_age=1 retention=0.620843 landmarks=560 inliers=560 rot_delta_deg=0.485312 trans_delta_m=0.0477791 adopted=0
+Frame 975: tracked features down to 917, re-detecting.
+Frame 976: accepted PnP correction map_age=5 track_age=1 retention=0.511086 landmarks=461 inliers=461 rot_delta_deg=0.57357 trans_delta_m=0.0224798 adopted=0
+Frame 977: accepted PnP correction map_age=6 track_age=1 retention=0.429047 landmarks=387 inliers=387 rot_delta_deg=0.674995 trans_delta_m=0.0369472 adopted=0
+Frame 977: tracked features down to 831, re-detecting.
+Frame 978: accepted PnP correction map_age=1 track_age=1 retention=0.924188 landmarks=768 inliers=768 rot_delta_deg=0.0644867 trans_delta_m=0.0291069 adopted=0
+Frame 979: accepted PnP correction map_age=2 track_age=1 retention=0.717208 landmarks=596 inliers=596 rot_delta_deg=0.142201 trans_delta_m=0.0530246 adopted=0
+Frame 979: tracked features down to 738, re-detecting.
+Frame 980: accepted PnP correction map_age=3 track_age=1 retention=0.649819 landmarks=540 inliers=540 rot_delta_deg=0.243061 trans_delta_m=0.0669528 adopted=0
+Frame 981: accepted PnP correction map_age=4 track_age=1 retention=0.578821 landmarks=481 inliers=481 rot_delta_deg=0.385274 trans_delta_m=0.0795987 adopted=0
+Frame 981: tracked features down to 963, re-detecting.
+Frame 982: accepted PnP correction map_age=5 track_age=1 retention=0.463297 landmarks=385 inliers=385 rot_delta_deg=0.431797 trans_delta_m=0.0775676 adopted=0
+Frame 983: accepted PnP correction map_age=1 track_age=1 retention=0.846863 landmarks=918 inliers=918 rot_delta_deg=0.0948179 trans_delta_m=0.0280188 adopted=0
+Frame 983: tracked features down to 900, re-detecting.
+Frame 984: accepted PnP correction map_age=2 track_age=1 retention=0.752768 landmarks=816 inliers=816 rot_delta_deg=0.109622 trans_delta_m=0.0497332 adopted=0
+Frame 985: accepted PnP correction map_age=3 track_age=1 retention=0.672509 landmarks=729 inliers=729 rot_delta_deg=0.19777 trans_delta_m=0.0831311 adopted=0
+Frame 985: tracked features down to 906, re-detecting.
+Frame 986: accepted PnP correction map_age=4 track_age=1 retention=0.5369 landmarks=582 inliers=582 rot_delta_deg=0.326887 trans_delta_m=0.115345 adopted=0
+Frame 987: accepted PnP correction map_age=5 track_age=1 retention=0.413284 landmarks=448 inliers=448 rot_delta_deg=0.459241 trans_delta_m=0.15771 adopted=0
+Frame 987: tracked features down to 866, re-detecting.
+Frame 988: accepted PnP correction map_age=1 track_age=1 retention=0.879908 landmarks=762 inliers=762 rot_delta_deg=0.0476665 trans_delta_m=0.00234746 adopted=0
+Frame 989: accepted PnP correction map_age=2 track_age=1 retention=0.762125 landmarks=660 inliers=660 rot_delta_deg=0.152778 trans_delta_m=0.0198429 adopted=0
+Frame 990: accepted PnP correction map_age=3 track_age=1 retention=0.568129 landmarks=492 inliers=492 rot_delta_deg=0.157051 trans_delta_m=0.0212891 adopted=0
+Frame 990: tracked features down to 675, re-detecting.
+Frame 991: accepted PnP correction map_age=4 track_age=1 retention=0.482679 landmarks=418 inliers=418 rot_delta_deg=0.22565 trans_delta_m=0.0130607 adopted=0
+Frame 992: accepted PnP correction map_age=1 track_age=1 retention=0.846903 landmarks=957 inliers=957 rot_delta_deg=0.0562315 trans_delta_m=0.0161832 adopted=0
+Frame 992: tracked features down to 949, re-detecting.
+Frame 993: accepted PnP correction map_age=2 track_age=1 retention=0.692035 landmarks=782 inliers=782 rot_delta_deg=0.125937 trans_delta_m=0.0878192 adopted=0
+Frame 993: tracked features down to 701, re-detecting.
+Frame 994: accepted PnP correction map_age=3 track_age=1 retention=0.555752 landmarks=628 inliers=628 rot_delta_deg=0.166592 trans_delta_m=0.138748 adopted=0
+Frame 994: tracked features down to 720, re-detecting.
+Frame 995: accepted PnP correction map_age=4 track_age=1 retention=0.431858 landmarks=488 inliers=488 rot_delta_deg=0.142909 trans_delta_m=0.156951 adopted=0
+Frame 995: tracked features down to 711, re-detecting.
+Frame 996: accepted PnP correction map_age=1 track_age=1 retention=0.921238 landmarks=655 inliers=655 rot_delta_deg=0.0347255 trans_delta_m=0.00426445 adopted=0
+Frame 996: tracked features down to 792, re-detecting.
+Frame 997: accepted PnP correction map_age=2 track_age=1 retention=0.824191 landmarks=586 inliers=586 rot_delta_deg=0.116476 trans_delta_m=0.019403 adopted=0
+Frame 997: tracked features down to 740, re-detecting.
+Frame 998: accepted PnP correction map_age=3 track_age=1 retention=0.742616 landmarks=528 inliers=528 rot_delta_deg=0.155821 trans_delta_m=0.0221487 adopted=0
+Frame 998: tracked features down to 693, re-detecting.
+Frame 999: accepted PnP correction map_age=4 track_age=1 retention=0.666667 landmarks=474 inliers=474 rot_delta_deg=0.222857 trans_delta_m=0.0432671 adopted=0
+Frame 999: tracked features down to 726, re-detecting.
+Frame 999 (1000/1101) tracked=2000 inliers=726 status=pnp-candidate pose=(35.2849, -3.60173, -47.169)
+Frame 1000: accepted PnP correction map_age=5 track_age=1 retention=0.580872 landmarks=413 inliers=413 rot_delta_deg=0.202073 trans_delta_m=0.0370612 adopted=0
+Frame 1000: tracked features down to 817, re-detecting.
+Frame 1001: accepted PnP correction map_age=6 track_age=1 retention=0.490858 landmarks=349 inliers=349 rot_delta_deg=0.265576 trans_delta_m=0.0505527 adopted=0
+Frame 1001: tracked features down to 713, re-detecting.
+Frame 1002: accepted PnP correction map_age=1 track_age=1 retention=0.880785 landmarks=628 inliers=628 rot_delta_deg=0.065884 trans_delta_m=0.0317794 adopted=0
+Frame 1002: tracked features down to 738, re-detecting.
+Frame 1003: accepted PnP correction map_age=2 track_age=1 retention=0.845722 landmarks=603 inliers=603 rot_delta_deg=0.0912243 trans_delta_m=0.0310263 adopted=0
+Frame 1003: tracked features down to 764, re-detecting.
+Frame 1004: accepted PnP correction map_age=3 track_age=1 retention=0.788219 landmarks=562 inliers=562 rot_delta_deg=0.120129 trans_delta_m=0.031608 adopted=0
+Frame 1004: tracked features down to 736, re-detecting.
+Frame 1005: accepted PnP correction map_age=4 track_age=1 retention=0.753156 landmarks=537 inliers=537 rot_delta_deg=0.172906 trans_delta_m=0.0449039 adopted=0
+Frame 1005: tracked features down to 603, re-detecting.
+Frame 1006: accepted PnP correction map_age=5 track_age=1 retention=0.677419 landmarks=483 inliers=483 rot_delta_deg=0.142233 trans_delta_m=0.0393051 adopted=0
+Frame 1006: tracked features down to 637, re-detecting.
+Frame 1007: accepted PnP correction map_age=6 track_age=1 retention=0.604488 landmarks=431 inliers=431 rot_delta_deg=0.1346 trans_delta_m=0.0486967 adopted=0
+Frame 1007: tracked features down to 610, re-detecting.
+Frame 1008: accepted PnP correction map_age=7 track_age=1 retention=0.58345 landmarks=416 inliers=416 rot_delta_deg=0.164151 trans_delta_m=0.0510019 adopted=0
+Frame 1008: tracked features down to 615, re-detecting.
+Frame 1009: accepted PnP correction map_age=8 track_age=1 retention=0.541374 landmarks=386 inliers=386 rot_delta_deg=0.172117 trans_delta_m=0.0667304 adopted=0
+Frame 1009: tracked features down to 541, re-detecting.
+Frame 1010: accepted PnP correction map_age=1 track_age=1 retention=0.953789 landmarks=516 inliers=516 rot_delta_deg=0.0648024 trans_delta_m=0.0152802 adopted=0
+Frame 1010: tracked features down to 557, re-detecting.
+Frame 1011: accepted PnP correction map_age=2 track_age=1 retention=0.857671 landmarks=464 inliers=464 rot_delta_deg=0.0863574 trans_delta_m=0.0424059 adopted=0
+Frame 1011: tracked features down to 578, re-detecting.
+Frame 1012: accepted PnP correction map_age=3 track_age=1 retention=0.761553 landmarks=412 inliers=412 rot_delta_deg=0.268701 trans_delta_m=0.0695885 adopted=0
+Frame 1012: tracked features down to 667, re-detecting.
+Frame 1013: accepted PnP correction map_age=4 track_age=1 retention=0.57671 landmarks=312 inliers=312 rot_delta_deg=0.626303 trans_delta_m=0.10493 adopted=0
+Frame 1013: tracked features down to 535, re-detecting.
+Frame 1014: accepted PnP correction map_age=5 track_age=1 retention=0.436229 landmarks=236 inliers=236 rot_delta_deg=0.453816 trans_delta_m=0.122225 adopted=0
+Frame 1014: tracked features down to 586, re-detecting.
+Frame 1015: accepted PnP correction map_age=1 track_age=1 retention=0.820819 landmarks=481 inliers=481 rot_delta_deg=0.0242788 trans_delta_m=0.0039351 adopted=0
+Frame 1015: tracked features down to 506, re-detecting.
+Frame 1016: accepted PnP correction map_age=2 track_age=1 retention=0.604096 landmarks=354 inliers=354 rot_delta_deg=0.0914031 trans_delta_m=0.00655266 adopted=0
+Frame 1016: tracked features down to 435, re-detecting.
+Frame 1017: accepted PnP correction map_age=3 track_age=1 retention=0.503413 landmarks=295 inliers=295 rot_delta_deg=0.0746489 trans_delta_m=0.00972586 adopted=0
+Frame 1017: tracked features down to 415, re-detecting.
+Frame 1018: accepted PnP correction map_age=4 track_age=1 retention=0.430034 landmarks=252 inliers=252 rot_delta_deg=0.0535799 trans_delta_m=0.00809489 adopted=0
+Frame 1018: tracked features down to 427, re-detecting.
+Frame 1019: accepted PnP correction map_age=1 track_age=1 retention=0.807963 landmarks=345 inliers=345 rot_delta_deg=0.0223622 trans_delta_m=0.00543803 adopted=0
+Frame 1019: tracked features down to 436, re-detecting.
+Frame 1020: accepted PnP correction map_age=2 track_age=1 retention=0.725995 landmarks=310 inliers=310 rot_delta_deg=0.127744 trans_delta_m=0.0166454 adopted=0
+Frame 1020: tracked features down to 448, re-detecting.
+Frame 1021: accepted PnP correction map_age=3 track_age=1 retention=0.576112 landmarks=246 inliers=246 rot_delta_deg=0.178268 trans_delta_m=0.0309214 adopted=0
+Frame 1021: tracked features down to 458, re-detecting.
+Frame 1022: accepted PnP correction map_age=4 track_age=1 retention=0.522248 landmarks=223 inliers=223 rot_delta_deg=0.149814 trans_delta_m=0.0314287 adopted=0
+Frame 1022: tracked features down to 567, re-detecting.
+Frame 1023: accepted PnP correction map_age=5 track_age=1 retention=0.407494 landmarks=174 inliers=174 rot_delta_deg=0.128211 trans_delta_m=0.0153093 adopted=0
+Frame 1023: skipped keyframe rebuild due to low baseline/parallax.
+Frame 1023: tracked features down to 515, re-detecting.
+Frame 1024: skipped keyframe rebuild due to low baseline/parallax.
+Frame 1024: tracked features down to 617, re-detecting.
+Frame 1025: skipped keyframe rebuild due to low baseline/parallax.
+Frame 1025: tracked features down to 621, re-detecting.
+Frame 1026: skipped keyframe rebuild due to low baseline/parallax.
+Frame 1026: tracked features down to 597, re-detecting.
+Frame 1027: skipped keyframe rebuild due to low baseline/parallax.
+Frame 1027: tracked features down to 645, re-detecting.
+Frame 1028: skipped keyframe rebuild due to low baseline/parallax.
+Frame 1028: tracked features down to 734, re-detecting.
+Frame 1029: tracked features down to 642, re-detecting.
+Frame 1030: accepted PnP correction map_age=1 track_age=1 retention=0.85514 landmarks=549 inliers=549 rot_delta_deg=0.0549977 trans_delta_m=0.00978097 adopted=0
+Frame 1030: tracked features down to 595, re-detecting.
+Frame 1031: accepted PnP correction map_age=2 track_age=1 retention=0.82243 landmarks=528 inliers=528 rot_delta_deg=0.159739 trans_delta_m=0.0133839 adopted=0
+Frame 1031: tracked features down to 641, re-detecting.
+Frame 1032: accepted PnP correction map_age=3 track_age=1 retention=0.71028 landmarks=456 inliers=456 rot_delta_deg=0.295209 trans_delta_m=0.0245229 adopted=0
+Frame 1032: tracked features down to 727, re-detecting.
+Frame 1033: accepted PnP correction map_age=4 track_age=1 retention=0.61215 landmarks=393 inliers=393 rot_delta_deg=0.378291 trans_delta_m=0.0407908 adopted=0
+Frame 1033: tracked features down to 604, re-detecting.
+Frame 1034: accepted PnP correction map_age=5 track_age=1 retention=0.537383 landmarks=345 inliers=345 rot_delta_deg=0.389416 trans_delta_m=0.0151334 adopted=0
+Frame 1034: tracked features down to 668, re-detecting.
+Frame 1035: accepted PnP correction map_age=6 track_age=1 retention=0.501558 landmarks=322 inliers=322 rot_delta_deg=0.449126 trans_delta_m=0.0320754 adopted=0
+Frame 1035: tracked features down to 944, re-detecting.
+Frame 1036: accepted PnP correction map_age=7 track_age=1 retention=0.406542 landmarks=261 inliers=261 rot_delta_deg=0.509902 trans_delta_m=0.0451123 adopted=0
+Frame 1036: tracked features down to 659, re-detecting.
+Frame 1037: accepted PnP correction map_age=1 track_age=1 retention=0.781487 landmarks=515 inliers=515 rot_delta_deg=0.0936137 trans_delta_m=0.0210319 adopted=0
+Frame 1037: tracked features down to 571, re-detecting.
+Frame 1038: accepted PnP correction map_age=2 track_age=1 retention=0.655539 landmarks=432 inliers=432 rot_delta_deg=0.13142 trans_delta_m=0.0211095 adopted=0
+Frame 1038: tracked features down to 655, re-detecting.
+Frame 1039: accepted PnP correction map_age=3 track_age=1 retention=0.550835 landmarks=363 inliers=363 rot_delta_deg=0.413976 trans_delta_m=0.0594453 adopted=0
+Frame 1039: tracked features down to 745, re-detecting.
+Frame 1040: accepted PnP correction map_age=4 track_age=1 retention=0.443096 landmarks=292 inliers=292 rot_delta_deg=0.398602 trans_delta_m=0.0571408 adopted=0
+Frame 1040: tracked features down to 555, re-detecting.
+Frame 1041: accepted PnP correction map_age=1 track_age=1 retention=0.845045 landmarks=469 inliers=469 rot_delta_deg=0.0635114 trans_delta_m=0.0190635 adopted=0
+Frame 1041: tracked features down to 542, re-detecting.
+Frame 1042: accepted PnP correction map_age=2 track_age=1 retention=0.659459 landmarks=366 inliers=366 rot_delta_deg=0.0578028 trans_delta_m=0.0117317 adopted=0
+Frame 1042: tracked features down to 518, re-detecting.
+Frame 1043: accepted PnP correction map_age=3 track_age=1 retention=0.508108 landmarks=282 inliers=282 rot_delta_deg=0.0464331 trans_delta_m=0.0118176 adopted=0
+Frame 1043: tracked features down to 395, re-detecting.
+Frame 1044: accepted PnP correction map_age=4 track_age=1 retention=0.331532 landmarks=184 inliers=184 rot_delta_deg=0.275039 trans_delta_m=0.034923 adopted=0
+Frame 1044: tracked features down to 356, re-detecting.
+Frame 1045: accepted PnP correction map_age=1 track_age=1 retention=0.775281 landmarks=276 inliers=276 rot_delta_deg=0.108825 trans_delta_m=0.0161916 adopted=0
+Frame 1045: tracked features down to 457, re-detecting.
+Frame 1046: accepted PnP correction map_age=2 track_age=1 retention=0.41573 landmarks=148 inliers=148 rot_delta_deg=0.180231 trans_delta_m=0.0193312 adopted=0
+Frame 1046: tracked features down to 332, re-detecting.
+Frame 1047: accepted PnP correction map_age=1 track_age=1 retention=0.903614 landmarks=300 inliers=300 rot_delta_deg=0.0972039 trans_delta_m=0.0304681 adopted=0
+Frame 1047: tracked features down to 496, re-detecting.
+Frame 1048: accepted PnP correction map_age=2 track_age=1 retention=0.813253 landmarks=270 inliers=270 rot_delta_deg=0.172376 trans_delta_m=0.0580497 adopted=0
+Frame 1048: tracked features down to 369, re-detecting.
+Frame 1049: accepted PnP correction map_age=3 track_age=1 retention=0.674699 landmarks=224 inliers=224 rot_delta_deg=0.264433 trans_delta_m=0.0769102 adopted=0
+Frame 1049: tracked features down to 392, re-detecting.
+Frame 1049 (1050/1101) tracked=2000 inliers=392 status=pnp-candidate pose=(37.8691, -3.43135, -33.9764)
+Frame 1050: accepted PnP correction map_age=4 track_age=1 retention=0.524096 landmarks=174 inliers=174 rot_delta_deg=0.391713 trans_delta_m=0.0936873 adopted=0
+Frame 1050: tracked features down to 346, re-detecting.
+Frame 1051: accepted PnP correction map_age=5 track_age=1 retention=0.421687 landmarks=140 inliers=140 rot_delta_deg=0.451713 trans_delta_m=0.111965 adopted=0
+Frame 1051: tracked features down to 558, re-detecting.
+Frame 1052: accepted PnP correction map_age=1 track_age=1 retention=0.842294 landmarks=470 inliers=470 rot_delta_deg=0.0435982 trans_delta_m=0.00545046 adopted=0
+Frame 1052: tracked features down to 501, re-detecting.
+Frame 1053: accepted PnP correction map_age=2 track_age=1 retention=0.808244 landmarks=451 inliers=451 rot_delta_deg=0.0242187 trans_delta_m=0.00544779 adopted=0
+Frame 1053: tracked features down to 713, re-detecting.
+Frame 1054: accepted PnP correction map_age=3 track_age=1 retention=0.750896 landmarks=419 inliers=419 rot_delta_deg=0.0466792 trans_delta_m=0.0189052 adopted=0
+Frame 1054: tracked features down to 733, re-detecting.
+Frame 1055: accepted PnP correction map_age=4 track_age=1 retention=0.697133 landmarks=389 inliers=389 rot_delta_deg=0.0596169 trans_delta_m=0.0344123 adopted=0
+Frame 1055: tracked features down to 780, re-detecting.
+Frame 1056: accepted PnP correction map_age=5 track_age=1 retention=0.616487 landmarks=344 inliers=344 rot_delta_deg=0.25372 trans_delta_m=0.0840732 adopted=0
+Frame 1056: tracked features down to 804, re-detecting.
+Frame 1057: accepted PnP correction map_age=6 track_age=1 retention=0.564516 landmarks=315 inliers=315 rot_delta_deg=0.323892 trans_delta_m=0.0920694 adopted=0
+Frame 1057: tracked features down to 759, re-detecting.
+Frame 1058: accepted PnP correction map_age=7 track_age=1 retention=0.430108 landmarks=240 inliers=240 rot_delta_deg=0.413686 trans_delta_m=0.0947992 adopted=0
+Frame 1058: tracked features down to 756, re-detecting.
+Frame 1059: accepted PnP correction map_age=1 track_age=1 retention=0.902116 landmarks=682 inliers=682 rot_delta_deg=0.11673 trans_delta_m=0.0400975 adopted=0
+Frame 1059: tracked features down to 771, re-detecting.
+Frame 1060: accepted PnP correction map_age=2 track_age=1 retention=0.801587 landmarks=606 inliers=606 rot_delta_deg=0.114731 trans_delta_m=0.0428644 adopted=0
+Frame 1060: tracked features down to 763, re-detecting.
+Frame 1061: accepted PnP correction map_age=3 track_age=1 retention=0.724868 landmarks=548 inliers=548 rot_delta_deg=0.173387 trans_delta_m=0.061928 adopted=0
+Frame 1061: tracked features down to 771, re-detecting.
+Frame 1062: accepted PnP correction map_age=4 track_age=1 retention=0.612434 landmarks=463 inliers=463 rot_delta_deg=0.236816 trans_delta_m=0.0676047 adopted=0
+Frame 1062: tracked features down to 898, re-detecting.
+Frame 1063: accepted PnP correction map_age=5 track_age=1 retention=0.56746 landmarks=429 inliers=429 rot_delta_deg=0.271646 trans_delta_m=0.0709549 adopted=0
+Frame 1063: tracked features down to 910, re-detecting.
+Frame 1064: accepted PnP correction map_age=6 track_age=1 retention=0.464286 landmarks=351 inliers=351 rot_delta_deg=0.331441 trans_delta_m=0.0568124 adopted=0
+Frame 1064: tracked features down to 654, re-detecting.
+Frame 1065: accepted PnP correction map_age=1 track_age=1 retention=0.957187 landmarks=626 inliers=626 rot_delta_deg=0.0526709 trans_delta_m=0.0173418 adopted=1
+Frame 1065: tracked features down to 782, re-detecting.
+Frame 1066: accepted PnP correction map_age=2 track_age=1 retention=0.902141 landmarks=590 inliers=590 rot_delta_deg=0.16 trans_delta_m=0.0678641 adopted=0
+Frame 1066: tracked features down to 983, re-detecting.
+Frame 1067: accepted PnP correction map_age=3 track_age=1 retention=0.721713 landmarks=472 inliers=472 rot_delta_deg=0.165405 trans_delta_m=0.117202 adopted=1
+Frame 1067: tracked features down to 814, re-detecting.
+Frame 1068: accepted PnP correction map_age=4 track_age=1 retention=0.585627 landmarks=383 inliers=383 rot_delta_deg=0.342774 trans_delta_m=0.045989 adopted=1
+Frame 1068: tracked features down to 846, re-detecting.
+Frame 1069: accepted PnP correction map_age=5 track_age=1 retention=0.542813 landmarks=355 inliers=355 rot_delta_deg=0.135419 trans_delta_m=0.0456632 adopted=0
+Frame 1069: tracked features down to 744, re-detecting.
+Frame 1070: accepted PnP correction map_age=6 track_age=1 retention=0.444954 landmarks=291 inliers=291 rot_delta_deg=0.323123 trans_delta_m=0.0793353 adopted=0
+Frame 1071: accepted PnP correction map_age=1 track_age=1 retention=0.935897 landmarks=949 inliers=949 rot_delta_deg=0.0694233 trans_delta_m=0.00856051 adopted=1
+Frame 1071: tracked features down to 637, re-detecting.
+Frame 1072: accepted PnP correction map_age=2 track_age=1 retention=0.857988 landmarks=870 inliers=870 rot_delta_deg=0.0913098 trans_delta_m=0.0270812 adopted=1
+Frame 1072: tracked features down to 779, re-detecting.
+Frame 1073: accepted PnP correction map_age=3 track_age=1 retention=0.746548 landmarks=757 inliers=757 rot_delta_deg=0.0391897 trans_delta_m=0.0114916 adopted=1
+Frame 1073: tracked features down to 993, re-detecting.
+Frame 1074: accepted PnP correction map_age=4 track_age=1 retention=0.654832 landmarks=664 inliers=664 rot_delta_deg=0.135876 trans_delta_m=0.0430588 adopted=1
+Frame 1074: tracked features down to 814, re-detecting.
+Frame 1075: accepted PnP correction map_age=5 track_age=1 retention=0.597633 landmarks=606 inliers=606 rot_delta_deg=0.0583566 trans_delta_m=0.0308391 adopted=1
+Frame 1075: tracked features down to 782, re-detecting.
+Frame 1076: accepted PnP correction map_age=6 track_age=1 retention=0.577909 landmarks=586 inliers=586 rot_delta_deg=0.102265 trans_delta_m=0.0204599 adopted=0
+Frame 1077: accepted PnP correction map_age=7 track_age=1 retention=0.550296 landmarks=558 inliers=558 rot_delta_deg=0.120674 trans_delta_m=0.0372559 adopted=0
+Frame 1077: tracked features down to 986, re-detecting.
+Frame 1078: accepted PnP correction map_age=8 track_age=1 retention=0.533531 landmarks=541 inliers=541 rot_delta_deg=0.119184 trans_delta_m=0.0449895 adopted=0
+Frame 1079: accepted PnP correction map_age=1 track_age=1 retention=0.913884 landmarks=1040 inliers=1040 rot_delta_deg=0.0700435 trans_delta_m=0.0134411 adopted=1
+Frame 1079: tracked features down to 791, re-detecting.
+Frame 1080: accepted PnP correction map_age=2 track_age=1 retention=0.84007 landmarks=956 inliers=956 rot_delta_deg=0.0804831 trans_delta_m=0.0263358 adopted=0
+Frame 1080: tracked features down to 779, re-detecting.
+Frame 1081: accepted PnP correction map_age=3 track_age=1 retention=0.786467 landmarks=895 inliers=895 rot_delta_deg=0.173891 trans_delta_m=0.0493666 adopted=0
+Frame 1081: tracked features down to 884, re-detecting.
+Frame 1082: accepted PnP correction map_age=4 track_age=1 retention=0.724956 landmarks=825 inliers=825 rot_delta_deg=0.199168 trans_delta_m=0.0490826 adopted=0
+Frame 1083: accepted PnP correction map_age=5 track_age=1 retention=0.651142 landmarks=741 inliers=741 rot_delta_deg=0.23065 trans_delta_m=0.0674109 adopted=1
+Frame 1083: tracked features down to 653, re-detecting.
+Frame 1084: accepted PnP correction map_age=6 track_age=1 retention=0.559754 landmarks=637 inliers=637 rot_delta_deg=0.131523 trans_delta_m=0.0709567 adopted=1
+Frame 1084: tracked features down to 693, re-detecting.
+Frame 1085: accepted PnP correction map_age=7 track_age=1 retention=0.520211 landmarks=592 inliers=592 rot_delta_deg=0.124887 trans_delta_m=0.0477796 adopted=0
+Frame 1085: tracked features down to 860, re-detecting.
+Frame 1086: accepted PnP correction map_age=8 track_age=1 retention=0.491213 landmarks=559 inliers=559 rot_delta_deg=0.216691 trans_delta_m=0.0721496 adopted=0
+Frame 1086: tracked features down to 699, re-detecting.
+Frame 1087: accepted PnP correction map_age=1 track_age=1 retention=0.908441 landmarks=635 inliers=635 rot_delta_deg=0.0150611 trans_delta_m=0.00578049 adopted=1
+Frame 1087: tracked features down to 327, re-detecting.
+Frame 1088: accepted PnP correction map_age=2 track_age=1 retention=0.855508 landmarks=598 inliers=598 rot_delta_deg=0.103612 trans_delta_m=0.030326 adopted=0
+Frame 1088: tracked features down to 158, re-detecting.
+Frame 1089: scale below threshold.
+Frame 1090: 2D-2D pose failed.
+Frame 1091: 2D-2D pose failed.
+Frame 1092: scale below threshold.
+Frame 1093: 2D-2D pose failed.
+Frame 1094: 2D-2D pose failed.
+Frame 1095: scale below threshold.
+Frame 1096: 2D-2D pose failed.
+Frame 1097: 2D-2D pose failed.
+Frame 1098: 2D-2D pose failed.
+Frame 1099: 2D-2D pose failed.
+Frame 1099 (1100/1101) tracked=2000 inliers=0 status=skip-pose
+Frame 1100: 2D-2D pose failed.
+Frame 1100 (1101/1101) tracked=2000 inliers=0 status=skip-pose
+Finished. Saved TUM trajectory to /home/xywu/桌面/SLAM/output/full_run_tuned_pnp/position/position.txt, geometry trajectory to /home/xywu/桌面/SLAM/output/full_run_tuned_pnp/position/geometry_position.txt and map to /home/xywu/桌面/SLAM/output/full_run_tuned_pnp/traj/map2.png

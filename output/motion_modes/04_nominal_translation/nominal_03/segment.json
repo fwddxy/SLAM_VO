@@ -1,0 +1,44 @@
+{
+  "mode": "04_nominal_translation",
+  "segment_id": "nominal_03",
+  "sequence": "07",
+  "warmup_start_frame": 350,
+  "start_frame": 360,
+  "end_frame": 379,
+  "evaluation_start_frame": 360,
+  "is_primary": false,
+  "notes": "post-turn steady translation with very low rotation",
+  "vo_command": [
+    "/home/xywu/桌面/SLAM/build/VO",
+    "--start-frame",
+    "350",
+    "--end-frame",
+    "379",
+    "--output-root",
+    "output/motion_modes/04_nominal_translation/nominal_03"
+  ],
+  "run_status": "completed",
+  "run_log": "output/motion_modes/04_nominal_translation/nominal_03/run.log",
+  "reference_gt": "output/motion_modes/04_nominal_translation/nominal_03/reference/gt_tum_segment.txt",
+  "full_estimate_path": "output/motion_modes/04_nominal_translation/nominal_03/position/position_full.txt",
+  "full_geometry_estimate_path": "output/motion_modes/04_nominal_translation/nominal_03/position/geometry_position_full.txt",
+  "estimate_path": "output/motion_modes/04_nominal_translation/nominal_03/position/position.txt",
+  "geometry_estimate_path": "output/motion_modes/04_nominal_translation/nominal_03/position/geometry_position.txt",
+  "estimate_semantics": "final_geometry_spine",
+  "geometry_estimate_semantics": "pure_two_view_diagnostic",
+  "evo": {
+    "ape": {
+      "status": "completed",
+      "output": "output/motion_modes/04_nominal_translation/nominal_03/ape/evo_ape_metrics.txt"
+    },
+    "rpe": {
+      "status": "completed",
+      "output": "output/motion_modes/04_nominal_translation/nominal_03/rpe/evo_rpe_metrics.txt"
+    },
+    "traj": {
+      "status": "completed",
+      "output": "output/motion_modes/04_nominal_translation/nominal_03/traj/evo_traj_metrics.txt"
+    }
+  },
+  "evo_status": "completed"
+}

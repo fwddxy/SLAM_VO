@@ -1,0 +1,15 @@
+,/home/xywu/桌面/SLAM/output/motion_modes/06_transition/transition_01/position/position.txt
+nr. of poses,20.0
+path length (m),6.653659470212002
+duration (s),1.9750100000000117
+t_start (s),65.26346
+t_end (s),67.23847
+v_max (m/s),6.090051112066565
+v_min (m/s),0.0
+v_avg (m/s),3.36814931776818
+v_max (km/h),21.924184003439635
+v_min (km/h),0.0
+v_avg (km/h),12.125337543965449
+dt_max (s),0.10587999999999909
+dt_min (s),0.10187000000000523
+dt_avg (s),0.10394789473684272

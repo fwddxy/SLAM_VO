@@ -1,0 +1,47 @@
+{
+  "mode": "06_transition",
+  "segment_id": "transition_02",
+  "sequence": "07",
+  "warmup_start_frame": 652,
+  "start_frame": 714,
+  "end_frame": 733,
+  "evaluation_start_frame": 714,
+  "is_primary": false,
+  "notes": "restart and acceleration after the near-static interval",
+  "vo_command": [
+    "/home/xywu/桌面/SLAM/build/VO",
+    "--start-frame",
+    "652",
+    "--end-frame",
+    "733",
+    "--output-root",
+    "output/motion_modes/06_transition/transition_02"
+  ],
+  "run_status": "completed",
+  "run_log": "output/motion_modes/06_transition/transition_02/run.log",
+  "reference_gt": "output/motion_modes/06_transition/transition_02/reference/gt_tum_segment.txt",
+  "full_estimate_path": "output/motion_modes/06_transition/transition_02/position/position_full.txt",
+  "full_geometry_estimate_path": "output/motion_modes/06_transition/transition_02/position/geometry_position_full.txt",
+  "estimate_path": "output/motion_modes/06_transition/transition_02/position/position.txt",
+  "geometry_estimate_path": "output/motion_modes/06_transition/transition_02/position/geometry_position.txt",
+  "estimate_semantics": "final_geometry_spine",
+  "geometry_estimate_semantics": "pure_two_view_diagnostic",
+  "evo": {
+    "ape": {
+      "status": "completed",
+      "output": "output/motion_modes/06_transition/transition_02/ape/evo_ape_metrics.txt",
+      "fallback_alignment": "origin"
+    },
+    "rpe": {
+      "status": "completed",
+      "output": "output/motion_modes/06_transition/transition_02/rpe/evo_rpe_metrics.txt",
+      "fallback_alignment": "origin"
+    },
+    "traj": {
+      "status": "completed",
+      "output": "output/motion_modes/06_transition/transition_02/traj/evo_traj_metrics.txt",
+      "fallback_alignment": "origin"
+    }
+  },
+  "evo_status": "completed"
+}

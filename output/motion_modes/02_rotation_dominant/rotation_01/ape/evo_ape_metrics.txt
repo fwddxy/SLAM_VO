@@ -1,0 +1,36 @@
+--------------------------------------------------------------------------------
+Loaded 20 stamps and poses from: /home/xywu/桌面/SLAM/output/motion_modes/02_rotation_dominant/rotation_01/reference/gt_tum_segment.txt
+Loaded 20 stamps and poses from: /home/xywu/桌面/SLAM/output/motion_modes/02_rotation_dominant/rotation_01/position/position.txt
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 20 of max. 20 possible matching timestamps between...
+	/home/xywu/桌面/SLAM/output/motion_modes/02_rotation_dominant/rotation_01/reference/gt_tum_segment.txt
+and:	/home/xywu/桌面/SLAM/output/motion_modes/02_rotation_dominant/rotation_01/position/position.txt
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[ 0.98885783 -0.00299403 -0.14883292]
+ [ 0.00362733  0.99998549  0.00398382]
+ [ 0.14881883 -0.0044793   0.98885433]]
+Translation of alignment:
+[-0.16170842 -0.05252275  1.32988903]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 20 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	0.054492
+      mean	0.027396
+    median	0.025323
+       min	0.005014
+      rmse	0.029942
+       sse	0.017930
+       std	0.012082
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to /home/xywu/桌面/SLAM/output/motion_modes/02_rotation_dominant/rotation_01/ape/evo_ape_plot.pdf

@@ -1,0 +1,36 @@
+--------------------------------------------------------------------------------
+Loaded 20 stamps and poses from: /home/xywu/桌面/SLAM/output/motion_modes/03_low_translation/low_translation_02/reference/gt_tum_segment.txt
+Loaded 20 stamps and poses from: /home/xywu/桌面/SLAM/output/motion_modes/03_low_translation/low_translation_02/position/position.txt
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 20 of max. 20 possible matching timestamps between...
+	/home/xywu/桌面/SLAM/output/motion_modes/03_low_translation/low_translation_02/reference/gt_tum_segment.txt
+and:	/home/xywu/桌面/SLAM/output/motion_modes/03_low_translation/low_translation_02/position/position.txt
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[-0.14191273  0.47326655  0.86941333]
+ [ 0.26858618  0.8637633  -0.42635012]
+ [-0.95274458  0.1730079  -0.24969186]]
+Translation of alignment:
+[-156.51888659    8.50725167  -77.56139822]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Compared 20 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with SE(3) Umeyama alignment)
+
+       max	0.811108
+      mean	0.347984
+    median	0.348702
+       min	0.034402
+      rmse	0.392728
+       sse	3.084701
+       std	0.182051
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to /home/xywu/桌面/SLAM/output/motion_modes/03_low_translation/low_translation_02/ape/evo_ape_plot.pdf

@@ -1,0 +1,38 @@
+--------------------------------------------------------------------------------
+Loaded 1101 stamps and poses from: Kitti/gt-tum07.txt
+Loaded 1100 stamps and poses from: output/full_run/position/position.txt
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 1100 of max. 1100 possible matching timestamps between...
+	Kitti/gt-tum07.txt
+and:	output/full_run/position/position.txt
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[ 0.99950488 -0.02971185  0.01035336]
+ [ 0.02954979  0.99944361  0.01546888]
+ [-0.0108072  -0.01515529  0.99982675]]
+Translation of alignment:
+[-12.11764644   3.32920697   7.11780363]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Found 1099 pairs with delta 1 (frames) among 1100 poses using consecutive pairs.
+Compared 1099 relative pose pairs, delta = 1 (frames) with consecutive pairs.
+Calculating RPE for translation part pose relation...
+--------------------------------------------------------------------------------
+RPE w.r.t. translation part (m)
+for delta = 1 (frames) using consecutive pairs
+(with SE(3) Umeyama alignment)
+
+       max	1.013812
+      mean	0.030927
+    median	0.019784
+       min	0.000453
+      rmse	0.056490
+       sse	3.506989
+       std	0.047272
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to output/full_run/rpe/evo_rpe_plot.pdf

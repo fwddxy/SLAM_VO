@@ -1,0 +1,48 @@
+Visualization disabled. GUI opens by default when a usable local display socket is present. Set VO_ENABLE_GUI=0 to force headless mode.
+Custom output root: output/motion_modes/05_fast_translation/fast_03
+Selected frame range: [780, 809] (30 frames)
+Processing 30 frames...
+Frame 782: accepted PnP correction map_age=1 track_age=1 retention=0.756799 landmarks=974 inliers=974 rot_delta_deg=0.106346 trans_delta_m=0.032147 adopted=0
+Frame 782: tracked features down to 935, re-detecting.
+Frame 782 (3/30) tracked=2000 inliers=935 status=pnp-candidate pose=(-0.0684621, -0.0501528, 2.23773)
+Frame 783: accepted PnP correction map_age=2 track_age=1 retention=0.6892 landmarks=887 inliers=887 rot_delta_deg=0.104962 trans_delta_m=0.047522 adopted=0
+Frame 783 (4/30) tracked=1162 inliers=1162 status=pnp-candidate pose=(-0.0667249, -0.0808937, 3.38151)
+Frame 784: accepted PnP correction map_age=3 track_age=1 retention=0.594406 landmarks=765 inliers=765 rot_delta_deg=0.157452 trans_delta_m=0.110195 adopted=0
+Frame 784: tracked features down to 976, re-detecting.
+Frame 784 (5/30) tracked=2000 inliers=976 status=pnp-candidate pose=(-0.0246322, -0.0566979, 4.54079)
+Frame 785: accepted PnP correction map_age=4 track_age=1 retention=0.511267 landmarks=658 inliers=658 rot_delta_deg=0.200941 trans_delta_m=0.0901183 adopted=0
+Frame 786: accepted PnP correction map_age=5 track_age=1 retention=0.392385 landmarks=505 inliers=505 rot_delta_deg=0.168018 trans_delta_m=0.0454384 adopted=0
+Frame 787: accepted PnP correction map_age=1 track_age=1 retention=0.874419 landmarks=1128 inliers=1128 rot_delta_deg=0.312079 trans_delta_m=0.0294809 adopted=0
+Frame 788: accepted PnP correction map_age=2 track_age=1 retention=0.671318 landmarks=866 inliers=866 rot_delta_deg=0.574337 trans_delta_m=0.0892771 adopted=0
+Frame 788: tracked features down to 916, re-detecting.
+Frame 789: accepted PnP correction map_age=3 track_age=1 retention=0.514729 landmarks=664 inliers=664 rot_delta_deg=0.857883 trans_delta_m=0.308402 adopted=0
+Frame 790: accepted PnP correction map_age=4 track_age=1 retention=0.416279 landmarks=537 inliers=537 rot_delta_deg=1.20702 trans_delta_m=0.430958 adopted=0
+Frame 790: skipped keyframe rebuild due to low baseline/parallax.
+Frame 790: tracked features down to 901, re-detecting.
+Frame 791: skipped keyframe rebuild due to low baseline/parallax.
+Frame 792: skipped keyframe rebuild due to low baseline/parallax.
+Frame 793: skipped keyframe rebuild due to low baseline/parallax.
+Frame 793: tracked features down to 989, re-detecting.
+Frame 794: skipped keyframe rebuild due to low baseline/parallax.
+Frame 796: accepted PnP correction map_age=1 track_age=1 retention=0.816249 landmarks=1075 inliers=1075 rot_delta_deg=0.120675 trans_delta_m=0.0564761 adopted=0
+Frame 797: accepted PnP correction map_age=2 track_age=1 retention=0.722096 landmarks=951 inliers=951 rot_delta_deg=0.282847 trans_delta_m=0.12971 adopted=0
+Frame 797: tracked features down to 979, re-detecting.
+Frame 798: accepted PnP correction map_age=3 track_age=1 retention=0.625664 landmarks=824 inliers=824 rot_delta_deg=0.409004 trans_delta_m=0.160773 adopted=0
+Frame 799: accepted PnP correction map_age=4 track_age=1 retention=0.527715 landmarks=695 inliers=695 rot_delta_deg=0.707847 trans_delta_m=0.313627 adopted=0
+Frame 800: accepted PnP correction map_age=5 track_age=1 retention=0.416097 landmarks=548 inliers=548 rot_delta_deg=0.639364 trans_delta_m=0.299473 adopted=0
+Frame 800: tracked features down to 952, re-detecting.
+Frame 801: accepted PnP correction map_age=1 track_age=1 retention=0.905462 landmarks=862 inliers=862 rot_delta_deg=0.197259 trans_delta_m=0.0593552 adopted=0
+Frame 802: accepted PnP correction map_age=2 track_age=1 retention=0.659664 landmarks=628 inliers=628 rot_delta_deg=0.596323 trans_delta_m=0.199812 adopted=0
+Frame 802: tracked features down to 947, re-detecting.
+Frame 803: accepted PnP correction map_age=3 track_age=1 retention=0.442227 landmarks=421 inliers=421 rot_delta_deg=0.975275 trans_delta_m=0.262637 adopted=0
+Frame 804: accepted PnP correction map_age=1 track_age=1 retention=0.856884 landmarks=946 inliers=946 rot_delta_deg=0.0890238 trans_delta_m=0.0289108 adopted=0
+Frame 804: tracked features down to 913, re-detecting.
+Frame 805: accepted PnP correction map_age=2 track_age=1 retention=0.626812 landmarks=692 inliers=692 rot_delta_deg=0.169543 trans_delta_m=0.0528484 adopted=0
+Frame 806: accepted PnP correction map_age=3 track_age=1 retention=0.494565 landmarks=546 inliers=546 rot_delta_deg=0.540142 trans_delta_m=0.131791 adopted=0
+Frame 806: tracked features down to 846, re-detecting.
+Frame 807: accepted PnP correction map_age=1 track_age=1 retention=0.845154 landmarks=715 inliers=715 rot_delta_deg=0.208605 trans_delta_m=0.048447 adopted=0
+Frame 808: accepted PnP correction map_age=2 track_age=1 retention=0.731678 landmarks=619 inliers=619 rot_delta_deg=0.258837 trans_delta_m=0.134697 adopted=0
+Frame 809: accepted PnP correction map_age=3 track_age=1 retention=0.615839 landmarks=521 inliers=521 rot_delta_deg=0.34347 trans_delta_m=0.272563 adopted=0
+Frame 809: tracked features down to 776, re-detecting.
+Frame 809 (30/30) tracked=2000 inliers=776 status=pnp-candidate pose=(-0.212235, -0.0627138, 34.0845)
+Finished. Saved TUM trajectory to /home/xywu/桌面/SLAM/output/motion_modes/05_fast_translation/fast_03/position/position.txt, geometry trajectory to /home/xywu/桌面/SLAM/output/motion_modes/05_fast_translation/fast_03/position/geometry_position.txt and map to /home/xywu/桌面/SLAM/output/motion_modes/05_fast_translation/fast_03/traj/map2.png

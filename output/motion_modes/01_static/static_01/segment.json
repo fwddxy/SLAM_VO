@@ -1,0 +1,47 @@
+{
+  "mode": "01_static",
+  "segment_id": "static_01",
+  "sequence": "07",
+  "warmup_start_frame": 644,
+  "start_frame": 695,
+  "end_frame": 714,
+  "evaluation_start_frame": 695,
+  "is_primary": true,
+  "notes": "near standstill with only millimeter-level translation",
+  "vo_command": [
+    "/home/xywu/桌面/SLAM/build/VO",
+    "--start-frame",
+    "644",
+    "--end-frame",
+    "714",
+    "--output-root",
+    "output/motion_modes/01_static/static_01"
+  ],
+  "run_status": "completed",
+  "run_log": "output/motion_modes/01_static/static_01/run.log",
+  "reference_gt": "output/motion_modes/01_static/static_01/reference/gt_tum_segment.txt",
+  "full_estimate_path": "output/motion_modes/01_static/static_01/position/position_full.txt",
+  "full_geometry_estimate_path": "output/motion_modes/01_static/static_01/position/geometry_position_full.txt",
+  "estimate_path": "output/motion_modes/01_static/static_01/position/position.txt",
+  "geometry_estimate_path": "output/motion_modes/01_static/static_01/position/geometry_position.txt",
+  "estimate_semantics": "final_geometry_spine",
+  "geometry_estimate_semantics": "pure_two_view_diagnostic",
+  "evo": {
+    "ape": {
+      "status": "completed",
+      "output": "output/motion_modes/01_static/static_01/ape/evo_ape_metrics.txt",
+      "fallback_alignment": "origin"
+    },
+    "rpe": {
+      "status": "completed",
+      "output": "output/motion_modes/01_static/static_01/rpe/evo_rpe_metrics.txt",
+      "fallback_alignment": "origin"
+    },
+    "traj": {
+      "status": "completed",
+      "output": "output/motion_modes/01_static/static_01/traj/evo_traj_metrics.txt",
+      "fallback_alignment": "origin"
+    }
+  },
+  "evo_status": "completed"
+}

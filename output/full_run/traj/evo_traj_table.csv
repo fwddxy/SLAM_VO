@@ -1,0 +1,15 @@
+,output/full_run/position/position.txt
+nr. of poses,1100.0
+path length (m),690.5847902161267
+duration (s),114.2257248
+t_start (s),0.1038752
+t_end (s),114.3296
+v_max (m/s),11.643787650468635
+v_min (m/s),0.0
+v_avg (m/s),6.045937828811383
+v_max (km/h),41.91763554168709
+v_min (km/h),0.0
+v_avg (km/h),21.76537618372098
+dt_max (s),0.10869999999999891
+dt_min (s),0.099189999999993
+dt_avg (s),0.10393605532302093

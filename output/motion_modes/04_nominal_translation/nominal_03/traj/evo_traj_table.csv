@@ -1,0 +1,15 @@
+,/home/xywu/桌面/SLAM/output/motion_modes/04_nominal_translation/nominal_03/position/position.txt
+nr. of poses,20.0
+path length (m),17.876177269296637
+duration (s),1.9758600000000044
+t_start (s),37.41589
+t_end (s),39.39175
+v_max (m/s),9.534184238891665
+v_min (m/s),8.120433588125195
+v_avg (m/s),9.047541344987772
+v_max (km/h),34.323063260009995
+v_min (km/h),29.233560917250703
+v_avg (km/h),32.57114884195598
+dt_max (s),0.10414000000000101
+dt_min (s),0.10385000000000133
+dt_avg (s),0.1039926315789476

@@ -1,0 +1,44 @@
+{
+  "mode": "05_fast_translation",
+  "segment_id": "fast_01",
+  "sequence": "07",
+  "warmup_start_frame": 775,
+  "start_frame": 785,
+  "end_frame": 804,
+  "evaluation_start_frame": 785,
+  "is_primary": true,
+  "notes": "highest-speed translation plateau in KITTI 07",
+  "vo_command": [
+    "/home/xywu/桌面/SLAM/build/VO",
+    "--start-frame",
+    "775",
+    "--end-frame",
+    "804",
+    "--output-root",
+    "output/motion_modes/05_fast_translation/fast_01"
+  ],
+  "run_status": "completed",
+  "run_log": "output/motion_modes/05_fast_translation/fast_01/run.log",
+  "reference_gt": "output/motion_modes/05_fast_translation/fast_01/reference/gt_tum_segment.txt",
+  "full_estimate_path": "output/motion_modes/05_fast_translation/fast_01/position/position_full.txt",
+  "full_geometry_estimate_path": "output/motion_modes/05_fast_translation/fast_01/position/geometry_position_full.txt",
+  "estimate_path": "output/motion_modes/05_fast_translation/fast_01/position/position.txt",
+  "geometry_estimate_path": "output/motion_modes/05_fast_translation/fast_01/position/geometry_position.txt",
+  "estimate_semantics": "final_geometry_spine",
+  "geometry_estimate_semantics": "pure_two_view_diagnostic",
+  "evo": {
+    "ape": {
+      "status": "completed",
+      "output": "output/motion_modes/05_fast_translation/fast_01/ape/evo_ape_metrics.txt"
+    },
+    "rpe": {
+      "status": "completed",
+      "output": "output/motion_modes/05_fast_translation/fast_01/rpe/evo_rpe_metrics.txt"
+    },
+    "traj": {
+      "status": "completed",
+      "output": "output/motion_modes/05_fast_translation/fast_01/traj/evo_traj_metrics.txt"
+    }
+  },
+  "evo_status": "completed"
+}

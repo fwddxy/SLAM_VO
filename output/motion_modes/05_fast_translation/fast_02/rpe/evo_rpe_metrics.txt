@@ -1,0 +1,38 @@
+--------------------------------------------------------------------------------
+Loaded 20 stamps and poses from: /home/xywu/桌面/SLAM/output/motion_modes/05_fast_translation/fast_02/reference/gt_tum_segment.txt
+Loaded 20 stamps and poses from: /home/xywu/桌面/SLAM/output/motion_modes/05_fast_translation/fast_02/position/position.txt
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 20 of max. 20 possible matching timestamps between...
+	/home/xywu/桌面/SLAM/output/motion_modes/05_fast_translation/fast_02/reference/gt_tum_segment.txt
+and:	/home/xywu/桌面/SLAM/output/motion_modes/05_fast_translation/fast_02/position/position.txt
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Aligning using Umeyama's method...
+Rotation of alignment:
+[[-0.02430178  0.07142146  0.99715014]
+ [-0.77080546  0.63382914 -0.06418386]
+ [-0.63660692 -0.77016855  0.03964887]]
+Translation of alignment:
+[-131.48709309    4.29198063  -88.99581747]
+Scale correction: 1.0
+--------------------------------------------------------------------------------
+Found 19 pairs with delta 1 (frames) among 20 poses using consecutive pairs.
+Compared 19 relative pose pairs, delta = 1 (frames) with consecutive pairs.
+Calculating RPE for translation part pose relation...
+--------------------------------------------------------------------------------
+RPE w.r.t. translation part (m)
+for delta = 1 (frames) using consecutive pairs
+(with SE(3) Umeyama alignment)
+
+       max	0.080865
+      mean	0.039476
+    median	0.036615
+       min	0.004806
+      rmse	0.046540
+       sse	0.041153
+       std	0.024649
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to /home/xywu/桌面/SLAM/output/motion_modes/05_fast_translation/fast_02/rpe/evo_rpe_plot.pdf

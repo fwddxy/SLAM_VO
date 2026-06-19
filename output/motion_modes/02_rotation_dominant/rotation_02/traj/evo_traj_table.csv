@@ -1,0 +1,15 @@
+,/home/xywu/桌面/SLAM/output/motion_modes/02_rotation_dominant/rotation_02/position/position.txt
+nr. of poses,20.0
+path length (m),5.53436854148639
+duration (s),1.9702490000000001
+t_start (s),1.868002
+t_end (s),3.838251
+v_max (m/s),4.1853635597021785
+v_min (m/s),1.2548152753493476
+v_avg (m/s),2.8087569487968893
+v_max (km/h),15.067308814927843
+v_min (km/h),4.517334991257651
+v_avg (km/h),10.111525015668802
+dt_max (s),0.10385599999999995
+dt_min (s),0.10347600000000012
+dt_avg (s),0.10369731578947369

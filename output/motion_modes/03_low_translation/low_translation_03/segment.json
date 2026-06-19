@@ -1,0 +1,47 @@
+{
+  "mode": "03_low_translation",
+  "segment_id": "low_translation_03",
+  "sequence": "07",
+  "warmup_start_frame": 620,
+  "start_frame": 652,
+  "end_frame": 671,
+  "evaluation_start_frame": 652,
+  "is_primary": false,
+  "notes": "weak translation close to the near-stop section",
+  "vo_command": [
+    "/home/xywu/桌面/SLAM/build/VO",
+    "--start-frame",
+    "620",
+    "--end-frame",
+    "671",
+    "--output-root",
+    "output/motion_modes/03_low_translation/low_translation_03"
+  ],
+  "run_status": "completed",
+  "run_log": "output/motion_modes/03_low_translation/low_translation_03/run.log",
+  "reference_gt": "output/motion_modes/03_low_translation/low_translation_03/reference/gt_tum_segment.txt",
+  "full_estimate_path": "output/motion_modes/03_low_translation/low_translation_03/position/position_full.txt",
+  "full_geometry_estimate_path": "output/motion_modes/03_low_translation/low_translation_03/position/geometry_position_full.txt",
+  "estimate_path": "output/motion_modes/03_low_translation/low_translation_03/position/position.txt",
+  "geometry_estimate_path": "output/motion_modes/03_low_translation/low_translation_03/position/geometry_position.txt",
+  "estimate_semantics": "final_geometry_spine",
+  "geometry_estimate_semantics": "pure_two_view_diagnostic",
+  "evo": {
+    "ape": {
+      "status": "completed",
+      "output": "output/motion_modes/03_low_translation/low_translation_03/ape/evo_ape_metrics.txt",
+      "fallback_alignment": "origin"
+    },
+    "rpe": {
+      "status": "completed",
+      "output": "output/motion_modes/03_low_translation/low_translation_03/rpe/evo_rpe_metrics.txt",
+      "fallback_alignment": "origin"
+    },
+    "traj": {
+      "status": "completed",
+      "output": "output/motion_modes/03_low_translation/low_translation_03/traj/evo_traj_metrics.txt",
+      "fallback_alignment": "origin"
+    }
+  },
+  "evo_status": "completed"
+}

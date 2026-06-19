@@ -1,0 +1,33 @@
+--------------------------------------------------------------------------------
+Loaded 20 stamps and poses from: /home/xywu/桌面/SLAM/output/motion_modes/03_low_translation/low_translation_03/reference/gt_tum_segment.txt
+Loaded 20 stamps and poses from: /home/xywu/桌面/SLAM/output/motion_modes/03_low_translation/low_translation_03/position/position.txt
+--------------------------------------------------------------------------------
+Synchronizing trajectories...
+Found 20 of max. 20 possible matching timestamps between...
+	/home/xywu/桌面/SLAM/output/motion_modes/03_low_translation/low_translation_03/reference/gt_tum_segment.txt
+and:	/home/xywu/桌面/SLAM/output/motion_modes/03_low_translation/low_translation_03/position/position.txt
+..with max. time diff.: 0.01 (s) and time offset: 0.0 (s).
+--------------------------------------------------------------------------------
+Origin alignment transformation:
+[[-9.98148920e-01  1.47351632e-02  5.90051527e-02 -1.46131372e+02]
+ [ 1.75235095e-02  9.98740190e-01  4.70208498e-02  3.26134913e+00]
+ [-5.82379575e-02  4.79677878e-02 -9.97149654e-01 -6.95495649e+01]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
+--------------------------------------------------------------------------------
+Compared 20 absolute pose pairs.
+Calculating APE for translation part pose relation...
+--------------------------------------------------------------------------------
+APE w.r.t. translation part (m)
+(with origin alignment)
+
+       max	0.774900
+      mean	0.589730
+    median	0.736396
+       min	0.000000
+      rmse	0.638843
+       sse	8.162408
+       std	0.245639
+
+--------------------------------------------------------------------------------
+Plotting results... 
+Plots saved to /home/xywu/桌面/SLAM/output/motion_modes/03_low_translation/low_translation_03/ape/evo_ape_plot.pdf

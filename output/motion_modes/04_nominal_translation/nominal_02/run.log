@@ -1,0 +1,48 @@
+Visualization disabled. GUI opens by default when a usable local display socket is present. Set VO_ENABLE_GUI=0 to force headless mode.
+Custom output root: output/motion_modes/04_nominal_translation/nominal_02
+Selected frame range: [277, 306] (30 frames)
+Processing 30 frames...
+Frame 279: skipped keyframe rebuild due to low baseline/parallax.
+Frame 279 (3/30) tracked=1427 inliers=1427 status=2d2d pose=(-0.016318, -0.0129454, 1.4764)
+Frame 280 (4/30) tracked=1192 inliers=1192 status=rebuild-2d2d pose=(-0.0544509, -0.016955, 2.21226)
+Frame 281: accepted PnP correction map_age=1 track_age=1 retention=0.955537 landmarks=1139 inliers=1139 rot_delta_deg=0.0889202 trans_delta_m=0.0395368 adopted=1
+Frame 281 (5/30) tracked=1115 inliers=1115 status=pnp pose=(-0.0861885, -0.0224379, 2.93488)
+Frame 282: accepted PnP correction map_age=2 track_age=1 retention=0.904362 landmarks=1078 inliers=1078 rot_delta_deg=0.325727 trans_delta_m=0.118506 adopted=0
+Frame 283: accepted PnP correction map_age=3 track_age=1 retention=0.864933 landmarks=1031 inliers=1031 rot_delta_deg=0.279226 trans_delta_m=0.0846906 adopted=0
+Frame 283: tracked features down to 992, re-detecting.
+Frame 284: accepted PnP correction map_age=4 track_age=1 retention=0.825503 landmarks=984 inliers=984 rot_delta_deg=0.256897 trans_delta_m=0.0797663 adopted=0
+Frame 285: accepted PnP correction map_age=5 track_age=1 retention=0.807886 landmarks=963 inliers=963 rot_delta_deg=0.316136 trans_delta_m=0.0886074 adopted=0
+Frame 286: accepted PnP correction map_age=6 track_age=1 retention=0.776007 landmarks=925 inliers=925 rot_delta_deg=0.381608 trans_delta_m=0.120026 adopted=0
+Frame 287: accepted PnP correction map_age=7 track_age=1 retention=0.743289 landmarks=886 inliers=886 rot_delta_deg=0.284585 trans_delta_m=0.0971853 adopted=0
+Frame 288: accepted PnP correction map_age=8 track_age=1 retention=0.722315 landmarks=861 inliers=861 rot_delta_deg=0.282031 trans_delta_m=0.0921282 adopted=0
+Frame 288: skipped keyframe rebuild due to low baseline/parallax.
+Frame 289: skipped keyframe rebuild due to low baseline/parallax.
+Frame 290: skipped keyframe rebuild due to low baseline/parallax.
+Frame 291: skipped keyframe rebuild due to low baseline/parallax.
+Frame 291: tracked features down to 928, re-detecting.
+Frame 292: skipped keyframe rebuild due to low baseline/parallax.
+Frame 293: skipped keyframe rebuild due to low baseline/parallax.
+Frame 294: skipped keyframe rebuild due to low baseline/parallax.
+Frame 295: skipped keyframe rebuild due to low baseline/parallax.
+Frame 295: tracked features down to 940, re-detecting.
+Frame 296: skipped keyframe rebuild due to low baseline/parallax.
+Frame 297: skipped keyframe rebuild due to low baseline/parallax.
+Frame 298: skipped keyframe rebuild due to low baseline/parallax.
+Frame 298: tracked features down to 920, re-detecting.
+Frame 299: skipped keyframe rebuild due to low baseline/parallax.
+Frame 300: skipped keyframe rebuild due to low baseline/parallax.
+Frame 300: tracked features down to 775, re-detecting.
+Frame 301: skipped keyframe rebuild due to low baseline/parallax.
+Frame 302: skipped keyframe rebuild due to low baseline/parallax.
+Frame 302: tracked features down to 679, re-detecting.
+Frame 303: skipped keyframe rebuild due to low baseline/parallax.
+Frame 303: tracked features down to 873, re-detecting.
+Frame 304: tracked features down to 695, re-detecting.
+Frame 305: accepted PnP correction map_age=1 track_age=1 retention=0.979856 landmarks=681 inliers=681 rot_delta_deg=0.0569474 trans_delta_m=0.010045 adopted=1
+Frame 305: tracked features down to 692, re-detecting.
+Frame 306: accepted PnP correction map_age=2 track_age=1 retention=0.964029 landmarks=670 inliers=670 rot_delta_deg=0.0227876 trans_delta_m=0.00495677 adopted=1
+Frame 306: tracked features down to 695, re-detecting.
+Frame 306 (30/30) tracked=2000 inliers=695 status=pnp pose=(-0.738946, -0.1485, 14.8911)
+Finished. Saved TUM trajectory to /home/xywu/桌面/SLAM/output/motion_modes/04_nominal_translation/nominal_02/position/position.txt, geometry trajectory to /home/xywu/桌面/SLAM/output/motion_modes/04_nominal_translation/nominal_02/position/geometry_position.txt and map to /home/xywu/桌面/SLAM/output/motion_modes/04_nominal_translation/nominal_02/traj/map2.png
+
+Initialization triangulation is insufficient; the next frame will rebuild landmarks via 2D-2D.

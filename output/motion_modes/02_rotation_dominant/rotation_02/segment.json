@@ -1,0 +1,44 @@
+{
+  "mode": "02_rotation_dominant",
+  "segment_id": "rotation_02",
+  "sequence": "07",
+  "warmup_start_frame": 13,
+  "start_frame": 18,
+  "end_frame": 37,
+  "evaluation_start_frame": 18,
+  "is_primary": false,
+  "notes": "shifted version of the same early turning segment",
+  "vo_command": [
+    "/home/xywu/桌面/SLAM/build/VO",
+    "--start-frame",
+    "13",
+    "--end-frame",
+    "37",
+    "--output-root",
+    "output/motion_modes/02_rotation_dominant/rotation_02"
+  ],
+  "run_status": "completed",
+  "run_log": "output/motion_modes/02_rotation_dominant/rotation_02/run.log",
+  "reference_gt": "output/motion_modes/02_rotation_dominant/rotation_02/reference/gt_tum_segment.txt",
+  "full_estimate_path": "output/motion_modes/02_rotation_dominant/rotation_02/position/position_full.txt",
+  "full_geometry_estimate_path": "output/motion_modes/02_rotation_dominant/rotation_02/position/geometry_position_full.txt",
+  "estimate_path": "output/motion_modes/02_rotation_dominant/rotation_02/position/position.txt",
+  "geometry_estimate_path": "output/motion_modes/02_rotation_dominant/rotation_02/position/geometry_position.txt",
+  "estimate_semantics": "final_geometry_spine",
+  "geometry_estimate_semantics": "pure_two_view_diagnostic",
+  "evo": {
+    "ape": {
+      "status": "completed",
+      "output": "output/motion_modes/02_rotation_dominant/rotation_02/ape/evo_ape_metrics.txt"
+    },
+    "rpe": {
+      "status": "completed",
+      "output": "output/motion_modes/02_rotation_dominant/rotation_02/rpe/evo_rpe_metrics.txt"
+    },
+    "traj": {
+      "status": "completed",
+      "output": "output/motion_modes/02_rotation_dominant/rotation_02/traj/evo_traj_metrics.txt"
+    }
+  },
+  "evo_status": "completed"
+}

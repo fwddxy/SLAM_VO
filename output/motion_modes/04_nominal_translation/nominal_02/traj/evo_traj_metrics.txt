@@ -1,0 +1,8 @@
+--------------------------------------------------------------------------------
+name:	position
+infos:	20 poses, 8.001m path length, 1.973s duration
+--------------------------------------------------------------------------------
+name:	gt_tum_segment
+infos:	20 poses, 7.994m path length, 1.973s duration
+--------------------------------------------------------------------------------
+Plots saved to /home/xywu/桌面/SLAM/output/motion_modes/04_nominal_translation/nominal_02/traj/evo_traj_xz.pdf

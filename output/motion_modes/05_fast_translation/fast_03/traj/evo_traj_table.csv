@@ -1,0 +1,15 @@
+,/home/xywu/桌面/SLAM/output/motion_modes/05_fast_translation/fast_03/position/position.txt
+nr. of poses,20.0
+path length (m),22.38846913081268
+duration (s),1.9753999999999934
+t_start (s),82.11018
+t_end (s),84.08558
+v_max (m/s),11.53000339231098
+v_min (m/s),11.079335364636883
+v_avg (m/s),11.333618394581759
+v_max (km/h),41.508012212319535
+v_min (km/h),39.88560731269278
+v_avg (km/h),40.801026220494336
+dt_max (s),0.10403000000000873
+dt_min (s),0.10387000000000057
+dt_avg (s),0.10396842105263122

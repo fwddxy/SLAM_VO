@@ -1,0 +1,55 @@
+Visualization disabled. GUI opens by default when a usable local display socket is present. Set VO_ENABLE_GUI=0 to force headless mode.
+Custom output root: output/motion_modes/02_rotation_dominant/rotation_02
+Selected frame range: [13, 37] (25 frames)
+Processing 25 frames...
+Frame 15: accepted PnP correction map_age=1 track_age=1 retention=0.974227 landmarks=189 inliers=189 rot_delta_deg=0.178738 trans_delta_m=0.020776 adopted=1
+Frame 15: tracked features down to 122, re-detecting.
+Frame 15 (3/25) tracked=2000 inliers=122 status=pnp pose=(-0.0651422, 0.0292779, 0.399323)
+Frame 16: accepted PnP correction map_age=2 track_age=1 retention=0.969072 landmarks=188 inliers=188 rot_delta_deg=0.288422 trans_delta_m=0.0326497 adopted=1
+Frame 16: tracked features down to 414, re-detecting.
+Frame 16 (4/25) tracked=2000 inliers=414 status=pnp pose=(-0.102571, 0.0406934, 0.596356)
+Frame 17: accepted PnP correction map_age=3 track_age=1 retention=0.948454 landmarks=184 inliers=184 rot_delta_deg=0.263987 trans_delta_m=0.0296848 adopted=1
+Frame 17: tracked features down to 299, re-detecting.
+Frame 17 (5/25) tracked=2000 inliers=299 status=pnp pose=(-0.132797, 0.0554813, 0.797511)
+Frame 18: accepted PnP correction map_age=4 track_age=1 retention=0.845361 landmarks=164 inliers=164 rot_delta_deg=0.578803 trans_delta_m=0.0673471 adopted=1
+Frame 18: tracked features down to 459, re-detecting.
+Frame 19: accepted PnP correction map_age=5 track_age=1 retention=0.726804 landmarks=141 inliers=141 rot_delta_deg=0.668126 trans_delta_m=0.105175 adopted=1
+Frame 19: tracked features down to 517, re-detecting.
+Frame 20: accepted PnP correction map_age=6 track_age=1 retention=0.690722 landmarks=134 inliers=134 rot_delta_deg=0.475563 trans_delta_m=0.0716197 adopted=1
+Frame 20: tracked features down to 689, re-detecting.
+Frame 21: accepted PnP correction map_age=7 track_age=1 retention=0.541237 landmarks=105 inliers=105 rot_delta_deg=0.71226 trans_delta_m=0.106444 adopted=1
+Frame 21: tracked features down to 724, re-detecting.
+Frame 22: accepted PnP correction map_age=8 track_age=1 retention=0.381443 landmarks=74 inliers=74 rot_delta_deg=0.683027 trans_delta_m=0.101921 adopted=0
+Frame 22: tracked features down to 757, re-detecting.
+Frame 23: accepted PnP correction map_age=1 track_age=1 retention=0.941876 landmarks=713 inliers=713 rot_delta_deg=0.0525139 trans_delta_m=0.00995146 adopted=1
+Frame 23: tracked features down to 927, re-detecting.
+Frame 24: accepted PnP correction map_age=2 track_age=1 retention=0.852048 landmarks=645 inliers=645 rot_delta_deg=0.148847 trans_delta_m=0.00725283 adopted=1
+Frame 24: tracked features down to 850, re-detecting.
+Frame 25: accepted PnP correction map_age=3 track_age=1 retention=0.751651 landmarks=569 inliers=569 rot_delta_deg=0.423741 trans_delta_m=0.0624507 adopted=1
+Frame 25: tracked features down to 861, re-detecting.
+Frame 26: accepted PnP correction map_age=4 track_age=1 retention=0.602378 landmarks=456 inliers=456 rot_delta_deg=0.324966 trans_delta_m=0.0468387 adopted=1
+Frame 26: tracked features down to 866, re-detecting.
+Frame 27: accepted PnP correction map_age=5 track_age=1 retention=0.428005 landmarks=324 inliers=324 rot_delta_deg=0.21787 trans_delta_m=0.00530498 adopted=0
+Frame 27: tracked features down to 813, re-detecting.
+Frame 28: accepted PnP correction map_age=1 track_age=1 retention=0.815498 landmarks=663 inliers=663 rot_delta_deg=0.0524801 trans_delta_m=0.0188458 adopted=1
+Frame 28: tracked features down to 750, re-detecting.
+Frame 29: accepted PnP correction map_age=2 track_age=1 retention=0.664207 landmarks=540 inliers=540 rot_delta_deg=0.111059 trans_delta_m=0.00790628 adopted=1
+Frame 29: tracked features down to 653, re-detecting.
+Frame 30: accepted PnP correction map_age=3 track_age=1 retention=0.335793 landmarks=273 inliers=273 rot_delta_deg=0.316644 trans_delta_m=0.0692846 adopted=0
+Frame 30: tracked features down to 547, re-detecting.
+Frame 31: accepted PnP correction map_age=1 track_age=1 retention=0.718464 landmarks=393 inliers=393 rot_delta_deg=0.0676316 trans_delta_m=0.00741519 adopted=1
+Frame 31: tracked features down to 498, re-detecting.
+Frame 32: accepted PnP correction map_age=2 track_age=1 retention=0.6234 landmarks=341 inliers=341 rot_delta_deg=0.0850444 trans_delta_m=0.00806228 adopted=1
+Frame 32: tracked features down to 467, re-detecting.
+Frame 33: accepted PnP correction map_age=3 track_age=1 retention=0.526508 landmarks=288 inliers=288 rot_delta_deg=0.108798 trans_delta_m=0.0137787 adopted=0
+Frame 33: tracked features down to 550, re-detecting.
+Frame 34: accepted PnP correction map_age=4 track_age=1 retention=0.447898 landmarks=245 inliers=245 rot_delta_deg=0.216537 trans_delta_m=0.0278157 adopted=0
+Frame 34: tracked features down to 605, re-detecting.
+Frame 35: accepted PnP correction map_age=1 track_age=1 retention=0.889256 landmarks=538 inliers=538 rot_delta_deg=0.0775773 trans_delta_m=0.0208134 adopted=1
+Frame 35: tracked features down to 415, re-detecting.
+Frame 36: accepted PnP correction map_age=2 track_age=1 retention=0.780165 landmarks=472 inliers=472 rot_delta_deg=0.150089 trans_delta_m=0.0323636 adopted=1
+Frame 36: tracked features down to 531, re-detecting.
+Frame 37: accepted PnP correction map_age=3 track_age=1 retention=0.690909 landmarks=418 inliers=418 rot_delta_deg=0.242578 trans_delta_m=0.0877799 adopted=1
+Frame 37: tracked features down to 339, re-detecting.
+Frame 37 (25/25) tracked=2000 inliers=339 status=pnp pose=(-4.16159, -0.132066, 4.42387)
+Finished. Saved TUM trajectory to /home/xywu/桌面/SLAM/output/motion_modes/02_rotation_dominant/rotation_02/position/position.txt, geometry trajectory to /home/xywu/桌面/SLAM/output/motion_modes/02_rotation_dominant/rotation_02/position/geometry_position.txt and map to /home/xywu/桌面/SLAM/output/motion_modes/02_rotation_dominant/rotation_02/traj/map2.png
